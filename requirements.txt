@@ -1,0 +1,5 @@
+# Flask
+Flask==0.10.1
+
+# Analyze code base
+flake8>=2.4.1
