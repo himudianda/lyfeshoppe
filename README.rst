@@ -19,11 +19,14 @@ Clone the repo and install all dependencies
 - Type ``cd cheermonk``
 - Activate your virtualenv
 - Type ``pip install -r requirements.txt`` to install dependencies
+- Type ``pip install --editable .`` to create the Cheermonk.egg-info which helps us easily run console scripts.
 
 
 Initialize everything and view the app
 --------------------------------------
 
+- Type ``run all`` to start server
+        OR
 - Type ``python run.py`` to start server
 - Visit http://localhost:5000 in your browser
 
