@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html lang="">
+
+<head>
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+</head>
+
+<body>
+
+  {% block header %}
+  {% endblock %}
+
+  {% block hero %}
+  {% endblock %}
+
+  <main class="container">
+
+    {% block heading %}
+      <h1>Cheermonk</h1>
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
+  </main>
+
+  <footer class="footer text-center">
+      <div class="container">
+          <ul class="list-inline">
+              {% block footer %}
+              {% endblock %}
+          </ul>
+      </div>
+  </footer>
+
+</body>
+</html>
