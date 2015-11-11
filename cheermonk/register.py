@@ -1,3 +1,4 @@
+from cheermonk.extensions import db
 from cheermonk.blueprints.page import page
 
 FLASK_BLUEPRINTS = [page]
@@ -8,3 +9,7 @@ def blueprints(app):
         app.register_blueprint(blueprint)
 
     return None
+
+
+def extensions(app):
+    db.init_app(app)

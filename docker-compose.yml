@@ -1,0 +1,10 @@
+postgres:
+  image: postgres:9.4.3
+  environment:
+    POSTGRES_USER: cheermonk
+    POSTGRES_PASSWORD: bestpassword
+  ports:
+    - 5432:5432
+  volumes:
+    - ~/.docker-volumes/cheermonk/postgresql/data:/var/lib/postgresql/data
+
