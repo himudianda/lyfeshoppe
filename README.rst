@@ -25,9 +25,7 @@ Clone the repo and install all dependencies
 Initialize everything and view the app
 --------------------------------------
 
-- Type ``run all`` to start server
-        OR
-- Type ``python run.py`` to start server
+- Type ``run server debug`` OR ``run server gunicorn`` to start server
 - Visit http://localhost:5000 in your browser
 
 

@@ -4,5 +4,11 @@ Flask==0.10.1
 # Command line tasks
 click==4.0
 
+# App server
+gunicorn==19.3.0
+
+# Manage multiple processes in development
+honcho==0.6.6
+
 # Analyze code base
 flake8>=2.4.1
