@@ -1,3 +1,4 @@
+{% import 'macros/layout/assets.jinja2' as assets with context %}
 
 <!doctype html>
 <html lang="">
@@ -7,6 +8,10 @@
       {% block title %}
       {% endblock %}
     </title>
+
+    {{ assets.render() }}
+    {{ assets.polyfills() }}
+
 </head>
 
 <body>
