@@ -47,7 +47,7 @@ Set up docker-compose
 Initialize everything and view the app
 --------------------------------------
 
-- npm run-script build
+- Type ``run assets build`` to create the build directory and manifest file
 - Type ``run server gunicorn`` OR ``run server debug`` to start server
 - Visit http://localhost:5000 in your browser
 
