@@ -4,6 +4,9 @@ Flask==0.10.1
 # Command line tasks
 click==4.0
 
+# Asset management
+Flask-Webpack==0.0.6
+
 # Database and migrations
 psycopg2==2.6.1
 Flask-SQLAlchemy==2.0
