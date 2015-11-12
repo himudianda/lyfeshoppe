@@ -1,8 +1,8 @@
-# Use the barebones version of Python 2.7.10.
+
 MAINTAINER Harshit Imudianda <harshit.himudianda@gmail.com>
 
 # Install any packages that must be installed.
-RUN apt-get update && apt-get install -qq -y build-essential libpq-dev postgresql-client-9.4 --fix-missing --no-install-recommends
+RUN apt-get update && apt-get install -qq -y build-essential nodejs nodejs-legacy npm libpq-dev postgresql-client-9.4 libpng-dev --fix-missing --no-install-recommends
 
 # Setup the install path for this service.
 ENV INSTALL_PATH /cheermonk
@@ -15,8 +15,21 @@ WORKDIR $INSTALL_PATH
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+# Ensure frontend packages are cached and only get updated when necessary.
+COPY package.json package.json
+RUN npm install
+
+# Copy the source from the build machine to the image at the WORKDIR path.
+COPY . .
+
+# Process all of the assets.
+RUN PUBLIC_PATH='/' NODE_ENV='production' npm run-script build
+
 # Give access to the CLI script.
 RUN pip install --editable .
 
+# Create a volume so that nginx can read from it.
+VOLUME ["$INSTALL_PATH/build/public"]
+
 # The default command to run if no command is specified.
-CMD gunicorn -b 0.0.0.0:8000 "cheermonk.app:create_app()"
+CMD gunicorn -b 0.0.0.0:5000 "cheermonk.app:create_app()"

@@ -1,6 +1,8 @@
 {# Render assets that get included on all pages. #}
 
 {%- macro render() -%}
+  {{ stylesheet_tag('vendor_css', 'app_css') | safe }}
+
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,700,700italic,300,400italic' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 {%- endmacro -%}
