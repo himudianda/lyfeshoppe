@@ -25,7 +25,7 @@
   <main class="container">
 
     {% block heading %}
-      <h1>Cheermonk</h1>
+      <h1 id="cheermonk">Cheermonk</h1>
     {% endblock %}
 
     {% block body %}
@@ -41,5 +41,6 @@
       </div>
   </footer>
 
+  {{ javascript_tag('vendor_js', 'app_js') | safe }}
 </body>
 </html>
