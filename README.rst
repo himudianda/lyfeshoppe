@@ -20,6 +20,12 @@ Install Docker
 
 Make sure you get ``docker-compose v1.4.0+``.
 
+Install nodejs
+''''''''''''''
+
+- https://nodejs.org/download/ (runtime dependency for assets)
+
+
 Clone the repo and install all dependencies
 -------------------------------------------
 
@@ -28,6 +34,8 @@ Clone the repo and install all dependencies
 - Activate your virtualenv
 - Type ``pip install -r requirements.txt`` to install dependencies
 - Type ``pip install --editable .`` to create the Cheermonk.egg-info which helps us easily run console scripts.
+- Type ``npm install`` to install the asset dependencies
+
 
 Set up docker-compose
 ---------------------
@@ -39,7 +47,8 @@ Set up docker-compose
 Initialize everything and view the app
 --------------------------------------
 
-- Type ``run server debug`` OR ``run server gunicorn`` to start server
+- npm run-script build
+- Type ``run server gunicorn`` OR ``run server debug`` to start server
 - Visit http://localhost:5000 in your browser
 
 
