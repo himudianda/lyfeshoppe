@@ -1,3 +1,8 @@
+Unreleased
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Error templates - 404, 500 & 502 are served from build/public directory
+
 Version 0.0.3 (2015-11-12)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 

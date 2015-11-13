@@ -1,6 +1,6 @@
 from flask import Flask
 
-from cheermonk.register import blueprints, extensions
+from cheermonk.register import blueprints, extensions, template_processors, error_templates
 
 
 def create_app():
@@ -10,6 +10,8 @@ def create_app():
     # Register
     blueprints(app)
     extensions(app)
+    template_processors(app)
+    error_templates(app)
 
     return app
 
