@@ -1,10 +1,12 @@
 from flask import render_template
 
-from cheermonk.extensions import db, webpack
+from cheermonk.extensions import db, bcrypt, login_manager, webpack
 from cheermonk.blueprints.page import page
+from cheermonk.blueprints.user import user
+
 from jinja2 import ChoiceLoader, FileSystemLoader
 
-FLASK_BLUEPRINTS = [page]
+FLASK_BLUEPRINTS = [page, user]
 
 CUSTOM_ERROR_PAGES = [404, 500, 502]
 
@@ -18,6 +20,8 @@ def blueprints(app):
 
 def extensions(app):
     db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
     webpack.init_app(app)
 
 

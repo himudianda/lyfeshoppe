@@ -1,6 +1,8 @@
 from flask import Flask
 
+from cheermonk.blueprints.user.models import User
 from cheermonk.register import blueprints, extensions, template_processors, error_templates
+from cheermonk.initialize import authentication
 
 
 def create_app():
@@ -12,6 +14,9 @@ def create_app():
     extensions(app)
     template_processors(app)
     error_templates(app)
+
+    # Initialize.
+    authentication(app, User)
 
     return app
 
