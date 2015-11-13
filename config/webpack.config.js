@@ -36,7 +36,7 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
                 loaders: [
-                    'file?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
+                    'file?context=' + rootAssetPath + '&name=' + '[path][name].[hash].[ext]',
                     'image?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
             }
