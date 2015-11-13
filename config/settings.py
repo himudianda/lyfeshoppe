@@ -10,6 +10,8 @@ SECRET_KEY = 'pickabettersecret'
 DEBUG = True
 TESTING = False
 
+SERVER_NAME = 'localhost:5000'
+
 # Seed settings.
 SEED_ADMIN_EMAIL = 'dev@localhost.com'
 
