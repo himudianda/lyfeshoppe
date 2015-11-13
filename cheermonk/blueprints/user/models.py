@@ -1,4 +1,7 @@
 from flask_login import UserMixin
+from hashlib import md5
+from flask import current_app
+from itsdangerous import URLSafeTimedSerializer
 
 from cheermonk.extensions import db, bcrypt
 from cheermonk.lib.util_sqlalchemy import ResourceMixin
@@ -59,3 +62,21 @@ class User(UserMixin, ResourceMixin, db.Model):
             return bcrypt.check_password_hash(self.password, password)
 
         return True
+
+    def get_auth_token(self):
+        """
+        Return the user's auth token. Use their password as part of the token
+        because if the user changes their password we will want to invalidate
+        all of their logins across devices. It is completely fine to use
+        md5 here as nothing leaks.
+
+        This satisfies Flask-Login by providing a means to create a token.
+
+        :return: str
+        """
+        private_key = current_app.config['SECRET_KEY']
+
+        serializer = URLSafeTimedSerializer(private_key)
+        data = [str(self.id), md5(self.password).hexdigest()]
+
+        return serializer.dumps(data).decode('utf-8')

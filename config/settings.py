@@ -10,6 +10,9 @@ SECRET_KEY = 'pickabettersecret'
 DEBUG = True
 TESTING = False
 
+# Seed settings.
+SEED_ADMIN_EMAIL = 'dev@localhost.com'
+
 # Database settings,
 # The username and password must match what's in docker-compose.yml for dev.
 db_uri = 'postgresql://cheermonk:bestpassword@localhost:5432/{0}'

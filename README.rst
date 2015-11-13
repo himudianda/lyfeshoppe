@@ -48,9 +48,11 @@ Initialize everything and view the app
 --------------------------------------
 
 - Type ``run assets build`` to create the build directory and manifest file
+- Type ``run`` to see a list of what's available
+- Type ``run db reset cheermonk cheermonk_test`` to initialize the databases
 - Type ``run server gunicorn`` OR ``run server debug`` to start server
 - Visit http://localhost:5000 in your browser
-
+- If you wish to login, email: ``dev@localhost.com`` / password: ``password``
 
 How do I shut everything down?
 ''''''''''''''''''''''''''''''
@@ -58,6 +60,21 @@ How do I shut everything down?
 - Hit CTRL+C a few times to stop everything
 - Type ``docker-compose stop`` to ensure all containers are stopped
 - Confirm no containers are running by typing ``docker ps``
+
+
+Can I quickly change my schema without migrating?
+'''''''''''''''''''''''''''''''''''''''''''''''''
+
+Yep, just be warned that this will completely purge your database but doing
+this early on in development can sometimes be reasonable while you tinker with
+your schema very frequently.
+
+- Shut everything down
+- Type ``docker-compose run postgres``
+- Type ``run db reset cheermonk cheermonk_test``
+- Type ``run add all``
+
+This will drop your database, create a new one and seed it with fake data.
 
 
 Apply flake8 fixes
