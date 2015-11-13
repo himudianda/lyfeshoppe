@@ -26,7 +26,7 @@
                           stream</a>
                       </li>
                   {% else %}
-                      <li><a href="#">Learn
+                      <li><a href="{{ url_for('page.learn_more') }}">Learn
                           more</a></li>
                       <li>
                           <a href="#">Pricing</a>
@@ -62,8 +62,8 @@
 {% endblock %}
 
 {% block footer %}
-    <li><a href="#">FAQ</a></li>
+    <li><a href="{{ url_for('page.faq') }}">FAQ</a></li>
     <li><a href="#">Support</a></li>
-    <li><a href="#">Privacy policy</a></li>
-    <li><a href="#">Terms of service</a></li>
+    <li><a href="{{ url_for('page.privacy') }}">Privacy policy</a></li>
+    <li><a href="{{ url_for('page.terms') }}">Terms of service</a></li>
 {% endblock %}
