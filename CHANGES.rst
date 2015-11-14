@@ -1,6 +1,10 @@
-Unreleased
+Version 0.0.4 (2015-11-13)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+- Added CSRF protection.
+- Added styles, fonts, images - beautified the frontend pages
+- Added more frontend pages - faq, terms, privacy, learnmore etc.
+- Implemented User models with complete user authentication - signup, login, password reset, change credentials etc
 - Error templates - 404, 500 & 502 are served from build/public directory
 
 Version 0.0.3 (2015-11-12)
