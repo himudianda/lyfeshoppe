@@ -104,7 +104,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         u = User.find_by_identity(identity)
         reset_token = u.serialize_token()
 
-        # This prevents circular imports.
+        # This prevents circular imports
         from cheermonk.blueprints.user.tasks import deliver_password_reset_email
 
         deliver_password_reset_email.delay(u.id, reset_token)

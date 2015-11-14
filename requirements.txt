@@ -1,24 +1,31 @@
 # Flask
 Flask==0.10.1
+Flask-Mail==0.9.1
 
-# Command line tasks
-click==4.0
+# Database and migrations
+psycopg2==2.6.1
+Flask-SQLAlchemy==2.0
 
-# Asset management
-Flask-Webpack==0.0.6
+# Background worker and cache
+redis==2.10.3
+celery==3.1.18
+flower==0.8.2
+Flask-Cache==0.13.1
 
 # Authentication and authorization
 Flask-Login==0.2.11
 Flask-Bcrypt==0.6.2
 itsdangerous==0.24
 
+# Asset management
+Flask-Webpack==0.0.6
+
 # Forms
 Flask-WTF==0.11
 WTForms-Components==0.9.7
 
-# Database and migrations
-psycopg2==2.6.1
-Flask-SQLAlchemy==2.0
+# Command line tasks
+click==4.0
 
 # App server
 gunicorn==19.3.0

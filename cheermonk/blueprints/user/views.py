@@ -74,8 +74,7 @@ def begin_password_reset():
     if form.validate_on_submit():
         u = User.initialize_password_reset(request.form.get('identity'))
 
-        #flash(_('An email has been sent to %(email)s.',
-        #        email=u.email), 'success')
+        flash('An email has been sent to {}.'.format(u.email), 'success')
         return redirect(url_for('user.login'))
 
     return render_template('user/begin_password_reset.jinja2', form=form)
