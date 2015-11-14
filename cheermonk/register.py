@@ -1,6 +1,6 @@
 from flask import render_template
 
-from cheermonk.extensions import db, bcrypt, login_manager, webpack
+from cheermonk.extensions import db, bcrypt, login_manager, csrf, webpack
 from cheermonk.blueprints.page import page
 from cheermonk.blueprints.user import user
 
@@ -22,6 +22,7 @@ def extensions(app):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
     webpack.init_app(app)
 
 

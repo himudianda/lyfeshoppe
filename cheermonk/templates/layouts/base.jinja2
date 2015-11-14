@@ -1,3 +1,4 @@
+{% import 'macros/layout/meta_tags.jinja2' as meta_tags %}
 {% import 'macros/layout/assets.jinja2' as assets with context %}
 {% import 'macros/layout/flash.jinja2' as flash with context %}
 
@@ -5,6 +6,7 @@
 <html lang="">
 <head>
     <title>{% block title %}{% endblock %}</title>
+  {{ meta_tags.render(csrf_token()) }}
 
   {{ assets.render() }}
   {{ assets.polyfills() }}
