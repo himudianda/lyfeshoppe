@@ -9,6 +9,6 @@
 {% endblock %}
 
 {% block footer %}
-    <li><a href="#">Help</a></li>
+    <li><a href="{{ url_for('issue.support') }}">Help</a></li>
     <li><a href="{{ url_for('user.signup') }}">Sign up today</a></li>
 {% endblock %}

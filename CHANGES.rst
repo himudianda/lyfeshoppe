@@ -1,3 +1,29 @@
+Version 0.1 (2015-11-14)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Major features & infrastructure work has been implemented as follows.
+
+Features:
+- Implemented User roles, subscriptions, Issue tracking, Coupons, Credit Card Handling, etc.
+- Stripe API used for billing
+- All subscribed users can receive tweets about cats :)
+- Unit Tests have been implemented for testing core features.
+- Issue tracking & support has also been added & can be viewed on Admin interface
+- Tools like flower, cAdvisor used for better system tracking.
+
+Packages:
+- Flask-Mail used to send out emails
+- Redis is used for multiple things: pub-sub part in websocket server, to back celery & to back flask-cache as the backend.
+- Celery is the background task queue & Flower is the front end to view celery tasks
+- Flask-Cache helps caching an entire flask view OR a jinja2 snippet.
+- flask-bouncer is used for handling permissions - i.e. showing diff data for different User roles
+- Subscription service implemented using Stripe APIs
+- Tweepy is used for getting realtime tweets
+- Unit Tests implemented using pytest, pytest-cov does coverage testing
+- mock is used to mock the stripe APIs for our test
+- fake-factory package used Faker underneath to generate fake data
+- Flask-DebugToolbar is super useful - helps figure whats happening under the hood in your app.
+
+
 Version 0.0.4 (2015-11-13)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 

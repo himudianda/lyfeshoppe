@@ -1,6 +1,22 @@
-var moment = require('moment'); // included thru node_modules & nginx could serve it directly.
+var moment = require('moment');
+
+var coupon = require('./coupon');
+var stripe = require('./stripe');
+var BulkDelete = require('./bulk-delete');
+var faye = require('./faye');
 
 $(document).ready(function () {
+    moment.locale($('body').data('locale'));
+
+    coupon();
+    stripe();
+
+    var bulk_delete = new BulkDelete();
+    bulk_delete.listenForEvents();
+
+    if (window.location.pathname === '/live_stream') {
+        faye();
+    }
 
     $('.from-now').each(function (i, e) {
         (function updateTime() {

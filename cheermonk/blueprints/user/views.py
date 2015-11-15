@@ -10,6 +10,7 @@ from flask_login import (
     login_user,
     current_user,
     logout_user)
+from flask_babel import gettext as _
 
 from cheermonk.lib.safe_next_url import safe_next_url
 from cheermonk.blueprints.user.decorators import anonymous_required
@@ -20,7 +21,8 @@ from cheermonk.blueprints.user.forms import (
     PasswordResetForm,
     SignupForm,
     WelcomeForm,
-    UpdateCredentials)
+    UpdateCredentials,
+    UpdateLocale)
 
 user = Blueprint('user', __name__, template_folder='templates')
 
@@ -44,6 +46,8 @@ def login():
             # 2) Uncomment the 'remember' field in user/forms.py#LoginForm
             # 3) Add a checkbox to the login form with the id/name 'remember'
             if login_user(u, remember=True):
+                u.update_activity_tracking(request.remote_addr)
+
                 # Handle optionally redirecting to the next URL safely.
                 next_url = request.form.get('next')
                 if next_url:
@@ -51,9 +55,9 @@ def login():
 
                 return redirect(url_for('user.settings'))
             else:
-                flash('This account has been disabled.', 'error')
+                flash(_('This account has been disabled.'), 'error')
         else:
-            flash('Identity or password is incorrect.', 'error')
+            flash(_('Identity or password is incorrect.'), 'error')
 
     return render_template('user/login.jinja2', form=form)
 
@@ -62,7 +66,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.', 'success')
+    flash(_('You have been logged out.'), 'success')
     return redirect(url_for('user.login'))
 
 
@@ -74,7 +78,8 @@ def begin_password_reset():
     if form.validate_on_submit():
         u = User.initialize_password_reset(request.form.get('identity'))
 
-        flash('An email has been sent to {}.'.format(u.email), 'success')
+        flash(_('An email has been sent to %(email)s.',
+                email=u.email), 'success')
         return redirect(url_for('user.login'))
 
     return render_template('user/begin_password_reset.jinja2', form=form)
@@ -89,7 +94,8 @@ def password_reset():
         u = User.deserialize_token(request.form.get('reset_token'))
 
         if u is None:
-            flash('Your reset token has expired or was tampered with.', 'error')
+            flash(_('Your reset token has expired or was tampered with.'),
+                  'error')
             return redirect(url_for('user.begin_password_reset'))
 
         form.populate_obj(u)
@@ -97,7 +103,7 @@ def password_reset():
         u.save()
 
         if login_user(u):
-            flash('Your password has been reset.', 'success')
+            flash(_('Your password has been reset.'), 'success')
             return redirect(url_for('user.settings'))
 
     return render_template('user/password_reset.jinja2', form=form)
@@ -116,7 +122,7 @@ def signup():
         u.save()
 
         if login_user(u):
-            flash('Awesome, thanks for signing up!', 'success')
+            flash(_('Awesome, thanks for signing up!'), 'success')
             return redirect(url_for('user.welcome'))
 
     return render_template('user/signup.jinja2', form=form)
@@ -126,7 +132,7 @@ def signup():
 @login_required
 def welcome():
     if current_user.username:
-        flash('You already picked a username.', 'warning')
+        flash(_('You already picked a username.'), 'warning')
         return redirect(url_for('user.settings'))
 
     form = WelcomeForm()
@@ -135,8 +141,8 @@ def welcome():
         current_user.username = request.form.get('username')
         current_user.save()
 
-        flash('Sign up is complete, enjoy our services.', 'success')
-        return "Welcome to Cheermonk"
+        flash(_('Sign up is complete, enjoy our services.'), 'success')
+        return redirect(url_for('billing.pricing'))
 
     return render_template('user/welcome.jinja2', form=form)
 
@@ -162,7 +168,22 @@ def update_credentials():
 
         current_user.save()
 
-        flash('Your sign in settings have been updated.', 'success')
+        flash(_('Your sign in settings have been updated.'), 'success')
         return redirect(url_for('user.settings'))
 
     return render_template('user/update_credentials.jinja2', form=form)
+
+
+@user.route('/settings/update_locale', methods=['GET', 'POST'])
+@login_required
+def update_locale():
+    form = UpdateLocale(locale=current_user.locale)
+
+    if form.validate_on_submit():
+        form.populate_obj(current_user)
+        current_user.save()
+
+        flash(_('Your locale settings have been updated.'), 'success')
+        return redirect(url_for('user.settings'))
+
+    return render_template('user/update_locale.jinja2', form=form)

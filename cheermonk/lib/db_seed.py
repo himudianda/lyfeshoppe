@@ -25,7 +25,7 @@ def create_admin():
         return None
 
     params = {
-        #'role': 'admin',
+        'role': 'admin',
         'email': SEED_ADMIN_EMAIL,
         'password': 'password'
     }

@@ -1,4 +1,5 @@
 from flask import render_template
+from flask_babel import lazy_gettext as _
 
 from cheermonk.extensions import mail
 
@@ -40,9 +41,9 @@ def send_template_message(template=None, ctx=None, *args, **kwargs):
 
     if template is not None:
         if 'body' in kwargs:
-            raise Exception('You cannot have both a template and body arg.')
+            raise Exception(_('You cannot have both a template and body arg.'))
         elif 'html' in kwargs:
-            raise Exception('You cannot have both a template and body arg.')
+            raise Exception(_('You cannot have both a template and body arg.'))
 
         kwargs['body'] = _try_renderer_template(template, **ctx)
         kwargs['html'] = _try_renderer_template(template, ext='html', **ctx)

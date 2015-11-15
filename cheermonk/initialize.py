@@ -1,6 +1,8 @@
+from flask import request
+from flask_login import current_user
 from itsdangerous import URLSafeTimedSerializer
 
-from cheermonk.extensions import login_manager
+from cheermonk.extensions import login_manager, babel
 
 
 def authentication(app, user_model):
@@ -27,3 +29,19 @@ def authentication(app, user_model):
         user_uid = data[0]
 
         return user_model.query.get(user_uid)
+
+
+def locale(app):
+    """
+    Initialize a locale for the current request.
+
+    :param app: Flask application instance
+    :return: str
+    """
+    @babel.localeselector
+    def get_locale():
+        if current_user.is_authenticated():
+            return current_user.locale
+
+        accept_languages = app.config.get('ACCEPT_LANGUAGES')
+        return request.accept_languages.best_match(accept_languages)

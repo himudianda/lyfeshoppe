@@ -1,9 +1,24 @@
+import logging
+
 from flask_wtf import Form
-from wtforms import HiddenField, StringField, PasswordField
+from wtforms import HiddenField, StringField, PasswordField, SelectField
 from wtforms.validators import DataRequired, Length, Optional, Regexp
 from wtforms_components import EmailField, Unique, Email
+from flask_babel import lazy_gettext as _
 
-from cheermonk.lib.util_wtforms import ModelForm
+try:
+    from instance import settings
+
+    LANGUAGES = settings.LANGUAGES
+except ImportError:
+    logging.error('Ensure __init__.py and settings.py both exist in instance/')
+    exit(1)
+except AttributeError:
+    from config import settings
+
+    LANGUAGES = settings.LANGUAGES
+
+from cheermonk.lib.util_wtforms import ModelForm, choices_from_dict
 from cheermonk.blueprints.user.models import User, db
 from cheermonk.blueprints.user.validations import ensure_identity_exists, \
     ensure_existing_password_matches
@@ -11,14 +26,14 @@ from cheermonk.blueprints.user.validations import ensure_identity_exists, \
 
 class LoginForm(Form):
     next = HiddenField()
-    identity = StringField('Username or email',
+    identity = StringField(_('Username or email'),
                            [DataRequired(), Length(3, 254)])
     password = PasswordField('Password', [DataRequired(), Length(8, 128)])
-    # remember = BooleanField('Stay signed in')
+    # remember = BooleanField(_('Stay signed in'))
 
 
 class BeginPasswordResetForm(Form):
-    identity = StringField('Username or email',
+    identity = StringField(_('Username or email'),
                            [DataRequired(),
                             Length(3, 254),
                             ensure_identity_exists]
@@ -27,7 +42,7 @@ class BeginPasswordResetForm(Form):
 
 class PasswordResetForm(Form):
     reset_token = HiddenField()
-    password = PasswordField('Password', [DataRequired(), Length(8, 128)])
+    password = PasswordField(_('Password'), [DataRequired(), Length(8, 128)])
 
 
 class SignupForm(ModelForm):
@@ -39,11 +54,11 @@ class SignupForm(ModelForm):
             get_session=lambda: db.session
         )
     ])
-    password = PasswordField('Password', [DataRequired(), Length(8, 128)])
+    password = PasswordField(_('Password'), [DataRequired(), Length(8, 128)])
 
 
 class WelcomeForm(ModelForm):
-    username_message = 'Letters, numbers and underscores only please.'
+    username_message = _('Letters, numbers and underscores only please.')
 
     username = StringField(validators=[
         Unique(
@@ -64,9 +79,14 @@ class UpdateCredentials(ModelForm):
             get_session=lambda: db.session
         )
     ])
-    current_password = PasswordField('Current password',
+    current_password = PasswordField(_('Current password'),
                                      [DataRequired(),
                                       Length(8, 128),
                                       ensure_existing_password_matches]
                                      )
-    password = PasswordField('Password', [Optional(), Length(8, 128)])
+    password = PasswordField(_('Password'), [Optional(), Length(8, 128)])
+
+
+class UpdateLocale(ModelForm):
+    locale = SelectField(_('Language preference'), [DataRequired()],
+                         choices=choices_from_dict(LANGUAGES))

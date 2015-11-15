@@ -1,5 +1,8 @@
 {% import 'macros/layout/meta_tags.jinja2' as meta_tags %}
+{% import 'macros/layout/fav_icons.jinja2' as fav_icons %}
 {% import 'macros/layout/assets.jinja2' as assets with context %}
+{% import 'macros/layout/analytics.jinja2' as analytics with context %}
+{% import 'billing/macros/billing.jinja2' as billing with context %}
 {% import 'macros/layout/flash.jinja2' as flash with context %}
 
 <!doctype html>
@@ -7,13 +10,17 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
   {{ meta_tags.render(csrf_token()) }}
+  {{ fav_icons.render(self.title()) }}
 
   {{ assets.render() }}
   {{ assets.polyfills() }}
 
+  {{ analytics.google_ua() }}
 </head>
-<body>
+<body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }}>
 {% block header %}{% endblock %}
+
+{{ billing.card_expiring_warning() }}
 
 {% block hero %}{% endblock %}
 
@@ -27,7 +34,7 @@
 <footer class="footer text-center">
     <div class="container">
         <ul class="list-inline">
-            <li class="text-muted">{{ 'Cheermonk' }} &copy; 2015</li>
+            <li class="text-muted">{{ _('Cheermonk') }} &copy; 2015</li>
             {% block footer %}{% endblock %}
         </ul>
     </div>

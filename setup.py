@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='Cheermonk',
-    version='0.1',
+    version='1.0',
     packages=['cli', 'cli.commands'],
     include_package_data=True,
     install_requires=[

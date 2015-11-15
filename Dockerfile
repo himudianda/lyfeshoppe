@@ -1,5 +1,6 @@
-
-MAINTAINER Harshit Imudianda <harshit.himudianda@gmail.com>
+# Use the barebones version of Python 2.7.10.
+FROM python:2.7.10-slim
+MAINTAINER Harshit Imudianda <harshit.imudianda@gmail.com>
 
 # Install any packages that must be installed.
 RUN apt-get update && apt-get install -qq -y build-essential nodejs nodejs-legacy npm libpq-dev postgresql-client-9.4 libpng-dev --fix-missing --no-install-recommends
@@ -32,4 +33,4 @@ RUN pip install --editable .
 VOLUME ["$INSTALL_PATH/build/public"]
 
 # The default command to run if no command is specified.
-CMD gunicorn -b 0.0.0.0:5000 "cheermonk.app:create_app()"
+CMD gunicorn -b 0.0.0.0:8000 "cheermonk.app:create_app()"
