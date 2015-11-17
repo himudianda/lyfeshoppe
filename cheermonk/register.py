@@ -11,6 +11,7 @@ from cheermonk.lib.http_method_override_middleware import \
     HTTPMethodOverrideMiddleware
 from cheermonk.blueprints.admin import admin
 from cheermonk.blueprints.page import page
+from cheermonk.blueprints.sample import sample
 from cheermonk.blueprints.user import user
 from cheermonk.blueprints.issue import issue
 from cheermonk.blueprints.stream import stream
@@ -33,6 +34,7 @@ from cheermonk.blueprints.billing.template_processors import format_currency
 FLASK_BLUEPRINTS = [
     admin,
     page,
+    sample,
     user,
     issue,
     billing,
@@ -79,7 +81,10 @@ def blueprints(app):
     :return: None
     """
     for blueprint in FLASK_BLUEPRINTS:
-        app.register_blueprint(blueprint)
+        if blueprint == sample:
+            app.register_blueprint(blueprint, url_prefix='/sample')
+        else:
+            app.register_blueprint(blueprint)
 
     return None
 
