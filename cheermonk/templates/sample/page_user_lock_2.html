@@ -49,7 +49,7 @@ License: You must have a valid license purchased only from cheermonk(the above l
     <body class="">
         <div class="page-lock">
             <div class="page-logo">
-                <a class="brand" href="index.html">
+                <a class="{{ url_for('sample.index') }}">
                     <img src="{{ url_for('static', filename='pages/img/logo-big.png') }}" alt="logo" /> </a>
             </div>
             <div class="page-body">
@@ -69,7 +69,7 @@ License: You must have a valid license purchased only from cheermonk(the above l
                         </div>
                         <!-- /input-group -->
                         <div class="relogin">
-                            <a href="login.html"> Not Bob Nilson ? </a>
+                            <a href="{{ url_for('sample.login') }}"> Not Bob Nilson ? </a>
                         </div>
                     </form>
                 </div>
