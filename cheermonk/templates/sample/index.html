@@ -236,7 +236,7 @@ License: You must have a valid license purchased only from cheermonk(the above l
                                     <li class="external">
                                         <h3>You have
                                             <span class="bold">7 New</span> Messages</h3>
-                                        <a href="app_inbox.html">view all</a>
+                                        <a href="{{ url_for('sample.app_inbox') }}">view all</a>
                                     </li>
                                     <li>
                                         <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
@@ -425,11 +425,11 @@ License: You must have a valid license purchased only from cheermonk(the above l
                                             <i class="icon-user"></i> My Profile </a>
                                     </li>
                                     <li>
-                                        <a href="app_calendar.html">
+                                        <a href="{{ url_for('sample.app_calendar') }}" class="nav-link ">
                                             <i class="icon-calendar"></i> My Calendar </a>
                                     </li>
                                     <li>
-                                        <a href="app_inbox.html">
+                                        <a href="{{ url_for('sample.app_inbox') }}" class="nav-link ">
                                             <i class="icon-envelope-open"></i> My Inbox
                                             <span class="badge badge-danger"> 3 </span>
                                         </a>
@@ -1177,7 +1177,7 @@ License: You must have a valid license purchased only from cheermonk(the above l
                                     </a>
                                 </li>
                                 <li class="nav-item  ">
-                                    <a href="app_inbox.html" class="nav-link ">
+                                    <a href="{{ url_for('sample.app_inbox') }}" class="nav-link ">
                                         <i class="icon-envelope"></i>
                                         <span class="title">Inbox</span>
                                     </a>
