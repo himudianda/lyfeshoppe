@@ -635,7 +635,7 @@
 								<div class="top-cart-items">
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Blue Round-Neck Tshirt</a>
@@ -645,7 +645,7 @@
 									</div>
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Light Blue Denim Dress</a>
@@ -770,18 +770,18 @@
 						<div class="clear"></div>
 
 						<ul class="clients-grid grid-6 nobottommargin clearfix">
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/1.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/2.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/3.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/4.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/5.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/6.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/7.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/8.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/9.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/10.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/11.png" alt="Clients"></a></li>
-							<li><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/12.png" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/1.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/2.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/3.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/4.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/5.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/6.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/7.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/8.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/9.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/10.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/11.png') }}" alt="Clients"></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/12.png') }}" alt="Clients"></a></li>
 						</ul>
 
 					</div>
@@ -803,7 +803,7 @@
 							<article class="portfolio-item pf-media pf-icons">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-										<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/1.jpg') }}" alt="Open Imagination">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/1.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
@@ -819,7 +819,7 @@
 							<article class="portfolio-item pf-illustrations">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-										<img src="images/portfolio/4/2.jpg" alt="Locked Steel Gate">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/2.jpg') }}" alt="Locked Steel Gate">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/2.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
@@ -835,7 +835,7 @@
 							<article class="portfolio-item pf-graphics pf-uielements">
 								<div class="portfolio-image">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/3.jpg') }}" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
@@ -850,7 +850,7 @@
 							<article class="portfolio-item pf-icons pf-illustrations">
 								<div class="portfolio-image">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/4/4.jpg" alt="Mac Sunglasses">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/4.jpg') }}" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/4.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
@@ -867,7 +867,7 @@
 							<article class="portfolio-item pf-uielements pf-media">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-										<img src="images/portfolio/4/5.jpg" alt="Console Activity">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/5.jpg') }}" alt="Console Activity">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/5.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
@@ -883,7 +883,7 @@
 							<article class="portfolio-item pf-graphics pf-illustrations">
 								<div class="portfolio-image">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/4/6.jpg" alt="Mac Sunglasses">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/6.jpg') }}" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/6.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
@@ -902,7 +902,7 @@
 							<article class="portfolio-item pf-uielements pf-icons">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
-										<img src="images/portfolio/4/7.jpg" alt="Backpack Contents">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/7.jpg') }}" alt="Backpack Contents">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
@@ -917,7 +917,7 @@
 							<article class="portfolio-item pf-graphics">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-										<img src="images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/8.jpg') }}" alt="Sunset Bulb Glow">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/8.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
@@ -933,7 +933,7 @@
 							<article class="portfolio-item pf-illustrations pf-icons">
 								<div class="portfolio-image">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/4/9.jpg" alt="Mac Sunglasses">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/9.jpg') }}" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/9.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
@@ -951,7 +951,7 @@
 							<article class="portfolio-item pf-graphics pf-media pf-uielements">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
-										<img src="images/portfolio/4/10.jpg" alt="Study Table">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/10.jpg') }}" alt="Study Table">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
@@ -966,7 +966,7 @@
 							<article class="portfolio-item pf-media pf-icons">
 								<div class="portfolio-image">
 									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-										<img src="images/portfolio/4/11.jpg" alt="Workspace Stuff">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/11.jpg') }}" alt="Workspace Stuff">
 									</a>
 									<div class="portfolio-overlay">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/11.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
@@ -982,7 +982,7 @@
 							<article class="portfolio-item pf-illustrations pf-graphics">
 								<div class="portfolio-image">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/4/12.jpg" alt="Mac Sunglasses">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/4/12.jpg') }}" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
 										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/12.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>

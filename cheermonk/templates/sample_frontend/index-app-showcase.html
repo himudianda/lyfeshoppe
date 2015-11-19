@@ -635,7 +635,7 @@
 								<div class="top-cart-items">
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Blue Round-Neck Tshirt</a>
@@ -645,7 +645,7 @@
 									</div>
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Light Blue Denim Dress</a>
@@ -682,7 +682,7 @@
 			<div class="full-screen" style="background: url('images/appshowcase/1.jpg'); background-size: cover;">
 				<div class="container clearfix">
 
-					<img src="images/appshowcase/slider-iphone.png" alt="Image" class="hidden-sm hidden-xs" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
+					<img src="{{ url_for('static', filename='frontend/images/appshowcase/slider-iphone.png') }}" alt="Image" class="hidden-sm hidden-xs" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
 
 					<div class="vertical-middle no-fade">
 						<div class="col-md-6 dark fright nobottommargin" data-animate="fadeIn">
@@ -715,19 +715,19 @@
 				<div class="container clearfix">
 
 					<div class="col_one_third nobottommargin center">
-						<a href="{{ url_for('static', filename='#') }}"><img src="images/appshowcase/s1.png" alt="Image" class="bottommargin-sm"></a>
+						<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/appshowcase/s1.png') }}" alt="Image" class="bottommargin-sm"></a>
 						<h4>Responsive Layout</h4>
 						<p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
 					</div>
 
 					<div class="col_one_third nobottommargin center">
-						<a href="{{ url_for('static', filename='#') }}"><img src="images/appshowcase/s4.png" alt="Image" class="bottommargin-sm"></a>
+						<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/appshowcase/s4.png') }}" alt="Image" class="bottommargin-sm"></a>
 						<h4>Retina Ready Graphics</h4>
 						<p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
 					</div>
 
 					<div class="col_one_third nobottommargin center col_last">
-						<a href="{{ url_for('static', filename='#') }}"><img src="images/appshowcase/s5.png" alt="Image" class="bottommargin-sm"></a>
+						<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/appshowcase/s5.png') }}" alt="Image" class="bottommargin-sm"></a>
 						<h4>Powerful Performance</h4>
 						<p>Cheermonk includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
 					</div>
@@ -764,7 +764,7 @@
 
 						<div class="col_half nobottommargin topmargin-lg">
 
-							<img src="images/appshowcase/iphone-solid.png" alt="Image" class="center-block">
+							<img src="{{ url_for('static', filename='frontend/images/appshowcase/iphone-solid.png') }}" alt="Image" class="center-block">
 
 						</div>
 
@@ -856,8 +856,8 @@
 						</div>
 
 						<div style="position: relative; margin-bottom: -60px;" data-height-lg="415" data-height-md="342" data-height-sm="262" data-height-xs="160" data-height-xxs="102">
-							<img src="images/services/chrome.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" alt="Chrome">
-							<img src="images/services/ipad3.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="300" alt="iPad">
+							<img src="{{ url_for('static', filename='frontend/images/services/chrome.png') }}" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" alt="Chrome">
+							<img src="{{ url_for('static', filename='frontend/images/services/ipad3.png') }}" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="300" alt="iPad">
 						</div>
 
 					</div>
@@ -949,7 +949,7 @@
 
 							<div class="widget clearfix">
 
-								<img src="images/footer-widget-logo.png" alt="" class="footer-logo">
+								<img src="{{ url_for('static', filename='frontend/images/footer-widget-logo.png') }}" alt="" class="footer-logo">
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 

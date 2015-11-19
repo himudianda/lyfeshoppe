@@ -635,7 +635,7 @@
 								<div class="top-cart-items">
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Blue Round-Neck Tshirt</a>
@@ -645,7 +645,7 @@
 									</div>
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Light Blue Denim Dress</a>
@@ -696,25 +696,25 @@
 							<div class="slider-wrap">
 								<div class="slide">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/1/full/1.jpg" alt="Slide 1">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/1/full/1.jpg') }}" alt="Slide 1">
 									</a>
 									<div class="flex-caption slider-caption-bg">Ultra Responsive Layout</div>
 								</div>
 								<div class="slide">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/1/full/2.jpg" alt="Slide 2">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/1/full/2.jpg') }}" alt="Slide 2">
 									</a>
 									<div class="flex-caption slider-caption-bg slider-caption-bottom-right">Retina Graphics Support</div>
 								</div>
 								<div class="slide">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/1/full/3.jpg" alt="Slide 3">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/1/full/3.jpg') }}" alt="Slide 3">
 									</a>
 									<div class="flex-caption slider-caption-bg">Custom Google WebFonts</div>
 								</div>
 								<div class="slide">
 									<a href="{{ url_for('static', filename='#') }}">
-										<img src="images/portfolio/1/full/4.jpg" alt="Slide 4">
+										<img src="{{ url_for('static', filename='frontend/images/portfolio/1/full/4.jpg') }}" alt="Slide 4">
 									</a>
 									<div class="flex-caption slider-caption-bg slider-caption-bottom-right">400+ HTML5 Templates Included</div>
 								</div>
@@ -732,7 +732,7 @@
 						<div id="portfolio-ajax-container"></div>
 					</div>
 
-					<div id="portfolio-ajax-loader"><img src="images/preloader-dark.gif" alt="Preloader"></div>
+					<div id="portfolio-ajax-loader"><img src="{{ url_for('static', filename='frontend/images/preloader-dark.gif') }}" alt="Preloader"></div>
 
 					<!-- Portfolio Filter
 					============================================= -->
@@ -760,7 +760,7 @@
 						<article id="portfolio-item-1" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-media pf-icons">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-									<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/1.jpg') }}" alt="Open Imagination">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -775,7 +775,7 @@
 						<article id="portfolio-item-2" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-illustrations">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-									<img src="images/portfolio/4/2.jpg" alt="Locked Steel Gate">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/2.jpg') }}" alt="Locked Steel Gate">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -790,7 +790,7 @@
 						<article id="portfolio-item-3" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item pf-graphics pf-uielements">
 							<div class="portfolio-image">
 								<a href="{{ url_for('static', filename='#') }}">
-									<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/3.jpg') }}" alt="Mac Sunglasses">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -825,7 +825,7 @@
 						<article id="portfolio-item-5" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-uielements pf-media">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-									<img src="images/portfolio/4/5.jpg" alt="Console Activity">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/5.jpg') }}" alt="Console Activity">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -862,7 +862,7 @@
 						<article id="portfolio-item-7" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item pf-uielements pf-icons">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
-									<img src="images/portfolio/4/7.jpg" alt="Backpack Contents">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/7.jpg') }}" alt="Backpack Contents">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -877,7 +877,7 @@
 						<article id="portfolio-item-8" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-graphics">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-									<img src="images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/8.jpg') }}" alt="Sunset Bulb Glow">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -913,7 +913,7 @@
 						<article id="portfolio-item-10" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item pf-graphics pf-media pf-uielements">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
-									<img src="images/portfolio/4/10.jpg" alt="Study Table">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/10.jpg') }}" alt="Study Table">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -928,7 +928,7 @@
 						<article id="portfolio-item-11" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-media pf-icons">
 							<div class="portfolio-image">
 								<a href="{{ url_for('sample_frontend.portfolio-single') }}">
-									<img src="images/portfolio/4/11.jpg" alt="Workspace Stuff">
+									<img src="{{ url_for('static', filename='frontend/images/portfolio/4/11.jpg') }}" alt="Workspace Stuff">
 								</a>
 								<div class="portfolio-overlay">
 									<a href="{{ url_for('static', filename='#') }}" class="center-icon"><i class="icon-line-expand"></i></a>
@@ -1005,7 +1005,7 @@
 							<div class="slider-wrap">
 								<div class="slide">
 									<div class="testi-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/testimonials/3.jpg" alt="Customer Testimonails"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/testimonials/3.jpg') }}" alt="Customer Testimonails"></a>
 									</div>
 									<div class="testi-content">
 										<p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
@@ -1017,7 +1017,7 @@
 								</div>
 								<div class="slide">
 									<div class="testi-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/testimonials/2.jpg" alt="Customer Testimonails"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/testimonials/2.jpg') }}" alt="Customer Testimonails"></a>
 									</div>
 									<div class="testi-content">
 										<p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
@@ -1029,7 +1029,7 @@
 								</div>
 								<div class="slide">
 									<div class="testi-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/testimonials/1.jpg" alt="Customer Testimonails"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/testimonials/1.jpg') }}" alt="Customer Testimonails"></a>
 									</div>
 									<div class="testi-content">
 										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
@@ -1065,7 +1065,7 @@
 
 							<div class="widget clearfix">
 
-								<img src="images/footer-widget-logo.png" alt="" class="footer-logo">
+								<img src="{{ url_for('static', filename='frontend/images/footer-widget-logo.png') }}" alt="" class="footer-logo">
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 

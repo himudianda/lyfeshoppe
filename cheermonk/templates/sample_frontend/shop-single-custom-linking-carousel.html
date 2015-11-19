@@ -635,7 +635,7 @@
 								<div class="top-cart-items">
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Blue Round-Neck Tshirt</a>
@@ -645,7 +645,7 @@
 									</div>
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Light Blue Denim Dress</a>
@@ -713,13 +713,13 @@
 									<div id="oc-images" class="owl-carousel image-carousel" data-lightbox="gallery">
 
 										<div class="oc-item">
-											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3.jpg') }}" title="Pink Printed Dress - Front View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/images/shop/dress/3.jpg') }}" alt="Pink Printed Dress"></a>
+											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3.jpg') }}" title="Pink Printed Dress - Front View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/shop/dress/3.jpg') }}') }}" alt="Pink Printed Dress"></a>
 										</div>
 										<div class="oc-item">
-											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3-1.jpg') }}" title="Pink Printed Dress - Side View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/images/shop/dress/3-1.jpg') }}" alt="Pink Printed Dress"></a>
+											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3-1.jpg') }}" title="Pink Printed Dress - Side View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/shop/dress/3-1.jpg') }}') }}" alt="Pink Printed Dress"></a>
 										</div>
 										<div class="oc-item">
-											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3-2.jpg') }}" title="Pink Printed Dress - Back View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/images/shop/dress/3-2.jpg') }}" alt="Pink Printed Dress"></a>
+											<a href="{{ url_for('static', filename='frontend/images/shop/dress/3-2.jpg') }}" title="Pink Printed Dress - Back View" data-lightbox="gallery-item"><img src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/shop/dress/3-2.jpg') }}') }}" alt="Pink Printed Dress"></a>
 										</div>
 
 									</div>
@@ -1127,12 +1127,12 @@
 							<div class="oc-item">
 								<div class="product iproduct clearfix">
 									<div class="product-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/dress/1.jpg" alt="Checked Short Dress"></a>
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/dress/1-1.jpg" alt="Checked Short Dress"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/dress/1.jpg') }}" alt="Checked Short Dress"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/dress/1-1.jpg') }}" alt="Checked Short Dress"></a>
 										<div class="sale-flash">50% Off*</div>
 										<div class="product-overlay">
 											<a href="{{ url_for('static', filename='#') }}" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-											<a href="{{ url_for('sample_frontend.include/ajax/shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
+											<a href="{{ url_for('sample_frontend.include_ajax_shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
 										</div>
 									</div>
 									<div class="product-desc center">
@@ -1152,11 +1152,11 @@
 							<div class="oc-item">
 								<div class="product iproduct clearfix">
 									<div class="product-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/pants/1-1.jpg" alt="Slim Fit Chinos"></a>
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/pants/1.jpg" alt="Slim Fit Chinos"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/pants/1-1.jpg') }}" alt="Slim Fit Chinos"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/pants/1.jpg') }}" alt="Slim Fit Chinos"></a>
 										<div class="product-overlay">
 											<a href="{{ url_for('static', filename='#') }}" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-											<a href="{{ url_for('sample_frontend.include/ajax/shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
+											<a href="{{ url_for('sample_frontend.include_ajax_shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
 										</div>
 									</div>
 									<div class="product-desc center">
@@ -1176,11 +1176,11 @@
 							<div class="oc-item">
 								<div class="product iproduct clearfix">
 									<div class="product-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/shoes/1-1.jpg" alt="Dark Brown Boots"></a>
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/shoes/1.jpg" alt="Dark Brown Boots"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/shoes/1-1.jpg') }}" alt="Dark Brown Boots"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/shoes/1.jpg') }}" alt="Dark Brown Boots"></a>
 										<div class="product-overlay">
 											<a href="{{ url_for('static', filename='#') }}" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-											<a href="{{ url_for('sample_frontend.include/ajax/shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
+											<a href="{{ url_for('sample_frontend.include_ajax_shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
 										</div>
 									</div>
 									<div class="product-desc center">
@@ -1200,11 +1200,11 @@
 							<div class="oc-item">
 								<div class="product iproduct clearfix">
 									<div class="product-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/dress/2.jpg" alt="Light Blue Denim Dress"></a>
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/dress/2-2.jpg" alt="Light Blue Denim Dress"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/dress/2.jpg') }}" alt="Light Blue Denim Dress"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/dress/2-2.jpg') }}" alt="Light Blue Denim Dress"></a>
 										<div class="product-overlay">
 											<a href="{{ url_for('static', filename='#') }}" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-											<a href="{{ url_for('sample_frontend.include/ajax/shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
+											<a href="{{ url_for('sample_frontend.include_ajax_shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
 										</div>
 									</div>
 									<div class="product-desc center">
@@ -1224,12 +1224,12 @@
 							<div class="oc-item">
 								<div class="product iproduct clearfix">
 									<div class="product-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/sunglasses/1.jpg" alt="Unisex Sunglasses"></a>
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/sunglasses/1-1.jpg" alt="Unisex Sunglasses"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/sunglasses/1.jpg') }}" alt="Unisex Sunglasses"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/sunglasses/1-1.jpg') }}" alt="Unisex Sunglasses"></a>
 										<div class="sale-flash">Sale!</div>
 										<div class="product-overlay">
 											<a href="{{ url_for('static', filename='#') }}" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-											<a href="{{ url_for('sample_frontend.include/ajax/shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
+											<a href="{{ url_for('sample_frontend.include_ajax_shop-item') }}" class="item-quick-view" data-lightbox="ajax"><i class="icon-zoom-in2"></i><span> Quick View</span></a>
 										</div>
 									</div>
 									<div class="product-desc center">
@@ -1296,7 +1296,7 @@
 
 							<div class="widget clearfix">
 
-								<img src="images/footer-widget-logo.png" alt="" class="footer-logo">
+								<img src="{{ url_for('static', filename='frontend/images/footer-widget-logo.png') }}" alt="" class="footer-logo">
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 

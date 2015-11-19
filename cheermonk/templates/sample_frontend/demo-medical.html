@@ -76,9 +76,9 @@
 						<ul>
 							<li><a href="{{ url_for('static', filename='#') }}">EN</a>
 								<ul>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/french.png" alt="French"> FR</a></li>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/italian.png" alt="Italian"> IT</a></li>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/german.png" alt="German"> DE</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/french.png') }}" alt="French"> FR</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/italian.png') }}" alt="Italian"> IT</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/german.png') }}" alt="German"> DE</a></li>
 								</ul>
 							</li>
 							<li><a href="{{ url_for('static', filename='#') }}" data-scrollto="#booking-appointment-form" data-offset="100" data-easing="easeInOutExpo" data-speed="1200" class="bgcolor" style="color:#fff;">Book an Appointment</a></li>
@@ -390,7 +390,7 @@
 							<li class="noleftpadding notoppadding">
 								<div class="testimonial">
 									<div class="testi-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/testimonials/1.jpg" alt="Customer Testimonails"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/testimonials/1.jpg') }}" alt="Customer Testimonails"></a>
 									</div>
 									<div class="testi-content">
 										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!</p>
@@ -404,7 +404,7 @@
 							<li class="noleftpadding nobottompadding">
 								<div class="testimonial">
 									<div class="testi-image">
-										<a href="{{ url_for('static', filename='#') }}"><img src="images/testimonials/2.jpg" alt="Customer Testimonails"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/testimonials/2.jpg') }}" alt="Customer Testimonails"></a>
 									</div>
 									<div class="testi-content">
 										<p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
@@ -484,7 +484,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/1.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/1.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. John Doe</h4><span>Cardiologist</span></div>
@@ -493,7 +493,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/2.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/2.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Bryan Mcguire</h4><span>Orthopedist</span></div>
@@ -502,7 +502,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/3.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/3.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Mary Jane</h4><span>Neurologist</span></div>
@@ -511,7 +511,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/4.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/4.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Silvia Bush</h4><span>Dentist</span></div>
@@ -520,7 +520,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/6.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/6.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Hugh Baldwin</h4><span>Cardiologist</span></div>
@@ -529,7 +529,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/7.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/7.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Erika Todd</h4><span>Neurologist</span></div>
@@ -538,7 +538,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/8.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/8.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Randy Adams</h4><span>Dentist</span></div>
@@ -547,7 +547,7 @@
 
 						<div class="team">
 							<div class="team-image">
-								<img src="demos/medical/images/doctors/9.jpg" alt="Dr. John Doe">
+								<img src="{{ url_for('static', filename='frontend/demos/medical/images/doctors/9.jpg') }}" alt="Dr. John Doe">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Dr. Alan Freeman</h4><span>Eye Specialist</span></div>

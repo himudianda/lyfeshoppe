@@ -62,9 +62,9 @@
 							</li>
 							<li><a href="{{ url_for('static', filename='#') }}">EN</a>
 								<ul>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/french.png" alt="French"> FR</a></li>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/italian.png" alt="Italian"> IT</a></li>
-									<li><a href="{{ url_for('static', filename='#') }}"><img src="images/icons/flags/german.png" alt="German"> DE</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/french.png') }}" alt="French"> FR</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/italian.png') }}" alt="Italian"> IT</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/icons/flags/german.png') }}" alt="German"> DE</a></li>
 								</ul>
 							</li>
 							<li><a href="{{ url_for('static', filename='#') }}">Login</a>
@@ -318,7 +318,7 @@
 								<div class="top-cart-items">
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Blue Round-Neck Tshirt</a>
@@ -328,7 +328,7 @@
 									</div>
 									<div class="top-cart-item clearfix">
 										<div class="top-cart-item-image">
-											<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
 										</div>
 										<div class="top-cart-item-desc">
 											<a href="{{ url_for('static', filename='#') }}">Light Blue Denim Dress</a>
@@ -376,22 +376,22 @@
 								<div class="slider-wrap">
 									<div class="slide">
 										<a href="{{ url_for('static', filename='#') }}">
-											<img src="images/shop/slider/1.jpg" alt="Shop Image">
+											<img src="{{ url_for('static', filename='frontend/images/shop/slider/1.jpg') }}" alt="Shop Image">
 										</a>
 									</div>
 									<div class="slide">
 										<a href="{{ url_for('static', filename='#') }}">
-											<img src="images/shop/slider/2.jpg" alt="Shop Image">
+											<img src="{{ url_for('static', filename='frontend/images/shop/slider/2.jpg') }}" alt="Shop Image">
 										</a>
 									</div>
 									<div class="slide">
 										<a href="{{ url_for('static', filename='#') }}">
-											<img src="images/shop/slider/3.jpg" alt="Shop Image">
+											<img src="{{ url_for('static', filename='frontend/images/shop/slider/3.jpg') }}" alt="Shop Image">
 										</a>
 									</div>
 									<div class="slide">
 										<a href="{{ url_for('static', filename='#') }}">
-											<img src="images/shop/slider/4.jpg" alt="Shop Image">
+											<img src="{{ url_for('static', filename='frontend/images/shop/slider/4.jpg') }}" alt="Shop Image">
 										</a>
 									</div>
 								</div>
@@ -403,11 +403,11 @@
 					<div class="col_one_third bottommargin-lg col_last">
 
 						<div class="col_full bottommargin-sm">
-							<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/banners/7.jpg" alt="Image"></a>
+							<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/7.jpg') }}" alt="Image"></a>
 						</div>
 
 						<div class="col_full nobottommargin">
-							<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/banners/3.jpg" alt="Image"></a>
+							<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/3.jpg') }}" alt="Image"></a>
 						</div>
 
 					</div>
@@ -429,7 +429,7 @@
 					<div class="col_one_third bottommargin-lg">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<img src="images/shop/banners/10.jpg" alt="Image">
+								<img src="{{ url_for('static', filename='frontend/images/shop/banners/10.jpg') }}" alt="Image">
 							</div>
 							<div class="fbox-desc">
 								<h3>Men's Footwear<span class="subtitle">Flat 50% Off*</span></h3>
@@ -441,7 +441,7 @@
 					<div class="col_one_third bottommargin-lg">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<img src="images/shop/banners/11.jpg" alt="Image">
+								<img src="{{ url_for('static', filename='frontend/images/shop/banners/11.jpg') }}" alt="Image">
 							</div>
 							<div class="fbox-desc">
 								<h3>Latest Product Arrivals<span class="subtitle">New Dress Designs Available</span></h3>
@@ -453,7 +453,7 @@
 					<div class="col_one_third bottommargin-lg col_last">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<img src="images/shop/banners/12.jpg" alt="Image">
+								<img src="{{ url_for('static', filename='frontend/images/shop/banners/12.jpg') }}" alt="Image">
 							</div>
 							<div class="fbox-desc">
 								<h3>The Style Blog<span class="subtitle">Fashion Tips from Experts</span></h3>
@@ -474,7 +474,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/1.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -489,7 +489,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/6.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -504,7 +504,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/7.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/7.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -519,7 +519,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/9.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/9.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -546,7 +546,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/3.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/3.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -561,7 +561,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/10.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/10.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -576,7 +576,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/11.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/11.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -591,7 +591,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/4.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/4.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -618,7 +618,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/8.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/8.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -633,7 +633,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/5.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/5.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -648,7 +648,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/12.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/12.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -663,7 +663,7 @@
 
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img src="images/shop/small/2.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/shop/small/2.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -684,22 +684,22 @@
 
 					<div id="oc-clients-full" class="owl-carousel image-carousel">
 
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/1.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/2.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/3.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/4.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/5.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/6.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/7.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/8.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/9.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/10.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/11.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/12.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/13.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/14.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/15.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="images/clients/logo/18.png" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/1.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/2.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/3.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/4.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/5.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/6.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/7.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/8.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/9.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/10.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/11.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/12.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/13.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/14.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/15.png') }}" alt="Clients"></a></div>
+						<div class="oc-item"><a href="{{ url_for('static', filename='#') }}"><img src="{{ url_for('static', filename='frontend/images/clients/logo/18.png') }}" alt="Clients"></a></div>
 
 					</div>
 
@@ -776,7 +776,7 @@
 
 							<div class="widget clearfix">
 
-								<img src="images/footer-widget-logo.png" alt="" class="footer-logo">
+								<img src="{{ url_for('static', filename='frontend/images/footer-widget-logo.png') }}" alt="" class="footer-logo">
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 
