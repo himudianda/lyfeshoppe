@@ -2,23 +2,20 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -97,8 +94,8 @@
 					<!-- Logo
 					============================================= -->
 					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Cheermonk Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 					</div><!-- #logo end -->
 
 					<!-- Primary Navigation
@@ -106,142 +103,142 @@
 					<nav id="primary-menu">
 
 						<ul class="menu-left">
-							<li><a href="index.html"><div>Home</div></a>
+							<li><a href="{{ url_for('sample_frontend.index') }}"><div>Home</div></a>
 								<ul>
-									<li><a href="index-corporate.html"><div>Home - Corporate</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-corporate') }}"><div>Home - Corporate</div></a>
 										<ul>
-											<li><a href="index-corporate.html"><div>Corporate - Layout 1</div></a></li>
-											<li><a href="index-corporate-2.html"><div>Corporate - Layout 2</div></a></li>
-											<li><a href="index-corporate-3.html"><div>Corporate - Layout 3</div></a></li>
-											<li><a href="index-corporate-4.html"><div>Corporate - Layout 4</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-corporate') }}"><div>Corporate - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-corporate-2') }}"><div>Corporate - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-corporate-3') }}"><div>Corporate - Layout 3</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-corporate-4') }}"><div>Corporate - Layout 4</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-portfolio.html"><div>Home - Portfolio</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-portfolio') }}"><div>Home - Portfolio</div></a>
 										<ul>
-											<li><a href="index-portfolio.html"><div>Portfolio - Layout 1</div></a></li>
-											<li><a href="index-portfolio-2.html"><div>Portfolio - Layout 2</div></a></li>
-											<li><a href="index-portfolio-3.html"><div>Portfolio - Masonry</div></a></li>
-											<li><a href="index-portfolio-4.html"><div>Portfolio - AJAX</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-portfolio') }}"><div>Portfolio - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-portfolio-2') }}"><div>Portfolio - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-portfolio-3') }}"><div>Portfolio - Masonry</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-portfolio-4') }}"><div>Portfolio - AJAX</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-blog.html"><div>Home - Blog</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-blog') }}"><div>Home - Blog</div></a>
 										<ul>
-											<li><a href="index-blog.html"><div>Blog - Layout 1</div></a></li>
-											<li><a href="index-blog-2.html"><div>Blog - Layout 2</div></a></li>
-											<li><a href="index-blog-3.html"><div>Blog - Layout 3</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-blog') }}"><div>Blog - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-blog-2') }}"><div>Blog - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-blog-3') }}"><div>Blog - Layout 3</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-shop.html"><div>Home - Shop</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-shop') }}"><div>Home - Shop</div></a>
 										<ul>
-											<li><a href="index-shop.html"><div>Shop - Layout 1</div></a></li>
-											<li><a href="index-shop-2.html"><div>Shop - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-shop') }}"><div>Shop - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-shop-2') }}"><div>Shop - Layout 2</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-magazine.html"><div>Home - Magazine</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-magazine') }}"><div>Home - Magazine</div></a>
 										<ul>
-											<li><a href="index-magazine.html"><div>Magazine - Layout 1</div></a></li>
-											<li><a href="index-magazine-2.html"><div>Magazine - Layout 2</div></a></li>
-											<li><a href="index-magazine-3.html"><div>Magazine - Layout 3</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-magazine') }}"><div>Magazine - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-magazine-2') }}"><div>Magazine - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-magazine-3') }}"><div>Magazine - Layout 3</div></a></li>
 										</ul>
 									</li>
-									<li><a href="landing.html"><div>Home - Landing Page</div></a>
+									<li><a href="{{ url_for('sample_frontend.landing') }}"><div>Home - Landing Page</div></a>
 										<ul>
-											<li><a href="landing.html"><div>Landing Page - Layout 1</div></a></li>
-											<li><a href="landing-2.html"><div>Landing Page - Layout 2</div></a></li>
-											<li><a href="landing-3.html"><div>Landing Page - Layout 3</div></a></li>
-											<li><a href="landing-4.html"><div>Landing Page - Layout 4</div></a></li>
-											<li><a href="landing-5.html"><div>Landing Page - Layout 5</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.landing') }}"><div>Landing Page - Layout 1</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.landing-2') }}"><div>Landing Page - Layout 2</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.landing-3') }}"><div>Landing Page - Layout 3</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.landing-4') }}"><div>Landing Page - Layout 4</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.landing-5') }}"><div>Landing Page - Layout 5</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-fullscreen-image.html"><div>Home - Full Screen</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-fullscreen-image') }}"><div>Home - Full Screen</div></a>
 										<ul>
-											<li><a href="index-fullscreen-image.html"><div>Full Screen - Image</div></a></li>
-											<li><a href="index-fullscreen-slider.html"><div>Full Screen - Slider</div></a></li>
-											<li><a href="index-fullscreen-video.html"><div>Full Screen - Video</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-fullscreen-image') }}"><div>Full Screen - Image</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-fullscreen-slider') }}"><div>Full Screen - Slider</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-fullscreen-video') }}"><div>Full Screen - Video</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-onepage.html"><div>Home - One Page</div></a>
+									<li><a href="{{ url_for('sample_frontend.index-onepage') }}"><div>Home - One Page</div></a>
 										<ul>
-											<li><a href="index-onepage.html"><div>One Page - Default</div></a></li>
-											<li><a href="index-onepage-2.html"><div>One Page - Submenu</div></a></li>
-											<li><a href="index-onepage-3.html"><div>One Page - Dots Style</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-onepage') }}"><div>One Page - Default</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-onepage-2') }}"><div>One Page - Submenu</div></a></li>
+											<li><a href="{{ url_for('sample_frontend.index-onepage-3') }}"><div>One Page - Dots Style</div></a></li>
 										</ul>
 									</li>
-									<li><a href="index-wedding.html"><div>Home - Wedding</div></a></li>
-									<li><a href="index-restaurant.html"><div>Home - Restaurant</div></a></li>
-									<li><a href="index-events.html"><div>Home - Events</div></a></li>
-									<li><a href="index-parallax.html"><div>Home - Parallax</div></a></li>
-									<li><a href="index-app-showcase.html"><div>Home - App Showcase</div></a></li>
+									<li><a href="{{ url_for('sample_frontend.index-wedding') }}"><div>Home - Wedding</div></a></li>
+									<li><a href="{{ url_for('sample_frontend.index-restaurant') }}"><div>Home - Restaurant</div></a></li>
+									<li><a href="{{ url_for('sample_frontend.index-events') }}"><div>Home - Events</div></a></li>
+									<li><a href="{{ url_for('sample_frontend.index-parallax') }}"><div>Home - Parallax</div></a></li>
+									<li><a href="{{ url_for('sample_frontend.index-app-showcase') }}"><div>Home - App Showcase</div></a></li>
 								</ul>
 							</li>
-							<li class="current"><a href="#"><div>Features</div></a></li>
-							<li class="mega-menu"><a href="#"><div>Pages</div></a>
+							<li class="current"><a href="{{ url_for('static', filename='#') }}"><div>Features</div></a></li>
+							<li class="mega-menu"><a href="{{ url_for('static', filename='#') }}"><div>Pages</div></a>
 								<div class="mega-menu-content style-2 col-4 clearfix">
 									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Introduction</div></a>
+										<li class="mega-menu-title"><a href="{{ url_for('static', filename='#') }}"><div>Introduction</div></a>
 											<ul>
-												<li><a href="about.html"><div>About Us</div></a></li>
-												<li><a href="about-2.html"><div>About Us - Layout 2</div></a></li>
-												<li><a href="about-me.html"><div>About Me</div></a></li>
-												<li><a href="team.html"><div>Team Members</div></a></li>
-												<li><a href="jobs.html"><div>Careers</div></a></li>
-												<li><a href="side-navigation.html"><div>Side Navigation</div></a></li>
-												<li><a href="page-submenu.html"><div>Page Submenu</div></a></li>
-												<li><a href="sitemap.html"><div>Sitemap</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.about') }}"><div>About Us</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.about-2') }}"><div>About Us - Layout 2</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.about-me') }}"><div>About Me</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.team') }}"><div>Team Members</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.jobs') }}"><div>Careers</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.side-navigation') }}"><div>Side Navigation</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.page-submenu') }}"><div>Page Submenu</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.sitemap') }}"><div>Sitemap</div></a></li>
 											</ul>
 										</li>
 									</ul>
 									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Utility</div></a>
+										<li class="mega-menu-title"><a href="{{ url_for('static', filename='#') }}"><div>Utility</div></a>
 											<ul>
-												<li><a href="services.html"><div>Services - Layout 1</div></a></li>
-												<li><a href="services-2.html"><div>Services - Layout 2</div></a></li>
-												<li><a href="services-3.html"><div>Services - Layout 3</div></a></li>
-												<li><a href="faqs.html"><div>FAQs - Layout 1</div></a></li>
-												<li><a href="faqs-2.html"><div>FAQs - Layout 2</div></a></li>
-												<li><a href="faqs-3.html"><div>FAQs - Layout 3</div></a></li>
-												<li><a href="faqs-4.html"><div>FAQs - Layout 4</div></a></li>
-												<li><a href="maintenance.html"><div>Maintenance Page</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.services') }}"><div>Services - Layout 1</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.services-2') }}"><div>Services - Layout 2</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.services-3') }}"><div>Services - Layout 3</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.faqs') }}"><div>FAQs - Layout 1</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.faqs-2') }}"><div>FAQs - Layout 2</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.faqs-3') }}"><div>FAQs - Layout 3</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.faqs-4') }}"><div>FAQs - Layout 4</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.maintenance') }}"><div>Maintenance Page</div></a></li>
 											</ul>
 										</li>
 									</ul>
 									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Layout Grids</div></a>
+										<li class="mega-menu-title"><a href="{{ url_for('static', filename='#') }}"><div>Layout Grids</div></a>
 											<ul>
-												<li><a href="full-width.html"><div>Full Width</div></a></li>
-												<li><a href="full-width-wide.html"><div>Full Width - Wide</div></a></li>
-												<li><a href="right-sidebar.html"><div>Right Sidebar</div></a></li>
-												<li><a href="left-sidebar.html"><div>Left Sidebar</div></a></li>
-												<li><a href="both-sidebar.html"><div>Both Sidebar</div></a></li>
-												<li><a href="both-right-sidebar.html"><div>Both Right Sidebar</div></a></li>
-												<li><a href="both-left-sidebar.html"><div>Both Left Sidebar</div></a></li>
-												<li><a href="blank-page.html"><div>Blank Page</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.full-width') }}"><div>Full Width</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.full-width-wide') }}"><div>Full Width - Wide</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.right-sidebar') }}"><div>Right Sidebar</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.left-sidebar') }}"><div>Left Sidebar</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.both-sidebar') }}"><div>Both Sidebar</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.both-right-sidebar') }}"><div>Both Right Sidebar</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.both-left-sidebar') }}"><div>Both Left Sidebar</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.blank-page') }}"><div>Blank Page</div></a></li>
 											</ul>
 										</li>
 									</ul>
 									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Miscellaneous</div></a>
+										<li class="mega-menu-title"><a href="{{ url_for('static', filename='#') }}"><div>Miscellaneous</div></a>
 											<ul>
-												<li><a href="login-register.html"><div>Login/Register</div></a></li>
-												<li><a href="login-register-2.html"><div>Login/Register - Style 2</div></a></li>
-												<li><a href="login-register-3.html"><div>Login/Register - Style 3</div></a></li>
-												<li><a href="login-1.html"><div>Login - Style 1</div></a></li>
-												<li><a href="login-2.html"><div>Login - Style 2</div></a></li>
-												<li><a href="404.html"><div>404 - Simple Layout</div></a></li>
-												<li><a href="404-2.html"><div>404 - Parallax Image</div></a></li>
-												<li><a href="404-3.html"><div>404 - HTML5 Video</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.login-register') }}"><div>Login/Register</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.login-register-2') }}"><div>Login/Register - Style 2</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.login-register-3') }}"><div>Login/Register - Style 3</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.login-1') }}"><div>Login - Style 1</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.login-2') }}"><div>Login - Style 2</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.404') }}"><div>404 - Simple Layout</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.404-2') }}"><div>404 - Parallax Image</div></a></li>
+												<li><a href="{{ url_for('sample_frontend.404-3') }}"><div>404 - HTML5 Video</div></a></li>
 											</ul>
 										</li>
 									</ul>
 								</div>
 							</li>
-							<li><a href="#"><div>Portfolio</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div>Portfolio</div></a></li>
 						</ul>
 						<ul class="menu-right">
-							<li><a href="#"><div>Blog</div></a></li>
-							<li><a href="shop.html"><div>Shop</div></a></li>
-							<li><a href="#"><div>Shortcodes</div></a></li>
-							<li><a href="#"><div>Contact</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div>Blog</div></a></li>
+							<li><a href="{{ url_for('sample_frontend.shop') }}"><div>Shop</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div>Shortcodes</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div>Contact</div></a></li>
 						</ul>
 
 					</nav><!-- #primary-menu end -->
@@ -440,13 +437,6 @@
 								<h4>Blogroll</h4>
 
 								<ul>
-									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
-									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
-									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
-									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
-									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
-									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
-									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
 								</ul>
 
 							</div>
@@ -462,7 +452,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Lorem ipsum dolor sit amet, consectetur</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -473,7 +463,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Elit Assumenda vel amet dolorum quasi</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -484,7 +474,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Debitis nihil placeat, illum est nisi</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -553,18 +543,18 @@
 							<div class="row">
 
 								<div class="col-md-6 clearfix bottommargin-sm">
-									<a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
 										<i class="icon-rss"></i>
 										<i class="icon-rss"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
 								</div>
 
 							</div>
@@ -585,47 +575,47 @@
 
 					<div class="col_half">
 						Copyrights &copy; 2014 All Rights Reserved by Cheermonk Inc.<br>
-						<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+						<div class="copyright-links"><a href="{{ url_for('static', filename='#') }}">Terms of Use</a> / <a href="{{ url_for('static', filename='#') }}">Privacy Policy</a></div>
 					</div>
 
 					<div class="col_half col_last tright">
 						<div class="fright clearfix">
-							<a href="#" class="social-icon si-small si-borderless si-facebook">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-facebook">
 								<i class="icon-facebook"></i>
 								<i class="icon-facebook"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-twitter">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-twitter">
 								<i class="icon-twitter"></i>
 								<i class="icon-twitter"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-gplus">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-gplus">
 								<i class="icon-gplus"></i>
 								<i class="icon-gplus"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-pinterest">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-pinterest">
 								<i class="icon-pinterest"></i>
 								<i class="icon-pinterest"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-vimeo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-vimeo">
 								<i class="icon-vimeo"></i>
 								<i class="icon-vimeo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-github">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-github">
 								<i class="icon-github"></i>
 								<i class="icon-github"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-yahoo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-yahoo">
 								<i class="icon-yahoo"></i>
 								<i class="icon-yahoo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-linkedin">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-linkedin">
 								<i class="icon-linkedin"></i>
 								<i class="icon-linkedin"></i>
 							</a>

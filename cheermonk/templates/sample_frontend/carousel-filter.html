@@ -2,23 +2,20 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -61,42 +58,42 @@
 				<div class="container clearfix">
 
 					<div id="project-terms">
-						<a data-filter="all" class="active" href="#">all</a>
-						<a data-filter="3d" href="#">3d</a>
-						<a data-filter="drawings" href="#">drawing</a>
-						<a data-filter="flash" href="#">flash</a>
-						<a data-filter="websites" href="#">website</a>
+						<a data-filter="all" class="active" href="{{ url_for('static', filename='#') }}">all</a>
+						<a data-filter="3d" href="{{ url_for('static', filename='#') }}">3d</a>
+						<a data-filter="drawings" href="{{ url_for('static', filename='#') }}">drawing</a>
+						<a data-filter="flash" href="{{ url_for('static', filename='#') }}">flash</a>
+						<a data-filter="websites" href="{{ url_for('static', filename='#') }}">website</a>
 					</div>
 
 					<div id="projects-carousel" class="owl-carousel image-carousel">
 
 							<div class="project 3d">
 								<h2>3d</h2>
-								<a href="#"><img src="images/portfolio/4/4-1.jpg" alt="Image 1"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/4-1.jpg" alt="Image 1"></a>
 							</div>
 							<div class="project websites">
 								<h2>website</h2>
-								<a href="#"><img src="images/portfolio/4/6-1.jpg" alt="Image 2"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/6-1.jpg" alt="Image 2"></a>
 							</div>
 							<div class="project 3d">
 								<h2>3d</h2>
-								<a href="#"><img src="images/portfolio/4/6-2.jpg" alt="Image 3"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/6-2.jpg" alt="Image 3"></a>
 							</div>
 							<div class="project flash">
 								<h2>flash</h2>
-								<a href="#"><img src="images/portfolio/4/6-3.jpg" alt="Image 4"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/6-3.jpg" alt="Image 4"></a>
 							</div>
 							<div class="project 3d">
 								<h2>3d</h2>
-								<a href="#"><img src="images/portfolio/4/9-1.jpg" alt="Image 5"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/9-1.jpg" alt="Image 5"></a>
 							</div>
 							<div class="project drawing">
 								<h2>drawing</h2>
-								<a href="#"><img src="images/portfolio/4/9-2.jpg" alt="Image 6"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/9-2.jpg" alt="Image 6"></a>
 							</div>
 							<div class="project 3d">
 								<h2>3d</h2>
-								<a href="#"><img src="images/portfolio/4/12-1.jpg" alt="Image 7"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img src="images/portfolio/4/12-1.jpg" alt="Image 7"></a>
 							</div>
 
 					</div>

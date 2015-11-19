@@ -2,31 +2,28 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
 
 	<!-- Travel Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="demos/travel/travel.css" type="text/css" />
-	<link rel="stylesheet" href="demos/travel/css/datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/travel/travel.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/travel/css/datepicker.css') }}" type="text/css" />
 	<!-- / -->
 
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" href="css/colors.php?color=AC4147" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/colors.php?color=AC4147') }}" type="text/css" />
 
 	<!-- External JavaScripts
 	============================================= -->
@@ -61,14 +58,14 @@
 					============================================= -->
 					<div class="top-links">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="faqs.html">FAQs</a></li>
-							<li><a href="contact.html">Contact</a></li>
-							<li><a href="#">USD</a>
+							<li><a href="{{ url_for('sample_frontend.index') }}">Home</a></li>
+							<li><a href="{{ url_for('sample_frontend.faqs') }}">FAQs</a></li>
+							<li><a href="{{ url_for('sample_frontend.contact') }}">Contact</a></li>
+							<li><a href="{{ url_for('static', filename='#') }}">USD</a>
 								<ul>
-									<li><a href="#">EUR</a></li>
-									<li><a href="#">AUD</a></li>
-									<li><a href="#">GBP</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}">EUR</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}">AUD</a></li>
+									<li><a href="{{ url_for('static', filename='#') }}">GBP</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -82,12 +79,12 @@
 					============================================= -->
 					<div id="top-social">
 						<ul>
-							<li><a href="#" class="si-facebook"><span class="ts-icon"><i class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a></li>
-							<li><a href="#" class="si-twitter"><span class="ts-icon"><i class="icon-twitter"></i></span><span class="ts-text">Twitter</span></a></li>
-							<li><a href="#" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span class="ts-text">Pinterest</span></a></li>
-							<li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
-							<li><a href="tel:+91.11.85412542" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
-							<li><a href="mailto:info@cheermonk.com" class="si-email3"><span class="ts-icon"><i class="icon-envelope-alt"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" class="si-facebook"><span class="ts-icon"><i class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" class="si-twitter"><span class="ts-icon"><i class="icon-twitter"></i></span><span class="ts-text">Twitter</span></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span class="ts-text">Pinterest</span></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/tel:+91.11.85412542') }}" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/mailto:info@cheermonk.com') }}" class="si-email3"><span class="ts-icon"><i class="icon-envelope-alt"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
 						</ul>
 					</div><!-- #top-social end -->
 
@@ -110,8 +107,8 @@
 					<!-- Logo
 					============================================= -->
 					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Cheermonk Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 					</div><!-- #logo end -->
 
 					<!-- Primary Navigation
@@ -119,12 +116,12 @@
 					<nav id="primary-menu" class="style-4">
 
 						<ul>
-							<li class="current"><a href="index.html"><div><i class="icon-home2"></i>Home</div></a>	</li>
-							<li><a href="#"><div><i class="icon-plane"></i>Flights</div></a></li>
-							<li><a href="#"><div><i class="icon-building"></i>Hotels</div></a></li>
-							<li><a href="#"><div><i class="icon-gift"></i>Holidays</div></a></li>
-							<li><a href="#"><div><i class="icon-pencil2"></i>Blog</div></a></li>
-							<li><a href="#"><div><i class="icon-phone3"></i>1800 105 2541</div></a></li>
+							<li class="{{ url_for('sample_frontend.index') }}"><div><i class="icon-home2"></i>Home</div></a>	</li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div><i class="icon-plane"></i>Flights</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div><i class="icon-building"></i>Hotels</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div><i class="icon-gift"></i>Holidays</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div><i class="icon-pencil2"></i>Blog</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}"><div><i class="icon-phone3"></i>1800 105 2541</div></a></li>
 						</ul>
 
 					</nav><!-- #primary-menu end -->
@@ -156,10 +153,10 @@
 						<div class="tabs travel-organiser-tabs clearfix">
 
 							<ul class="tab-nav clearfix">
-								<li><a href="#tab-flights"><i class="icon-plane"></i><span class="hidden-xs">Flights</span></a></li>
-								<li><a href="#tab-hotels"><i class="icon-building"></i><span class="hidden-xs">Hotels</span></a></li>
-								<li><a href="#tab-flights-hotels"><span class="visible-xs"><i class="icon-plane"></i> + <i class="icon-building"></i></span><span class="hidden-xs">Flights + Hotels<span class="label label-danger">Save</span></span></a></li>
-								<li><a href="#tab-holidays"><i class="icon-gift"></i><span class="hidden-xs">Holidays</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/#tab-flights') }}"><i class="icon-plane"></i><span class="hidden-xs">Flights</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/#tab-hotels') }}"><i class="icon-building"></i><span class="hidden-xs">Hotels</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/#tab-flights-hotels') }}"><span class="visible-xs"><i class="icon-plane"></i> + <i class="icon-building"></i></span><span class="hidden-xs">Flights + Hotels<span class="label label-danger">Save</span></span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/#tab-holidays') }}"><i class="icon-gift"></i><span class="hidden-xs">Holidays</span></a></li>
 							</ul>
 
 							<div class="tab-container">
@@ -202,7 +199,7 @@
 											</div>
 											<div class="col-sm-12">
 												<button class="button button-3d nomargin rightmargin-sm">Search Flights</button>
-												<a href="#" class="more-link fright" style="margin-top: 9px;">Advanced Search</a>
+												<a href="{{ url_for('static', filename='#') }}" class="more-link fright" style="margin-top: 9px;">Advanced Search</a>
 											</div>
 										</div>
 									</form>
@@ -240,7 +237,7 @@
 											</div>
 											<div class="col-sm-12">
 												<button class="button button-3d nomargin rightmargin-sm">Search Hotels</button>
-												<a href="#" class="more-link fright" style="margin-top: 9px;">Popular Hotels</a>
+												<a href="{{ url_for('static', filename='#') }}" class="more-link fright" style="margin-top: 9px;">Popular Hotels</a>
 											</div>
 										</div>
 									</form>
@@ -290,7 +287,7 @@
 											</div>
 											<div class="col-sm-12">
 												<button class="button button-3d nomargin rightmargin-sm">Search Flights + Hotels</button>
-												<a href="#" class="more-link fright" style="margin-top: 9px;">Holiday Packages</a>
+												<a href="{{ url_for('static', filename='#') }}" class="more-link fright" style="margin-top: 9px;">Holiday Packages</a>
 											</div>
 										</div>
 									</form>
@@ -345,7 +342,7 @@
 											</div>
 											<div class="col-sm-12">
 												<button class="button button-3d nomargin rightmargin-sm">Search Flights</button>
-												<a href="#" class="more-link fright" style="margin-top: 9px;">Advanced Search</a>
+												<a href="{{ url_for('static', filename='#') }}" class="more-link fright" style="margin-top: 9px;">Advanced Search</a>
 											</div>
 										</div>
 									</form>
@@ -434,7 +431,7 @@
 
 					<article class="portfolio-item pf-media pf-icons">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/1.jpg" alt="Beach Activities">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -447,7 +444,7 @@
 
 					<article class="portfolio-item pf-illustrations">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/2.jpg" alt="Romantic Getaways">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -460,7 +457,7 @@
 
 					<article class="portfolio-item pf-graphics pf-uielements">
 						<div class="portfolio-image">
-							<a href="#">
+							<a href="{{ url_for('static', filename='#') }}">
 								<img src="demos/travel/images/packages/3.jpg" alt="Mountain Madness">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -473,7 +470,7 @@
 
 					<article class="portfolio-item pf-icons pf-illustrations">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/4.jpg" alt="Active Explorer">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -486,7 +483,7 @@
 
 					<article class="portfolio-item pf-uielements pf-media">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/5.jpg" alt="Icy Challenge">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -499,7 +496,7 @@
 
 					<article class="portfolio-item pf-graphics pf-illustrations">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/6.jpg" alt="Hill Trekking">
 								<div class="portfolio-overlay" data-lightbox="gallery">
 									<div class="portfolio-desc">
@@ -512,7 +509,7 @@
 
 					<article class="portfolio-item pf-uielements pf-icons">
 						<div class="portfolio-image">
-							<a href="portfolio-single-video.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
 								<img src="demos/travel/images/packages/7.jpg" alt="Forest Camping">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -525,7 +522,7 @@
 
 					<article class="portfolio-item pf-graphics">
 						<div class="portfolio-image">
-							<a href="portfolio-single.html">
+							<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 								<img src="demos/travel/images/packages/8.jpg" alt="River Rafting">
 								<div class="portfolio-overlay">
 									<div class="portfolio-desc">
@@ -565,11 +562,11 @@
 							</div>
 							<div class="spost col-md-12 col-sm-6 noborder noleftpadding clearfix">
 								<div class="entry-image">
-									<a href="#"><img src="images/magazine/small/1.jpg" alt=""></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/1.jpg" alt=""></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">7 Nights/8 Days Europe</a></h4>
+										<h4><a href="{{ url_for('static', filename='#') }}">7 Nights/8 Days Europe</a></h4>
 									</div>
 									<ul class="entry-meta">
 										<li><span class="color">$599</span> onwards</li>
@@ -578,11 +575,11 @@
 							</div>
 							<div class="spost col-md-12 col-sm-6 noborder noleftpadding clearfix">
 								<div class="entry-image">
-									<a href="#"><img src="images/magazine/small/2.jpg" alt=""></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/2.jpg" alt=""></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">4 Nights/5 Days Thailand</a></h4>
+										<h4><a href="{{ url_for('static', filename='#') }}">4 Nights/5 Days Thailand</a></h4>
 									</div>
 									<ul class="entry-meta">
 										<li><span class="color">$399</span> onwards</li>
@@ -591,11 +588,11 @@
 							</div>
 							<div class="spost col-md-12 col-sm-6 noborder noleftpadding clearfix">
 								<div class="entry-image">
-									<a href="#"><img src="images/magazine/small/3.jpg" alt=""></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/3.jpg" alt=""></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">11 Nights/12 Days America</a></h4>
+										<h4><a href="{{ url_for('static', filename='#') }}">11 Nights/12 Days America</a></h4>
 									</div>
 									<ul class="entry-meta">
 										<li><span class="color">$1299</span> onwards</li>
@@ -604,11 +601,11 @@
 							</div>
 							<div class="spost col-md-12 col-sm-6 noborder noleftpadding clearfix">
 								<div class="entry-image">
-									<a href="#"><img src="images/magazine/small/4.jpg" alt=""></a>
+									<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/4.jpg" alt=""></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">14 Nights/15 Days New Zealand</a></h4>
+										<h4><a href="{{ url_for('static', filename='#') }}">14 Nights/15 Days New Zealand</a></h4>
 									</div>
 									<ul class="entry-meta">
 										<li><span class="color">$1999</span> onwards</li>
@@ -618,7 +615,6 @@
 						</div>
 					</div>
 
-					<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 					<script type="text/javascript" src="js/jquery.gmap.js"></script>
 
 					<script type="text/javascript">
@@ -727,7 +723,7 @@
 
 				</div>
 
-				<a href="#" class="button button-full button-dark center bottommargin-lg">
+				<a href="{{ url_for('static', filename='#') }}" class="button button-full button-dark center bottommargin-lg">
 					<div class="container clearfix">
 						Can't find your Favorite Package? <strong>Browse Packages</strong> <i class="icon-caret-right" style="top:4px;"></i>
 					</div>
@@ -746,20 +742,20 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="entry-image nobottommargin">
-										<a href="#"><img src="demos/travel/images/blog/1.jpg" alt="Paris"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="demos/travel/images/blog/1.jpg" alt="Paris"></a>
 									</div>
 								</div>
 								<div class="col-md-6" style="margin-top: 20px;">
 									<span class="before-heading">Sightseeing</span>
 									<div class="entry-title">
-										<h3><a href="#">Things to do in Bangkok for free</a></h3>
+										<h3><a href="{{ url_for('static', filename='#') }}">Things to do in Bangkok for free</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li><i class="icon-calendar3"></i> 16th February</li>
-										<li><a href="#"><i class="icon-comments"></i> 19</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}"><i class="icon-comments"></i> 19</a></li>
 									</ul>
 									<div class="entry-content">
-										<a href="#" class="more-link">Read more</a>
+										<a href="{{ url_for('static', filename='#') }}" class="more-link">Read more</a>
 									</div>
 								</div>
 							</div>
@@ -769,20 +765,20 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="entry-image nobottommargin">
-										<a href="#"><img src="demos/travel/images/blog/2.jpg" alt="Paris"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="demos/travel/images/blog/2.jpg" alt="Paris"></a>
 									</div>
 								</div>
 								<div class="col-md-6" style="margin-top: 20px;">
 									<span class="before-heading">Nightlife</span>
 									<div class="entry-title">
-										<h3><a href="#">Nightclubs to check out in Kuala Lumpur</a></h3>
+										<h3><a href="{{ url_for('static', filename='#') }}">Nightclubs to check out in Kuala Lumpur</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li><i class="icon-calendar3"></i> 16th February</li>
-										<li><a href="#"><i class="icon-comments"></i> 19</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}"><i class="icon-comments"></i> 19</a></li>
 									</ul>
 									<div class="entry-content">
-										<a href="#" class="more-link">Read more</a>
+										<a href="{{ url_for('static', filename='#') }}" class="more-link">Read more</a>
 									</div>
 								</div>
 							</div>
@@ -792,20 +788,20 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="entry-image nobottommargin">
-										<a href="#"><img src="demos/travel/images/blog/3.jpg" alt="Paris"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="demos/travel/images/blog/3.jpg" alt="Paris"></a>
 									</div>
 								</div>
 								<div class="col-md-6" style="margin-top: 20px;">
 									<span class="before-heading">Hotels</span>
 									<div class="entry-title">
-										<h3><a href="#">Prague hotels for every kind of traveller</a></h3>
+										<h3><a href="{{ url_for('static', filename='#') }}">Prague hotels for every kind of traveller</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li><i class="icon-calendar3"></i> 16th February</li>
-										<li><a href="#"><i class="icon-comments"></i> 19</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}"><i class="icon-comments"></i> 19</a></li>
 									</ul>
 									<div class="entry-content">
-										<a href="#" class="more-link">Read more</a>
+										<a href="{{ url_for('static', filename='#') }}" class="more-link">Read more</a>
 									</div>
 								</div>
 							</div>
@@ -815,20 +811,20 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="entry-image nobottommargin">
-										<a href="#"><img src="demos/travel/images/blog/4.jpg" alt="Paris"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="demos/travel/images/blog/4.jpg" alt="Paris"></a>
 									</div>
 								</div>
 								<div class="col-md-6" style="margin-top: 20px;">
 									<span class="before-heading">Eating Out</span>
 									<div class="entry-title">
-										<h3><a href="#">Shanghai restaurants for the discerning diner</a></h3>
+										<h3><a href="{{ url_for('static', filename='#') }}">Shanghai restaurants for the discerning diner</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li><i class="icon-calendar3"></i> 16th February</li>
-										<li><a href="#"><i class="icon-comments"></i> 19</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}"><i class="icon-comments"></i> 19</a></li>
 									</ul>
 									<div class="entry-content">
-										<a href="#" class="more-link">Read more</a>
+										<a href="{{ url_for('static', filename='#') }}" class="more-link">Read more</a>
 									</div>
 								</div>
 							</div>
@@ -848,7 +844,7 @@
 
 						<p class="lead">Educate, aid, criteria catalyst John Lennon. Life-saving diversity necessities elevate worldwide carbon rights empowerment. Pursue these aspirations leverage, accessibility UNICEF, reduce child mortality collaborative cities safeguards. Informal economies non-partisan; evolution transformative climate change local benefit.</p>
 
-						<a href="#" class="button button-rounded button-reveal tright button-xlarge topmargin-sm"><i class="icon-angle-right"></i><span>Create a Package</span></a>
+						<a href="{{ url_for('static', filename='#') }}" class="button button-rounded button-reveal tright button-xlarge topmargin-sm"><i class="icon-angle-right"></i><span>Create a Package</span></a>
 
 					</div>
 				</div>
@@ -895,18 +891,18 @@
 							<div class="row">
 
 								<div class="col-md-6 clearfix bottommargin-sm">
-									<a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
 										<i class="icon-rss"></i>
 										<i class="icon-rss"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
 								</div>
 
 							</div>
@@ -922,11 +918,11 @@
 							<div id="post-list-footer">
 								<div class="spost clearfix">
 									<div class="entry-image">
-										<a href="#"><img src="images/magazine/small/1.jpg" alt="Package"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/1.jpg" alt="Package"></a>
 									</div>
 									<div class="entry-c">
 										<div class="entry-title">
-											<h4><a href="#">7 Nights/8 Days Europe</a></h4>
+											<h4><a href="{{ url_for('static', filename='#') }}">7 Nights/8 Days Europe</a></h4>
 										</div>
 										<ul class="entry-meta">
 											<li><strong>$599</strong> onwards</li>
@@ -936,11 +932,11 @@
 
 								<div class="spost clearfix">
 									<div class="entry-image">
-										<a href="#"><img src="images/magazine/small/2.jpg" alt="Package"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/2.jpg" alt="Package"></a>
 									</div>
 									<div class="entry-c">
 										<div class="entry-title">
-											<h4><a href="#">4 Nights/5 Days Thailand</a></h4>
+											<h4><a href="{{ url_for('static', filename='#') }}">4 Nights/5 Days Thailand</a></h4>
 										</div>
 										<ul class="entry-meta">
 											<li><strong>$399</strong> onwards</li>
@@ -950,11 +946,11 @@
 
 								<div class="spost clearfix">
 									<div class="entry-image">
-										<a href="#"><img src="images/magazine/small/3.jpg" alt="Package"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img src="images/magazine/small/3.jpg" alt="Package"></a>
 									</div>
 									<div class="entry-c">
 										<div class="entry-title">
-											<h4><a href="#">11 Nights/12 Days America</a></h4>
+											<h4><a href="{{ url_for('static', filename='#') }}">11 Nights/12 Days America</a></h4>
 										</div>
 										<ul class="entry-meta">
 											<li><strong>$1299</strong> onwards</li>
@@ -975,18 +971,18 @@
 							<div class="row clearfix">
 								<div class="col-xs-6">
 									<ul>
-										<li><a href="#">Thailand</a></li>
-										<li><a href="#">Indonesia</a></li>
-										<li><a href="#">Italy</a></li>
-										<li><a href="#">Spain</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">Thailand</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">Indonesia</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">Italy</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">Spain</a></li>
 									</ul>
 								</div>
 								<div class="col-xs-6">
 									<ul>
-										<li><a href="#">India</a></li>
-										<li><a href="#">France</a></li>
-										<li><a href="#">Philippines</a></li>
-										<li><a href="#">New Zealand</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">India</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">France</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">Philippines</a></li>
+										<li><a href="{{ url_for('static', filename='#') }}">New Zealand</a></li>
 									</ul>
 								</div>
 							</div>
@@ -1037,47 +1033,47 @@
 
 					<div class="col_half">
 						Copyrights &copy; 2014 All Rights Reserved by Cheermonk Inc.<br>
-						<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+						<div class="copyright-links"><a href="{{ url_for('static', filename='#') }}">Terms of Use</a> / <a href="{{ url_for('static', filename='#') }}">Privacy Policy</a></div>
 					</div>
 
 					<div class="col_half col_last tright">
 						<div class="fright clearfix">
-							<a href="#" class="social-icon si-small si-borderless si-facebook">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-facebook">
 								<i class="icon-facebook"></i>
 								<i class="icon-facebook"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-twitter">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-twitter">
 								<i class="icon-twitter"></i>
 								<i class="icon-twitter"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-gplus">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-gplus">
 								<i class="icon-gplus"></i>
 								<i class="icon-gplus"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-pinterest">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-pinterest">
 								<i class="icon-pinterest"></i>
 								<i class="icon-pinterest"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-vimeo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-vimeo">
 								<i class="icon-vimeo"></i>
 								<i class="icon-vimeo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-github">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-github">
 								<i class="icon-github"></i>
 								<i class="icon-github"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-yahoo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-yahoo">
 								<i class="icon-yahoo"></i>
 								<i class="icon-yahoo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-linkedin">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-linkedin">
 								<i class="icon-linkedin"></i>
 								<i class="icon-linkedin"></i>
 							</a>

@@ -2,23 +2,20 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -167,8 +164,8 @@
 					<!-- Logo
 					============================================= -->
 					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Cheermonk Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 					</div><!-- #logo end -->
 
 					<!-- Primary Navigation
@@ -176,21 +173,21 @@
 					<nav id="primary-menu">
 
 						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1500">
-							<li><a href="#" data-href="#home"><div>Home</div></a></li>
-							<li><a href="#" data-href="#section-about"><div>About</div></a></li>
-							<li><a href="#" data-href="#section-work"><div>Work</div></a></li>
-							<li><a href="#" data-href="#section-team"><div>Team</div></a></li>
-							<li><a href="#" data-href="#section-services"><div>Services</div></a></li>
-							<li><a href="#" data-href="#section-pricing"><div>Pricing</div></a></li>
-							<li><a href="blog.html"><div>Blog</div></a></li>
-							<li><a href="#" data-href="#section-testimonials" data-offset="60"><div>Testimonials</div></a></li>
-							<li><a href="#" data-href="#section-contact"><div>Contact</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#home"><div>Home</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-about"><div>About</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-work"><div>Work</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-team"><div>Team</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-services"><div>Services</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-pricing"><div>Pricing</div></a></li>
+							<li><a href="{{ url_for('sample_frontend.blog') }}"><div>Blog</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-testimonials" data-offset="60"><div>Testimonials</div></a></li>
+							<li><a href="{{ url_for('static', filename='#') }}" data-href="#section-contact"><div>Contact</div></a></li>
 						</ul>
 
 						<!-- Top Search
 						============================================= -->
 						<div id="top-search">
-							<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+							<a href="{{ url_for('static', filename='#') }}" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
 							<form action="search.html" method="get">
 								<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
 							</form>
@@ -310,200 +307,197 @@
 
 							<article class="portfolio-item pf-media pf-icons">
 								<div class="portfolio-image">
-									<a href="portfolio-single.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 										<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="images/portfolio/full/1.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-										<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/1.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Open Imagination</a></h3>
-									<span><a href="#">Media</a>, <a href="#">Icons</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Open Imagination</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Media</a>, <a href="{{ url_for('static', filename='#') }}">Icons</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-illustrations">
 								<div class="portfolio-image">
-									<a href="portfolio-single.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 										<img src="images/portfolio/4/2.jpg" alt="Locked Steel Gate">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="images/portfolio/full/2.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-										<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/2.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Locked Steel Gate</a></h3>
-									<span><a href="#">Illustrations</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Locked Steel Gate</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Illustrations</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-graphics pf-uielements">
 								<div class="portfolio-image">
-									<a href="#">
+									<a href="{{ url_for('static', filename='#') }}">
 										<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="http://vimeo.com/89396394" class="left-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-										<a href="portfolio-single-video.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
-									<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-video') }}">Mac Sunglasses</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Graphics</a>, <a href="{{ url_for('static', filename='#') }}">UI Elements</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-icons pf-illustrations">
 								<div class="portfolio-image">
-									<a href="#">
+									<a href="{{ url_for('static', filename='#') }}">
 										<img src="images/portfolio/4/4.jpg" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
-										<a href="images/portfolio/full/4.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-										<a href="images/portfolio/full/4-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/4.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/4-1.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-gallery.html">Morning Dew</a></h3>
-									<span><a href="#"><a href="#">Icons</a>, <a href="#">Illustrations</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}">Morning Dew</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}"><a href="{{ url_for('static', filename='#') }}">Icons</a>, <a href="{{ url_for('static', filename='#') }}">Illustrations</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-uielements pf-media">
 								<div class="portfolio-image">
-									<a href="portfolio-single.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 										<img src="images/portfolio/4/5.jpg" alt="Console Activity">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="images/portfolio/full/5.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-										<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/5.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Console Activity</a></h3>
-									<span><a href="#">UI Elements</a>, <a href="#">Media</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Console Activity</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">UI Elements</a>, <a href="{{ url_for('static', filename='#') }}">Media</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-graphics pf-illustrations">
 								<div class="portfolio-image">
-									<a href="#">
+									<a href="{{ url_for('static', filename='#') }}">
 										<img src="images/portfolio/4/6.jpg" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
-										<a href="images/portfolio/full/6.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-										<a href="images/portfolio/full/6-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="images/portfolio/full/6-2.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="images/portfolio/full/6-3.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/6.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/6-1.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/6-2.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/6-3.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-gallery.html">Shake It!</a></h3>
-									<span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}">Shake It!</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Illustrations</a>, <a href="{{ url_for('static', filename='#') }}">Graphics</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-uielements pf-icons">
 								<div class="portfolio-image">
-									<a href="portfolio-single-video.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
 										<img src="images/portfolio/4/7.jpg" alt="Backpack Contents">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="http://www.youtube.com/watch?v=kuceVNBTJio" class="left-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-										<a href="portfolio-single-video.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-video.html">Backpack Contents</a></h3>
-									<span><a href="#">UI Elements</a>, <a href="#">Icons</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-video') }}">Backpack Contents</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">UI Elements</a>, <a href="{{ url_for('static', filename='#') }}">Icons</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-graphics">
 								<div class="portfolio-image">
-									<a href="portfolio-single.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 										<img src="images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="images/portfolio/full/8.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-										<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/8.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Sunset Bulb Glow</a></h3>
-									<span><a href="#">Graphics</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Sunset Bulb Glow</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Graphics</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-illustrations pf-icons">
 								<div class="portfolio-image">
-									<a href="#">
+									<a href="{{ url_for('static', filename='#') }}">
 										<img src="images/portfolio/4/9.jpg" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
-										<a href="images/portfolio/full/9.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-										<a href="images/portfolio/full/9-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="images/portfolio/full/9-2.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/9.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/9-1.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/9-2.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Bridge Side</a></h3>
-									<span><a href="#">Illustrations</a>, <a href="#">Icons</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Bridge Side</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Illustrations</a>, <a href="{{ url_for('static', filename='#') }}">Icons</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-graphics pf-media pf-uielements">
 								<div class="portfolio-image">
-									<a href="portfolio-single-video.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single-video') }}">
 										<img src="images/portfolio/4/10.jpg" alt="Study Table">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="http://vimeo.com/91973305" class="left-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-										<a href="portfolio-single-video.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-video') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-video.html">Study Table</a></h3>
-									<span><a href="#">Graphics</a>, <a href="#">Media</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-video') }}">Study Table</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Graphics</a>, <a href="{{ url_for('static', filename='#') }}">Media</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-media pf-icons">
 								<div class="portfolio-image">
-									<a href="portfolio-single.html">
+									<a href="{{ url_for('sample_frontend.portfolio-single') }}">
 										<img src="images/portfolio/4/11.jpg" alt="Workspace Stuff">
 									</a>
 									<div class="portfolio-overlay">
-										<a href="images/portfolio/full/11.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-										<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/11.jpg') }}" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single.html">Workspace Stuff</a></h3>
-									<span><a href="#">Media</a>, <a href="#">Icons</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single') }}">Workspace Stuff</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Media</a>, <a href="{{ url_for('static', filename='#') }}">Icons</a></span>
 								</div>
 							</article>
 
 							<article class="portfolio-item pf-illustrations pf-graphics">
 								<div class="portfolio-image">
-									<a href="#">
+									<a href="{{ url_for('static', filename='#') }}">
 										<img src="images/portfolio/4/12.jpg" alt="Mac Sunglasses">
 									</a>
 									<div class="portfolio-overlay" data-lightbox="gallery">
-										<a href="images/portfolio/full/12.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-										<a href="images/portfolio/full/12-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-										<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/12.jpg') }}" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+										<a href="{{ url_for('static', filename='frontend/images/portfolio/full/12-1.jpg') }}" class="hidden" data-lightbox="gallery-item"></a>
+										<a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}" class="right-icon"><i class="icon-line-ellipsis"></i></a>
 									</div>
 								</div>
 								<div class="portfolio-desc">
-									<h3><a href="portfolio-single-gallery.html">Fixed Aperture</a></h3>
-									<span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
+									<h3><a href="{{ url_for('sample_frontend.portfolio-single-gallery') }}">Fixed Aperture</a></h3>
+									<span><a href="{{ url_for('static', filename='#') }}">Illustrations</a>, <a href="{{ url_for('static', filename='#') }}">Graphics</a></span>
 								</div>
 							</article>
 
@@ -531,15 +525,15 @@
 								<div class="team-desc">
 									<div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
 									<div class="team-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat assumenda similique unde mollitia.</div>
-									<a href="#" class="social-icon si-rounded si-small si-facebook">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-facebook">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-twitter">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-twitter">
 										<i class="icon-twitter"></i>
 										<i class="icon-twitter"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-gplus">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-gplus">
 										<i class="icon-gplus"></i>
 										<i class="icon-gplus"></i>
 									</a>
@@ -557,15 +551,15 @@
 								<div class="team-desc">
 									<div class="team-title"><h4>Nix Maxwell</h4><span>Co-Founder</span></div>
 									<div class="team-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat assumenda similique unde mollitia.</div>
-									<a href="#" class="social-icon si-rounded si-small si-forrst">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-forrst">
 										<i class="icon-forrst"></i>
 										<i class="icon-forrst"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-skype">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-skype">
 										<i class="icon-skype"></i>
 										<i class="icon-skype"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-flickr">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-flickr">
 										<i class="icon-flickr"></i>
 										<i class="icon-flickr"></i>
 									</a>
@@ -585,15 +579,15 @@
 								<div class="team-desc">
 									<div class="team-title"><h4>Josh Clark</h4><span>Developer</span></div>
 									<div class="team-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat assumenda similique unde mollitia.</div>
-									<a href="#" class="social-icon si-rounded si-small si-dribbble">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-dribbble">
 										<i class="icon-dribbble"></i>
 										<i class="icon-dribbble"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-twitter">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-twitter">
 										<i class="icon-twitter"></i>
 										<i class="icon-twitter"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-github">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-github">
 										<i class="icon-github"></i>
 										<i class="icon-github"></i>
 									</a>
@@ -611,15 +605,15 @@
 								<div class="team-desc">
 									<div class="team-title"><h4>Mary Jane</h4><span>Support</span></div>
 									<div class="team-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat assumenda similique unde mollitia.</div>
-									<a href="#" class="social-icon si-rounded si-small si-facebook">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-facebook">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-linkedin">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-linkedin">
 										<i class="icon-linkedin"></i>
 										<i class="icon-linkedin"></i>
 									</a>
-									<a href="#" class="social-icon si-rounded si-small si-twitter">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-rounded si-small si-twitter">
 										<i class="icon-twitter"></i>
 										<i class="icon-twitter"></i>
 									</a>
@@ -684,7 +678,7 @@
 						<div class="col_one_third">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-phone2"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-phone2"></i></a>
 								</div>
 								<h3>Responsive Layout</h3>
 								<p>Powerful Layout with Responsive functionality that can be adapted to any screen size.</p>
@@ -694,7 +688,7 @@
 						<div class="col_one_third">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="200">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-eye"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-eye"></i></a>
 								</div>
 								<h3>Retina Ready Graphics</h3>
 								<p>Looks beautiful &amp; ultra-sharp on Retina Displays with Retina Icons, Fonts &amp; Images.</p>
@@ -704,7 +698,7 @@
 						<div class="col_one_third col_last">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="400">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-star2"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-star2"></i></a>
 								</div>
 								<h3>Powerful Performance</h3>
 								<p>Optimized code that are completely customizable and deliver unmatched fast performance.</p>
@@ -716,7 +710,7 @@
 						<div class="col_one_third">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="600">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-video"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-video"></i></a>
 								</div>
 								<h3>HTML5 Video</h3>
 								<p>Cheermonk provides support for Native HTML5 Videos that can be added to a Full Width Background.</p>
@@ -726,7 +720,7 @@
 						<div class="col_one_third">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="800">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-params"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-params"></i></a>
 								</div>
 								<h3>Parallax Support</h3>
 								<p>Display your Content attractively using Parallax Sections that have unlimited customizable areas.</p>
@@ -736,7 +730,7 @@
 						<div class="col_one_third col_last">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="1000">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-fire"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-fire"></i></a>
 								</div>
 								<h3>Endless Possibilities</h3>
 								<p>Complete control on each &amp; every element that provides endless customization possibilities.</p>
@@ -748,7 +742,7 @@
 						<div class="col_one_third nobottommargin">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="1200">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-bulb"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-bulb"></i></a>
 								</div>
 								<h3>Light &amp; Dark Color Schemes</h3>
 								<p>Change your Website's Primary Scheme instantly by simply adding the dark class to the body.</p>
@@ -758,7 +752,7 @@
 						<div class="col_one_third nobottommargin">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="1400">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-heart2"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-heart2"></i></a>
 								</div>
 								<h3>Boxed &amp; Wide Layouts</h3>
 								<p>Stretch your Website to the Full Width or make it boxed to surprise your visitors.</p>
@@ -768,7 +762,7 @@
 						<div class="col_one_third nobottommargin col_last">
 							<div class="feature-box fbox-center fbox-effect nobottomborder" data-animate="fadeIn" data-delay="1600">
 								<div class="fbox-icon">
-									<a href="#"><i class="icon-note"></i></a>
+									<a href="{{ url_for('static', filename='#') }}"><i class="icon-note"></i></a>
 								</div>
 								<h3>Extensive Documentation</h3>
 								<p>We have covered each &amp; everything in our Documentation including Videos &amp; Screenshots.</p>
@@ -813,7 +807,7 @@
 										</ul>
 									</div>
 									<div class="pricing-action">
-										<a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
+										<a href="{{ url_for('static', filename='#') }}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
 									</div>
 								</div>
 
@@ -843,7 +837,7 @@
 										</ul>
 									</div>
 									<div class="pricing-action">
-										<a href="#" class="btn btn-danger btn-block btn-lg bgcolor border-color">Sign Up</a>
+										<a href="{{ url_for('static', filename='#') }}" class="btn btn-danger btn-block btn-lg bgcolor border-color">Sign Up</a>
 									</div>
 								</div>
 
@@ -868,7 +862,7 @@
 										</ul>
 									</div>
 									<div class="pricing-action">
-										<a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
+										<a href="{{ url_for('static', filename='#') }}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
 									</div>
 								</div>
 
@@ -893,7 +887,7 @@
 										</ul>
 									</div>
 									<div class="pricing-action">
-										<a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
+										<a href="{{ url_for('static', filename='#') }}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
 									</div>
 								</div>
 
@@ -1058,7 +1052,6 @@
 
 							<section id="google-map" class="gmap" style="height: 410px;"></section>
 
-							<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 							<script type="text/javascript" src="js/jquery.gmap.js"></script>
 
 							<script type="text/javascript">
@@ -1102,7 +1095,7 @@
 							<div class="col_one_fourth">
 								<div class="feature-box fbox-center fbox-bg fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><i class="icon-map-marker2"></i></a>
+										<a href="{{ url_for('static', filename='#') }}"><i class="icon-map-marker2"></i></a>
 									</div>
 									<h3>Our Headquarters<span class="subtitle">Melbourne, Australia</span></h3>
 								</div>
@@ -1111,7 +1104,7 @@
 							<div class="col_one_fourth">
 								<div class="feature-box fbox-center fbox-bg fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><i class="icon-phone3"></i></a>
+										<a href="{{ url_for('static', filename='#') }}"><i class="icon-phone3"></i></a>
 									</div>
 									<h3>Speak to Us<span class="subtitle">(123) 456 7890</span></h3>
 								</div>
@@ -1120,7 +1113,7 @@
 							<div class="col_one_fourth">
 								<div class="feature-box fbox-center fbox-bg fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><i class="icon-skype2"></i></a>
+										<a href="{{ url_for('static', filename='#') }}"><i class="icon-skype2"></i></a>
 									</div>
 									<h3>Make a Video Call<span class="subtitle">CheermonkOnSkype</span></h3>
 								</div>
@@ -1129,7 +1122,7 @@
 							<div class="col_one_fourth col_last">
 								<div class="feature-box fbox-center fbox-bg fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><i class="icon-twitter2"></i></a>
+										<a href="{{ url_for('static', filename='#') }}"><i class="icon-twitter2"></i></a>
 									</div>
 									<h3>Follow on Twitter<span class="subtitle">2.3M Followers</span></h3>
 								</div>
@@ -1187,13 +1180,6 @@
 								<h4>Blogroll</h4>
 
 								<ul>
-									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
-									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
-									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
-									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
-									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
-									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
-									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
 								</ul>
 
 							</div>
@@ -1209,7 +1195,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Lorem ipsum dolor sit amet, consectetur</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -1220,7 +1206,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Elit Assumenda vel amet dolorum quasi</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -1231,7 +1217,7 @@
 									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
+												<h4><a href="{{ url_for('static', filename='#') }}">Debitis nihil placeat, illum est nisi</a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li>10th July 2014</li>
@@ -1300,18 +1286,18 @@
 							<div class="row">
 
 								<div class="col-md-6 clearfix bottommargin-sm">
-									<a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
+									<a href="{{ url_for('static', filename='#') }}" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
 										<i class="icon-rss"></i>
 										<i class="icon-rss"></i>
 									</a>
-									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
+									<a href="{{ url_for('static', filename='#') }}"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
 								</div>
 
 							</div>
@@ -1332,47 +1318,47 @@
 
 					<div class="col_half">
 						Copyrights &copy; 2014 All Rights Reserved by Cheermonk Inc.<br>
-						<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+						<div class="copyright-links"><a href="{{ url_for('static', filename='#') }}">Terms of Use</a> / <a href="{{ url_for('static', filename='#') }}">Privacy Policy</a></div>
 					</div>
 
 					<div class="col_half col_last tright">
 						<div class="fright clearfix">
-							<a href="#" class="social-icon si-small si-borderless si-facebook">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-facebook">
 								<i class="icon-facebook"></i>
 								<i class="icon-facebook"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-twitter">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-twitter">
 								<i class="icon-twitter"></i>
 								<i class="icon-twitter"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-gplus">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-gplus">
 								<i class="icon-gplus"></i>
 								<i class="icon-gplus"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-pinterest">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-pinterest">
 								<i class="icon-pinterest"></i>
 								<i class="icon-pinterest"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-vimeo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-vimeo">
 								<i class="icon-vimeo"></i>
 								<i class="icon-vimeo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-github">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-github">
 								<i class="icon-github"></i>
 								<i class="icon-github"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-yahoo">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-yahoo">
 								<i class="icon-yahoo"></i>
 								<i class="icon-yahoo"></i>
 							</a>
 
-							<a href="#" class="social-icon si-small si-borderless si-linkedin">
+							<a href="{{ url_for('static', filename='#') }}" class="social-icon si-small si-borderless si-linkedin">
 								<i class="icon-linkedin"></i>
 								<i class="icon-linkedin"></i>
 							</a>

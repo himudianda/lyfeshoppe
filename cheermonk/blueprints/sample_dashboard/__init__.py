@@ -1,0 +1,1 @@
+from cheermonk.blueprints.sample_dashboard.views import sample_dashboard
