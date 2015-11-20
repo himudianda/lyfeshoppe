@@ -1328,6 +1328,11 @@ def google_map_functions():
     return render_template('sample_frontend/google-map-functions.html')
 
 
+@sample_frontend.route('/shop_2')
+def shop_2():
+    return render_template('sample_frontend/shop-2.html')
+
+
 @sample_frontend.route('/portfolio_infinity_scroll_2')
 def portfolio_infinity_scroll_2():
     return render_template('sample_frontend/portfolio-infinity-scroll-2.html')
