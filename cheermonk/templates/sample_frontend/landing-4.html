@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -388,7 +388,7 @@
 
 							<div id="snav-content1">
 								<h3>Ultra Responsive Template</h3>
-								<img class="alignright img-responsive" src="images/landing/responsive.png" alt="">
+								<img class="alignright img-responsive" src="{{ url_for('static', filename='frontend/images/landing/responsive.png') }}" alt="">
 
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, ex, inventore, tenetur, repellat ipsam soluta libero amet nam aspernatur perspiciatis quos praesentium et debitis ea odit enim illo aliquid eligendi numquam neque. Ipsum, voluptatibus, perspiciatis a quam aliquid cumque cupiditate id ipsa tempora eveniet. Cupiditate, necessitatibus, consequatur odio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, vitae, laboriosam libero nihil labore hic modi? Odit, veritatis nulla molestiae!
 							</div>
@@ -403,7 +403,7 @@
 							</div>
 
 							<div id="snav-content4">
-								<img class="alignleft img-responsive" src="images/landing/bootstrap.png" alt="">
+								<img class="alignleft img-responsive" src="{{ url_for('static', filename='frontend/images/landing/bootstrap.png') }}" alt="">
 								<h3>Bootstrap v3.2.0 Compatiable</h3>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, nostrum, dolores id quo nam repudiandae ad culpa architecto minima nemo eaque soluta nulla laborum neque provident saepe facilis expedita numquam quas alias in perferendis accusamus ipsam blanditiis sit voluptatem temporibus vero error veritatis repellat eos reiciendis repellendus quam. Officia dicta ipsam nostrum aperiam. Dolor, expedita enim modi nostrum commodi sint architecto aliquam aut mollitia repellendus deserunt quaerat aspernatur aperiam voluptatibus consequatur rerum consequuntur.
 							</div>
@@ -693,7 +693,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

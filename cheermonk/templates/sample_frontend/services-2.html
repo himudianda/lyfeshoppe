@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -772,7 +772,7 @@
 						<div class="row">
 
 							<div class="col-md-4 bottommargin">
-								<img data-animate="fadeInLeftBig" src="images/services/iphone.png" alt="iPhone" class="center-block">
+								<img data-animate="fadeInLeftBig" src="{{ url_for('static', filename='frontend/images/services/iphone.png') }}" alt="iPhone" class="center-block">
 							</div>
 
 							<div class="col-md-4 col-sm-6 topmargin bottommargin">
@@ -1236,7 +1236,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

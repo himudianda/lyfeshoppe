@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -817,7 +817,7 @@
 						</div>
 
 						<div class="divcenter bottommargin" style="max-width: 800px;">
-							<iframe src="//player.vimeo.com/video/105977011?title=0&amp;byline=0&amp;portrait=0&amp;color=24a8bf" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/105977011?title=0&amp;byline=0&amp;portrait=0&amp;color=24a8bf') }}" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 						</div>
 
 						<p><strong>Share this Video:</strong> <a href="{{ url_for('static', filename='#') }}" class="button button-rounded si-facebook si-colored leftmargin-sm"><i class="icon-facebook"></i> Facebook</a> <a href="{{ url_for('static', filename='#') }}" class="button button-rounded si-twitter si-colored"><i class="icon-twitter"></i> Twitter</a> <a href="{{ url_for('static', filename='#') }}" class="button button-rounded si-pinterest si-colored"><i class="icon-pinterest"></i> Pinterest</a></p>
@@ -1161,7 +1161,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

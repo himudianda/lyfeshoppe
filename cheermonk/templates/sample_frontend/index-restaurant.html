@@ -20,12 +20,12 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
 
 	<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='frontend/include/rs-plugin/css/settings.css') }}" media="screen" />
@@ -675,14 +675,14 @@
 						</div>
 
 						<div class="masonry-thumbs col-4 clearfix" data-lightbox="gallery" style="width: 100.3%;">
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/3.jpg" alt="Gallery Thumb 1" data-animate="zoomIn"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/5.jpg" alt="Gallery Thumb 2" data-animate="zoomIn" data-delay="100"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/6.jpg" alt="Gallery Thumb 3" data-animate="zoomIn" data-delay="200"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/7.jpg" alt="Gallery Thumb 4" data-animate="zoomIn" data-delay="300"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/8.jpg" alt="Gallery Thumb 5" data-animate="zoomIn" data-delay="400"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/10.jpg" alt="Gallery Thumb 6" data-animate="zoomIn" data-delay="500"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/11.jpg" alt="Gallery Thumb 7" data-animate="zoomIn" data-delay="600"></a>
-							<a href="{{ url_for('static', filename='frontend/images/restaurant/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/restaurant/thumb/gallery/12.jpg" alt="Gallery Thumb 8" data-animate="zoomIn" data-delay="700"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/3.jpg') }}') }}" alt="Gallery Thumb 1" data-animate="zoomIn"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/5.jpg') }}') }}" alt="Gallery Thumb 2" data-animate="zoomIn" data-delay="100"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/6.jpg') }}') }}" alt="Gallery Thumb 3" data-animate="zoomIn" data-delay="200"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/7.jpg') }}') }}" alt="Gallery Thumb 4" data-animate="zoomIn" data-delay="300"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/8.jpg') }}') }}" alt="Gallery Thumb 5" data-animate="zoomIn" data-delay="400"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/10.jpg') }}') }}" alt="Gallery Thumb 6" data-animate="zoomIn" data-delay="500"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/11.jpg') }}') }}" alt="Gallery Thumb 7" data-animate="zoomIn" data-delay="600"></a>
+							<a href="{{ url_for('static', filename='frontend/images/restaurant/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/restaurant/thumb/gallery/12.jpg') }}') }}" alt="Gallery Thumb 8" data-animate="zoomIn" data-delay="700"></a>
 						</div>
 
 					</div>
@@ -828,7 +828,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

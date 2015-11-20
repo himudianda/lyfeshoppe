@@ -20,12 +20,12 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
 
 	<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='frontend/include/rs-plugin/css/settings.css') }}" media="screen" />
@@ -1146,7 +1146,7 @@
 				<div class="container clearfix">
 
 					<div class="divcenter center clearfix" style="max-width: 900px;">
-						<img class="bottommargin" src="images/logo-side.png" alt="">
+						<img class="bottommargin" src="{{ url_for('static', filename='frontend/images/logo-side.png') }}" alt="">
 						<h1>Welcome! This is <span>Cheermonk</span>.</h1>
 						<h2>A very clean, responsive &amp; super flexible multipurpose theme that makes it easy to create a website of any category.</h2>
 						<a href="{{ url_for('static', filename='#') }}" class="button button-3d button-dark button-large ">Browse Features</a>
@@ -1495,7 +1495,7 @@
 				<div class="container clearfix">
 
 					<div class="col_three_fifth topmargin-sm bottommargin">
-						<img data-animate="fadeInLeftBig" src="images/services/imac.png" alt="Imac">
+						<img data-animate="fadeInLeftBig" src="{{ url_for('static', filename='frontend/images/services/imac.png') }}" alt="Imac">
 					</div>
 
 					<div class="col_two_fifth topmargin-sm bottommargin-lg col_last">
@@ -1597,7 +1597,7 @@
 						<div class="col_half nobottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/11.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/11.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
@@ -1615,7 +1615,7 @@
 						<div class="col_half col_last nobottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/14.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/14.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h3>
@@ -2035,7 +2035,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

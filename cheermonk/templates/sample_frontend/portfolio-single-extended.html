@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -853,10 +853,10 @@
 				</div>
 
 				<div class="nomargin masonry-thumbs col-4" data-lightbox="gallery">
-					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/portfolio/extended/thumbs/1.jpg" alt="Gallery Thumb 1"></a>
-					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/portfolio/extended/thumbs/2.jpg" alt="Gallery Thumb 2"></a>
-					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/portfolio/extended/thumbs/6.jpg" alt="Gallery Thumb 3"></a>
-					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/portfolio/extended/thumbs/7.jpg" alt="Gallery Thumb 4"></a>
+					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/1.jpg') }}') }}" alt="Gallery Thumb 1"></a>
+					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/2.jpg') }}') }}" alt="Gallery Thumb 2"></a>
+					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/6.jpg') }}') }}" alt="Gallery Thumb 3"></a>
+					<a href="{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/portfolio/extended/thumbs/7.jpg') }}') }}" alt="Gallery Thumb 4"></a>
 				</div>
 
 				<div class="clear"></div>
@@ -1160,7 +1160,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

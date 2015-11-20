@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -95,9 +95,9 @@
 					<div class="col_two_third topmargin nobottommargin">
 
 						<div style="position: relative;" data-height-lg="535" data-height-md="442" data-height-sm="338" data-height-xs="316" data-height-xxs="201">
-							<img data-animate="fadeInLeft" src="images/landing/device1.png" alt="Mac" style="position: absolute; top: 0; left: 0;">
-							<img data-animate="fadeInRight" data-delay="300" src="images/landing/device2.png" alt="iPad" style="position: absolute; top: 0; left: 0;">
-							<img data-animate="fadeInUp" data-delay="600" src="images/landing/device3.png" alt="iPhone" style="position: absolute; top: 0; left: 0;">
+							<img data-animate="fadeInLeft" src="{{ url_for('static', filename='frontend/images/landing/device1.png') }}" alt="Mac" style="position: absolute; top: 0; left: 0;">
+							<img data-animate="fadeInRight" data-delay="300" src="{{ url_for('static', filename='frontend/images/landing/device2.png') }}" alt="iPad" style="position: absolute; top: 0; left: 0;">
+							<img data-animate="fadeInUp" data-delay="600" src="{{ url_for('static', filename='frontend/images/landing/device3.png') }}" alt="iPhone" style="position: absolute; top: 0; left: 0;">
 						</div>
 
 					</div>
@@ -492,7 +492,7 @@
 
 						<section id="google-map" class="gmap" style="height: 410px;"></section>
 
-						<script type="text/javascript" src="js/jquery.gmap.js"></script>
+						<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 						<script type="text/javascript">
 
@@ -840,7 +840,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

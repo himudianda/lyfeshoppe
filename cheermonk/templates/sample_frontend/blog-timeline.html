@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -714,7 +714,7 @@
 								<div class="timeline-divider"></div>
 							</div>
 							<div class="entry-image">
-								<a href="{{ url_for('static', filename='frontend/images/blog/full/17.jpg') }}" data-lightbox="image"><img class="image_fade" src="images/blog/small/17.jpg" alt="Standard Post with Image"></a>
+								<a href="{{ url_for('static', filename='frontend/images/blog/full/17.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/17.jpg') }}') }}" alt="Standard Post with Image"></a>
 							</div>
 							<div class="entry-title">
 								<h2><a href="{{ url_for('sample_frontend.blog_single') }}">This is a Standard post with a Preview Image</a></h2>
@@ -758,9 +758,9 @@
 								<div class="fslider" data-arrows="false" data-lightbox="gallery">
 									<div class="flexslider">
 										<div class="slider-wrap">
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/10.jpg" alt="Standard Post with Gallery"></a></div>
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/20.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/20.jpg" alt="Standard Post with Gallery"></a></div>
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/21.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/21.jpg" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/10.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/20.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/20.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/21.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/21.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
 										</div>
 									</div>
 								</div>
@@ -802,15 +802,15 @@
 							</div>
 							<div class="entry-image clearfix">
 								<div class="portfolio-single-image masonry-thumbs col-4" data-big="3" data-lightbox="gallery">
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/2.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/3.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/6-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/6-1.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/6-2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/6-2.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/12.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/12-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/12-1.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/13.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/18.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/18.jpg" alt=""></a>
-									<a href="{{ url_for('static', filename='frontend/images/blog/full/19.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/small/19.jpg" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/2.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/3.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/6-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/6-1.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/6-2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/6-2.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/12.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/12-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/12-1.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/13.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/18.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/18.jpg') }}') }}" alt=""></a>
+									<a href="{{ url_for('static', filename='frontend/images/blog/full/19.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/small/19.jpg') }}') }}" alt=""></a>
 								</div>
 							</div>
 							<div class="entry-title">
@@ -870,10 +870,10 @@
 								<div class="fslider" data-animation="fade" data-pagi="false" data-pause="6000" data-lightbox="gallery">
 									<div class="flexslider">
 										<div class="slider-wrap">
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/6-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/6-1.jpg" alt="Standard Post with Gallery"></a></div>
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/6-2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/6-2.jpg" alt="Standard Post with Gallery"></a></div>
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/12-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/12-1.jpg" alt="Standard Post with Gallery"></a></div>
-											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/22.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/blog/masonry/22.jpg" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/6-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/6-1.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/6-2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/6-2.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/12-1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/12-1.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+											<div class="slide"><a href="{{ url_for('static', filename='frontend/images/blog/full/22.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/blog/masonry/22.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
 										</div>
 									</div>
 								</div>
@@ -1263,7 +1263,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

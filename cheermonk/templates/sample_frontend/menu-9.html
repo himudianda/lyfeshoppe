@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -105,8 +105,8 @@
 				<!-- Logo
 				============================================= -->
 				<div id="logo" class="divcenter">
-					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img class="divcenter" src="images/logo.png" alt="Cheermonk Logo"></a>
-					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img class="divcenter" src="images/logo@2x.png" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img class="divcenter" src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img class="divcenter" src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 				</div><!-- #logo end -->
 
 			</div>
@@ -1134,7 +1134,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

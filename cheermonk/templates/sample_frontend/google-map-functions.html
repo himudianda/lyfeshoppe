@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -721,7 +721,7 @@
 
 						<div id="google-map" class="gmap" style="height: 400px;"></div>
 
-						<script type="text/javascript" src="js/jquery.gmap.js"></script>
+						<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 						<script>
 
@@ -1068,7 +1068,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

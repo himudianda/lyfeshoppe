@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -1263,7 +1263,7 @@
 					<div class="col_one_third">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<iframe src="//player.vimeo.com/video/88318922?title=0&amp;byline=0&amp;portrait=0&amp;badge=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+								<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/88318922?title=0&amp;byline=0&amp;portrait=0&amp;badge=0') }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 							</div>
 							<div class="fbox-desc">
 								<h3>Tons of Customizations<span class="subtitle">Do whatever you like</span></h3>
@@ -1303,7 +1303,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/portfolio/3/1.jpg" alt="Featured Box Image"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/portfolio/3/1.jpg') }}" alt="Featured Box Image"></a>
 							</div>
 							<div class="fbox-desc">
 								<h3>Retina Ready Display<span class="subtitle">Amet dolore nobis iusto iste</span></h3>
@@ -1314,7 +1314,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/portfolio/3/2.jpg" alt="Featured Box Image"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/portfolio/3/2.jpg') }}" alt="Featured Box Image"></a>
 							</div>
 							<div class="fbox-desc">
 								<h3>Ultra Responsive Design<span class="subtitle">Excepturi doloremque nemo aperiam</span></h3>
@@ -1325,7 +1325,7 @@
 					<div class="col_one_third col_last nobottommargin">
 						<div class="feature-box center media-box fbox-bg">
 							<div class="fbox-media">
-								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/portfolio/3/3.jpg" alt="Featured Box Image"></a>
+								<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/portfolio/3/3.jpg') }}" alt="Featured Box Image"></a>
 							</div>
 							<div class="fbox-desc">
 								<h3>400+ HTML Pages Included<span class="subtitle">Commodi quidem eum libero</span></h3>
@@ -1668,7 +1668,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

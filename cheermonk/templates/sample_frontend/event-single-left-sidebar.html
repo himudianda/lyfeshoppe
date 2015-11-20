@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -781,7 +781,7 @@
 
 								<section id="event-location" class="gmap" style="height: 300px;"></section>
 
-								<script type="text/javascript" src="js/jquery.gmap.js"></script>
+								<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 								<script type="text/javascript">
 
@@ -817,7 +817,7 @@
 
 								<h4>Preview</h4>
 
-								<iframe src="//player.vimeo.com/video/30626474" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+								<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/30626474') }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 							</div>
 
@@ -979,7 +979,7 @@
 							<div class="widget clearfix">
 
 								<h4>Recent Event in Video</h4>
-								<iframe src="//player.vimeo.com/video/103927232" width="500" height="250" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+								<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/103927232') }}" width="500" height="250" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 							</div>
 
@@ -1272,7 +1272,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

@@ -21,11 +21,11 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/jquery.calendario.js"></script>
-	<script type="text/javascript" src="js/events-data.js"></script>
-	<script type="text/javascript" src="js/jquery.gmap.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.calendario.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/events-data.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -1054,21 +1054,21 @@
 						</div>
 
 						<div class="col_full masonry-thumbs col-4 clearfix" data-lightbox="gallery">
-							<a href="{{ url_for('static', filename='frontend/images/events/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/1.jpg" alt="Gallery Thumb 1"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/2.jpg" alt="Gallery Thumb 2"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/3.jpg" alt="Gallery Thumb 3"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/4.jpg" alt="Gallery Thumb 4"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/5.jpg" alt="Gallery Thumb 5"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/6.jpg" alt="Gallery Thumb 6"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/7.jpg" alt="Gallery Thumb 7"></a>
-							<a href="{{ url_for('static', filename='frontend/images/events/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/events/thumbs/8.jpg" alt="Gallery Thumb 8"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/1.jpg') }}') }}" alt="Gallery Thumb 1"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/2.jpg') }}') }}" alt="Gallery Thumb 2"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/3.jpg') }}') }}" alt="Gallery Thumb 3"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/4.jpg') }}') }}" alt="Gallery Thumb 4"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/5.jpg') }}') }}" alt="Gallery Thumb 5"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/6.jpg') }}') }}" alt="Gallery Thumb 6"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/7.jpg') }}') }}" alt="Gallery Thumb 7"></a>
+							<a href="{{ url_for('static', filename='frontend/images/events/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/events/thumbs/8.jpg') }}') }}" alt="Gallery Thumb 8"></a>
 						</div>
 
 						<div class="fancy-title title-border">
 							<h4>Video</h4>
 						</div>
 
-						<iframe src="//player.vimeo.com/video/30626474" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/30626474') }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 					</div>
 
@@ -1405,7 +1405,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

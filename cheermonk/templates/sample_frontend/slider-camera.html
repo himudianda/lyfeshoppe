@@ -21,9 +21,9 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/jquery.camera.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.camera.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -683,22 +683,22 @@
 		<section id="slider" class="slider-parallax clearfix">
 
 			<div class="camera_wrap" id="camera_wrap_1">
-				<div data-thumb="images/slider/full/thumbs/1.jpg" data-src="images/slider/full/1.jpg">
+				<div data-thumb="images/slider/full/thumbs/1.jpg" data-src="{{ url_for('static', filename='frontend/images/slider/full/1.jpg') }}">
 					<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
 						<div class="container">Powerful Layout with Responsive functionality that can be adapted to any screen size.</div>
 					</div>
 				</div>
-				<div data-thumb="images/slider/full/thumbs/2.jpg" data-src="images/slider/full/2.jpg">
+				<div data-thumb="images/slider/full/thumbs/2.jpg" data-src="{{ url_for('static', filename='frontend/images/slider/full/2.jpg') }}">
 					<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
 						<div class="container">Looks beautiful &amp; ultra-sharp on Retina Screen Displays.</div>
 					</div>
 				</div>
-				<div data-thumb="images/slider/full/thumbs/3.jpg" data-src="images/slider/full/3.jpg">
+				<div data-thumb="images/slider/full/thumbs/3.jpg" data-src="{{ url_for('static', filename='frontend/images/slider/full/3.jpg') }}">
 					<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
 						<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>
 					</div>
 				</div>
-				<div data-thumb="images/slider/full/thumbs/4.jpg" data-src="images/slider/full/4.jpg">
+				<div data-thumb="images/slider/full/thumbs/4.jpg" data-src="{{ url_for('static', filename='frontend/images/slider/full/4.jpg') }}">
 					<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
 						<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>
 					</div>
@@ -1102,7 +1102,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

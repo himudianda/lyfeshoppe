@@ -29,8 +29,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -321,7 +321,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="demos/construction/images/services/1.jpg" alt="Why choose Us?">
+								<img style="border-radius: 2px;" src="{{ url_for('static', filename='frontend/demos/construction/images/services/1.jpg') }}" alt="Why choose Us?">
 							</div>
 							<div class="fbox-desc">
 								<h3>Skilled Professionals.<span class="subtitle">Your Property in Good Hands.</span></h3>
@@ -333,7 +333,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="images/services/1.jpg" alt="Effective Planning">
+								<img style="border-radius: 2px;" src="{{ url_for('static', filename='frontend/images/services/1.jpg') }}" alt="Effective Planning">
 							</div>
 							<div class="fbox-desc">
 								<h3>Effective Planning.<span class="subtitle">Construction Process Organized.</span></h3>
@@ -345,7 +345,7 @@
 					<div class="col_one_third nobottommargin col_last">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="demos/construction/images/services/2.jpg" alt="Why choose Us?">
+								<img style="border-radius: 2px;" src="{{ url_for('static', filename='frontend/demos/construction/images/services/2.jpg') }}" alt="Why choose Us?">
 							</div>
 							<div class="fbox-desc">
 								<h3>Risk Management.<span class="subtitle">We have got you Covered.</span></h3>
@@ -768,7 +768,7 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}" data-lightbox="image"><img class="image_fade" src="demos/construction/images/blog/5.jpg" alt="Standard Post with Image"></a>
+										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}') }}" alt="Standard Post with Image"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="{{ url_for('static', filename='#') }}">Upcoming Projects in Australia</a></h3>
@@ -789,9 +789,9 @@
 										<div class="fslider" data-arrows="false" data-lightbox="gallery">
 											<div class="flexslider">
 												<div class="slider-wrap">
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="demos/construction/images/blog/2.jpg" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="demos/construction/images/blog/1.jpg" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="demos/construction/images/blog/3.jpg" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
 												</div>
 											</div>
 										</div>
@@ -812,7 +812,7 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}" data-lightbox="image"><img class="image_fade" src="demos/construction/images/blog/4.jpg" alt="Standard Post with Image"></a>
+										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}') }}" alt="Standard Post with Image"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="{{ url_for('static', filename='#') }}">Global Excellence Construction Award</a></h3>
@@ -1039,7 +1039,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -837,7 +837,7 @@
 								<div class="ipost clearfix">
 									<div class="col_half bottommargin-sm">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/7.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/7.jpg') }}" alt="Image"></a>
 										</div>
 									</div>
 									<div class="col_half bottommargin-sm col_last">
@@ -940,7 +940,7 @@
 								<div class="ipost clearfix bottommargin-sm">
 									<div class="col_half nobottommargin">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/8.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/8.jpg') }}" alt="Image"></a>
 										</div>
 									</div>
 									<div class="col_half nobottommargin col_last">
@@ -1035,21 +1035,21 @@
 							</div>
 
 							<div class="col_full masonry-thumbs col-6 bottommargin-lg clearfix" data-big="5" data-lightbox="gallery">
-								<a href="{{ url_for('static', filename='frontend/images/magazine/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/1.jpg" alt="Gallery Thumb 1"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/2.jpg" alt="Gallery Thumb 2"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/3.jpg" alt="Gallery Thumb 3"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/4.jpg" alt="Gallery Thumb 4"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/5.jpg" alt="Gallery Thumb 5"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/6.jpg" alt="Gallery Thumb 6"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/7.jpg" alt="Gallery Thumb 7"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/8.jpg" alt="Gallery Thumb 8"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/9.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/9.jpg" alt="Gallery Thumb 9"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/10.jpg" alt="Gallery Thumb 10"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/11.jpg" alt="Gallery Thumb 11"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/12.jpg" alt="Gallery Thumb 12"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/13.jpg" alt="Gallery Thumb 13"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/14.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/14.jpg" alt="Gallery Thumb 14"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/15.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="images/magazine/thumb/15.jpg" alt="Gallery Thumb 15"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}') }}" alt="Gallery Thumb 1"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}') }}" alt="Gallery Thumb 2"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}') }}" alt="Gallery Thumb 3"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}') }}" alt="Gallery Thumb 4"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/5.jpg') }}') }}" alt="Gallery Thumb 5"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}') }}" alt="Gallery Thumb 6"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/7.jpg') }}') }}" alt="Gallery Thumb 7"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/8.jpg') }}') }}" alt="Gallery Thumb 8"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/9.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/9.jpg') }}') }}" alt="Gallery Thumb 9"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/10.jpg') }}') }}" alt="Gallery Thumb 10"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/11.jpg') }}') }}" alt="Gallery Thumb 11"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/12.jpg') }}') }}" alt="Gallery Thumb 12"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/13.jpg') }}') }}" alt="Gallery Thumb 13"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/14.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/14.jpg') }}') }}" alt="Gallery Thumb 14"></a>
+								<a href="{{ url_for('static', filename='frontend/images/magazine/15.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/15.jpg') }}') }}" alt="Gallery Thumb 15"></a>
 							</div>
 
 							<div class="col_full nobottommargin clearfix">
@@ -1061,7 +1061,7 @@
 								<div class="col_one_third">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/11.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/11.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Yum, McDonald's apologize as new China food scandal brews</a></h3>
@@ -1079,7 +1079,7 @@
 								<div class="col_one_third">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/16.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/16.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Halliburton gets boost from rebound in North America drilling</a></h3>
@@ -1097,7 +1097,7 @@
 								<div class="col_one_third col_last">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/13.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/13.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">China sends spy ship off Hawaii during U.S.-led drills brews</a></h3>
@@ -1117,7 +1117,7 @@
 								<div class="col_one_third nobottommargin">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/10.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/10.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Wobbly stocks underpin yen and Swiss franc; dollar subdued</a></h3>
@@ -1135,7 +1135,7 @@
 								<div class="col_one_third nobottommargin">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/15.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/15.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">BlackBerry names ex-Sybase executive as chief operating officer</a></h3>
@@ -1153,7 +1153,7 @@
 								<div class="col_one_third nobottommargin col_last">
 									<div class="ipost clearfix">
 										<div class="entry-image">
-											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/6.jpg" alt="Image"></a>
+											<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}" alt="Image"></a>
 										</div>
 										<div class="entry-title">
 											<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Georgian prime minister fires seven ministers in first reshuffle</a></h3>
@@ -1205,7 +1205,7 @@
 								</div>
 
 								<div class="widget clearfix">
-									<img class="aligncenter" src="images/magazine/ad.png" alt="">
+									<img class="aligncenter" src="{{ url_for('static', filename='frontend/images/magazine/ad.png') }}" alt="">
 								</div>
 
 								<div class="widget widget_links clearfix">
@@ -1274,7 +1274,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/3.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/3.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1288,7 +1288,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/2.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/2.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1302,7 +1302,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/1.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/1.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1321,7 +1321,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/1.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/1.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1335,7 +1335,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/2.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/2.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1349,7 +1349,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/magazine/small/3.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/magazine/small/3.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<div class="entry-title">
@@ -1368,7 +1368,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/icons/avatar.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/icons/avatar.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<strong>John Doe:</strong> Veritatis recusandae sunt repellat distinctio...
@@ -1377,7 +1377,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/icons/avatar.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/icons/avatar.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<strong>Mary Jane:</strong> Possimus libero, earum officia architecto maiores....
@@ -1386,7 +1386,7 @@
 
 													<div class="spost clearfix">
 														<div class="entry-image">
-															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="images/icons/avatar.jpg" alt=""></a>
+															<a href="{{ url_for('static', filename='#') }}" class="nobg"><img class="img-circle" src="{{ url_for('static', filename='frontend/images/icons/avatar.jpg') }}" alt=""></a>
 														</div>
 														<div class="entry-c">
 															<strong>Site Admin:</strong> Deleniti magni labore laboriosam odio...
@@ -1406,7 +1406,7 @@
 								</div>
 
 								<div class="widget clearfix">
-									<img class="aligncenter" src="images/magazine/ad.png" alt="">
+									<img class="aligncenter" src="{{ url_for('static', filename='frontend/images/magazine/ad.png') }}" alt="">
 								</div>
 
 								<div class="widget clearfix">
@@ -1668,7 +1668,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

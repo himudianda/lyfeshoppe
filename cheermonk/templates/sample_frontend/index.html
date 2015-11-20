@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -1277,7 +1277,7 @@
 				<div class="container clearfix">
 
 					<div class="col_one_third bottommargin-sm center">
-						<img data-animate="fadeInLeft" src="images/services/iphone6.png" alt="Iphone">
+						<img data-animate="fadeInLeft" src="{{ url_for('static', filename='frontend/images/services/iphone6.png') }}" alt="Iphone">
 					</div>
 
 					<div class="col_two_third bottommargin-sm col_last">
@@ -1361,7 +1361,7 @@
 						<div class="col-md-3 col-sm-6 bottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/1.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Bloomberg smart cities; change-makers economic security</a></h3>
@@ -1379,7 +1379,7 @@
 						<div class="col-md-3 col-sm-6 bottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/2.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Medicine new approaches communities, outcomes partnership</a></h3>
@@ -1397,7 +1397,7 @@
 						<div class="col-md-3 col-sm-6 bottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/3.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Significant altruism planned giving insurmountable challenges liberal</a></h3>
@@ -1415,7 +1415,7 @@
 						<div class="col-md-3 col-sm-6 bottommargin">
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/thumb/4.jpg" alt="Image"></a>
+									<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}" alt="Image"></a>
 								</div>
 								<div class="entry-title">
 									<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Compassion conflict resolution, progressive; tackle</a></h3>
@@ -1841,7 +1841,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

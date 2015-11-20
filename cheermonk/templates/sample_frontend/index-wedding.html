@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -130,7 +130,7 @@
 					<div class="col-md-6 bottommargin">
 						<div class="team team-list clearfix">
 							<div class="team-image" style="width: 150px;">
-								<img class="img-circle" src="images/wedding/17.jpg" alt="Bryant Kellam">
+								<img class="img-circle" src="{{ url_for('static', filename='frontend/images/wedding/17.jpg') }}" alt="Bryant Kellam">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Bryant Kellam</h4><span>Groom</span></div>
@@ -159,7 +159,7 @@
 					<div class="col-md-6 bottommargin">
 						<div class="team team-list clearfix">
 							<div class="team-image" style="width: 150px;">
-								<img class="img-circle" src="images/wedding/18.jpg" alt="Leanna Pyburn">
+								<img class="img-circle" src="{{ url_for('static', filename='frontend/images/wedding/18.jpg') }}" alt="Leanna Pyburn">
 							</div>
 							<div class="team-desc">
 								<div class="team-title"><h4>Leanna Pyburn</h4><span>Bride</span></div>
@@ -258,7 +258,7 @@
 
 				<div id="google-map1" style="height: 500px;" class="gmap"></div>
 
-				<script type="text/javascript" src="js/jquery.gmap.js"></script>
+				<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 				<script type="text/javascript">
 
@@ -392,7 +392,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -971,7 +971,7 @@
 
 								<div class="spost clearfix">
 									<div class="entry-image">
-										<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="images/magazine/small/movie/4.jpg" alt="Image"></a>
+										<a href="{{ url_for('static', filename='#') }}"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/small/movie/4.jpg') }}" alt="Image"></a>
 									</div>
 									<div class="entry-c">
 										<div class="entry-title">
@@ -1290,7 +1290,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

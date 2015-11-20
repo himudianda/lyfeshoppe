@@ -21,15 +21,15 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/jquery.vmap.js"></script>
-	<script type="text/javascript" src="js/vmap/jquery.vmap.world.js"></script>
-	<script type="text/javascript" src="js/vmap/jquery.vmap.usa.js"></script>
-	<script type="text/javascript" src="js/vmap/jquery.vmap.europe.js"></script>
-	<script type="text/javascript" src="js/vmap/jquery.vmap.germany.js"></script>
-	<script type="text/javascript" src="js/vmap/jquery.vmap.sampledata.js"></script>
-	<script type="text/javascript" src="js/jquery.gmap.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.vmap.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/vmap/jquery.vmap.world.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/vmap/jquery.vmap.usa.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/vmap/jquery.vmap.europe.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/vmap/jquery.vmap.germany.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/vmap/jquery.vmap.sampledata.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -1385,7 +1385,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

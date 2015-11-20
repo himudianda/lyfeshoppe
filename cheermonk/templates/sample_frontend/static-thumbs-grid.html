@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -682,63 +682,63 @@
 
 			<div class="masonry-thumbs col-6 clearfix" data-big="3" data-lightbox="gallery">
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/1.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/1.jpg" alt="Gallery Thumb 1">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/1.jpg') }}" alt="Gallery Thumb 1">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/2.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/2.jpg" alt="Gallery Thumb 2">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/2.jpg') }}" alt="Gallery Thumb 2">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/3.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/3.jpg" alt="Gallery Thumb 3">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/3.jpg') }}" alt="Gallery Thumb 3">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/4.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/4.jpg" alt="Gallery Thumb 4">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/4.jpg') }}" alt="Gallery Thumb 4">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/5.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/5.jpg" alt="Gallery Thumb 5">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/5.jpg') }}" alt="Gallery Thumb 5">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/6.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/6.jpg" alt="Gallery Thumb 6">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/6.jpg') }}" alt="Gallery Thumb 6">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/7.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/7.jpg" alt="Gallery Thumb 7">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/7.jpg') }}" alt="Gallery Thumb 7">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/8.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/8.jpg" alt="Gallery Thumb 8">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/8.jpg') }}" alt="Gallery Thumb 8">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/9.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/9.jpg" alt="Gallery Thumb 9">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/9.jpg') }}" alt="Gallery Thumb 9">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/10.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/10.jpg" alt="Gallery Thumb 10">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/10.jpg') }}" alt="Gallery Thumb 10">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/11.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/11.jpg" alt="Gallery Thumb 11">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/11.jpg') }}" alt="Gallery Thumb 11">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/12.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/12.jpg" alt="Gallery Thumb 12">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/12.jpg') }}" alt="Gallery Thumb 12">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/17.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/17.jpg" alt="Gallery Thumb 13">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/17.jpg') }}" alt="Gallery Thumb 13">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/16.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/16.jpg" alt="Gallery Thumb 14">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/16.jpg') }}" alt="Gallery Thumb 14">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/image.png') }}" alt="Play"></span>
 				</a>
 				<a href="{{ url_for('static', filename='frontend/images/slider/thumbs/15.jpg') }}" data-lightbox="gallery-item">
-					<img class="image_fade" src="images/slider/thumbs/15.jpg" alt="Gallery Thumb 15">
+					<img class="image_fade" src="{{ url_for('static', filename='frontend/images/slider/thumbs/15.jpg') }}" alt="Gallery Thumb 15">
 					<span class="i-overlay on-hover"><img src="{{ url_for('static', filename='frontend/images/icons/play.png') }}" alt="Play"></span>
 				</a>
 			</div>
@@ -1119,7 +1119,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>

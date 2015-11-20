@@ -20,8 +20,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
 
 	<!-- Document Title
 	============================================= -->
@@ -876,7 +876,7 @@
 								</div>
 								<textarea class="required form-control short-textarea" id="quick-contact-form-message" name="quick-contact-form-message" rows="4" cols="30" placeholder="Message"></textarea>
 								<div class="row">
-									<div class="col-xs-5"><img id="footer-form-captcha" src="include/captcha/assets/bg.png" alt="Captcha"></div>
+									<div class="col-xs-5"><img id="footer-form-captcha" src="{{ url_for('static', filename='frontend/include/captcha/assets/bg.png') }}" alt="Captcha"></div>
 									<div class="col-xs-7"><input type="text" class="required form-control" id="quick-contact-form-captcha" name="quick-contact-form-captcha" value="" placeholder="Captcha" /></div>
 								</div>
 								<input type="text" class="hidden" id="quick-contact-form-botcheck" name="quick-contact-form-botcheck" value="" />
@@ -952,7 +952,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
 </body>
 </html>
