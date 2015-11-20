@@ -809,7 +809,7 @@ def header_transparent():
 
 
 @sample_frontend.route('/404_2')
-def 404_2():
+def _404_2():
     return render_template('sample_frontend/404-2.html')
 
 
@@ -1484,7 +1484,7 @@ def modal_popovers():
 
 
 @sample_frontend.route('/404_3')
-def 404_3():
+def _404_3():
     return render_template('sample_frontend/404-3.html')
 
 
@@ -2379,7 +2379,7 @@ def promo_boxes():
 
 
 @sample_frontend.route('/404')
-def 404():
+def _404():
     return render_template('sample_frontend/404.html')
 
 
