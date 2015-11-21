@@ -2,20 +2,23 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -85,8 +88,8 @@
 							<li><a href="#" class="si-github"><span class="ts-icon"><i class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>
 							<li><a href="#" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span class="ts-text">Pinterest</span></a></li>
 							<li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
-							<li><a href="{{ url_for('static', filename='frontend/tel:+91.11.85412542') }}" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
-							<li><a href="{{ url_for('static', filename='frontend/mailto:info@cheermonk.com') }}" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/./tel:+91.11.85412542') }}" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/./mailto:info@cheermonk.com') }}" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
 						</ul>
 					</div><!-- #top-social end -->
 
@@ -105,8 +108,8 @@
 				<!-- Logo
 				============================================= -->
 				<div id="logo">
-					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
-					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark@2x.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 				</div><!-- #logo end -->
 
 				<div class="top-advert">
@@ -347,10 +350,10 @@
 											<li><a href="{{ url_for('sample_frontend.contact_7') }}">Contact 7</a></li>
 										</ul>
 									</li>
-									<li><a href="{{ url_for('static', filename='frontend/#footer') }}" data-scrollto="#footer"><div><i class="icon-th"></i>Footers</div></a>
+									<li><a href="{{ url_for('static', filename='frontend/./#footer') }}" data-scrollto="#footer"><div><i class="icon-th"></i>Footers</div></a>
 										<ul>
 											<li><a href="{{ url_for('sample_frontend.sticky_footer') }}"><div>Sticky Footer</div></a></li>
-											<li><a href="{{ url_for('static', filename='frontend/#footer') }}" data-scrollto="#footer"><div>Footer - Layout 1</div></a></li>
+											<li><a href="{{ url_for('static', filename='frontend/./#footer') }}" data-scrollto="#footer"><div>Footer - Layout 1</div></a></li>
 											<li><a href="footer-2.html#footer"><div>Footer - Layout 2</div></a></li>
 											<li><a href="footer-3.html#footer"><div>Footer - Layout 3</div></a></li>
 											<li><a href="footer-4.html#footer"><div>Footer - Layout 4</div></a></li>
@@ -742,7 +745,7 @@
 							<div class="fslider flex-thumb-grid grid-6" data-speed="400" data-arrows="true" data-thumbs="true" data-easing="easeOutQuad">
 								<div class="flexslider">
 									<div class="slider-wrap">
-										<div class="slide" data-thumb="images/magazine/thumb/1.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}">
 											<a href="#">
 												<img src="{{ url_for('static', filename='frontend/images/magazine/1.jpg') }}" alt="">
 												<div class="overlay">
@@ -757,7 +760,7 @@
 												</div>
 											</a>
 										</div>
-										<div class="slide" data-thumb="images/magazine/thumb/2.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}">
 											<a href="#">
 												<img src="{{ url_for('static', filename='frontend/images/magazine/2.jpg') }}" alt="">
 												<div class="overlay">
@@ -772,7 +775,7 @@
 												</div>
 											</a>
 										</div>
-										<div class="slide" data-thumb="images/magazine/thumb/3.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}">
 											<a href="#">
 												<img src="{{ url_for('static', filename='frontend/images/magazine/3.jpg') }}" alt="">
 												<div class="overlay">
@@ -787,9 +790,10 @@
 												</div>
 											</a>
 										</div>
-										<div class="slide" data-thumb="images/magazine/thumb/4.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}">
+											<iframe src="http://player.vimeo.com/video/99895335" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 										</div>
-										<div class="slide" data-thumb="images/magazine/thumb/5.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/5.jpg') }}">
 											<a href="#">
 												<img src="{{ url_for('static', filename='frontend/images/magazine/5.jpg') }}" alt="">
 												<div class="overlay">
@@ -804,7 +808,7 @@
 												</div>
 											</a>
 										</div>
-										<div class="slide" data-thumb="images/magazine/thumb/6.jpg">
+										<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}">
 											<a href="#">
 												<img src="{{ url_for('static', filename='frontend/images/magazine/6.jpg') }}" alt="">
 												<div class="overlay">
@@ -1005,10 +1009,10 @@
 						<div class="tabs bottommargin-lg clearfix" id="tab-news">
 
 							<ul class="tab-nav clearfix">
-								<li><a href="{{ url_for('static', filename='frontend/#tabs-news-1') }}"><i class="icon-facetime-video"></i><span class="hidden-xs"> Video News</span></a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#tabs-news-2') }}"><i class="icon-film"></i><span class="hidden-xs"> Movie Reviews</span></a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#tabs-news-3') }}"><i class="icon-music2"></i><span class="hidden-xs"> Music</span></a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#tabs-news-4') }}"><i class="icon-bar-chart"></i><span class="hidden-xs"> Opinion Polls</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#tabs-news-1') }}"><i class="icon-facetime-video"></i><span class="hidden-xs"> Video News</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#tabs-news-2') }}"><i class="icon-film"></i><span class="hidden-xs"> Movie Reviews</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#tabs-news-3') }}"><i class="icon-music2"></i><span class="hidden-xs"> Music</span></a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#tabs-news-4') }}"><i class="icon-bar-chart"></i><span class="hidden-xs"> Opinion Polls</span></a></li>
 							</ul>
 
 							<div class="tab-container">
@@ -1018,7 +1022,7 @@
 									<div class="col_three_fifth nobottommargin">
 										<div class="ipost clearfix">
 											<div class="entry-image">
-												<iframe src="{{ url_for('static', filename='frontend///player.vimeo.com/video/97243508') }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+												<iframe src="{{ url_for('static', filename='//player.vimeo.com/video/97243508') }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 											</div>
 											<div class="entry-title">
 												<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Foreign advisors killed in Kabul blast</a></h3>
@@ -1240,6 +1244,7 @@
 									<div class="col_three_fifth nobottommargin">
 										<div class="ipost clearfix">
 											<div class="entry-image">
+												<iframe width="100%" height="250" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/139433038&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 											</div>
 											<div class="entry-title">
 												<h3><a href="{{ url_for('sample_frontend.blog_single') }}">Afrojack vs Thirty Seconds To Mars - Do Or Die (Club Remix)</a></h3>
@@ -1486,9 +1491,9 @@
 								<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
 
 									<ul class="tab-nav clearfix">
-										<li><a href="{{ url_for('static', filename='frontend/#tabs-1') }}">Popular</a></li>
-										<li><a href="{{ url_for('static', filename='frontend/#tabs-2') }}">Recent</a></li>
-										<li><a href="{{ url_for('static', filename='frontend/#tabs-3') }}"><i class="icon-comments-alt norightmargin"></i></a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#tabs-1') }}">Popular</a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#tabs-2') }}">Recent</a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#tabs-3') }}"><i class="icon-comments-alt norightmargin"></i></a></li>
 									</ul>
 
 									<div class="tab-container">
@@ -1633,6 +1638,7 @@
 							</div>
 
 							<div class="widget clearfix">
+								<iframe src="{{ url_for('static', filename='//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FEnvato&amp;width=240&amp;height=240&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=499481203443583') }}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:240px; height:240px;" allowTransparency="true"></iframe>
 							</div>
 
 						</div>
@@ -1813,7 +1819,7 @@
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 
-								<div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+								<div style="background"{{ url_for('static', filename='frontend/images/world-map.png') }}") no-repeat center center; background-size: 100%;">
 									<address>
 										<strong>Headquarters:</strong><br>
 										795 Folsom Ave, Suite 600<br>
@@ -1835,6 +1841,13 @@
 								<h4>Blogroll</h4>
 
 								<ul>
+									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
+									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
+									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
+									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
 								</ul>
 
 							</div>

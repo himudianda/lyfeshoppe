@@ -2,31 +2,34 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Montserrat:400,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
 
 	<!-- Medical Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/medical/medical.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/medical/medical.css') }}" type="text/css" />
 	<!-- / -->
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/medical/css/medical-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/medical/css/medical-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/medical/fonts.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/medical/fonts.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/colors.php?color=DE6262') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/colors.php?color=DE6262') }}" type="text/css" />
 
 	<!-- External JavaScripts
 	============================================= -->
@@ -43,6 +46,7 @@
 
 </head>
 
+<body class="stretched" data-loader-html="<div id='css3-spinner-svg-pulse-wrapper'><svg id='css3-spinner-svg-pulse' version='1.2' height='210' width='550' xmlns='http://www.w3.org/2000/svg' viewport='0 0 60 60' xmlns:xlink='http://www.w3.org/1999/xlink'><path id='css3-spinner-pulse' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round' d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' /></svg></div>">
 
 	<!-- Document Wrapper
 	============================================= -->
@@ -136,7 +140,7 @@
 
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image: url('demos/medical/images/slider/1.jpg');">
+					<div class="swiper-slide" style="background-image"{{ url_for('static', filename='frontend/demos/medical/images/slider/1.jpg') }}");">
 						<div class="container clearfix">
 							<div class="slider-caption slider-caption-right" style="max-width: 700px;">
 								<h2 data-caption-animate="flipInX">Team of Experts<span>.</span></h2>
@@ -144,7 +148,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="swiper-slide" style="background-image: url('demos/medical/images/slider/2.jpg');">
+					<div class="swiper-slide" style="background-image"{{ url_for('static', filename='frontend/demos/medical/images/slider/2.jpg') }}");">
 						<div class="container clearfix">
 							<div class="slider-caption">
 								<h2 data-caption-animate="zoomIn">Heart<span>Beat</span>.</h2>
@@ -279,7 +283,7 @@
 				</div>
 
 				<div class="section nopadding common-height dark topmargin-sm">
-					<div class="col-md-5" style="background: url('demos/medical/images/section-bg.jpg') center center no-repeat; background-size: cover;">
+					<div class="col-md-5" style="background"{{ url_for('static', filename='frontend/demos/medical/images/section-bg.jpg') }}") center center no-repeat; background-size: cover;">
 						<div>&nbsp;</div>
 					</div>
 					<div id="booking-appointment-form" class="col-md-7 nopadding">

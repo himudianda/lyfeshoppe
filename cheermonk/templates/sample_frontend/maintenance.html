@@ -2,20 +2,23 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -46,8 +49,8 @@
 					<!-- Logo
 					============================================= -->
 					<div id="logo" class="divcenter">
-						<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo" class="divcenter"></a>
-						<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo" class="divcenter"></a>
+						<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark@2x.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 					</div><!-- #logo end -->
 
 				</div>
@@ -95,7 +98,7 @@
 								<a href="#"><i class="icon-email3"></i></a>
 							</div>
 							<h3>Do you need Support?</h3>
-							<p>You may simply send us an Email at <a href="{{ url_for('static', filename='frontend/mailto:info@cheermonk.com') }}">info@cheermonk.com</a> if you need urgent support.</p>
+							<p>You may simply send us an Email at <a href="{{ url_for('static', filename='frontend/./mailto:info@cheermonk.com') }}">info@cheermonk.com</a> if you need urgent support.</p>
 						</div>
 					</div>
 

@@ -2,30 +2,33 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
 
 	<!-- Construction Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/construction/construction.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/construction/construction.css') }}" type="text/css" />
 	<!-- / -->
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/construction/css/fonts.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/construction/css/fonts.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/demos/construction/css/colors.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./demos/construction/css/colors.css') }}" type="text/css" />
 
 	<!-- External JavaScripts
 	============================================= -->
@@ -193,7 +196,7 @@
 
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image: url('demos/construction/images/slider/2.jpg'); background-position: center top;">
+					<div class="swiper-slide" style="background-image"{{ url_for('static', filename='frontend/demos/construction/images/slider/2.jpg') }}"); background-position: center top;">
 						<div class="container clearfix">
 							<div class="slider-caption">
 								<h2>Welcome to Cheermonk</h2>
@@ -210,13 +213,13 @@
 						</div>
 						<div class="video-wrap">
 							<video id="slide-video" poster="demos/construction/images/videos/1.jpg" preload="auto" loop autoplay muted>
-								<source src='demos/construction/images/videos/1.webm' type='video/webm' />
-								<source src='demos/construction/images/videos/1.mp4' type='video/mp4' />
+								<source src="{{ url_for('static', filename='frontend/demos/construction/images/videos/1.webm') }}" type='video/webm' />
+								<source src="{{ url_for('static', filename='frontend/demos/construction/images/videos/1.mp4') }}" type='video/mp4' />
 							</video>
 							<div class="video-overlay" style="background-color: rgba(0,0,0,0.1);"></div>
 						</div>
 					</div>
-					<div class="swiper-slide" style="background-image: url('demos/construction/images/slider/1.jpg'); background-position: center bottom;">
+					<div class="swiper-slide" style="background-image"{{ url_for('static', filename='frontend/demos/construction/images/slider/1.jpg') }}"); background-position: center bottom;">
 						<div class="container clearfix">
 							<div  class="slider-caption">
 								<h2>Premium Constructions</h2>
@@ -356,7 +359,7 @@
 
 				</div>
 
-				<div class="section parallax dark" style="background-image: url('demos/construction/images/slider/1.jpg'); padding: 120px 0;" data-stellar-background-ratio="0.4">
+				<div class="section parallax dark" style="background-image"{{ url_for('static', filename='frontend/demos/construction/images/slider/1.jpg') }}"); padding: 120px 0;" data-stellar-background-ratio="0.4">
 
 					<div class="fslider testimonial testimonial-full" data-arrows="false" style="z-index: 2;">
 						<div class="flexslider">
@@ -611,10 +614,10 @@
 						<div class="tabs tabs-justify nobottommargin clearfix" id="construction-tabs">
 
 							<ul class="tab-nav clearfix">
-								<li><a href="{{ url_for('static', filename='frontend/#construction-tab-1') }}">Why Us?</a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#construction-tab-2') }}">Work Ethic</a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#construction-tab-3') }}">Team</a></li>
-								<li><a href="{{ url_for('static', filename='frontend/#construction-tab-4') }}">Locations</a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#construction-tab-1') }}">Why Us?</a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#construction-tab-2') }}">Work Ethic</a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#construction-tab-3') }}">Team</a></li>
+								<li><a href="{{ url_for('static', filename='frontend/./#construction-tab-4') }}">Locations</a></li>
 							</ul>
 
 							<div class="tab-container">
@@ -695,6 +698,7 @@
 												</div>
 											</div>
 											<div class="col-sm-5 bottommargin-sm">
+												<img src="https://maps.googleapis.com/maps/api/staticmap?center=-37.814107,144.963280&zoom=12&markers=-37.814107,144.963280&size=300x180" alt="Google Map" class="img-thumbnail">
 											</div>
 										</div>
 									</div>
@@ -768,14 +772,14 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}') }}" alt="Standard Post with Image"></a>
+										<a href="{{ url_for('static', filename='frontend/./demos/construction/images/blog/5.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/demos/construction/images/blog/5.jpg') }}" alt="Standard Post with Image"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="#">Upcoming Projects in Australia</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li>10th Feb 2014</li>
-										<li><a href="{{ url_for('static', filename='frontend/#comments') }}">13 Comments</a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#comments') }}">13 Comments</a></li>
 									</ul>
 									<div class="entry-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>
@@ -789,9 +793,9 @@
 										<div class="fslider" data-arrows="false" data-lightbox="gallery">
 											<div class="flexslider">
 												<div class="slider-wrap">
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}') }}" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/./demos/construction/images/blog/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/demos/construction/images/blog/2.jpg') }}" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/./demos/construction/images/blog/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/demos/construction/images/blog/1.jpg') }}" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="{{ url_for('static', filename='frontend/./demos/construction/images/blog/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/demos/construction/images/blog/3.jpg') }}" alt="Standard Post with Gallery"></a></div>
 												</div>
 											</div>
 										</div>
@@ -801,7 +805,7 @@
 									</div>
 									<ul class="entry-meta clearfix">
 										<li>24th Feb 2014</li>
-										<li><a href="{{ url_for('static', filename='frontend/#comments') }}">21 Comments</a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#comments') }}">21 Comments</a></li>
 									</ul>
 									<div class="entry-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem!</p>
@@ -812,14 +816,14 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}') }}" alt="Standard Post with Image"></a>
+										<a href="{{ url_for('static', filename='frontend/./demos/construction/images/blog/4.jpg') }}" data-lightbox="image"><img class="image_fade" src="{{ url_for('static', filename='frontend/demos/construction/images/blog/4.jpg') }}" alt="Standard Post with Image"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="#">Global Excellence Construction Award</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
 										<li>5th May 2014</li>
-										<li><a href="{{ url_for('static', filename='frontend/#comments') }}">6 Comments</a></li>
+										<li><a href="{{ url_for('static', filename='frontend/./#comments') }}">6 Comments</a></li>
 									</ul>
 									<div class="entry-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>

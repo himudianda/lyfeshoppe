@@ -2,20 +2,23 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -41,7 +44,7 @@
 
 			<div class="content-wrap nopadding">
 
-				<div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: url('images/parallax/home/1.jpg') center center no-repeat; background-size: cover;"></div>
+				<div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background"{{ url_for('static', filename='frontend/images/parallax/home/1.jpg') }}") center center no-repeat; background-size: cover;"></div>
 
 				<div class="section nobg full-screen nopadding nomargin">
 					<div class="container vertical-middle divcenter clearfix">

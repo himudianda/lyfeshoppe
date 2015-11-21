@@ -2,20 +2,23 @@
 <html dir="ltr" lang="en-US">
 <head>
 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Cheermonk" />
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/magnific-popup.css') }}" type="text/css" />
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontend/./css/responsive.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
 	<!-- External JavaScripts
@@ -85,8 +88,8 @@
 							<li><a href="#" class="si-github"><span class="ts-icon"><i class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>
 							<li><a href="#" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span class="ts-text">Pinterest</span></a></li>
 							<li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
-							<li><a href="{{ url_for('static', filename='frontend/tel:+91.11.85412542') }}" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
-							<li><a href="{{ url_for('static', filename='frontend/mailto:info@cheermonk.com') }}" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/./tel:+91.11.85412542') }}" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
+							<li><a href="{{ url_for('static', filename='frontend/./mailto:info@cheermonk.com') }}" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@cheermonk.com</span></a></li>
 						</ul>
 					</div><!-- #top-social end -->
 
@@ -105,8 +108,8 @@
 				<!-- Logo
 				============================================= -->
 				<div id="logo">
-					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
-					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+					<a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark@2x.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
 				</div><!-- #logo end -->
 
 				<div class="top-advert">
@@ -347,10 +350,10 @@
 											<li><a href="{{ url_for('sample_frontend.contact_7') }}">Contact 7</a></li>
 										</ul>
 									</li>
-									<li><a href="{{ url_for('static', filename='frontend/#footer') }}" data-scrollto="#footer"><div><i class="icon-th"></i>Footers</div></a>
+									<li><a href="{{ url_for('static', filename='frontend/./#footer') }}" data-scrollto="#footer"><div><i class="icon-th"></i>Footers</div></a>
 										<ul>
 											<li><a href="{{ url_for('sample_frontend.sticky_footer') }}"><div>Sticky Footer</div></a></li>
-											<li><a href="{{ url_for('static', filename='frontend/#footer') }}" data-scrollto="#footer"><div>Footer - Layout 1</div></a></li>
+											<li><a href="{{ url_for('static', filename='frontend/./#footer') }}" data-scrollto="#footer"><div>Footer - Layout 1</div></a></li>
 											<li><a href="footer-2.html#footer"><div>Footer - Layout 2</div></a></li>
 											<li><a href="footer-3.html#footer"><div>Footer - Layout 3</div></a></li>
 											<li><a href="footer-4.html#footer"><div>Footer - Layout 4</div></a></li>
@@ -744,7 +747,7 @@
 								<div class="fslider flex-thumb-grid grid-6" data-animation="fade" data-arrows="true" data-thumbs="true">
 									<div class="flexslider">
 										<div class="slider-wrap">
-											<div class="slide" data-thumb="images/magazine/thumb/1.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}">
 												<a href="#">
 													<img src="{{ url_for('static', filename='frontend/images/magazine/1.jpg') }}" alt="">
 													<div class="overlay">
@@ -759,7 +762,7 @@
 													</div>
 												</a>
 											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/2.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}">
 												<a href="#">
 													<img src="{{ url_for('static', filename='frontend/images/magazine/2.jpg') }}" alt="">
 													<div class="overlay">
@@ -774,7 +777,7 @@
 													</div>
 												</a>
 											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/3.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}">
 												<a href="#">
 													<img src="{{ url_for('static', filename='frontend/images/magazine/3.jpg') }}" alt="">
 													<div class="overlay">
@@ -789,9 +792,10 @@
 													</div>
 												</a>
 											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/4.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}">
+												<iframe src="http://player.vimeo.com/video/99895335" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/5.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/5.jpg') }}">
 												<a href="#">
 													<img src="{{ url_for('static', filename='frontend/images/magazine/5.jpg') }}" alt="">
 													<div class="overlay">
@@ -806,7 +810,7 @@
 													</div>
 												</a>
 											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/6.jpg">
+											<div class="slide" data-thumb="{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}">
 												<a href="#">
 													<img src="{{ url_for('static', filename='frontend/images/magazine/6.jpg') }}" alt="">
 													<div class="overlay">
@@ -1035,21 +1039,21 @@
 							</div>
 
 							<div class="col_full masonry-thumbs col-6 bottommargin-lg clearfix" data-big="5" data-lightbox="gallery">
-								<a href="{{ url_for('static', filename='frontend/images/magazine/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}') }}" alt="Gallery Thumb 1"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}') }}" alt="Gallery Thumb 2"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}') }}" alt="Gallery Thumb 3"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}') }}" alt="Gallery Thumb 4"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/5.jpg') }}') }}" alt="Gallery Thumb 5"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}') }}" alt="Gallery Thumb 6"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/7.jpg') }}') }}" alt="Gallery Thumb 7"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/8.jpg') }}') }}" alt="Gallery Thumb 8"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/9.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/9.jpg') }}') }}" alt="Gallery Thumb 9"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/10.jpg') }}') }}" alt="Gallery Thumb 10"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/11.jpg') }}') }}" alt="Gallery Thumb 11"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/12.jpg') }}') }}" alt="Gallery Thumb 12"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/13.jpg') }}') }}" alt="Gallery Thumb 13"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/14.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/14.jpg') }}') }}" alt="Gallery Thumb 14"></a>
-								<a href="{{ url_for('static', filename='frontend/images/magazine/15.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/{{ url_for('static', filename='frontend/images/magazine/thumb/15.jpg') }}') }}" alt="Gallery Thumb 15"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/1.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/1.jpg') }}" alt="Gallery Thumb 1"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/2.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/2.jpg') }}" alt="Gallery Thumb 2"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/3.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/3.jpg') }}" alt="Gallery Thumb 3"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/4.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/4.jpg') }}" alt="Gallery Thumb 4"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/5.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/5.jpg') }}" alt="Gallery Thumb 5"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/6.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/6.jpg') }}" alt="Gallery Thumb 6"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/7.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/7.jpg') }}" alt="Gallery Thumb 7"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/8.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/8.jpg') }}" alt="Gallery Thumb 8"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/9.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/9.jpg') }}" alt="Gallery Thumb 9"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/10.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/10.jpg') }}" alt="Gallery Thumb 10"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/11.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/11.jpg') }}" alt="Gallery Thumb 11"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/12.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/12.jpg') }}" alt="Gallery Thumb 12"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/13.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/13.jpg') }}" alt="Gallery Thumb 13"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/14.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/14.jpg') }}" alt="Gallery Thumb 14"></a>
+								<a href="{{ url_for('static', filename='frontend/./images/magazine/15.jpg') }}" data-lightbox="gallery-item"><img class="image_fade" src="{{ url_for('static', filename='frontend/images/magazine/thumb/15.jpg') }}" alt="Gallery Thumb 15"></a>
 							</div>
 
 							<div class="col_full nobottommargin clearfix">
@@ -1262,9 +1266,9 @@
 									<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
 
 										<ul class="tab-nav clearfix">
-											<li><a href="{{ url_for('static', filename='frontend/#tabs-1') }}">Popular</a></li>
-											<li><a href="{{ url_for('static', filename='frontend/#tabs-2') }}">Recent</a></li>
-											<li><a href="{{ url_for('static', filename='frontend/#tabs-3') }}"><i class="icon-comments-alt norightmargin"></i></a></li>
+											<li><a href="{{ url_for('static', filename='frontend/./#tabs-1') }}">Popular</a></li>
+											<li><a href="{{ url_for('static', filename='frontend/./#tabs-2') }}">Recent</a></li>
+											<li><a href="{{ url_for('static', filename='frontend/./#tabs-3') }}"><i class="icon-comments-alt norightmargin"></i></a></li>
 										</ul>
 
 										<div class="tab-container">
@@ -1403,6 +1407,7 @@
 								</div>
 
 								<div class="widget clearfix">
+									<iframe src="http://player.vimeo.com/video/100299651" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 								</div>
 
 								<div class="widget clearfix">
@@ -1410,6 +1415,7 @@
 								</div>
 
 								<div class="widget clearfix">
+									<iframe src="{{ url_for('static', filename='//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FEnvato&amp;width=350&amp;height=240&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=499481203443583') }}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:240px; max-width: 100% !important;" allowTransparency="true"></iframe>
 								</div>
 
 							</div>
@@ -1444,7 +1450,7 @@
 
 								<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
 
-								<div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+								<div style="background"{{ url_for('static', filename='frontend/images/world-map.png') }}") no-repeat center center; background-size: 100%;">
 									<address>
 										<strong>Headquarters:</strong><br>
 										795 Folsom Ave, Suite 600<br>
@@ -1466,6 +1472,13 @@
 								<h4>Blogroll</h4>
 
 								<ul>
+									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
+									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
+									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
+									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
 								</ul>
 
 							</div>
