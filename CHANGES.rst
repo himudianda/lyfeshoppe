@@ -1,3 +1,10 @@
+Version 0.2 (2015-11-21)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Added 2 new themes for frontend & dashboard
+- Added sample templates & views for the dashboard & frontend theme demos.
+- These themes were transformed using cheermonk_private/scripts/transform_themes.py version 0.1
+
+
 Version 0.1 (2015-11-14)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Major features & infrastructure work has been implemented as follows.
