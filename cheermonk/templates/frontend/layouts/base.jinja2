@@ -78,12 +78,14 @@
       ============================================= -->
       <div id="copyrights">
         <div class="container clearfix">
-
-          <ul class="list-inline">
-                <li class="text-muted">{{ _('Cheermonk') }} &copy; 2015</li>
-                {% block footer %}{% endblock %}
+          <div class="col_half">
+            {{ _('Cheermonk') }} &copy; 2015
+          </div>
+          <div class="col_half col_last tright">
+            <ul class="list-inline">
+              {% block footer %}{% endblock %}
             </ul>
-
+          </div>
         </div>
       </div><!-- #copyrights end -->
     </footer><!-- #footer end -->

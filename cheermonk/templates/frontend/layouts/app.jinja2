@@ -24,16 +24,10 @@
           <nav id="primary-menu">
 
             <ul>
-              <li class="current"><a href="#"><div>Home</div><span>Lets Start</span></a>
-                <ul>
-                  <li><a href="{{ url_for('sample_frontend.index_corporate') }}"><div>Home - Corporate</div></a></li>
-                  <li><a href="{{ url_for('sample_frontend.index_portfolio') }}"><div>Home - Portfolio</div></a></li>
-                </ul>
-              </li>
-              <li><a href="#"><div>Accessories</div><span>Awesome Works</span></a></li>
-              <li><a href="#"><div>Sale</div><span>Awesome Works</span></a></li>
-              <li><a href="#"><div>Blog</div><span>Latest News</span></a></li>
-                  
+              <li class="current"><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
+              <li><a href="{{ url_for('page.faq') }}">FAQ</a></li>
+              <li><a href="{{ url_for('issue.support') }}">Support</a></li>
+
               {% if current_user.is_authenticated() %}
                 <li><a href="{{ url_for('stream.live_stream') }}">Dashboard</a></li>
                 <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
