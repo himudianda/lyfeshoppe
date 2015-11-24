@@ -1,69 +1,253 @@
 {% extends 'layouts/base.jinja2' %}
 
 {% block header %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                        data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="{{ url_for('page.home') }}">
-                    <img src="{{ asset_url_for('images/cheermonk.png') }}"
-                         class="img-responsive"
-                         width="229" height="50" title="Cheermonk"
-                         alt="Cheermonk"/>
-                </a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                  {% if current_user.is_authenticated() and current_user.subscription %}
-                      <li><a href="{{ url_for('stream.live_stream') }}">Live
-                          stream</a>
-                      </li>
-                  {% else %}
-                      <li><a href="{{ url_for('page.learn_more') }}">Learn
-                          more</a></li>
-                      <li>
-                          <a href="{{ url_for('billing.pricing') }}">Pricing</a>
-                      </li>
-                  {% endif %}
+
+    <!-- Header
+    ============================================= -->
+    <header id="header">
+
+      <div id="header-wrap">
+
+        <div class="container clearfix">
+
+          <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+          <!-- Logo
+          ============================================= -->
+          <div id="logo">
+            <a href="{{ url_for('sample_frontend.index') }}" class="standard-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo.png') }}" alt="Cheermonk Logo"></a>
+            <a href="{{ url_for('sample_frontend.index') }}" class="retina-logo" data-dark-logo="{{ url_for('static', filename='frontend/images/logo-dark@2x.png') }}"><img src="{{ url_for('static', filename='frontend/images/logo@2x.png') }}" alt="Cheermonk Logo"></a>
+          </div><!-- #logo end -->
+
+          <!-- Primary Navigation
+          ============================================= -->
+          <nav id="primary-menu">
+
+            <ul>
+              <li class="current"><a href="#"><div>Home</div><span>Lets Start</span></a>
+                <ul>
+                  <li><a href="{{ url_for('sample_frontend.index_corporate') }}"><div>Home - Corporate</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_corporate') }}"><div>Corporate - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_corporate_2') }}"><div>Corporate - Layout 2</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_corporate_3') }}"><div>Corporate - Layout 3</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_corporate_4') }}"><div>Corporate - Layout 4</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_portfolio') }}"><div>Home - Portfolio</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_portfolio') }}"><div>Portfolio - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_portfolio_2') }}"><div>Portfolio - Layout 2</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_portfolio_3') }}"><div>Portfolio - Masonry</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_portfolio_4') }}"><div>Portfolio - AJAX</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_blog') }}"><div>Home - Blog</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_blog') }}"><div>Blog - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_blog_2') }}"><div>Blog - Layout 2</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_blog_3') }}"><div>Blog - Layout 3</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_shop') }}"><div>Home - Shop</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_shop') }}"><div>Shop - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_shop_2') }}"><div>Shop - Layout 2</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_magazine') }}"><div>Home - Magazine</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_magazine') }}"><div>Magazine - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_magazine_2') }}"><div>Magazine - Layout 2</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_magazine_3') }}"><div>Magazine - Layout 3</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.landing') }}"><div>Home - Landing Page</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.landing') }}"><div>Landing Page - Layout 1</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.landing_2') }}"><div>Landing Page - Layout 2</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.landing_3') }}"><div>Landing Page - Layout 3</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.landing_4') }}"><div>Landing Page - Layout 4</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.landing_5') }}"><div>Landing Page - Layout 5</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_fullscreen_image') }}"><div>Home - Full Screen</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_fullscreen_image') }}"><div>Full Screen - Image</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_fullscreen_slider') }}"><div>Full Screen - Slider</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_fullscreen_video') }}"><div>Full Screen - Video</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_onepage') }}"><div>Home - One Page</div></a>
+                    <ul>
+                      <li><a href="{{ url_for('sample_frontend.index_onepage') }}"><div>One Page - Default</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_onepage_2') }}"><div>One Page - Submenu</div></a></li>
+                      <li><a href="{{ url_for('sample_frontend.index_onepage_3') }}"><div>One Page - Dots Style</div></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('sample_frontend.index_wedding') }}"><div>Home - Wedding</div></a></li>
+                  <li><a href="{{ url_for('sample_frontend.index_restaurant') }}"><div>Home - Restaurant</div></a></li>
+                  <li><a href="{{ url_for('sample_frontend.index_events') }}"><div>Home - Events</div></a></li>
+                  <li><a href="{{ url_for('sample_frontend.index_parallax') }}"><div>Home - Parallax</div></a></li>
+                  <li><a href="{{ url_for('sample_frontend.index_app_showcase') }}"><div>Home - App Showcase</div></a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  {% if current_user.role == 'admin' %}
-                      <li data-toggle="tooltip" title="foo">
-                        {% include 'admin/_menu.jinja2' %}
-                      </li>
-                  {% endif %}
-                  {% if current_user.is_authenticated() %}
-                      <li class="dropdown">
-                          <a href="#" class="dropdown-toggle"
-                             data-toggle="dropdown"
-                             role="button" aria-haspopup="true"
-                             aria-expanded="false">Account
-                              <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                              <li><a href="{{ url_for('user.settings') }}">Settings</a>
-                              </li>
-                              <li role="separator" class="divider"></li>
-                              <li class="dropdown-header">Session</li>
-                              <li><a href="{{ url_for('user.logout') }}">Log
-                                  out</a></li>
-                          </ul>
-                      </li>
-                  {% else %}
-                      <li><a href="{{ url_for('user.login') }}">Log in</a></li>
-                      <li><a href="{{ url_for('user.signup') }}">Sign up</a>
-                      </li>
-                  {% endif %}
-                </ul>
-            </div>
+              </li>
+              <!-- Mega Menu
+              ============================================= -->
+              <li class="mega-menu"><a href="#"><div>Men</div><span>Out of the Box</span></a>
+                <div class="mega-menu-content style-2 col-4 clearfix">
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>Footwear</div></a>
+                      <ul>
+                        <li><a href="#"><div>Casual Shoes</div></a></li>
+                        <li><a href="#"><div>Formal Shoes</div></a></li>
+                        <li><a href="#"><div>Sports shoes</div></a></li>
+                        <li><a href="#"><div>Flip Flops</div></a></li>
+                        <li><a href="#"><div>Slippers</div></a></li>
+                        <li><a href="#"><div>Sports Sandals</div></a></li>
+                        <li><a href="#"><div>Party Shoes</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>Clothing</div></a>
+                      <ul>
+                        <li><a href="#"><div>Casual Shirts</div></a></li>
+                        <li><a href="#"><div>T-Shirts</div></a></li>
+                        <li><a href="#"><div>Collared Tees</div></a></li>
+                        <li><a href="#"><div>Pants / Trousers</div></a></li>
+                        <li><a href="#"><div>Ethnic Wear</div></a></li>
+                        <li><a href="#"><div>Jeans</div></a></li>
+                        <li><a href="#"><div>Sweamwear</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>Accessories</div></a>
+                      <ul>
+                        <li><a href="#"><div>Bags &amp; Backpacks</div></a></li>
+                        <li><a href="#"><div>Watches</div></a></li>
+                        <li><a href="#"><div>Sunglasses</div></a></li>
+                        <li><a href="#"><div>Wallets</div></a></li>
+                        <li><a href="#"><div>Caps &amp; Hats</div></a></li>
+                        <li><a href="#"><div>Jewellery</div></a></li>
+                        <li><a href="#"><div>Belts, Ties</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>New Arrivals</div></a>
+                      <ul>
+                        <li><a href="#"><div>T-Shirts</div></a></li>
+                        <li><a href="#"><div>Formal Shoes</div></a></li>
+                        <li><a href="#"><div>Accessories</div></a></li>
+                        <li><a href="#"><div>Watches</div></a></li>
+                        <li><a href="#"><div>Perfumes</div></a></li>
+                        <li><a href="#"><div>Belts, Ties</div></a></li>
+                        <li><a href="#"><div>Formal Shirts</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </li><!-- .mega-menu end -->
+              <li><a href="#"><div>Women</div><span>Out of the Box</span></a>
+                <div class="mega-menu-content style-2 col-2 clearfix">
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>Footwear</div></a>
+                      <ul>
+                        <li><a href="#"><div>Casual Shoes</div></a></li>
+                        <li><a href="#"><div>Formal Shoes</div></a></li>
+                        <li><a href="#"><div>Sports shoes</div></a></li>
+                        <li><a href="#"><div>Flip Flops</div></a></li>
+                        <li><a href="#"><div>Slippers</div></a></li>
+                        <li><a href="#"><div>Sports Sandals</div></a></li>
+                        <li><a href="#"><div>Party Shoes</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li class="mega-menu-title"><a href="#"><div>Clothing</div></a>
+                      <ul>
+                        <li><a href="#"><div>Casual Shirts</div></a></li>
+                        <li><a href="#"><div>T-Shirts</div></a></li>
+                        <li><a href="#"><div>Collared Tees</div></a></li>
+                        <li><a href="#"><div>Pants / Trousers</div></a></li>
+                        <li><a href="#"><div>Ethnic Wear</div></a></li>
+                        <li><a href="#"><div>Jeans</div></a></li>
+                        <li><a href="#"><div>Sweamwear</div></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </li><!-- .mega-menu end -->
+              <li><a href="#"><div>Accessories</div><span>Awesome Works</span></a></li>
+              <li><a href="#"><div>Sale</div><span>Awesome Works</span></a></li>
+              <li><a href="#"><div>Blog</div><span>Latest News</span></a></li>
+                  
+              {% if current_user.is_authenticated() %}
+                <li><a href="{{ url_for('stream.live_stream') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+              {% else %}
+                <li><a href="{{ url_for('page.learn_more') }}">Investors</a></li>
+                <li><a href="{{ url_for('billing.pricing') }}">Businesses</a></li>
+              {% endif %}
+                
+            </ul>
+
+            <!-- Top Cart
+            ============================================= -->
+            <div id="top-cart">
+              <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart"></i><span>5</span></a>
+              <div class="top-cart-content">
+                <div class="top-cart-title">
+                  <h4>Shopping Cart</h4>
+                </div>
+                <div class="top-cart-items">
+                  <div class="top-cart-item clearfix">
+                    <div class="top-cart-item-image">
+                      <a href="#"><img src="{{ url_for('static', filename='frontend/images/shop/small/1.jpg') }}" alt="Blue Round-Neck Tshirt" /></a>
+                    </div>
+                    <div class="top-cart-item-desc">
+                      <a href="#">Blue Round-Neck Tshirt</a>
+                      <span class="top-cart-item-price">$19.99</span>
+                      <span class="top-cart-item-quantity">x 2</span>
+                    </div>
+                  </div>
+                  <div class="top-cart-item clearfix">
+                    <div class="top-cart-item-image">
+                      <a href="#"><img src="{{ url_for('static', filename='frontend/images/shop/small/6.jpg') }}" alt="Light Blue Denim Dress" /></a>
+                    </div>
+                    <div class="top-cart-item-desc">
+                      <a href="#">Light Blue Denim Dress</a>
+                      <span class="top-cart-item-price">$24.99</span>
+                      <span class="top-cart-item-quantity">x 3</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="top-cart-action clearfix">
+                  <span class="fleft top-checkout-price">$114.95</span>
+                  <button class="button button-3d button-small nomargin fright">View Cart</button>
+                </div>
+              </div>
+            </div><!-- #top-cart end -->
+
+            <!-- Top Search
+            ============================================= -->
+            <div id="top-search">
+              <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+              <form action="search.html" method="get">
+                <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
+              </form>
+            </div><!-- #top-search end -->
+
+          </nav><!-- #primary-menu end -->
+
         </div>
-    </nav>
+
+      </div>
+
+    </header><!-- #header end -->
+
 {% endblock %}
 
 {% block footer %}
