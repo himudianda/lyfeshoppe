@@ -46,25 +46,45 @@
   {{ analytics.google_ua() }}
 </head>
 <body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }}>
-{% block header %}{% endblock %}
+{% block header %}
 
-{% block hero %}{% endblock %}
+
+{% endblock %}
+
+{% block hero %}
+
+
+{% endblock %}
 
 <main class="container">
   {{ flash.render() }}
 
   {% block heading %}{% endblock %}
-  {% block body %}{% endblock %}
+  {% block body %}
+
+
+
+  {% endblock %}
 </main>
 
-<footer class="footer text-center">
-    <div class="container">
-        <ul class="list-inline">
+<!-- Footer
+============================================= -->
+<footer id="footer" class="dark">
+
+  <!-- Copyrights
+  ============================================= -->
+  <div id="copyrights">
+    <div class="container clearfix">
+
+      <ul class="list-inline">
             <li class="text-muted">{{ _('Cheermonk') }} &copy; 2015</li>
             {% block footer %}{% endblock %}
         </ul>
+
     </div>
-</footer>
+  </div><!-- #copyrights end -->
+</footer><!-- #footer end -->
+
 
 
 <!-- Footer Scripts
