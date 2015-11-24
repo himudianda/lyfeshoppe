@@ -45,47 +45,55 @@
 
   {{ analytics.google_ua() }}
 </head>
-<body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }}>
-{% block header %}
-
-
-{% endblock %}
-
-{% block hero %}
-
-
-{% endblock %}
-
-<main class="container">
-  {{ flash.render() }}
-
-  {% block heading %}{% endblock %}
-  {% block body %}
-
-
-
-  {% endblock %}
-</main>
-
-<!-- Footer
+<body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }} class="stretched">
+<!-- Document Wrapper
 ============================================= -->
-<footer id="footer" class="dark">
-
-  <!-- Copyrights
-  ============================================= -->
-  <div id="copyrights">
-    <div class="container clearfix">
-
-      <ul class="list-inline">
-            <li class="text-muted">{{ _('Cheermonk') }} &copy; 2015</li>
-            {% block footer %}{% endblock %}
-        </ul>
-
-    </div>
-  </div><!-- #copyrights end -->
-</footer><!-- #footer end -->
+<div id="wrapper" class="clearfix">
+    {% block header %}
 
 
+    {% endblock %}
+
+    {% block hero %}
+
+
+    {% endblock %}
+
+    <main class="container">
+      {{ flash.render() }}
+
+      {% block heading %}{% endblock %}
+      {% block body %}
+
+
+
+      {% endblock %}
+    </main>
+
+    <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+
+      <!-- Copyrights
+      ============================================= -->
+      <div id="copyrights">
+        <div class="container clearfix">
+
+          <ul class="list-inline">
+                <li class="text-muted">{{ _('Cheermonk') }} &copy; 2015</li>
+                {% block footer %}{% endblock %}
+            </ul>
+
+        </div>
+      </div><!-- #copyrights end -->
+    </footer><!-- #footer end -->
+
+</div><!-- #wrapper end -->
+
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div> 
 
 <!-- Footer Scripts
 ============================================= -->
