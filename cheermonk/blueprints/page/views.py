@@ -8,6 +8,11 @@ def home():
     return render_template('page/home.jinja2')
 
 
+@page.route('/new')
+def new():
+    return render_template('page/new_home.jinja2')
+
+
 @page.route('/learn-more')
 def learn_more():
     return render_template('page/learn_more.jinja2')
