@@ -24,12 +24,14 @@
               <li class="current"><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
               <li><a href="{{ url_for('page.faq') }}">FAQ</a></li>
               <li><a href="{{ url_for('issue.support') }}">Support</a></li>
+              <li><a href="{{ url_for('page.investors') }}">Investors</a></li>
+              <li><a href="{{ url_for('page.home') }}">Businesses</a></li>
               {% if current_user.is_authenticated() %}
                 <li><a href="{{ url_for('stream.live_stream') }}">Dashboard</a></li>
                 <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
               {% else %}
-                <li><a href="{{ url_for('page.investors') }}">Investors</a></li>
-                <li><a href="{{ url_for('page.home') }}">Businesses</a></li>
+                <li><a href="{{ url_for('user.login') }}">Login</a></li>
+                <li><a href="{{ url_for('user.signup') }}">Register</a></li>
               {% endif %}
             </ul>
           </nav><!-- #primary-menu end -->
