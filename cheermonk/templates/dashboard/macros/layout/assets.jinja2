@@ -1,0 +1,41 @@
+{# Render assets that get included on all pages. #}
+{%- macro render() -%}
+
+  <!-- BEGIN GLOBAL MANDATORY STYLES -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
+  <!-- END GLOBAL MANDATORY STYLES -->
+  <!-- BEGIN THEME GLOBAL STYLES -->
+  <link href="{{ url_for('static', filename='dashboard/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
+  <!-- END THEME GLOBAL STYLES -->
+  <!-- BEGIN THEME LAYOUT STYLES -->
+  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+  <!-- END THEME LAYOUT STYLES -->
+
+  <link rel="shortcut icon" href="favicon.ico" /> </head>
+
+  {{ situational() }}
+{%- endmacro -%}
+
+
+{# Render assets that get situationally loaded based on the endpoint. #}
+{%- macro situational() -%}
+
+{%- endmacro -%}
+
+
+{# Render polyfills for out dated browsers. #}
+{%- macro polyfills() -%}
+
+    <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+    <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+    <!--[if !IE]><!-->
+
+{%- endmacro -%}
