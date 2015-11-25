@@ -26,3 +26,8 @@ def terms():
 @page.route('/privacy')
 def privacy():
     return render_template('page/privacy.jinja2')
+
+
+@page.route('/investors')
+def investors():
+    return render_template('page/investors.jinja2')
