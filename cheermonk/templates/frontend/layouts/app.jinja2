@@ -21,17 +21,17 @@
           ============================================= -->
           <nav id="primary-menu">
             <ul>
-              <li class="current"><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
-              <li><a href="{{ url_for('page.faq') }}">FAQ</a></li>
-              <li><a href="{{ url_for('issue.support') }}">Support</a></li>
-              <li><a href="{{ url_for('page.investors') }}">Investors</a></li>
-              <li><a href="{{ url_for('page.home') }}">Businesses</a></li>
+              <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
+              <li {% if request.endpoint in ('page.faq') %} class="current"{% endif %}><a href="{{ url_for('page.faq') }}">FAQ</a></li>
+              <li {% if request.endpoint in ('issue.support') %} class="current"{% endif %}><a href="{{ url_for('issue.support') }}">Support</a></li>
+              <li {% if request.endpoint in ('page.investors') %} class="current"{% endif %}><a href="{{ url_for('page.investors') }}">Investors</a></li>
+              <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}">Businesses</a></li>
               {% if current_user.is_authenticated() %}
-                <li><a href="{{ url_for('stream.live_stream') }}">Dashboard</a></li>
-                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+                <li {% if request.endpoint in ('stream.live_stream') %} class="current"{% endif %}><a href="{{ url_for('stream.live_stream') }}">Dashboard</a></li>
+                <li {% if request.endpoint in ('user.logout') %} class="current"{% endif %}><a href="{{ url_for('user.logout') }}">Logout</a></li>
               {% else %}
-                <li><a href="{{ url_for('user.login') }}">Login</a></li>
-                <li><a href="{{ url_for('user.signup') }}">Register</a></li>
+                <li {% if request.endpoint in ('user.login') %} class="current"{% endif %}><a href="{{ url_for('user.login') }}">Login</a></li>
+                <li {% if request.endpoint in ('user.signup') %} class="current"{% endif %}><a href="{{ url_for('user.signup') }}">Register</a></li>
               {% endif %}
             </ul>
           </nav><!-- #primary-menu end -->
