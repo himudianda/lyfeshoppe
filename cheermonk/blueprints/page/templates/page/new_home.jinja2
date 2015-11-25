@@ -92,7 +92,13 @@
 					data-elementdelay="0.01"
 					data-endelementdelay="0.1"
 					data-endspeed="1000"
-					data-endeasing="Power4.easeIn" style=""><a href="#" class="button button-border button-large button-rounded tright nomargin"><span>Start Shopping</span> <i class="icon-angle-right"></i></a></div>
+					data-endeasing="Power4.easeIn" style="">
+						{% if current_user.is_authenticated() %}
+						{% else %}
+							<a href="{{ url_for('user.signup') }}" class="button button-border button-large button-rounded tright nomargin"><span>Register</span></a>
+							<a href="{{ url_for('user.login') }}" class="button button-border button-large button-rounded tright nomargin"><span>Login</span></a>
+						{%endif%}
+					</div>
 
 				</li>
 				<!-- SLIDE  -->
@@ -168,7 +174,13 @@
 					data-elementdelay="0.01"
 					data-endelementdelay="0.1"
 					data-endspeed="1000"
-					data-endeasing="Power4.easeIn" style=""><a href="#" class="button button-border button-large button-rounded tright nomargin"><span>Start Shopping</span> <i class="icon-angle-right"></i></a></div>
+					data-endeasing="Power4.easeIn" style="">
+						{% if current_user.is_authenticated() %}
+						{% else %}
+							<a href="{{ url_for('user.signup') }}" class="button button-border button-large button-rounded tright nomargin"><span>Register</span></a>
+							<a href="{{ url_for('user.login') }}" class="button button-border button-large button-rounded tright nomargin"><span>Login</span></a>
+						{% endif %}
+					</div>
 
 					<div class="tp-caption customin utb tp-resizeme revo-slider-caps-text uppercase"
 					data-x="510"
