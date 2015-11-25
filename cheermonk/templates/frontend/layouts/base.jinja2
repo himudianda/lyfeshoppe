@@ -6,101 +6,81 @@
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-<head>
+  <head>
     <title>{% block title %}{% endblock %}</title>
-  {{ meta_tags.render(csrf_token()) }}
-  {{ fav_icons.render(self.title()) }}
+    {{ meta_tags.render(csrf_token()) }}
+    {{ fav_icons.render(self.title()) }}
+    {{ assets.render() }}
 
-  {{ assets.render() }}
-  <style>
+    <style>
+      .revo-slider-emphasis-text {
+        font-size: 58px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        font-family: 'Raleway', sans-serif;
+        padding: 15px 20px;
+        border-top: 2px solid #FFF;
+        border-bottom: 2px solid #FFF;
+      }
+      .revo-slider-desc-text {
+        font-size: 20px;
+        font-family: 'Lato', sans-serif;
+        width: 650px;
+        text-align: center;
+        line-height: 1.5;
+      }
+      .revo-slider-caps-text {
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 3px;
+        font-family: 'Raleway', sans-serif;
+      }
+    </style>
 
-    .revo-slider-emphasis-text {
-      font-size: 58px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      font-family: 'Raleway', sans-serif;
-      padding: 15px 20px;
-      border-top: 2px solid #FFF;
-      border-bottom: 2px solid #FFF;
-    }
+    {{ assets.polyfills() }}
+    {{ analytics.google_ua() }}
+  </head>
 
-    .revo-slider-desc-text {
-      font-size: 20px;
-      font-family: 'Lato', sans-serif;
-      width: 650px;
-      text-align: center;
-      line-height: 1.5;
-    }
+  <body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }} class="stretched">
 
-    .revo-slider-caps-text {
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 3px;
-      font-family: 'Raleway', sans-serif;
-    }
-
-  </style>
-
-  {{ assets.polyfills() }}
-
-  {{ analytics.google_ua() }}
-</head>
-<body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }} class="stretched">
-<!-- Document Wrapper
-============================================= -->
-<div id="wrapper" class="clearfix">
-    {% block header %}
-
-
-    {% endblock %}
-
-    {% block hero %}
-
-
-    {% endblock %}
-
-    <main class="container">
-      {{ flash.render() }}
-
-      {% block heading %}{% endblock %}
-      {% block body %}
-
-
-
-      {% endblock %}
-    </main>
-
-    <!-- Footer
+    <!-- Document Wrapper
     ============================================= -->
-    <footer id="footer" class="dark">
+    <div id="wrapper" class="clearfix">
+        {% block header %}{% endblock %}
+        {% block hero %}{% endblock %}
 
-      <!-- Copyrights
-      ============================================= -->
-      <div id="copyrights">
-        <div class="container clearfix">
-          <div class="col_half">
-            {{ _('Cheermonk') }} &copy; 2015
+        <main class="container">
+          {{ flash.render() }}
+          {% block heading %}{% endblock %}
+          {% block body %}{% endblock %}
+        </main>
+
+        <!-- Footer
+        ============================================= -->
+        <footer id="footer" class="dark">
+          <div id="copyrights">
+            <div class="container clearfix">
+              <div class="col_half">
+                {{ _('Cheermonk') }} &copy; 2015
+              </div>
+              <div class="col_half col_last tright">
+                <ul class="list-inline">
+                  {% block footer %}{% endblock %}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="col_half col_last tright">
-            <ul class="list-inline">
-              {% block footer %}{% endblock %}
-            </ul>
-          </div>
-        </div>
-      </div><!-- #copyrights end -->
-    </footer><!-- #footer end -->
+        </footer><!-- #footer end -->
 
-</div><!-- #wrapper end -->
+    </div><!-- #wrapper end -->
 
+    <!-- Go To Top
+    ============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div> 
 
-<!-- Go To Top
-============================================= -->
-<div id="gotoTop" class="icon-angle-up"></div> 
+    <!-- Footer Scripts
+    ============================================= -->
+    <script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
 
-<!-- Footer Scripts
-============================================= -->
-<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
-
-
-</body>
+  </body>
 </html>
