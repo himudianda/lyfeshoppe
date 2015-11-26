@@ -78,6 +78,20 @@
                                 <span class="arrow"></span>
                             </a>
                         </li>
+                        {% if current_user.role == 'admin' %}
+                            <li class="nav-item  ">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-bulb"></i>
+                                    <span class="title">Admin</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item  ">
+                                        {% include 'admin/_menu.jinja2' %}
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a href="{{ url_for('page.home') }}" class="nav-link nav-toggle">
                                 <i class="icon-basket"></i>
