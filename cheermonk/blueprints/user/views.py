@@ -15,7 +15,7 @@ from flask_babel import gettext as _
 from cheermonk.lib.safe_next_url import safe_next_url
 from cheermonk.blueprints.user.decorators import anonymous_required
 
-from cheermonk.blueprints.user.models import User, Business
+from cheermonk.blueprints.user.models import UserBase, User, Business
 from cheermonk.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -79,7 +79,7 @@ def begin_password_reset():
     form = BeginPasswordResetForm()
 
     if form.validate_on_submit():
-        u = User.initialize_password_reset(request.form.get('identity'))
+        u = UserBase.initialize_password_reset(request.form.get('identity'))
 
         flash(_('An email has been sent to %(email)s.',
                 email=u.email), 'success')
@@ -94,7 +94,7 @@ def password_reset():
     form = PasswordResetForm(reset_token=request.args.get('reset_token'))
 
     if form.validate_on_submit():
-        u = User.deserialize_token(request.form.get('reset_token'))
+        u = UserBase.deserialize_token(request.form.get('reset_token'))
 
         if u is None:
             flash(_('Your reset token has expired or was tampered with.'),
@@ -102,7 +102,7 @@ def password_reset():
             return redirect(url_for('user.begin_password_reset'))
 
         form.populate_obj(u)
-        u.password = User.encrypt_password(request.form.get('password', None))
+        u.password = UserBase.encrypt_password(request.form.get('password', None))
         u.save()
 
         if login_user(u):
@@ -121,7 +121,7 @@ def signup():
         u = User()
 
         form.populate_obj(u)
-        u.password = User.encrypt_password(request.form.get('password', None))
+        u.password = UserBase.encrypt_password(request.form.get('password', None))
         u.save()
 
         if login_user(u):
