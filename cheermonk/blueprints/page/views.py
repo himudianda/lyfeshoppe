@@ -8,9 +8,9 @@ def home():
     return render_template('page/home.jinja2')
 
 
-@page.route('/dashboard_home')
-def dashboard_home():
-    return render_template('page/dashboard_home.jinja2')
+@page.route('/dashboard')
+def dashboard():
+    return render_template('page/dashboard.jinja2')
 
 
 @page.route('/learn-more')
