@@ -1,14 +1,10 @@
-{% extends 'dashboard/layouts/app.jinja2' %}
-{% import 'dashboard/macros/form.jinja2' as f with context %}
+{% extends 'layouts/app.jinja2' %}
+{% import 'macros/form.jinja2' as f with context %}
 {% import 'billing/macros/billing.jinja2' as billing with context %}
 
-{% block title %}
-    Pricing | CheerMonk | Social Shop with huge discounts.
-{% endblock %}
-
-{% block meta_description %}
-    We bring huge discounts from the best businesses around you.
-{% endblock %}
+{% block title %}You can't put a price on {{ _('Cheermonk') }}{% endblock %}
+{% block meta_description %}Sign up today to subscribe to the coolest cat
+  tweeting service ever created in the history of the universe.{% endblock %}
 
 {% block heading %}
   {% if current_user.subscription %}
@@ -20,71 +16,57 @@
   {% else %}
       <h2 class="text-center">You're moments away</h2>
       <h3 class="text-center text-muted lg-margin-bottom">
-          Just a few more clicks.
+          Just a few more clicks or taps before it's cat tweet time
       </h3>
   {% endif %}
 {% endblock %}
 
-{% block content %}
-    <!-- BEGIN CONTENT -->
-    <div class="page-content-wrapper">
-        <!-- BEGIN CONTENT BODY -->
-        <div class="page-content">
-
-            <!-- BEGIN PAGE HEADER-->
-            <h3 class="page-title"> Pricing </h3>
-            <!-- END PAGE HEADER-->
-
-            {% call f.form_tag('billing.update', class='text-center') %}
-              {% if current_user.subscription %}
-                  <div class="lg-margin-bottom">
-                      <div class="coupon-code">
-                        {{ form.coupon_code.label }}
-                        {{ f.field(form.coupon_code) }}
-                          <div id="coupon_code_status"
-                               class="small alert alert-small alert-success">
-                          </div>
-                      </div>
-                  </div>
-              {% endif %}
-                <div class="row">
-                  {% call billing.plan(plans['0']) %}
-                      <ul class="list-group list-group-flush text-center">
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item strike">Dicta optio cumque dolore
-                          </li>
-                          <li class="list-group-item strike">Dicta optio cumque dolore
-                          </li>
-                          <li class="list-group-item strike">Consequuntur voluptatum</li>
-                          <li class="list-group-item strike">Consequuntur voluptatum</li>
-                      </ul>
-                  {% endcall %}
-                  {% call billing.plan(plans['1']) %}
-                      <ul class="list-group list-group-flush text-center">
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item">Dicta optio cumque dolore</li>
-                          <li class="list-group-item">Dicta optio cumque dolore</li>
-                          <li class="list-group-item strike">Consequuntur voluptatum</li>
-                          <li class="list-group-item strike">Consequuntur voluptatum</li>
-                      </ul>
-                  {% endcall %}
-                  {% call billing.plan(plans['2']) %}
-                      <ul class="list-group list-group-flush text-center">
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item">Lorem ipsum dolor sit amet</li>
-                          <li class="list-group-item">Dicta optio cumque dolore</li>
-                          <li class="list-group-item">Dicta optio cumque dolore</li>
-                          <li class="list-group-item">Consequuntur voluptatum</li>
-                          <li class="list-group-item">Consequuntur voluptatum</li>
-                      </ul>
-                  {% endcall %}
+{% block body %}
+  {% call f.form_tag('billing.update', class='text-center') %}
+    {% if current_user.subscription %}
+        <div class="lg-margin-bottom">
+            <div class="coupon-code">
+              {{ form.coupon_code.label }}
+              {{ f.field(form.coupon_code) }}
+                <div id="coupon_code_status"
+                     class="small alert alert-small alert-success">
                 </div>
-            {% endcall %}
-
+            </div>
         </div>
-        <!-- END CONTENT BODY -->
-    </div>
-    <!-- END CONTENT -->
+    {% endif %}
+      <div class="row">
+        {% call billing.plan(plans['0']) %}
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item strike">Dicta optio cumque dolore
+                </li>
+                <li class="list-group-item strike">Dicta optio cumque dolore
+                </li>
+                <li class="list-group-item strike">Consequuntur voluptatum</li>
+                <li class="list-group-item strike">Consequuntur voluptatum</li>
+            </ul>
+        {% endcall %}
+        {% call billing.plan(plans['1']) %}
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item">Dicta optio cumque dolore</li>
+                <li class="list-group-item">Dicta optio cumque dolore</li>
+                <li class="list-group-item strike">Consequuntur voluptatum</li>
+                <li class="list-group-item strike">Consequuntur voluptatum</li>
+            </ul>
+        {% endcall %}
+        {% call billing.plan(plans['2']) %}
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+                <li class="list-group-item">Dicta optio cumque dolore</li>
+                <li class="list-group-item">Dicta optio cumque dolore</li>
+                <li class="list-group-item">Consequuntur voluptatum</li>
+                <li class="list-group-item">Consequuntur voluptatum</li>
+            </ul>
+        {% endcall %}
+      </div>
+  {% endcall %}
 {% endblock %}
