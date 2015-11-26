@@ -53,7 +53,7 @@ def login():
                 if next_url:
                     return redirect(safe_next_url(next_url))
 
-                return redirect(url_for('user.settings'))
+                return redirect(url_for('page.dashboard'))
             else:
                 flash(_('This account has been disabled.'), 'error')
         else:
@@ -123,7 +123,7 @@ def signup():
 
         if login_user(u):
             flash(_('Awesome, thanks for signing up!'), 'success')
-            return redirect(url_for('user.welcome'))
+            return redirect(url_for('page.dashboard'))
 
     return render_template('user/signup.jinja2', form=form)
 
