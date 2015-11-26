@@ -1,3 +1,5 @@
+import datetime
+import pytz
 from hashlib import md5
 from flask import current_app
 from flask_login import UserMixin
@@ -5,7 +7,7 @@ from itsdangerous import URLSafeTimedSerializer, \
     TimedJSONWebSignatureSerializer
 from sqlalchemy import or_
 
-from cheermonk.lib.util_sqlalchemy import ResourceMixin
+from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.extensions import db, bcrypt
 
 
@@ -22,6 +24,13 @@ class Business(UserMixin, ResourceMixin, db.Model):
     email = db.Column(db.String(255), unique=True, index=True, nullable=False,
                       server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
+
+    # Activity tracking.
+    sign_in_count = db.Column(db.Integer, nullable=False, default=0)
+    current_sign_in_on = db.Column(AwareDateTime())
+    current_sign_in_ip = db.Column(db.String(45))
+    last_sign_in_on = db.Column(AwareDateTime())
+    last_sign_in_ip = db.Column(db.String(45))
 
     # Locale.
     locale = db.Column(db.String(5), nullable=False, server_default='en')
@@ -190,3 +199,22 @@ class Business(UserMixin, ResourceMixin, db.Model):
 
         serializer = TimedJSONWebSignatureSerializer(private_key, expiration)
         return serializer.dumps({'user_email': self.email}).decode('utf-8')
+
+    def update_activity_tracking(self, ip_address):
+        """
+        Update various fields on the user that's related to meta data on his
+        account, such as the sign in count and ip address, etc..
+
+        :param ip_address: IP address
+        :type ip_address: str
+        :return: SQLAlchemy commit results
+        """
+        self.sign_in_count += 1
+
+        self.last_sign_in_on = self.current_sign_in_on
+        self.last_sign_in_ip = self.current_sign_in_ip
+
+        self.current_sign_in_on = datetime.datetime.now(pytz.utc)
+        self.current_sign_in_ip = ip_address
+
+        return self.save()
