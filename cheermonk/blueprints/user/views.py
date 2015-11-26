@@ -15,6 +15,7 @@ from flask_babel import gettext as _
 from cheermonk.lib.safe_next_url import safe_next_url
 from cheermonk.blueprints.user.decorators import anonymous_required
 from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.business.models import Business
 from cheermonk.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -34,6 +35,8 @@ def login():
 
     if form.validate_on_submit():
         u = User.find_by_identity(request.form.get('identity'))
+        if not u:
+            u = Business.find_by_identity(request.form.get('identity'))
 
         if u and u.authenticated(password=request.form.get('password')):
             # As you can see remember me is always enabled, this was a design
@@ -119,6 +122,25 @@ def signup():
 
         form.populate_obj(u)
         u.password = User.encrypt_password(request.form.get('password', None))
+        u.save()
+
+        if login_user(u):
+            flash(_('Awesome, thanks for signing up!'), 'success')
+            return redirect(url_for('page.dashboard'))
+
+    return render_template('user/signup.jinja2', form=form)
+
+
+@user.route('/business_signup', methods=['GET', 'POST'])
+@anonymous_required()
+def business_signup():
+    form = SignupForm()
+
+    if form.validate_on_submit():
+        u = Business()
+
+        form.populate_obj(u)
+        u.password = Business.encrypt_password(request.form.get('password', None))
         u.save()
 
         if login_user(u):
