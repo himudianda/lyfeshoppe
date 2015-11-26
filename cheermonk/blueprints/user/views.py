@@ -14,8 +14,8 @@ from flask_babel import gettext as _
 
 from cheermonk.lib.safe_next_url import safe_next_url
 from cheermonk.blueprints.user.decorators import anonymous_required
-from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.business.models import Business
+
+from cheermonk.blueprints.user.models import User, Business
 from cheermonk.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,

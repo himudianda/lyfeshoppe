@@ -19,37 +19,19 @@ from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.extensions import db, bcrypt
 
 
-class User(UserMixin, ResourceMixin, db.Model):
-    ROLE = OrderedDict([
-        ('guest', 'Guest'),
-        ('member', 'Member'),
-        ('admin', 'Admin')
-    ])
+class UserBase(UserMixin, ResourceMixin, db.Model):
 
-    __tablename__ = 'users'
+    __abstract__ = True
+
     id = db.Column(db.Integer, primary_key=True)
-
-    # Relationships.
-    credit_card = db.relationship(CreditCard, uselist=False, backref='users',
-                                  passive_deletes=True)
-    subscription = db.relationship(Subscription, uselist=False,
-                                   backref='users', passive_deletes=True)
-    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
-
-    # Authentication.
-    role = db.Column(db.Enum(*ROLE, name='role_types'),
-                     index=True, nullable=False, server_default='member')
     active = db.Column('is_active', db.Boolean(), nullable=False,
                        server_default='1')
+
+    name = db.Column(db.String(128), index=True)
     username = db.Column(db.String(24), unique=True, index=True)
     email = db.Column(db.String(255), unique=True, index=True, nullable=False,
                       server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
-
-    # Billing.
-    name = db.Column(db.String(128), index=True)
-    payment_id = db.Column(db.String(128), index=True)
-    cancelled_subscription_on = db.Column(AwareDateTime())
 
     # Activity tracking.
     sign_in_count = db.Column(db.Integer, nullable=False, default=0)
@@ -63,9 +45,9 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
-        super(User, self).__init__(**kwargs)
+        super(UserBase, self).__init__(**kwargs)
 
-        self.password = User.encrypt_password(kwargs.get('password', ''))
+        self.password = UserBase.encrypt_password(kwargs.get('password', ''))
 
     @classmethod
     def search(cls, query):
@@ -80,8 +62,8 @@ class User(UserMixin, ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        search_chain = (User.email.ilike(search_query),
-                        User.name.ilike(search_query))
+        search_chain = (cls.email.ilike(search_query),
+                        cls.name.ilike(search_query))
 
         return or_(*search_chain)
 
@@ -94,8 +76,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         :type identity: str
         :return: User instance
         """
-        return User.query.filter((User.email == identity)
-                                 | (User.username == identity)).first()
+        return cls.query.filter((cls.email == identity) | (cls.username == identity)).first()
 
     @classmethod
     def encrypt_password(cls, plaintext_password):
@@ -125,66 +106,9 @@ class User(UserMixin, ResourceMixin, db.Model):
         try:
             decoded_payload = private_key.loads(token)
 
-            return User.find_by_identity(decoded_payload.get('user_email'))
+            return cls.find_by_identity(decoded_payload.get('user_email'))
         except Exception:
             return None
-
-    @classmethod
-    def is_last_admin(cls, user, new_role, new_active):
-        """
-        Determine whether or not this user is the last admin account.
-
-        :param user: User being tested
-        :type user: User
-        :param new_role: New role being set
-        :type new_role: str
-        :param new_active: New active status being set
-        :type new_active: bool
-        :return: bool
-        """
-        is_changing_roles = user.role == 'admin' and new_role != 'admin'
-        is_changing_active = user.active is True and new_active is None
-
-        if is_changing_roles or is_changing_active:
-            admin_count = User.query.filter(User.role == 'admin').count()
-            active_count = User.query.filter(User.is_active is True).count()
-
-            if admin_count == 1 or active_count == 1:
-                return True
-
-        return False
-
-    @classmethod
-    def bulk_delete(cls, ids):
-        """
-        Override the general bulk_delete method because we need to delete them
-        one at a time while also deleting them on Stripe.
-
-        :param ids: List of ids to be deleted
-        :type ids: list
-        :return: int
-        """
-        delete_count = 0
-
-        for id in ids:
-            user = User.query.get(id)
-
-            if user is None:
-                continue
-
-            if user.payment_id is None:
-                user.delete()
-            else:
-                subscription = Subscription()
-                cancelled = subscription.cancel(user=user)
-
-                # If successful, delete it locally.
-                if cancelled:
-                    user.delete()
-
-            delete_count += 1
-
-        return delete_count
 
     @classmethod
     def initialize_password_reset(cls, identity):
@@ -195,7 +119,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         :type identity: str
         :return: User instance
         """
-        u = User.find_by_identity(identity)
+        u = cls.find_by_identity(identity)
         reset_token = u.serialize_token()
 
         # This prevents circular imports.
@@ -279,3 +203,90 @@ class User(UserMixin, ResourceMixin, db.Model):
         self.current_sign_in_ip = ip_address
 
         return self.save()
+
+
+class User(UserBase):
+    ROLE = OrderedDict([
+        ('guest', 'Guest'),
+        ('member', 'Member'),
+        ('admin', 'Admin')
+    ])
+
+    __tablename__ = 'users'
+
+    # Relationships.
+    credit_card = db.relationship(CreditCard, uselist=False, backref='users',
+                                  passive_deletes=True)
+    subscription = db.relationship(Subscription, uselist=False,
+                                   backref='users', passive_deletes=True)
+    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
+
+    # Authentication.
+    role = db.Column(db.Enum(*ROLE, name='role_types'),
+                     index=True, nullable=False, server_default='member')
+
+    # Billing.
+    payment_id = db.Column(db.String(128), index=True)
+    cancelled_subscription_on = db.Column(AwareDateTime())
+
+    @classmethod
+    def is_last_admin(cls, user, new_role, new_active):
+        """
+        Determine whether or not this user is the last admin account.
+
+        :param user: User being tested
+        :type user: User
+        :param new_role: New role being set
+        :type new_role: str
+        :param new_active: New active status being set
+        :type new_active: bool
+        :return: bool
+        """
+        is_changing_roles = user.role == 'admin' and new_role != 'admin'
+        is_changing_active = user.active is True and new_active is None
+
+        if is_changing_roles or is_changing_active:
+            admin_count = User.query.filter(User.role == 'admin').count()
+            active_count = User.query.filter(User.is_active is True).count()
+
+            if admin_count == 1 or active_count == 1:
+                return True
+
+        return False
+
+    @classmethod
+    def bulk_delete(cls, ids):
+        """
+        Override the general bulk_delete method because we need to delete them
+        one at a time while also deleting them on Stripe.
+
+        :param ids: List of ids to be deleted
+        :type ids: list
+        :return: int
+        """
+        delete_count = 0
+
+        for id in ids:
+            user = User.query.get(id)
+
+            if user is None:
+                continue
+
+            if user.payment_id is None:
+                user.delete()
+            else:
+                subscription = Subscription()
+                cancelled = subscription.cancel(user=user)
+
+                # If successful, delete it locally.
+                if cancelled:
+                    user.delete()
+
+            delete_count += 1
+
+        return delete_count
+
+
+class Business(UserBase):
+
+    __tablename__ = 'businesses'
