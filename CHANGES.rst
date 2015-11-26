@@ -1,3 +1,10 @@
+Version 0.3 (2015-11-26)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Modified all the to-be-used views of Cheermonk to either dashboard or frontend theme layout.
+- Extensive frontend work - login, signup, home, FAQs, Support etc pages are all modified with new layout.
+- Surfing through Cheermonk should give a nice monolithic experience.
+
+
 Version 0.2 (2015-11-21)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Added 2 new themes for frontend & dashboard
