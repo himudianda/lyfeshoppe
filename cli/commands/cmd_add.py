@@ -92,7 +92,7 @@ def businesses():
 
     # Ensure we get about 50 unique random emails, +1 due to the seeded email.
     for i in range(0, 50):
-        random_emails.append(fake.email())
+        random_emails.append(fake.company_email())
 
     random_emails = list(set(random_emails))
 
@@ -106,7 +106,7 @@ def businesses():
             'type': random.choice(Business.TYPE.keys()),
             'email': email,
             'password': Business.encrypt_password('password'),
-            'name': fake.name(),
+            'name': fake.company(),
             'locale': random.choice(ACCEPT_LANGUAGES)
         }
 
