@@ -1,0 +1,48 @@
+{% extends 'layouts/app.jinja2' %}
+{% import 'macros/items.jinja2' as items %}
+
+{% block title %}Admin - Products / List{% endblock %}
+
+{% block body %}
+
+  {% if products.total == 0 %}
+      <h3>No results found</h3>
+    {% if request.args.get('q') %}
+        <p>Try limiting or removing your search terms.</p>
+    {% else %}
+        <p>There are no products present.</p>
+    {% endif %}
+  {% else %}
+      <table class="table table-striped">
+          <thead>
+          <tr>
+              <th class="col-header">
+                {{ items.sort('created_on', 'Date') }}
+              </th>
+              <th class="col-header">
+                {{ items.sort('title') }}
+              </th>
+              <th class="col-header">
+                {{ items.sort('price') }}
+              </th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for product in products.items %}
+              <tr>
+                  <td>
+                      <time class="from-now" data-datetime="{{ product.created_on }}">
+                        {{ product.created_on }}
+                      </time>
+                  </td>
+                  <td>{{ product.title }}</td>
+                  <td>${{ product.price }}</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+
+    {{ items.paginate(products) }}
+  {% endif %}
+{% endblock %}
+

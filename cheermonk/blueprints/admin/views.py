@@ -13,6 +13,7 @@ from sqlalchemy import text
 from cheermonk.blueprints.admin.models import Dashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.user.models import User, Business
+from cheermonk.blueprints.inventory.models.product import Product
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.decorators import handle_stripe_exceptions
 from cheermonk.blueprints.billing.models.coupon import Coupon
@@ -50,6 +51,27 @@ def dashboard():
                            group_and_count_businesses=group_and_count_businesses,
                            group_and_count_issues=group_and_count_issues,
                            group_and_count_products=group_and_count_products)
+
+
+# Products -----------------------------------------------------------------------
+@admin.route('/products', defaults={'page': 1})
+@admin.route('/products/page/<int:page>')
+def products(page):
+    search_form = SearchForm()
+    bulk_form = BulkDeleteForm()
+
+    sort_by = Product.sort_by(request.args.get('sort', 'title'),
+                              request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_products = Product.query \
+        .filter() \
+        .order_by(text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('admin/product/index.jinja2',
+                           form=search_form, bulk_form=bulk_form,
+                           products=paginated_products)
 
 
 # Businesses -----------------------------------------------------------------------
