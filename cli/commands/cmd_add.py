@@ -103,6 +103,7 @@ def businesses():
         email = random_emails.pop()
 
         params = {
+            'type': random.choice(Business.TYPE.keys()),
             'email': email,
             'password': Business.encrypt_password('password'),
             'name': fake.name(),

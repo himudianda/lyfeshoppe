@@ -290,3 +290,13 @@ class User(UserBase):
 class Business(UserBase):
 
     __tablename__ = 'businesses'
+
+    TYPE = OrderedDict([
+        ('salon', 'Salon'),
+        ('gym', 'Gym'),
+        ('training', 'Training')
+    ])
+
+    # Authentication.
+    type = db.Column(db.Enum(*TYPE, name='business_types'),
+                     index=True, nullable=False, server_default='salon')
