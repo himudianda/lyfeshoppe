@@ -1,6 +1,7 @@
 from sqlalchemy import func
 
 from cheermonk.blueprints.user.models import db, User, Business
+from cheermonk.blueprints.inventory.models.product import Product
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.models.subscription import Subscription
 
@@ -50,6 +51,15 @@ class Dashboard(object):
         :return: dict
         """
         return Dashboard._group_and_count(Business, Business.type)
+
+    @classmethod
+    def group_and_count_products(cls):
+        """
+        Perform a group by/count on all products.
+
+        :return: dict
+        """
+        return Dashboard._group_and_count(Product, Product.business_id)
 
     @classmethod
     def group_and_count_issues(cls):
