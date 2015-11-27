@@ -35,12 +35,14 @@
             {% for business in businesses.items %}
                 <tr>
                     <td>
+                      <a href="{{ url_for('admin.businesses_edit', id=business.id) }}">
                         <div class="pull-left">
                           {{ account.role_icon_for(business) }}
                         </div>
                         <h4 class="media-heading">{{ business.name }}</h4>
 
                         <p class="text-muted">{{ business.email }}</p>
+                      </a>
                     </td>
                     <td>
                       {% if business.last_sign_in_on %}

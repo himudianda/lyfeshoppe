@@ -18,7 +18,7 @@ from cheermonk.blueprints.billing.decorators import handle_stripe_exceptions
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.models.subscription import Subscription
 from cheermonk.blueprints.admin.forms import SearchForm, BulkDeleteForm, \
-    UserForm, UserCancelSubscriptionForm, IssueForm, IssueContactForm, \
+    UserForm, BusinessForm, UserCancelSubscriptionForm, IssueForm, IssueContactForm, \
     CouponForm
 
 admin = Blueprint('admin', __name__,
@@ -69,6 +69,24 @@ def businesses(page):
     return render_template('admin/business/index.jinja2',
                            form=search_form, bulk_form=bulk_form,
                            businesses=paginated_businesses)
+
+
+@admin.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
+def businesses_edit(id):
+    business = Business.query.get(id)
+    form = BusinessForm(obj=business)
+
+    if form.validate_on_submit():
+        form.populate_obj(business)
+
+        if business.username == '':
+            business.username = None
+        business.save()
+
+        flash(_('Business has been saved successfully.'), 'success')
+        return redirect(url_for('admin.businesses'))
+
+    return render_template('admin/business/edit.jinja2', form=form, business=business)
 
 
 # Users -----------------------------------------------------------------------
