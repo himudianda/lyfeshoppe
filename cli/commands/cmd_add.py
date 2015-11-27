@@ -28,7 +28,7 @@ except AttributeError:
 from cheermonk.app import create_app
 from cheermonk.extensions import db
 from cheermonk.blueprints.issue.models import Issue
-from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.user.models import User, Business
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import \
@@ -80,6 +80,38 @@ def _bulk_insert(model, data, label):
 def cli():
     """ Populate your db with generated data. """
     pass
+
+
+@click.command()
+def businesses():
+    """
+    Create random businesses.
+    """
+    random_emails = []
+    data = []
+
+    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
+    for i in range(0, 50):
+        random_emails.append(fake.email())
+
+    random_emails = list(set(random_emails))
+
+    while True:
+        if len(random_emails) == 0:
+            break
+
+        email = random_emails.pop()
+
+        params = {
+            'email': email,
+            'password': Business.encrypt_password('password'),
+            'name': fake.name(),
+            'locale': random.choice(ACCEPT_LANGUAGES)
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Business, data, 'businesses')
 
 
 @click.command()
@@ -263,6 +295,7 @@ def all(ctx):
     :param ctx:
     :return: None
     """
+    ctx.invoke(businesses)
     ctx.invoke(users)
     ctx.invoke(issues)
     ctx.invoke(coupons)
@@ -271,6 +304,7 @@ def all(ctx):
     return None
 
 
+cli.add_command(businesses)
 cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(coupons)
