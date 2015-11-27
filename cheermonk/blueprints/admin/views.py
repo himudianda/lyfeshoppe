@@ -12,7 +12,7 @@ from sqlalchemy import text
 
 from cheermonk.blueprints.admin.models import Dashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.user.models import User, Business
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.decorators import handle_stripe_exceptions
 from cheermonk.blueprints.billing.models.coupon import Coupon
@@ -46,6 +46,13 @@ def dashboard():
                            group_and_count_coupons=group_and_count_coupons,
                            group_and_count_users=group_and_count_users,
                            group_and_count_issues=group_and_count_issues)
+
+
+# Businesses -----------------------------------------------------------------------
+@admin.route('/businesses', defaults={'page': 1})
+@admin.route('/businesses/page/<int:page>')
+def businesses(page):
+    return render_template('admin/business/index.jinja2')
 
 
 # Users -----------------------------------------------------------------------
