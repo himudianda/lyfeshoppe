@@ -1,10 +1,12 @@
 {% extends 'layouts/app.jinja2' %}
 {% import 'macros/items.jinja2' as items %}
+{% import 'macros/form.jinja2' as f with context %}
 {% import 'user/macros/business.jinja2' as account %}
 
 {% block title %}Admin - Businesses / List{% endblock %}
 
 {% block body %}
+  {{ f.search('admin.businesses') }}
 
   {% if businesses.total == 0 %}
       <h3>No results found</h3>
