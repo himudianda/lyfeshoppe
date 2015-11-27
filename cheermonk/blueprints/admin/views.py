@@ -12,7 +12,7 @@ from sqlalchemy import text
 
 from cheermonk.blueprints.admin.models import Dashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.user.models import User, Business
+from cheermonk.blueprints.user.models import User
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.decorators import handle_stripe_exceptions
 from cheermonk.blueprints.billing.models.coupon import Coupon
@@ -39,12 +39,14 @@ def dashboard():
     group_and_count_plans = Dashboard.group_and_count_plans()
     group_and_count_coupons = Dashboard.group_and_count_coupons()
     group_and_count_users = Dashboard.group_and_count_users()
+    group_and_count_businesses = Dashboard.group_and_count_businesses()
     group_and_count_issues = Dashboard.group_and_count_issues()
 
     return render_template('admin/page/dashboard.jinja2',
                            group_and_count_plans=group_and_count_plans,
                            group_and_count_coupons=group_and_count_coupons,
                            group_and_count_users=group_and_count_users,
+                           group_and_count_businesses=group_and_count_businesses,
                            group_and_count_issues=group_and_count_issues)
 
 
