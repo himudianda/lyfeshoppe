@@ -2,13 +2,12 @@ from flask_babel import lazy_gettext as _
 
 from cheermonk.lib.flask_mailplus import send_template_message
 from cheermonk.app import create_celery_app
-from cheermonk.blueprints.user.models import User
 
 celery = create_celery_app()
 
 
 @celery.task()
-def deliver_password_reset_email(user_id, reset_token):
+def deliver_password_reset_email(cls, user_id, reset_token):
     """
     Send a reset password e-mail to a user.
 
@@ -18,7 +17,7 @@ def deliver_password_reset_email(user_id, reset_token):
     :type reset_token: str
     :return: None if a user was not found
     """
-    user = User.query.get(user_id)
+    user = cls.query.get(user_id)
 
     if user is None:
         return
