@@ -17,9 +17,14 @@
                 href="{{ url_for('user.business_signup') }}">sign up</a>.</p>
     {% endif %}
   {% else %}
+    {% call f.form_tag('admin.businesses_bulk_delete') %}
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>
+                    <label for="select_all"></label>
+                    <input id="select_all" name="select_all" type="checkbox">
+                </th>
                 <th class="col-header">
                   {{ items.sort('name') }}
                 </th>
@@ -29,11 +34,26 @@
                 <th class="col-header">
                   {{ items.sort('sign_in_count', 'Sign in count') }}
                 </th>
+                <th id="bulk_actions" colspan="3">
+                    <div class="form-inline">
+                      {{ f.field(bulk_form.scope, inline=True) }}
+                        <button type="submit"
+                                class="btn btn-danger btn-sm">
+                            Delete items
+                        </button>
+                    </div>
+                </th>
             </tr>
             </thead>
             <tbody>
             {% for business in businesses.items %}
                 <tr>
+                    <td>
+                        <label for="bulk_ids"></label>
+                        <input class="checkbox-item" id="bulk_ids"
+                               name="bulk_ids"
+                               type="checkbox" value="{{ business.id }}">
+                    </td>
                     <td>
                       <a href="{{ url_for('admin.businesses_edit', id=business.id) }}">
                         <div class="pull-left">
@@ -57,6 +77,7 @@
             {% endfor %}
             </tbody>
         </table>
+    {% endcall %}
     {{ items.paginate(businesses) }}
   {% endif %}
 {% endblock %}

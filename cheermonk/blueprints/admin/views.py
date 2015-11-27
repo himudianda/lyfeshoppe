@@ -89,6 +89,30 @@ def businesses_edit(id):
     return render_template('admin/business/edit.jinja2', form=form, business=business)
 
 
+@admin.route('/businesses/bulk_delete', methods=['POST'])
+def businesses_bulk_delete():
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Business.get_bulk_action_ids(request.form.get('scope'),
+                                           request.form.getlist('bulk_ids'),
+                                           omit_ids=[current_user.id],
+                                           query=request.args.get('q', ''))
+
+        # Prevent circular imports.
+        from cheermonk.blueprints.user.tasks import delete_businesses
+
+        delete_businesses.delay(ids)
+
+        flash(_n('%(num)d business was scheduled to be deleted.',
+                 '%(num)d businesses were scheduled to be deleted.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No businesses were deleted, something went wrong.'), 'error')
+
+    return redirect(url_for('admin.businesses'))
+
+
 # Users -----------------------------------------------------------------------
 @admin.route('/users', defaults={'page': 1})
 @admin.route('/users/page/<int:page>')
