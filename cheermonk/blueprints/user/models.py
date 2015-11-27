@@ -16,6 +16,7 @@ from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.billing.models.credit_card import CreditCard
 from cheermonk.blueprints.billing.models.subscription import Subscription
 from cheermonk.blueprints.billing.models.invoice import Invoice
+from cheermonk.blueprints.inventory.models.product import Product
 from cheermonk.extensions import db, bcrypt
 
 
@@ -297,6 +298,8 @@ class Business(UserBase):
         ('training', 'Training')
     ])
 
-    # Authentication.
+    # Relationships.
+    products = db.relationship(Product, backref='businesses', passive_deletes=True)
+
     type = db.Column(db.Enum(*TYPE, name='business_types'),
                      index=True, nullable=False, server_default='salon')
