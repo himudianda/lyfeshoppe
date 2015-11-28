@@ -1,7 +1,17 @@
-{% extends 'layouts/app.jinja2' %}
+{% extends 'dashboard/layouts/app.jinja2' %}
 
-{% block title %}Admin - Issues / Update{% endblock %}
+{% block title %}
+    Admin - Issues / Update | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
 
-{% block body %}
-  {% include 'admin/issue/_form.jinja2' with context %}
+{% block content %}
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            {% include 'admin/issue/_form.jinja2' with context %}
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
 {% endblock %}
