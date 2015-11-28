@@ -1,8 +1,18 @@
-{% extends 'layouts/app.jinja2' %}
+{% extends 'dashboard/layouts/app.jinja2' %}
 
-{% block title %}Admin - Product / Add{% endblock %}
+{% block title %}
+    Admin - Products / Add | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
 
-{% block body %}
-  {% include 'admin/product/_form.jinja2' with context %}
+{% block content %}
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            {% include 'admin/product/_form.jinja2' with context %}
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
 {% endblock %}
 
