@@ -21,16 +21,17 @@
             <!-- END PAGE HEADER-->
 
             <div class="row">
-              <div class="col-md-6">
-                {{ f.search('admin.products') }}
-              </div>
-              <div class="col-md-6">
-                  <a href="{{ url_for('admin.products_new') }}"
-                     class="btn btn-primary pull-right">
-                      Create Product
-                  </a>
-              </div>
-          </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('admin.products_new') }}"
+                        class="btn btn-primary pull-left sbold green">
+                        Add Product
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    {{ f.search('admin.products') }}
+                </div>
+            </div>
 
           {% if products.total == 0 %}
               <h3>No results found</h3>
