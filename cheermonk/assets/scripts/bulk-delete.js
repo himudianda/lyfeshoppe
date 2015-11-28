@@ -12,6 +12,9 @@ class BulkDelete {
 
         this.updateScope = '#scope';
         this.bulkActions = '#bulk_actions';
+
+        $(this.colHeader).show();
+        $(this.bulkActions).hide();
     }
 
     listenForEvents() {
