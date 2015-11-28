@@ -20,6 +20,9 @@
                 {{ items.sort('created_on', 'Date') }}
               </th>
               <th class="col-header">
+                {{ items.sort('business_id') }}
+              </th>
+              <th class="col-header">
                 {{ items.sort('title') }}
               </th>
               <th class="col-header">
@@ -34,6 +37,11 @@
                       <time class="from-now" data-datetime="{{ product.created_on }}">
                         {{ product.created_on }}
                       </time>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('admin.businesses_edit', id=product.business_id) }}">
+                        <h5>{{ product.business_id }}</h5>
+                    </a>
                   </td>
                   <td>{{ product.title }}</td>
                   <td>${{ product.price }}</td>
