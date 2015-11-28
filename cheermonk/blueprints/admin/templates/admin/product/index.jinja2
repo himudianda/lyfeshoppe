@@ -5,14 +5,25 @@
 {% block title %}Admin - Products / List{% endblock %}
 
 {% block body %}
-  {{ f.search('admin.products') }}
+  <div class="row">
+      <div class="col-md-6">
+        {{ f.search('admin.products') }}
+      </div>
+      <div class="col-md-6">
+          <a href="{{ url_for('admin.products_new') }}"
+             class="btn btn-primary pull-right">
+              Create Product
+          </a>
+      </div>
+  </div>
 
   {% if products.total == 0 %}
       <h3>No results found</h3>
     {% if request.args.get('q') %}
         <p>Try limiting or removing your search terms.</p>
     {% else %}
-        <p>There are no products present.</p>
+        <p>There are no products present, you should <a
+                href="{{ url_for('admin.products_new') }}">create one</a>.</p>
     {% endif %}
   {% else %}
       {% call f.form_tag('admin.products_bulk_delete') %}

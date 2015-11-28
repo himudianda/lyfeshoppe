@@ -33,3 +33,17 @@ class Product(ResourceMixin, db.Model):
         search_chain = (cls.title.ilike(search_query))
 
         return search_chain
+
+    @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the product was created successfully.
+
+        :return: bool
+        """
+
+        product = Product(**params)
+        db.session.add(product)
+        db.session.commit()
+
+        return True

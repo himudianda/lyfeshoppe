@@ -111,6 +111,28 @@ def products_bulk_delete():
     return redirect(url_for('admin.products'))
 
 
+@admin.route('/products/new', methods=['GET', 'POST'])
+def products_new():
+    product = Product()
+    form = ProductForm(obj=product)
+
+    if form.validate_on_submit():
+        form.populate_obj(product)
+
+        params = {
+            'title': product.title,
+            'description': product.description,
+            'price': product.price,
+            'business_id': current_user.id
+        }
+
+        if Product.create(params):
+            flash(_('Product has been created successfully.'), 'success')
+            return redirect(url_for('admin.products'))
+
+    return render_template('admin/product/new.jinja2', form=form, product=product)
+
+
 # Businesses -----------------------------------------------------------------------
 @admin.route('/businesses', defaults={'page': 1})
 @admin.route('/businesses/page/<int:page>')
