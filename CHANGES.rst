@@ -1,3 +1,9 @@
+Version 0.4 (2015-11-27)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Admin dashboard now has ability to view all Businesses & Products
+- You can also bulk delete, edit & add new products/businesses from the admin view
+
+
 Version 0.3 (2015-11-26)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Modified all the to-be-used views of Cheermonk to either dashboard or frontend theme layout.
