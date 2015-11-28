@@ -92,6 +92,25 @@ def products_edit(id):
     return render_template('admin/product/edit.jinja2', form=form, product=product)
 
 
+@admin.route('/products/bulk_delete', methods=['POST'])
+def products_bulk_delete():
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Product.get_bulk_action_ids(request.form.get('scope'),
+                                          request.form.getlist('bulk_ids'),
+                                          query=request.args.get('q', ''))
+
+        delete_count = Product.bulk_delete(ids)
+        flash(_n('%(num)d product was scheduled to be deleted.',
+                 '%(num)d products were scheduled to be deleted.',
+                 num=delete_count), 'success')
+    else:
+        flash(_('No products were deleted, something went wrong.'), 'error')
+
+    return redirect(url_for('admin.products'))
+
+
 # Businesses -----------------------------------------------------------------------
 @admin.route('/businesses', defaults={'page': 1})
 @admin.route('/businesses/page/<int:page>')

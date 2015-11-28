@@ -15,9 +15,14 @@
         <p>There are no products present.</p>
     {% endif %}
   {% else %}
+      {% call f.form_tag('admin.products_bulk_delete') %}
       <table class="table table-striped">
           <thead>
           <tr>
+              <th>
+                  <label for="select_all"></label>
+                  <input id="select_all" name="select_all" type="checkbox">
+              </th>
               <th class="col-header">
                 {{ items.sort('created_on', 'Date') }}
               </th>
@@ -30,11 +35,26 @@
               <th class="col-header">
                 {{ items.sort('price') }}
               </th>
+              <th id="bulk_actions" colspan="5">
+                  <div class="form-inline">
+                    {{ f.field(bulk_form.scope, inline=True) }}
+                      <button type="submit"
+                              class="btn btn-danger btn-sm">
+                          Delete items
+                      </button>
+                  </div>
+              </th>
           </tr>
           </thead>
           <tbody>
           {% for product in products.items %}
               <tr>
+                  <td>
+                      <label for="bulk_ids"></label>
+                      <input class="checkbox-item" id="bulk_ids"
+                             name="bulk_ids"
+                             type="checkbox" value="{{ product.id }}">
+                  </td>
                   <td>
                       <time class="from-now" data-datetime="{{ product.created_on }}">
                         {{ product.created_on }}
@@ -56,6 +76,7 @@
           {% endfor %}
           </tbody>
       </table>
+      {% endcall %}
 
     {{ items.paginate(products) }}
   {% endif %}
