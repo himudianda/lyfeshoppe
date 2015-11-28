@@ -21,91 +21,97 @@
             <!-- END PAGE HEADER-->
 
             <div class="row">
-              <div class="col-md-6">
-                {{ f.search('admin.products') }}
-              </div>
-              <div class="col-md-6">
-                  <a href="{{ url_for('admin.products_new') }}"
-                     class="btn btn-primary pull-right">
-                      Create Product
-                  </a>
-              </div>
-          </div>
+                <div class="col-md-6">
+                  {{ f.search('admin.products') }}
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('admin.products_new') }}"
+                       class="btn btn-primary pull-right sbold green"
+                       role="button">
+                        Add New Product
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
 
-          {% if products.total == 0 %}
-              <h3>No results found</h3>
-            {% if request.args.get('q') %}
-                <p>Try limiting or removing your search terms.</p>
-            {% else %}
-                <p>There are no products present, you should <a
-                        href="{{ url_for('admin.products_new') }}">create one</a>.</p>
-            {% endif %}
-          {% else %}
-              {% call f.form_tag('admin.products_bulk_delete') %}
-              <table class="table table-striped">
-                  <thead>
-                  <tr>
-                      <th>
-                          <label for="select_all"></label>
-                          <input id="select_all" name="select_all" type="checkbox">
-                      </th>
-                      <th class="col-header">
-                        {{ items.sort('created_on', 'Date') }}
-                      </th>
-                      <th class="col-header">
-                        {{ items.sort('business_id') }}
-                      </th>
-                      <th class="col-header">
-                        {{ items.sort('title') }}
-                      </th>
-                      <th class="col-header">
-                        {{ items.sort('price') }}
-                      </th>
-                      <th id="bulk_actions" colspan="5">
-                          <div class="form-inline">
-                            {{ f.field(bulk_form.scope, inline=True) }}
-                              <button type="submit"
-                                      class="btn btn-danger btn-sm">
-                                  Delete items
-                              </button>
-                          </div>
-                      </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {% for product in products.items %}
-                      <tr>
-                          <td>
-                              <label for="bulk_ids"></label>
-                              <input class="checkbox-item" id="bulk_ids"
-                                     name="bulk_ids"
-                                     type="checkbox" value="{{ product.id }}">
-                          </td>
-                          <td>
-                              <time class="from-now" data-datetime="{{ product.created_on }}">
-                                {{ product.created_on }}
-                              </time>
-                          </td>
-                          <td>
-                            <a href="{{ url_for('admin.businesses_edit', id=product.business_id) }}">
-                                <h5>{{ product.business_id }}</h5>
-                            </a>
-                          </td>
-                          <td>
-                              <a href="{{ url_for('admin.products_edit', id=product.id) }}">
-                                  <h4 class="media-heading">{{ product.title }}</h4>
-                              </a>
-                          </td>
+            <div class="row">
 
-                          <td>${{ product.price }}</td>
-                      </tr>
-                  {% endfor %}
-                  </tbody>
-              </table>
-              {% endcall %}
+                {% if products.total == 0 %}
+                    <h3>No results found</h3>
+                  {% if request.args.get('q') %}
+                      <p>Try limiting or removing your search terms.</p>
+                  {% else %}
+                      <p>There are no products present, you should <a
+                              href="{{ url_for('admin.products_new') }}">create one</a>.</p>
+                  {% endif %}
+                {% else %}
+                    {% call f.form_tag('admin.products_bulk_delete') %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                <label for="select_all"></label>
+                                <input id="select_all" name="select_all" type="checkbox">
+                            </th>
+                            <th class="col-header">
+                              {{ items.sort('created_on', 'Date') }}
+                            </th>
+                            <th class="col-header">
+                              {{ items.sort('business_id') }}
+                            </th>
+                            <th class="col-header">
+                              {{ items.sort('title') }}
+                            </th>
+                            <th class="col-header">
+                              {{ items.sort('price') }}
+                            </th>
+                            <th id="bulk_actions" colspan="5">
+                                <div class="form-inline">
+                                  {{ f.field(bulk_form.scope, inline=True) }}
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        Delete items
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products.items %}
+                            <tr>
+                                <td>
+                                    <label for="bulk_ids"></label>
+                                    <input class="checkbox-item" id="bulk_ids"
+                                           name="bulk_ids"
+                                           type="checkbox" value="{{ product.id }}">
+                                </td>
+                                <td>
+                                    <time class="from-now" data-datetime="{{ product.created_on }}">
+                                      {{ product.created_on }}
+                                    </time>
+                                </td>
+                                <td>
+                                  <a href="{{ url_for('admin.businesses_edit', id=product.business_id) }}">
+                                      <h5>{{ product.business_id }}</h5>
+                                  </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin.products_edit', id=product.id) }}">
+                                        <h4 class="media-heading">{{ product.title }}</h4>
+                                    </a>
+                                </td>
 
-            {{ items.paginate(products) }}
-          {% endif %}
+                                <td>${{ product.price }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endcall %}
+
+                  {{ items.paginate(products) }}
+                {% endif %}
+
+            </div>
 
         </div>
         <!-- END CONTENT BODY -->
