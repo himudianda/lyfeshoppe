@@ -62,5 +62,7 @@
     <script src="{{ url_for('static', filename='dashboard/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
 
+    {{ javascript_tag('vendor_js', 'app_js') | safe }}
+
   </body>
 </html>
