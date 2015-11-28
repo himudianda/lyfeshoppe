@@ -16,3 +16,20 @@ class Product(ResourceMixin, db.Model):
     title = db.Column(db.String(128))
     description = db.Column(db.Text())
     price = db.Column(db.Integer())
+
+    @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        search_chain = (cls.title.ilike(search_query))
+
+        return search_chain

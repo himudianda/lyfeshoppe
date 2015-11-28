@@ -65,7 +65,7 @@ def products(page):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_products = Product.query \
-        .filter() \
+        .filter(Product.search(request.args.get('q', ''))) \
         .order_by(text(order_values)) \
         .paginate(page, 20, True)
 
