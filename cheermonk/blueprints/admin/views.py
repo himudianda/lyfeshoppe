@@ -123,7 +123,7 @@ def products_new():
             'title': product.title,
             'description': product.description,
             'price': product.price,
-            'business_id': current_user.id
+            'business_id': product.business_id
         }
 
         if Product.create(params):

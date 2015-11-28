@@ -85,13 +85,13 @@ class BusinessForm(ModelForm):
 
 
 class ProductForm(ModelForm):
+    business_id = IntegerField(_('Business Id'), [DataRequired(),
+                               NumberRange(min=1, max=10000)])
     title = StringField(_('Title'), validators=[
             DataRequired(), Length(1, 128)
         ])
-
     description = TextAreaField(_('Description'),
                                 [DataRequired(), Length(1, 8192)])
-
     price = IntegerField(_('Price'), [DataRequired(),
                          NumberRange(min=1, max=10000)])
 
