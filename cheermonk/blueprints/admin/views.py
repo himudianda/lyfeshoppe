@@ -113,7 +113,11 @@ def products_bulk_delete():
 
 @admin.route('/products/new', methods=['GET', 'POST'])
 def products_new():
-    product = Product()
+    product = Product(
+            business_id=current_user.id,
+            title="Product Title",
+            description="Product description"
+        )
     form = ProductForm(obj=product)
 
     if form.validate_on_submit():
