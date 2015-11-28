@@ -84,6 +84,18 @@ class BusinessForm(ModelForm):
                          choices=choices_from_dict(LANGUAGES))
 
 
+class ProductForm(ModelForm):
+    title = StringField(_('Title'), validators=[
+            DataRequired(), Length(1, 128)
+        ])
+
+    description = TextAreaField(_('Description'),
+                                [DataRequired(), Length(1, 8192)])
+
+    price = IntegerField(_('Price'), [DataRequired(),
+                         NumberRange(min=1, max=10000)])
+
+
 class UserCancelSubscriptionForm(Form):
     pass
 

@@ -43,7 +43,12 @@
                         <h5>{{ product.business_id }}</h5>
                     </a>
                   </td>
-                  <td>{{ product.title }}</td>
+                  <td>
+                      <a href="{{ url_for('admin.products_edit', id=product.id) }}">
+                          <h4 class="media-heading">{{ product.title }}</h4>
+                      </a>
+                  </td>
+
                   <td>${{ product.price }}</td>
               </tr>
           {% endfor %}
