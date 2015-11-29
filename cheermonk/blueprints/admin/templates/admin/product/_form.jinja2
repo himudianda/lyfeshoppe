@@ -16,13 +16,6 @@
     <div class="col-md-8 col-md-offset-2 well">
       {% call f.form_tag(endpoint, **form_kwargs) %}
           <legend>{{ legend }}</legend>
-          <label for="">Created on</label>
-          <h5 class="sm-margin-bottom">
-              <time class="from-now"
-                    data-datetime="{{ product.created_on }}">
-                {{ product.created_on }}
-              </time>
-          </h5>
 
         {% call f.form_group(form.business_id, css_class='sm-margin-bottom') %}
         {% endcall %}
