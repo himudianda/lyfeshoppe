@@ -16,23 +16,36 @@ from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.billing.models.credit_card import CreditCard
 from cheermonk.blueprints.billing.models.subscription import Subscription
 from cheermonk.blueprints.billing.models.invoice import Invoice
-from cheermonk.blueprints.inventory.models.product import Product
 from cheermonk.extensions import db, bcrypt
 
 
-class UserBase(UserMixin, ResourceMixin, db.Model):
+class User(UserMixin, ResourceMixin, db.Model):
+    __tablename__ = 'users'
 
-    __abstract__ = True
+    ROLE = OrderedDict([
+        ('guest', 'Guest'),
+        ('member', 'Member'),
+        ('admin', 'Admin')
+    ])
 
     id = db.Column(db.Integer, primary_key=True)
-    active = db.Column('is_active', db.Boolean(), nullable=False,
-                       server_default='1')
 
-    name = db.Column(db.String(128), index=True)
+    # Relationships.
+    credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
+    subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
+    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
+
+    # Authentication.
+    role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     username = db.Column(db.String(24), unique=True, index=True)
-    email = db.Column(db.String(255), unique=True, index=True, nullable=False,
-                      server_default='')
+    email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
+
+    # Billing.
+    name = db.Column(db.String(128), index=True)
+    payment_id = db.Column(db.String(128), index=True)
+    cancelled_subscription_on = db.Column(AwareDateTime())
 
     # Activity tracking.
     sign_in_count = db.Column(db.Integer, nullable=False, default=0)
@@ -46,9 +59,9 @@ class UserBase(UserMixin, ResourceMixin, db.Model):
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
-        super(UserBase, self).__init__(**kwargs)
+        super(User, self).__init__(**kwargs)
 
-        self.password = UserBase.encrypt_password(kwargs.get('password', ''))
+        self.password = User.encrypt_password(kwargs.get('password', ''))
 
     @classmethod
     def search(cls, query):
@@ -205,31 +218,6 @@ class UserBase(UserMixin, ResourceMixin, db.Model):
 
         return self.save()
 
-
-class User(UserBase):
-    ROLE = OrderedDict([
-        ('guest', 'Guest'),
-        ('member', 'Member'),
-        ('admin', 'Admin')
-    ])
-
-    __tablename__ = 'users'
-
-    # Relationships.
-    credit_card = db.relationship(CreditCard, uselist=False, backref='users',
-                                  passive_deletes=True)
-    subscription = db.relationship(Subscription, uselist=False,
-                                   backref='users', passive_deletes=True)
-    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
-
-    # Authentication.
-    role = db.Column(db.Enum(*ROLE, name='role_types'),
-                     index=True, nullable=False, server_default='member')
-
-    # Billing.
-    payment_id = db.Column(db.String(128), index=True)
-    cancelled_subscription_on = db.Column(AwareDateTime())
-
     @classmethod
     def is_last_admin(cls, user, new_role, new_active):
         """
@@ -286,20 +274,3 @@ class User(UserBase):
             delete_count += 1
 
         return delete_count
-
-
-class Business(UserBase):
-
-    __tablename__ = 'businesses'
-
-    TYPE = OrderedDict([
-        ('salon', 'Salon'),
-        ('gym', 'Gym'),
-        ('training', 'Training')
-    ])
-
-    # Relationships.
-    products = db.relationship(Product, backref='businesses', passive_deletes=True)
-
-    type = db.Column(db.Enum(*TYPE, name='business_types'),
-                     index=True, nullable=False, server_default='salon')

@@ -28,8 +28,7 @@ except AttributeError:
 from cheermonk.app import create_app
 from cheermonk.extensions import db
 from cheermonk.blueprints.issue.models import Issue
-from cheermonk.blueprints.user.models import User, Business
-from cheermonk.blueprints.inventory.models.product import Product
+from cheermonk.blueprints.user.models import User
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import \
@@ -81,39 +80,6 @@ def _bulk_insert(model, data, label):
 def cli():
     """ Populate your db with generated data. """
     pass
-
-
-@click.command()
-def businesses():
-    """
-    Create random businesses.
-    """
-    random_emails = []
-    data = []
-
-    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    for i in range(0, 50):
-        random_emails.append(fake.company_email())
-
-    random_emails = list(set(random_emails))
-
-    while True:
-        if len(random_emails) == 0:
-            break
-
-        email = random_emails.pop()
-
-        params = {
-            'type': random.choice(Business.TYPE.keys()),
-            'email': email,
-            'password': Business.encrypt_password('password'),
-            'name': fake.company(),
-            'locale': random.choice(ACCEPT_LANGUAGES)
-        }
-
-        data.append(params)
-
-    return _bulk_insert(Business, data, 'businesses')
 
 
 @click.command()
@@ -233,36 +199,6 @@ def coupons():
 
 
 @click.command()
-def products():
-    """
-    Create random products.
-    """
-    data = []
-    businesses = db.session.query(Business).all()
-
-    for business in businesses:
-        for i in range(0, random.randint(1, 12)):
-            # Create a fake unix timestamp in the future.
-            created_on = fake.date_time_between(
-                start_date='-1y', end_date='now').strftime('%s')
-            created_on = datetime.utcfromtimestamp(
-                float(created_on)).strftime('%Y-%m-%dT%H:%M:%S Z')
-
-            params = {
-                'created_on': created_on,
-                'updated_on': created_on,
-                'business_id': business.id,
-                'title': fake.sentence(nb_words=5, variable_nb_words=True),
-                'description': fake.paragraph(nb_sentences=10, variable_nb_sentences=True),
-                'price': random.randint(100, 9000)
-            }
-
-            data.append(params)
-
-    return _bulk_insert(Product, data, 'products')
-
-
-@click.command()
 def invoices():
     """
     Create random invoices.
@@ -327,8 +263,6 @@ def all(ctx):
     :param ctx:
     :return: None
     """
-    ctx.invoke(businesses)
-    ctx.invoke(products)
     ctx.invoke(users)
     ctx.invoke(issues)
     ctx.invoke(coupons)
@@ -337,8 +271,6 @@ def all(ctx):
     return None
 
 
-cli.add_command(businesses)
-cli.add_command(products)
 cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(coupons)

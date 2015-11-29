@@ -1,6 +1,5 @@
 from flask_babel import lazy_gettext as _
 
-from cheermonk.blueprints.user.models import Business
 from cheermonk.lib.flask_mailplus import send_template_message
 from cheermonk.app import create_celery_app
 
@@ -30,15 +29,3 @@ def deliver_password_reset_email(cls, user_id, reset_token):
                           template='user/mail/password_reset', ctx=ctx)
 
     return None
-
-
-@celery.task()
-def delete_businesses(ids):
-    """
-    Delete businesses.
-
-    :param ids: List of ids to be deleted
-    :type ids: list
-    :return: int
-    """
-    return Business.bulk_delete(ids)

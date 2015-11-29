@@ -1,9 +1,0 @@
-{% macro role_icon_for(business) -%}
-  {% if business.type == 'salon' %}
-      <i class="fa fa-3x fa-fw fa-shield text-info" title="Salon"></i>
-  {% elif business.type == 'gym' %}
-      <i class="fa fa-3x fa-fw fa-star text-warning" title="Gym"></i>
-  {% elif business.type == 'training' %}
-      <i class="fa fa-3x fa-fw fa-user text-warning" title="Training"></i>
-  {% endif %}
-{% endmacro %}

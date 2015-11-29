@@ -15,7 +15,7 @@ from flask_babel import gettext as _
 from cheermonk.lib.safe_next_url import safe_next_url
 from cheermonk.blueprints.user.decorators import anonymous_required
 
-from cheermonk.blueprints.user.models import UserBase, User, Business
+from cheermonk.blueprints.user.models import User
 from cheermonk.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -35,9 +35,6 @@ def login():
 
     if form.validate_on_submit():
         u = User.find_by_identity(request.form.get('identity'))
-        if not u:
-            u = Business.find_by_identity(request.form.get('identity'))
-
         if u and u.authenticated(password=request.form.get('password')):
             # As you can see remember me is always enabled, this was a design
             # decision I made because more often than not users want this
@@ -79,7 +76,7 @@ def begin_password_reset():
     form = BeginPasswordResetForm()
 
     if form.validate_on_submit():
-        u = UserBase.initialize_password_reset(request.form.get('identity'))
+        u = User.initialize_password_reset(request.form.get('identity'))
 
         flash(_('An email has been sent to %(email)s.',
                 email=u.email), 'success')
@@ -94,7 +91,7 @@ def password_reset():
     form = PasswordResetForm(reset_token=request.args.get('reset_token'))
 
     if form.validate_on_submit():
-        u = UserBase.deserialize_token(request.form.get('reset_token'))
+        u = User.deserialize_token(request.form.get('reset_token'))
 
         if u is None:
             flash(_('Your reset token has expired or was tampered with.'),
@@ -102,7 +99,7 @@ def password_reset():
             return redirect(url_for('user.begin_password_reset'))
 
         form.populate_obj(u)
-        u.password = UserBase.encrypt_password(request.form.get('password', None))
+        u.password = User.encrypt_password(request.form.get('password', None))
         u.save()
 
         if login_user(u):
@@ -121,26 +118,7 @@ def signup():
         u = User()
 
         form.populate_obj(u)
-        u.password = UserBase.encrypt_password(request.form.get('password', None))
-        u.save()
-
-        if login_user(u):
-            flash(_('Awesome, thanks for signing up!'), 'success')
-            return redirect(url_for('page.dashboard'))
-
-    return render_template('user/signup.jinja2', form=form)
-
-
-@user.route('/business_signup', methods=['GET', 'POST'])
-@anonymous_required()
-def business_signup():
-    form = SignupForm()
-
-    if form.validate_on_submit():
-        u = Business()
-
-        form.populate_obj(u)
-        u.password = Business.encrypt_password(request.form.get('password', None))
+        u.password = User.encrypt_password(request.form.get('password', None))
         u.save()
 
         if login_user(u):

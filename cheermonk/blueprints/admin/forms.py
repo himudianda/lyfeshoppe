@@ -23,7 +23,7 @@ except AttributeError:
 
 from cheermonk.lib.locale import Currency
 from cheermonk.lib.util_wtforms import ModelForm, choices_from_dict
-from cheermonk.blueprints.user.models import db, User, Business
+from cheermonk.blueprints.user.models import db, User
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.models.coupon import Coupon
 
@@ -61,39 +61,6 @@ class UserForm(ModelForm):
     active = BooleanField(_('Yes, allow this user to sign in'))
     locale = SelectField(_('Language preference'), [DataRequired()],
                          choices=choices_from_dict(LANGUAGES))
-
-
-class BusinessForm(ModelForm):
-    username_message = _('Letters, numbers and underscores only please.')
-
-    username = StringField(validators=[
-        Unique(
-            User.username,
-            get_session=lambda: db.session
-        ),
-        Optional(),
-        Length(1, 16),
-        Regexp('^\w+$', message=username_message)
-    ])
-    name = StringField(_('Full name'), [Optional(), Length(1, 128)])
-    type = SelectField(_('Business Type'), [DataRequired()],
-                       choices=choices_from_dict(Business.TYPE,
-                                                 prepend_blank=False))
-    active = BooleanField(_('Yes, allow this user to sign in'))
-    locale = SelectField(_('Language preference'), [DataRequired()],
-                         choices=choices_from_dict(LANGUAGES))
-
-
-class ProductForm(ModelForm):
-    business_id = IntegerField(_('Business Id'), [DataRequired(),
-                               NumberRange(min=1, max=10000)])
-    title = StringField(_('Title'), validators=[
-            DataRequired(), Length(1, 128)
-        ])
-    description = TextAreaField(_('Description'),
-                                [DataRequired(), Length(1, 8192)])
-    price = IntegerField(_('Price'), [DataRequired(),
-                         NumberRange(min=1, max=10000)])
 
 
 class UserCancelSubscriptionForm(Form):
