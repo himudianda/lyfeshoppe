@@ -1,5 +1,7 @@
-Unreleased
+Version 0.5 (2015-11-29)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Registrations/Logins only happen on User models (i.e. no register/login of Business models)
+- Got rid of Product models & simplified the Business models - also removed some views related to these models.
 - All Admin pages styled to dashboard theme
 
 
