@@ -1,3 +1,8 @@
+Unreleased
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+- All Admin pages styled to dashboard theme
+
+
 Version 0.4 (2015-11-27)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Admin dashboard now has ability to view all Businesses & Products
