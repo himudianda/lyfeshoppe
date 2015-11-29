@@ -18,6 +18,19 @@
               <div class="col-md-4">
                 <div class="panel panel-default">
                   <div class="panel-heading">
+                    Businesses
+                    <span class="pull-right text-muted">
+                      {{ group_and_count_businesses.total }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
                     <a href="{{ url_for('admin.coupons') }}">Billing</a>
                     <span class="pull-right text-muted">
                       {{ group_and_count_plans.total }}
