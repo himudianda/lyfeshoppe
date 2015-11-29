@@ -12,6 +12,8 @@ class Business(ResourceMixin, db.Model):
                 db.ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
                 index=True, nullable=False
             )
+
+    # Details
     name = db.Column(db.String(128))
     email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
 

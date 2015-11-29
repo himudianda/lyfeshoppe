@@ -31,8 +31,8 @@ from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.user.models import User
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
-from cheermonk.blueprints.billing.gateways.stripecom import \
-    Coupon as PaymentCoupon
+from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
+from cheermonk.blueprints.business.models.business import Business
 
 fake = Faker()
 app = create_app()
@@ -255,6 +255,37 @@ def invoices():
 
 
 @click.command()
+def businesses():
+    """
+    Create random businesses.
+    """
+    data = []
+
+    users = db.session.query(User).all()
+
+    for user in users:
+        for i in range(0, random.randint(1, 12)):
+            # Create a fake unix timestamp in the future.
+            created_on = fake.date_time_between(
+                start_date='-1y', end_date='now').strftime('%s')
+
+            created_on = datetime.utcfromtimestamp(
+                float(created_on)).strftime('%Y-%m-%dT%H:%M:%S Z')
+
+            params = {
+                'created_on': created_on,
+                'updated_on': created_on,
+                'user_id': user.id,
+                'name': fake.company(),
+                'email': fake.company_email()
+            }
+
+            data.append(params)
+
+    return _bulk_insert(Business, data, 'businesses')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -267,6 +298,7 @@ def all(ctx):
     ctx.invoke(issues)
     ctx.invoke(coupons)
     ctx.invoke(invoices)
+    ctx.invoke(businesses)
 
     return None
 
@@ -275,4 +307,5 @@ cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(coupons)
 cli.add_command(invoices)
+cli.add_command(businesses)
 cli.add_command(all)
