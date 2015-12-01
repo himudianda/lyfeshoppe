@@ -20,6 +20,7 @@ from cheermonk.extensions import db, bcrypt
 
 
 businesses_relationships = db.Table('businesses_relationships',
+                                    # NOTE: businesses.id & users.id are used because businesses & users are the table names 
                                     db.Column('business_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
                                     db.Column('admin_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
                                     db.PrimaryKeyConstraint('business_id', 'admin_id')
@@ -35,6 +36,7 @@ db.mapper(BusinessesRelationships, businesses_relationships)
 
 
 employers_relationships = db.Table('employers_relationships',
+                                    # NOTE: businesses.id & users.id are used because businesses & users are the table names
                                    db.Column('employer_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
                                    db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
                                    db.PrimaryKeyConstraint('employer_id', 'employee_id')
@@ -64,6 +66,13 @@ class User(UserMixin, ResourceMixin, db.Model):
     credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
     subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
     invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
+
+    # Many to many relationships defined.
+    # Each business can have multiple admins.
+    # Each business can have multiple employees
+    # Each User can head (be an admin of) multiple businesses
+    # Each User can be employed with multiple businesses
+    # NOTE: admins & employeers are used for backrefs coz they are the field names.
     businesses = db.relationship('Business', secondary=businesses_relationships, backref='admins')
     employers = db.relationship('Business', secondary=employers_relationships, backref='employees')
 
