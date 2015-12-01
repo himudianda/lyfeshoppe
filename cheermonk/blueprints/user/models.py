@@ -16,8 +16,37 @@ from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.billing.models.credit_card import CreditCard
 from cheermonk.blueprints.billing.models.subscription import Subscription
 from cheermonk.blueprints.billing.models.invoice import Invoice
-from cheermonk.blueprints.business.models.business import Business
 from cheermonk.extensions import db, bcrypt
+
+
+businesses_relationships = db.Table('businesses_relationships',
+                                    db.Column('business_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
+                                    db.Column('admin_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+                                    db.PrimaryKeyConstraint('business_id', 'admin_id')
+                                    )
+
+
+class BusinessesRelationships(object):
+    def __init__(self, business_id, admin_id):
+        self.business_id = business_id
+        self.admin_id = admin_id
+
+db.mapper(BusinessesRelationships, businesses_relationships)
+
+
+employers_relationships = db.Table('employers_relationships',
+                                   db.Column('employer_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
+                                   db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+                                   db.PrimaryKeyConstraint('employer_id', 'employee_id')
+                                   )
+
+
+class EmployersRelationships(object):
+    def __init__(self, employer_id, employee_id):
+        self.employer_id = employer_id
+        self.employee_id = employee_id
+
+db.mapper(EmployersRelationships, employers_relationships)
 
 
 class User(UserMixin, ResourceMixin, db.Model):
@@ -35,9 +64,8 @@ class User(UserMixin, ResourceMixin, db.Model):
     credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
     subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
     invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
-
-    # Business
-    businesses = db.relationship(Business, backref='users', passive_deletes=True)
+    businesses = db.relationship('Business', secondary=businesses_relationships, backref='admins')
+    employers = db.relationship('Business', secondary=employers_relationships, backref='employees')
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
