@@ -275,7 +275,6 @@ def businesses():
             params = {
                 'created_on': created_on,
                 'updated_on': created_on,
-                'user_id': user.id,
                 'name': fake.company(),
                 'email': fake.company_email(),
                 'admins': [user]

@@ -6,13 +6,6 @@ class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'
     id = db.Column(db.Integer, primary_key=True)
 
-    # Relationships.
-    user_id = db.Column(
-                db.Integer,
-                db.ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
-                index=True, nullable=False
-            )
-
     # Details
     name = db.Column(db.String(128))
     email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
