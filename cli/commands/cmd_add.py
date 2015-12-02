@@ -277,12 +277,27 @@ def businesses():
                 'updated_on': created_on,
                 'user_id': user.id,
                 'name': fake.company(),
-                'email': fake.company_email()
+                'email': fake.company_email(),
+                'admins': [user]
             }
 
             data.append(params)
 
-    return _bulk_insert(Business, data, 'businesses')
+    _bulk_insert(Business, data, 'businesses')
+
+    # Create all relationships between users & businesses
+    # Relation 1: Businesses & Business Admins (Many to many relation)
+    # Relation 2: Employers and Employeers (Many to many relation)
+    users = db.session.query(User).all()
+    businesses = db.session.query(Business).all()
+    for user, business in zip(users, businesses):
+        user.businesses.extend(businesses)
+        business.employees.extend(users)
+
+        db.session.add(user)
+        db.session.add(business)
+
+    db.session.commit()
 
 
 @click.command()
