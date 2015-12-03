@@ -277,6 +277,7 @@ def businesses():
                 'updated_on': created_on,
                 'name': fake.company(),
                 'email': fake.company_email(),
+                'type': random.choice(Business.TYPE.keys()),
                 'admins': [user]
             }
 

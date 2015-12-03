@@ -59,7 +59,7 @@ class Dashboard(object):
 
         :return: dict
         """
-        return Dashboard._group_and_count(Business, Business.name)
+        return Dashboard._group_and_count(Business, Business.type)
 
     @classmethod
     def _group_and_count(cls, model, field):
