@@ -73,6 +73,8 @@
                     <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         {% if current_user.role == 'admin' %}
                             {% include 'admin/_menu.jinja2' %}
+                        {% elif current_user.role == 'member' %}
+                            {% include 'dashboard/_menu.jinja2' %}
                         {% endif %}
 
                     </ul>
