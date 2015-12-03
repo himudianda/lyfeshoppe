@@ -30,10 +30,14 @@
                         <p>There are no businesses present.</p>
                     {% endif %}
                 {% else %}
-
+                    {% call f.form_tag('admin.businesses_bulk_delete') %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>
+                                    <label for="select_all"></label>
+                                    <input id="select_all" name="select_all" type="checkbox">
+                                </th>
                                 <th class="col-header">
                                     {{ items.sort('created_on', 'Date') }}
                                 </th>
@@ -46,11 +50,21 @@
                                 <th class="col-header">
                                     {{ items.sort('email') }}
                                 </th>
+                                <th id="bulk_actions" colspan="5">
+                                    <div class="form-inline">
+                                        {{ f.field(bulk_form.scope, inline=True) }}
+                                        <button type="submit" class="btn btn-danger btn-sm"> Delete items </button>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for business in businesses.items %}
                                 <tr>
+                                    <td>
+                                        <label for="bulk_ids"></label>
+                                        <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ business.id }}">
+                                    </td>
                                     <td>
                                         <time class="from-now" data-datetime="{{ business.created_on }}">
                                             {{ business.created_on }}
@@ -73,6 +87,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% endcall %}
                     {{ items.paginate(businesses) }}
                 {% endif %}
             </div>
