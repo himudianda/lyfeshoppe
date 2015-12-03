@@ -1,7 +1,9 @@
 from sqlalchemy import func
+from flask_login import current_user
 
 from cheermonk.blueprints.user.models import db
 from cheermonk.blueprints.business.models.business import Business
+from cheermonk.blueprints.user.models import User
 
 
 class Dashboard(object):
@@ -26,11 +28,15 @@ class Dashboard(object):
         :return: dict
         """
         count = func.count(field)
-        query = db.session.query(count, field).group_by(field).all()
+        query = db.session.query(count, field).filter(
+                        model.admins.any(User.id.in_([current_user.id]))
+                    ).group_by(field).all()
 
         results = {
             'query': query,
-            'total': model.query.count()
+            'total': db.session.query(model).filter(
+                        model.admins.any(User.id.in_([current_user.id]))
+                    ).count()
         }
 
         return results
