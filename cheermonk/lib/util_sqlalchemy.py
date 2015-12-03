@@ -95,7 +95,7 @@ class ResourceMixin(object):
         :return: Number of deleted instances
         """
         delete_count = cls.query.filter(cls.id.in_(ids)).delete(
-            synchronize_session='fetch')
+            synchronize_session=False)
         db.session.commit()
 
         return delete_count
