@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from sqlalchemy import or_
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin
 from cheermonk.extensions import db
@@ -28,3 +29,21 @@ class Business(ResourceMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Business, self).__init__(**kwargs)
+
+    @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        search_chain = (cls.email.ilike(search_query),
+                        cls.name.ilike(search_query))
+
+        return or_(*search_chain)
