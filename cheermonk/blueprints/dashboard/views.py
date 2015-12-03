@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from flask_login import login_required
 
 from cheermonk.blueprints.user.decorators import role_required
+from cheermonk.blueprints.dashboard.models import Dashboard
 
 dashboard = Blueprint('dashboard', __name__, template_folder='templates', url_prefix='/dashboard')
 
@@ -17,4 +18,7 @@ def before_request():
 # Dashboard -------------------------------------------------------------------
 @dashboard.route('')
 def index():
-    return render_template('page/dashboard.jinja2')
+    group_and_count_businesses = Dashboard.group_and_count_businesses()
+
+    return render_template('dashboard/page/dashboard.jinja2',
+                           group_and_count_businesses=group_and_count_businesses)
