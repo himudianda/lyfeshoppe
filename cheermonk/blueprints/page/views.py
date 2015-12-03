@@ -18,11 +18,6 @@ def dashboard():
         return redirect(url_for('dashboard.index'))
 
 
-@page.route('/learn-more')
-def learn_more():
-    return render_template('page/learn_more.jinja2')
-
-
 @page.route('/faq')
 def faq():
     return render_template('page/faq.jinja2')
