@@ -4,6 +4,7 @@ from collections import OrderedDict
 from flask_wtf import Form
 from wtforms import SelectField, StringField, BooleanField, TextAreaField, \
     FloatField, DateTimeField
+from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, Optional, Regexp, \
     NumberRange
 from wtforms_components import Unique, EmailField, IntegerField
@@ -70,6 +71,13 @@ class BusinessForm(ModelForm):
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE,
                                                  prepend_blank=False))
+    admins = QuerySelectMultipleField(
+      label="Admins",
+      query_factory=lambda: User.query.all(),
+      get_pk=lambda item: item.id,
+      get_label=lambda item: item.name,
+      allow_blank=True
+    )
 
 
 class UserCancelSubscriptionForm(Form):
