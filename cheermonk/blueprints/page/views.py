@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template
-
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import current_user
 page = Blueprint('page', __name__, template_folder='templates')
 
 
@@ -10,7 +10,10 @@ def home():
 
 @page.route('/dashboard')
 def dashboard():
-    return render_template('page/dashboard.jinja2')
+    if current_user.role == 'admin':
+        return redirect(url_for('admin.dashboard'))
+    else:
+        return render_template('page/dashboard.jinja2')
 
 
 @page.route('/learn-more')
