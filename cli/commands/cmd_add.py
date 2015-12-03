@@ -104,7 +104,7 @@ def users():
         email = random_emails.pop()
 
         params = {
-            'role': random.choice(User.ROLE.keys()),
+            'role': 'member',
             'email': email,
             'password': User.encrypt_password('password'),
             'name': fake.name(),
