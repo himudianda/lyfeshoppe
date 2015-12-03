@@ -75,7 +75,15 @@ class BusinessForm(ModelForm):
       label="Admins",
       query_factory=lambda: User.query.all(),
       get_pk=lambda item: item.id,
-      get_label=lambda item: item.name,
+      get_label=lambda item: item.name if item.name else item.email,
+      allow_blank=True
+    )
+
+    employees = QuerySelectMultipleField(
+      label="Employees",
+      query_factory=lambda: User.query.all(),
+      get_pk=lambda item: item.id,
+      get_label=lambda item: item.name if item.name else item.email,
       allow_blank=True
     )
 
