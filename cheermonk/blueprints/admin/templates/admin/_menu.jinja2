@@ -1,6 +1,35 @@
-<li><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
-<li role="separator" class="divider"></li>
-<li><a href="{{ url_for('admin.users') }}">Users</a></li>
-<li><a href="{{ url_for('admin.businesses') }}">Businesses</a></li>
-<li><a href="{{ url_for('admin.issues') }}">Issues</a></li>
-<li><a href="{{ url_for('admin.coupons') }}">Coupons</a></li>
+<li class="nav-item start">
+    <a href="{{ url_for('admin.dashboard') }}" class="nav-link nav-toggle">
+        <i class="icon-home"></i>
+        <span class="title">Dashboard</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ url_for('admin.users') }}" class="nav-link nav-toggle">
+        <i class="icon-bulb"></i>
+        <span class="title">Users</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ url_for('admin.businesses') }}" class="nav-link nav-toggle">
+        <i class="icon-basket"></i>
+        <span class="title">Businesses</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ url_for('admin.issues') }}" class="nav-link nav-toggle">
+        <i class="icon-bulb"></i>
+        <span class="title">Issues</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ url_for('admin.coupons') }}" class="nav-link nav-toggle">
+        <i class="icon-bulb"></i>
+        <span class="title">Coupons</span>
+        <span class="arrow"></span>
+    </a>
+</li>
