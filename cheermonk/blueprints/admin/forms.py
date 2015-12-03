@@ -24,6 +24,7 @@ except AttributeError:
 from cheermonk.lib.locale import Currency
 from cheermonk.lib.util_wtforms import ModelForm, choices_from_dict
 from cheermonk.blueprints.user.models import db, User
+from cheermonk.blueprints.business.models.business import Business
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.billing.models.coupon import Coupon
 
@@ -61,6 +62,14 @@ class UserForm(ModelForm):
     active = BooleanField(_('Yes, allow this user to sign in'))
     locale = SelectField(_('Language preference'), [DataRequired()],
                          choices=choices_from_dict(LANGUAGES))
+
+
+class BusinessForm(ModelForm):
+
+    name = StringField(_('Business name'), [Optional(), Length(1, 255)])
+    type = SelectField(_('Business Type'), [DataRequired()],
+                       choices=choices_from_dict(Business.TYPE,
+                                                 prepend_blank=False))
 
 
 class UserCancelSubscriptionForm(Form):

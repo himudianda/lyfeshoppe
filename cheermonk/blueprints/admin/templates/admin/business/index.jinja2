@@ -62,7 +62,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        {{ business.name }}
+                                        <a href="{{ url_for('admin.businesses_edit', id=business.id) }}">
+                                            {{ business.name }}
+                                        </a>
                                     </td>
                                     <td>
                                         {{ business.email }}

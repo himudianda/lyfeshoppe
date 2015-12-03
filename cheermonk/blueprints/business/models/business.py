@@ -22,7 +22,7 @@ class Business(ResourceMixin, db.Model):
     ])
 
     # Details
-    name = db.Column(db.String(128))
+    name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default='massage')
 
