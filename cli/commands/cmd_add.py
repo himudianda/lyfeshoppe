@@ -1,7 +1,7 @@
 import logging
 import random
 from datetime import datetime
-
+from random import randint
 import click
 from faker import Faker
 
@@ -289,12 +289,17 @@ def businesses():
     # Relation 1: Businesses & Business Admins (Many to many relation)
     # Relation 2: Employers and Employeers (Many to many relation)
     users = db.session.query(User).all()
+    num_of_users = User.query.count()
     businesses = db.session.query(Business).all()
-    for user, business in zip(users, businesses):
-        user.businesses.extend(businesses)
+
+    for business in businesses:
+
+        # Add one random user as administrator for a business
+        business.admins.append(users[randint(0, (num_of_users-1))])
+
+        # Add all users as employees for all businesses
         business.employees.extend(users)
 
-        db.session.add(user)
         db.session.add(business)
 
     db.session.commit()
