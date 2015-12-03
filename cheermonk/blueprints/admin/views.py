@@ -1,10 +1,4 @@
-from flask import (
-    Blueprint,
-    redirect,
-    request,
-    flash,
-    url_for,
-    render_template)
+from flask import Blueprint, redirect, request, flash, url_for, render_template
 from flask_login import login_required, current_user
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
@@ -23,8 +17,7 @@ from cheermonk.blueprints.admin.forms import SearchForm, BulkDeleteForm, \
     CouponForm
 from cheermonk.extensions import db
 
-admin = Blueprint('admin', __name__,
-                  template_folder='templates', url_prefix='/admin')
+admin = Blueprint('admin', __name__, template_folder='templates', url_prefix='/admin')
 
 
 @admin.before_request
@@ -148,8 +141,7 @@ def users_edit(id):
         if User.is_last_admin(user,
                               request.form.get('role'),
                               request.form.get('active')):
-            flash(_('You are the last admin, you cannot do that.'),
-                  'error')
+            flash(_('You are the last admin, you cannot do that.'), 'error')
             return redirect(url_for('admin.users'))
 
         form.populate_obj(user)
@@ -198,11 +190,9 @@ def users_cancel_subscription():
         if user:
             subscription = Subscription()
             if subscription.cancel(user):
-                flash(_('Subscription has been cancelled for %(user)s.',
-                        user=user.name), 'success')
+                flash(_('Subscription has been cancelled for %(user)s.', user=user.name), 'success')
         else:
-            flash(_('No subscription was cancelled, something went wrong.'),
-                  'error')
+            flash(_('No subscription was cancelled, something went wrong.'), 'error')
 
     return redirect(url_for('admin.users'))
 
@@ -237,14 +227,12 @@ def issues_edit(id):
 
     form = IssueForm(obj=issue)
 
-    subject = _('[Cheermonk issue] Re: %(issue_type)s',
-                issue_type=issue.LABEL[issue.label])
+    subject = _('[Cheermonk issue] Re: %(issue_type)s', issue_type=issue.LABEL[issue.label])
 
     # Shenanigans to comply with PEP-8's formatting style.
     body_string = '\n\nYou opened an issue regarding:'
     issue_string = '\n\n---\n{0}\n---\n\n'.format(issue.question)
-    message = _('Hello,%(body)s:%(issue)s\n\nThanks,\nCheermonk support team',
-                body=body_string, issue=issue_string)
+    message = _('Hello,%(body)s:%(issue)s\n\nThanks,\nCheermonk support team', body=body_string, issue=issue_string)
 
     contact_form = IssueContactForm(email=issue.email,
                                     subject=subject, message=message)
@@ -256,8 +244,7 @@ def issues_edit(id):
         flash(_('Issue has been saved successfully.'), 'success')
         return redirect(url_for('admin.issues'))
 
-    return render_template('admin/issue/edit.jinja2', form=form,
-                           contact_form=contact_form, issue=issue)
+    return render_template('admin/issue/edit.jinja2', form=form, contact_form=contact_form, issue=issue)
 
 
 @admin.route('/issues/bulk_delete', methods=['POST'])
@@ -292,8 +279,7 @@ def issues_contact(id):
 
         Issue.set_as_contacted(issue)
 
-        flash(_('The person who sent the issue has been contacted.'),
-              'success')
+        flash(_('The person who sent the issue has been contacted.'), 'success')
     else:
         flash(_('Issue no longer exists, no e-mail was sent.'), 'error')
 
