@@ -53,6 +53,16 @@ def businesses(page):
                            businesses=paginated_businesses)
 
 
+# Dashboard -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>')
+def business_dashboard(id):
+    business = Business.query.get(id)
+    group_and_count_businesses = Dashboard.group_and_count_businesses()
+
+    return render_template('backend/business/dashboard.jinja2',
+                           group_and_count_businesses=group_and_count_businesses)
+
+
 @backend.route('/businesses/bulk_delete', methods=['POST'])
 def businesses_bulk_delete():
     form = BulkDeleteForm()

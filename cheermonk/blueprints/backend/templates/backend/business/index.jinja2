@@ -76,8 +76,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        {{ business.name }}
-                                        
+                                        <a href="{{ url_for('backend.business_dashboard', id=business.id) }}">
+                                            {{ business.name }}
+                                        </a>
                                     </td>
                                     <td>
                                         {{ business.email }}
