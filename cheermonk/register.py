@@ -12,7 +12,6 @@ from cheermonk.lib.http_method_override_middleware import \
 from cheermonk.blueprints.admin import admin
 from cheermonk.blueprints.backend import backend
 from cheermonk.blueprints.page import page
-from cheermonk.blueprints.dashboard import dashboard
 from cheermonk.blueprints.user import user
 from cheermonk.blueprints.issue import issue
 from cheermonk.blueprints.stream import stream
@@ -36,7 +35,6 @@ FLASK_BLUEPRINTS = [
     admin,
     backend,
     page,
-    dashboard,
     user,
     issue,
     billing,

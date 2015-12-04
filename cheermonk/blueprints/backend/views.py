@@ -21,5 +21,5 @@ def before_request():
 def dashboard():
     group_and_count_businesses = Dashboard.group_and_count_businesses()
 
-    return render_template('page/dashboard.jinja2',
+    return render_template('backend/page/dashboard.jinja2',
                            group_and_count_businesses=group_and_count_businesses)
