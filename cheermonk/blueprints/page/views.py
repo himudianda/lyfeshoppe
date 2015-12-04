@@ -9,15 +9,6 @@ def home():
     return render_template('page/home.jinja2')
 
 
-@page.route('/panel')
-@login_required
-def dashboard():
-    if current_user.role == 'admin':
-        return redirect(url_for('admin.dashboard'))
-    else:
-        return redirect(url_for('dashboard.index'))
-
-
 @page.route('/faq')
 def faq():
     return render_template('page/faq.jinja2')

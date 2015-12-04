@@ -1,4 +1,5 @@
 {% extends 'dashboard/layouts/base.jinja2' %}
+{% import 'macros/role_urls.jinja2' as role_urls with context %}
 
 {% block header %}
   
@@ -8,8 +9,10 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                    <a href="{{ url_for('page.dashboard') }}">
-                        <img src="{{ url_for('static', filename='common/images/cheermonk_logo_very_small.png') }}" alt="logo" class="logo-default" /> </a>
+                    {% call role_urls.dashboard_url() %}
+                        <img src="{{ url_for('static', filename='common/images/cheermonk_logo_very_small.png') }}" alt="logo" class="logo-default" />
+                    {% endcall %}
+
                     <div class="menu-toggler sidebar-toggler">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
                     </div>
