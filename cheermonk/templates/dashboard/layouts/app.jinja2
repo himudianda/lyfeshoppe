@@ -77,7 +77,7 @@
                         {% if current_user.role == 'admin' %}
                             {% include 'admin/_menu.jinja2' %}
                         {% elif current_user.role == 'member' %}
-                            {% include 'dashboard/_menu.jinja2' %}
+                            {% include '_menu.jinja2' %}
                         {% endif %}
 
                     </ul>
