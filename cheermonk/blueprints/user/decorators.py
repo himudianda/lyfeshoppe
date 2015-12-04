@@ -1,8 +1,9 @@
 from functools import wraps
-
-from flask import flash, redirect, url_for
+from flask import flash, redirect
 from flask_babel import gettext as _
 from flask_login import current_user
+
+from cheermonk.lib.role_redirects import get_dashboard_url
 
 
 def anonymous_required():
@@ -16,7 +17,7 @@ def anonymous_required():
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if current_user.is_authenticated():
-                return redirect(url_for('page.dashboard'))
+                return redirect(get_dashboard_url())
 
             return f(*args, **kwargs)
 
@@ -38,7 +39,7 @@ def role_required(*roles):
         def decorated_function(*args, **kwargs):
             if current_user.role not in roles:
                 flash(_('You do not have permission to do that.'), 'error')
-                return redirect(url_for('page.dashboard'))
+                return redirect(get_dashboard_url())
 
             return f(*args, **kwargs)
 

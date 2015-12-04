@@ -13,6 +13,7 @@ from flask_login import (
 from flask_babel import gettext as _
 
 from cheermonk.lib.safe_next_url import safe_next_url
+from cheermonk.lib.role_redirects import get_dashboard_url
 from cheermonk.blueprints.user.decorators import anonymous_required
 
 from cheermonk.blueprints.user.models import User
@@ -53,7 +54,7 @@ def login():
                 if next_url:
                     return redirect(safe_next_url(next_url))
 
-                return redirect(url_for('page.dashboard'))
+                return redirect(get_dashboard_url())
             else:
                 flash(_('This account has been disabled.'), 'error')
         else:
@@ -123,7 +124,7 @@ def signup():
 
         if login_user(u):
             flash(_('Awesome, thanks for signing up!'), 'success')
-            return redirect(url_for('page.dashboard'))
+            return redirect(get_dashboard_url())
 
     return render_template('user/signup.jinja2', form=form)
 
