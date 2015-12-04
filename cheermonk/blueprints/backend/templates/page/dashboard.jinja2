@@ -1,0 +1,51 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+
+{% block title %}
+    Admin Dashboard | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+
+            <!-- BEGIN PAGE HEADER-->
+            <h3 class="page-title"> Dashboard. </h3>
+            <!-- END PAGE HEADER-->
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Businesses
+                    <span class="pull-right text-muted">
+                      {{ group_and_count_businesses.total }}
+                    </span>
+                  </div>
+                  <div class="panel-body">
+                    {% for item in group_and_count_businesses.query %}
+                      {% set percent = ((item[0] / group_and_count_businesses.total) * 100) | round %}
+                      <h5>
+                        {{ item[1] | title }}
+                        <span class="text-muted">({{ item[0] }})</span>
+                      </h5>
+                      <div class="progress progress-striped active">
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="{{ percent }}" aria-valuemin="0"
+                             aria-valuemax="100" style="width: {{ percent }}%;">
+                          {{ percent }}%
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}
+
+

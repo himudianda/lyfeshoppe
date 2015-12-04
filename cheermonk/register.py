@@ -10,6 +10,7 @@ from jinja2 import ChoiceLoader, FileSystemLoader
 from cheermonk.lib.http_method_override_middleware import \
     HTTPMethodOverrideMiddleware
 from cheermonk.blueprints.admin import admin
+from cheermonk.blueprints.backend import backend
 from cheermonk.blueprints.page import page
 from cheermonk.blueprints.dashboard import dashboard
 from cheermonk.blueprints.user import user
@@ -33,6 +34,7 @@ from cheermonk.blueprints.billing.template_processors import format_currency
 
 FLASK_BLUEPRINTS = [
     admin,
+    backend,
     page,
     dashboard,
     user,
