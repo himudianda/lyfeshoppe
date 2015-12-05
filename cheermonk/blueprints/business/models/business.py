@@ -7,6 +7,33 @@ from cheermonk.blueprints.user.models import User
 from cheermonk.extensions import db
 
 
+class Reservation(ResourceMixin, db.Model):
+    __tablename__ = 'reservations'
+
+    STATUS = OrderedDict([
+        ('new', 'New reservation'),
+        ('processing', 'Reservation being currently processed'),
+        ('confirmed', 'Reservation Confirmed'),
+        ('cancalled', 'Reservation Cancelled'),
+        ('executed', 'Product/Service was provided')
+    ])
+
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.Enum(*STATUS, name='reservation_statuses'), index=True, nullable=False, server_default='new')
+    start_time = db.Column(AwareDateTime())
+    end_time = db.Column(AwareDateTime())
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    # Relationships
+    customer_id = db.Column(db.Integer, db.ForeignKey(
+                        'customers.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Reservation, self).__init__(**kwargs)
+
+
 class Customer(ResourceMixin, db.Model):
     __tablename__ = 'customers'
 
@@ -22,6 +49,7 @@ class Customer(ResourceMixin, db.Model):
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
+    reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
