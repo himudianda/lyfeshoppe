@@ -25,22 +25,6 @@ class Product(ResourceMixin, db.Model):
         super(Product, self).__init__(**kwargs)
 
 
-'''
-class Employer(ResourceMixin, db.Model):
-    __tablename__ = 'employers'
-
-    id = db.Column(db.Integer, primary_key=True)
-
-
-class Employee(ResourceMixin, db.Model):
-    __tablename__ = 'employees'
-
-    id = db.Column(db.Integer, primary_key=True)
-    business
-    availability
-'''
-
-
 class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'
 
