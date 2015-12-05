@@ -7,6 +7,29 @@ from cheermonk.blueprints.user.models import User
 from cheermonk.extensions import db
 
 
+class Customer(ResourceMixin, db.Model):
+    __tablename__ = 'customers'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    # Relationships.
+    business_id = db.Column(db.Integer, db.ForeignKey(
+                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+
+    # Many to One relationship: Many customers can have same user
+    # Thats becoz; A customer can belong with multiple businesses.
+    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship(User)
+
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Customer, self).__init__(**kwargs)
+
+
 class Employee(ResourceMixin, db.Model):
     __tablename__ = 'employees'
 
@@ -28,6 +51,8 @@ class Employee(ResourceMixin, db.Model):
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
+
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
