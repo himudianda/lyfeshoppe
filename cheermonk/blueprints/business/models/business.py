@@ -2,25 +2,8 @@ from collections import OrderedDict
 from sqlalchemy import or_
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from cheermonk.blueprints.common.models import Address, Occupancy
+from cheermonk.blueprints.common.models import Address, Occupancy, Availability
 from cheermonk.extensions import db
-
-
-class StaffOccupancy(ResourceMixin, db.Model):
-    __tablename__ = 'staff_occupancies'
-
-    id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(AwareDateTime())
-    end_time = db.Column(AwareDateTime())
-
-    # Relationships.
-    employee_id = db.Column(db.Integer, db.ForeignKey(
-                        'users.id', onupdate='CASCADE', ondelete='CASCADE'
-                    ), index=True, nullable=False)
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Product, self).__init__(**kwargs)
 
 
 class Product(ResourceMixin, db.Model):
@@ -37,6 +20,8 @@ class Product(ResourceMixin, db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey(
                         'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
+
+    availabilities = db.relationship(Availability, backref="product")
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
@@ -76,8 +61,7 @@ class Business(ResourceMixin, db.Model):
     address = db.relationship(Address)
     # One to Many relationship: One business can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="business")
-
-    products = db.relationship(Product, backref='businesses', passive_deletes=True)
+    products = db.relationship(Product, backref='business', passive_deletes=True)
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
