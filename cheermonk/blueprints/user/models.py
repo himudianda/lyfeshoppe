@@ -86,6 +86,8 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     # Billing.
     name = db.Column(db.String(128), index=True)
+    mobile_phone = db.Column(db.String(20), index=True)
+    home_phone = db.Column(db.String(20), index=True)
     payment_id = db.Column(db.String(128), index=True)
     cancelled_subscription_on = db.Column(AwareDateTime())
 
