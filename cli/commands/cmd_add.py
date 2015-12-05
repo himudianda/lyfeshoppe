@@ -5,6 +5,15 @@ from random import randint
 import click
 from faker import Faker
 
+from cheermonk.app import create_app
+from cheermonk.extensions import db
+from cheermonk.blueprints.issue.models import Issue
+from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.billing.models.invoice import Invoice
+from cheermonk.blueprints.billing.models.coupon import Coupon
+from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
+from cheermonk.blueprints.business.models.business import Business
+
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
 
@@ -24,15 +33,6 @@ except AttributeError:
 
     if ACCEPT_LANGUAGES is None:
         ACCEPT_LANGUAGES = settings.ACCEPT_LANGUAGES
-
-from cheermonk.app import create_app
-from cheermonk.extensions import db
-from cheermonk.blueprints.issue.models import Issue
-from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.billing.models.invoice import Invoice
-from cheermonk.blueprints.billing.models.coupon import Coupon
-from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
-from cheermonk.blueprints.business.models.business import Business
 
 fake = Faker()
 app = create_app()
@@ -255,57 +255,6 @@ def invoices():
 
 
 @click.command()
-def businesses():
-    """
-    Create random businesses.
-    """
-    data = []
-
-    users = db.session.query(User).all()
-
-    for user in users:
-        for i in range(0, random.randint(1, 12)):
-            # Create a fake unix timestamp in the future.
-            created_on = fake.date_time_between(
-                start_date='-1y', end_date='now').strftime('%s')
-
-            created_on = datetime.utcfromtimestamp(
-                float(created_on)).strftime('%Y-%m-%dT%H:%M:%S Z')
-
-            params = {
-                'created_on': created_on,
-                'updated_on': created_on,
-                'name': fake.company(),
-                'email': fake.company_email(),
-                'type': random.choice(Business.TYPE.keys()),
-                'admins': [user]
-            }
-
-            data.append(params)
-
-    _bulk_insert(Business, data, 'businesses')
-
-    # Create all relationships between users & businesses
-    # Relation 1: Businesses & Business Admins (Many to many relation)
-    # Relation 2: Employers and Employeers (Many to many relation)
-    users = db.session.query(User).all()
-    num_of_users = User.query.count()
-    businesses = db.session.query(Business).all()
-
-    for business in businesses:
-
-        # Add one random user as administrator for a business
-        business.admins.append(users[randint(0, (num_of_users-1))])
-
-        # Add all users as employees for all businesses
-        business.employees.extend(users)
-
-        db.session.add(business)
-
-    db.session.commit()
-
-
-@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -318,7 +267,6 @@ def all(ctx):
     ctx.invoke(issues)
     ctx.invoke(coupons)
     ctx.invoke(invoices)
-    ctx.invoke(businesses)
 
     return None
 
@@ -327,5 +275,4 @@ cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(coupons)
 cli.add_command(invoices)
-cli.add_command(businesses)
 cli.add_command(all)
