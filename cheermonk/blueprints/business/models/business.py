@@ -14,11 +14,19 @@ class Inventory(ResourceMixin, db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey(
                         'products.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
+
     price = db.Column(db.Integer, nullable=False, default=0)
 
+    # more fields
+    '''
+    time required per session
+    
     # Example: Massage has count 1
     # Example: Yoga classes & sports training can how count >= 1
-    count = db.Column(db.Integer, nullable=False, default=0)
+    num of customers per session = db.Column(db.Integer, nullable=False, default=0)
+
+    '''
+
 
 
 class Product(ResourceMixin, db.Model):
@@ -28,7 +36,6 @@ class Product(ResourceMixin, db.Model):
 
     title = db.Column(db.String(128), nullable=False, server_default='')
     description = db.Column(db.Text())
-    price = db.Column(db.Integer, nullable=False, default=0)
 
     inventory = db.relationship(Inventory, backref='products', passive_deletes=True)
 
@@ -53,6 +60,8 @@ class Employee(ResourceMixin, db.Model):
     __tablename__ = 'employees'
 
     id = db.Column(db.Integer, primary_key=True)
+    business
+    availability
 '''
 
 
