@@ -53,6 +53,23 @@ class EmployersRelationships(object):
 db.mapper(EmployersRelationships, employers_relationships)
 
 
+product_employee_relationships = db.Table(
+        'product_employee_relationships',
+        # NOTE: products.id & users.id are used because products & users are the table names
+        db.Column('product_id', db.Integer, db.ForeignKey('products.id'), nullable=False),
+        db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+        db.PrimaryKeyConstraint('product_id', 'employee_id')
+    )
+
+
+class ProductEmployeeRelationships(object):
+    def __init__(self, product_id, employee_id):
+        self.product_id = product_id
+        self.employee_id = employee_id
+
+db.mapper(ProductEmployeeRelationships, product_employee_relationships)
+
+
 class User(UserMixin, ResourceMixin, db.Model):
     __tablename__ = 'users'
 
@@ -76,6 +93,8 @@ class User(UserMixin, ResourceMixin, db.Model):
     # NOTE: admins & employeers are used for backrefs coz they are the field names.
     businesses = db.relationship('Business', secondary=businesses_relationships, backref='admins')
     employers = db.relationship('Business', secondary=employers_relationships, backref='employees')
+    products = db.relationship('Product', secondary=product_employee_relationships, backref='employees')
+    occupancies = db.relationship('StaffOccupancy', backref='employees', passive_deletes=True)
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')

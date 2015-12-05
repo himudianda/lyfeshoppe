@@ -5,6 +5,23 @@ from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.extensions import db
 
 
+class StaffOccupancy(ResourceMixin, db.Model):
+    __tablename__ = 'staff_occupancies'
+
+    id = db.Column(db.Integer, primary_key=True)
+    start_time = db.Column(AwareDateTime())
+    end_time = db.Column(AwareDateTime())
+
+    # Relationships.
+    employee_id = db.Column(db.Integer, db.ForeignKey(
+                        'users.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Product, self).__init__(**kwargs)
+
+
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'
 
