@@ -5,39 +5,15 @@ from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.extensions import db
 
 
-class Inventory(ResourceMixin, db.Model):
-    __tablename__ = 'inventory'
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    # Relationships.
-    product_id = db.Column(db.Integer, db.ForeignKey(
-                        'products.id', onupdate='CASCADE', ondelete='CASCADE'
-                    ), index=True, nullable=False)
-
-    price = db.Column(db.Integer, nullable=False, default=0)
-
-    # more fields
-    '''
-    time required per session
-    
-    # Example: Massage has count 1
-    # Example: Yoga classes & sports training can how count >= 1
-    num of customers per session = db.Column(db.Integer, nullable=False, default=0)
-
-    '''
-
-
-
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
-
-    title = db.Column(db.String(128), nullable=False, server_default='')
+    name = db.Column(db.String(128))
     description = db.Column(db.Text())
-
-    inventory = db.relationship(Inventory, backref='products', passive_deletes=True)
+    capacity = db.Column(db.Integer, nullable=False, default=1)  # 1 person
+    price_cents = db.Column(db.Integer, nullable=False, default=1000)  # $10
+    duration_mins = db.Column(db.Integer, nullable=False, default=60)  # 1 hour
 
     # Relationships.
     business_id = db.Column(db.Integer, db.ForeignKey(
@@ -83,7 +59,7 @@ class Business(ResourceMixin, db.Model):
     # Details
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
+    email = db.Column(db.String(255), index=True)
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default='massage')
 
     open_time = db.Column(AwareDateTime())
