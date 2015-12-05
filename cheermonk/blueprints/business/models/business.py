@@ -30,6 +30,23 @@ class Customer(ResourceMixin, db.Model):
         super(Customer, self).__init__(**kwargs)
 
 
+employee_product_relations = db.Table(
+    'employee_product_relations',
+    # NOTE: businesses.id & users.id are used because businesses & users are the table names
+    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), nullable=False),
+    db.Column('employee_id', db.Integer, db.ForeignKey('employees.id'), nullable=False),
+    db.PrimaryKeyConstraint('product_id', 'employee_id')
+)
+
+
+class EmployeeProductRelationships(object):
+    def __init__(self, product_id, employee_id):
+        self.product_id = product_id
+        self.employee_id = employee_id
+
+db.mapper(EmployeeProductRelationships, employee_product_relations)
+
+
 class Employee(ResourceMixin, db.Model):
     __tablename__ = 'employees'
 
@@ -51,6 +68,7 @@ class Employee(ResourceMixin, db.Model):
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
+    products = db.relationship('Product', secondary=employee_product_relations, backref='employees')
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
