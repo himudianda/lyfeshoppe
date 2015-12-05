@@ -19,12 +19,13 @@ from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.extensions import db, bcrypt
 
 
-businesses_relationships = db.Table('businesses_relationships',
-                                    # NOTE: businesses.id & users.id are used because businesses & users are the table names 
-                                    db.Column('business_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
-                                    db.Column('admin_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
-                                    db.PrimaryKeyConstraint('business_id', 'admin_id')
-                                    )
+businesses_relationships = db.Table(
+        'businesses_relationships',
+        # NOTE: businesses.id & users.id are used because businesses & users are the table names
+        db.Column('business_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
+        db.Column('admin_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+        db.PrimaryKeyConstraint('business_id', 'admin_id')
+    )
 
 
 class BusinessesRelationships(object):
@@ -35,12 +36,13 @@ class BusinessesRelationships(object):
 db.mapper(BusinessesRelationships, businesses_relationships)
 
 
-employers_relationships = db.Table('employers_relationships',
-                                    # NOTE: businesses.id & users.id are used because businesses & users are the table names
-                                   db.Column('employer_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
-                                   db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
-                                   db.PrimaryKeyConstraint('employer_id', 'employee_id')
-                                   )
+employers_relationships = db.Table(
+        'employers_relationships',
+        # NOTE: businesses.id & users.id are used because businesses & users are the table names
+        db.Column('employer_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
+        db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+        db.PrimaryKeyConstraint('employer_id', 'employee_id')
+   )
 
 
 class EmployersRelationships(object):
