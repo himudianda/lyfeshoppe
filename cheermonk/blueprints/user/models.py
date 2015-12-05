@@ -57,7 +57,6 @@ class User(UserMixin, ResourceMixin, db.Model):
     __tablename__ = 'users'
 
     ROLE = OrderedDict([
-        ('guest', 'Guest'),
         ('member', 'Member'),
         ('admin', 'Admin')
     ])
