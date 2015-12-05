@@ -2,6 +2,7 @@ from collections import OrderedDict
 from sqlalchemy import or_
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
+from cheermonk.blueprints.common.models import Address, Occupancy
 from cheermonk.extensions import db
 
 
@@ -67,6 +68,14 @@ class Business(ResourceMixin, db.Model):
     close_time = db.Column(AwareDateTime())
     phone = db.Column(db.String(20), index=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    # Relationships.
+    # Many to One relationship: Many users can have same address
+    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+    address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
+    address = db.relationship(Address)
+    # One to Many relationship: One business can have multiple occupancies
+    occupancies = db.relationship(Occupancy, backref="business")
 
     products = db.relationship(Product, backref='businesses', passive_deletes=True)
 

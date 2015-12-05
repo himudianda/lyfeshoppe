@@ -13,61 +13,11 @@ from itsdangerous import URLSafeTimedSerializer, \
 from sqlalchemy import or_
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
+from cheermonk.blueprints.common.models import Address, Occupancy
 from cheermonk.blueprints.billing.models.credit_card import CreditCard
 from cheermonk.blueprints.billing.models.subscription import Subscription
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.extensions import db, bcrypt
-
-
-businesses_relationships = db.Table(
-        'businesses_relationships',
-        # NOTE: businesses.id & users.id are used because businesses & users are the table names
-        db.Column('business_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
-        db.Column('admin_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
-        db.PrimaryKeyConstraint('business_id', 'admin_id')
-    )
-
-
-class BusinessesRelationships(object):
-    def __init__(self, business_id, admin_id):
-        self.business_id = business_id
-        self.admin_id = admin_id
-
-db.mapper(BusinessesRelationships, businesses_relationships)
-
-
-employers_relationships = db.Table(
-        'employers_relationships',
-        # NOTE: businesses.id & users.id are used because businesses & users are the table names
-        db.Column('employer_id', db.Integer, db.ForeignKey('businesses.id'), nullable=False),
-        db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
-        db.PrimaryKeyConstraint('employer_id', 'employee_id')
-   )
-
-
-class EmployersRelationships(object):
-    def __init__(self, employer_id, employee_id):
-        self.employer_id = employer_id
-        self.employee_id = employee_id
-
-db.mapper(EmployersRelationships, employers_relationships)
-
-
-product_employee_relationships = db.Table(
-        'product_employee_relationships',
-        # NOTE: products.id & users.id are used because products & users are the table names
-        db.Column('product_id', db.Integer, db.ForeignKey('products.id'), nullable=False),
-        db.Column('employee_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
-        db.PrimaryKeyConstraint('product_id', 'employee_id')
-    )
-
-
-class ProductEmployeeRelationships(object):
-    def __init__(self, product_id, employee_id):
-        self.product_id = product_id
-        self.employee_id = employee_id
-
-db.mapper(ProductEmployeeRelationships, product_employee_relationships)
 
 
 class User(UserMixin, ResourceMixin, db.Model):
@@ -85,16 +35,12 @@ class User(UserMixin, ResourceMixin, db.Model):
     subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
     invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
 
-    # Many to many relationships defined.
-    # Each business can have multiple admins.
-    # Each business can have multiple employees
-    # Each User can head (be an admin of) multiple businesses
-    # Each User can be employed with multiple businesses
-    # NOTE: admins & employeers are used for backrefs coz they are the field names.
-    businesses = db.relationship('Business', secondary=businesses_relationships, backref='admins')
-    employers = db.relationship('Business', secondary=employers_relationships, backref='employees')
-    products = db.relationship('Product', secondary=product_employee_relationships, backref='employees')
-    occupancies = db.relationship('StaffOccupancy', backref='employees', passive_deletes=True)
+    # Many to One relationship: Many users can have same address
+    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+    address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
+    address = db.relationship(Address)
+    # One to Many relationship: One user can have multiple occupancies
+    occupancies = db.relationship(Occupancy, backref="user")
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')

@@ -11,6 +11,9 @@ class Occupancy(db.Model):
     end_time = db.Column(AwareDateTime())
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
+
 
 class Availability(db.Model):
     __tablename__ = 'availabilities'
