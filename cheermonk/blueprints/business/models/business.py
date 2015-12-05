@@ -3,7 +3,35 @@ from sqlalchemy import or_
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.common.models import Address, Occupancy, Availability
+from cheermonk.blueprints.user.models import User
 from cheermonk.extensions import db
+
+
+class Employee(ResourceMixin, db.Model):
+    __tablename__ = 'employees'
+
+    ROLE = OrderedDict([
+        ('admin', 'Admin'),  # Admin employees have full access to Business backends
+        ('member', 'Member')  # Member employees only have access to products in a Business that they offer
+    ])
+
+    id = db.Column(db.Integer, primary_key=True)
+    role = db.Column(db.Enum(*ROLE, name='employee_roles'), index=True, nullable=False, server_default='member')
+
+    # Relationships.
+    business_id = db.Column(db.Integer, db.ForeignKey(
+                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+
+    # Many to One relationship: Many employees can have same user
+    # Thats becoz; A user can be employed with multiple businesses.
+    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship(User)
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Employee, self).__init__(**kwargs)
 
 
 class Product(ResourceMixin, db.Model):
@@ -20,7 +48,6 @@ class Product(ResourceMixin, db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey(
                         'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
-
     availabilities = db.relationship(Availability, backref="product")
 
     def __init__(self, **kwargs):
@@ -62,6 +89,7 @@ class Business(ResourceMixin, db.Model):
     # One to Many relationship: One business can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="business")
     products = db.relationship(Product, backref='business', passive_deletes=True)
+    employees = db.relationship(Employee, backref='business', passive_deletes=True)
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

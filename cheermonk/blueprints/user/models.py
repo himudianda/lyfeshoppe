@@ -34,7 +34,6 @@ class User(UserMixin, ResourceMixin, db.Model):
     credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
     subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
     invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
-
     # Many to One relationship: Many users can have same address
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
