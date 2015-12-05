@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from sqlalchemy import or_
 
-from cheermonk.lib.util_sqlalchemy import ResourceMixin
+from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.extensions import db
 
 
@@ -67,7 +67,6 @@ class Employee(ResourceMixin, db.Model):
 
 class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'
-    id = db.Column(db.Integer, primary_key=True)
 
     TYPE = OrderedDict([
         ('acupuncture', 'Acupuncture'),
@@ -82,9 +81,15 @@ class Business(ResourceMixin, db.Model):
     ])
 
     # Details
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default='massage')
+
+    open_time = db.Column(AwareDateTime())
+    close_time = db.Column(AwareDateTime())
+    phone = db.Column(db.String(20), index=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     products = db.relationship(Product, backref='businesses', passive_deletes=True)
 
