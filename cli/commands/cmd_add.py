@@ -12,7 +12,7 @@ from cheermonk.blueprints.common.models import Address, Availability, Occupancy
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
-from cheermonk.blueprints.business.models.business import Business, Employee, Product
+from cheermonk.blueprints.business.models.business import Business, Employee, Product, Customer
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -406,6 +406,26 @@ def employees():
 
 
 @click.command()
+def customers():
+    """
+    Create random customers.
+    """
+    data = []
+    users = db.session.query(User).all()
+    businesses = db.session.query(Business).all()
+
+    for business in businesses:
+        params = {
+            'business_id': business.id,
+            'user_id': (random.choice(users)).id,
+            'active': '1'
+        }
+        data.append(params)
+
+    return _bulk_insert(Customer, data, 'customers')
+
+
+@click.command()
 def products():
     """
     Create random products.
@@ -446,6 +466,7 @@ def all(ctx):
     ctx.invoke(occupancies)
     ctx.invoke(employees)
     ctx.invoke(products)
+    ctx.invoke(customers)
     return None
 
 
@@ -458,4 +479,5 @@ cli.add_command(businesses)
 cli.add_command(occupancies)
 cli.add_command(employees)
 cli.add_command(products)
+cli.add_command(customers)
 cli.add_command(all)

@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from sqlalchemy import or_
+from sqlalchemy import or_, UniqueConstraint
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.common.models import Address, Occupancy, Availability
@@ -59,6 +59,8 @@ class Customer(ResourceMixin, db.Model):
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
+    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
+
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Customer, self).__init__(**kwargs)
@@ -106,6 +108,8 @@ class Employee(ResourceMixin, db.Model):
     reservations = db.relationship(Reservation, backref='employee', passive_deletes=True)
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_employee_user_business_uc'), )
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
