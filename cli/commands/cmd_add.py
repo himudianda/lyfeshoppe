@@ -12,7 +12,7 @@ from cheermonk.blueprints.common.models import Address, Availability, Occupancy
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
-from cheermonk.blueprints.business.models.business import Business, Employee, Product, Customer
+from cheermonk.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -43,6 +43,7 @@ NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_ISSUES = 50
 NUM_OF_FAKE_COUPONS = 5
 NUM_OF_FAKE_BUSINESSES = 200
+NUM_OF_FAKE_RESERVATIONS = 100
 
 
 def _log_status(count, model_label):
@@ -449,6 +450,44 @@ def products():
 
 
 @click.command()
+def reservations():
+    """
+    Create random reservations.
+    """
+    data = []
+
+    customers = db.session.query(Customer).all()
+    employees = db.session.query(Employee).all()
+    products = db.session.query(Product).all()
+
+    # Create a fake unix timestamp in the future.
+    start_time = fake.date_time_between(
+        start_date='now', end_date='+1d').strftime('%s')
+    end_time = fake.date_time_between(
+        start_date=start_time, end_date='+2d').strftime('%s')
+
+    start_time = datetime.utcfromtimestamp(
+        float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+    end_time = datetime.utcfromtimestamp(
+        float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+    for i in range(0, NUM_OF_FAKE_RESERVATIONS):
+        params = {
+            'status': random.choice(Reservation.STATUS.keys()),
+            'start_time': start_time,
+            'end_time': end_time,
+            'active': random.randint(100, 100000),
+            'customer_id': (random.choice(customers)).id,
+            'employee_id': (random.choice(employees)).id,
+            'product_id': (random.choice(products)).id
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Reservation, data, 'reservations')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -467,6 +506,7 @@ def all(ctx):
     ctx.invoke(employees)
     ctx.invoke(products)
     ctx.invoke(customers)
+    ctx.invoke(reservations)
     return None
 
 
@@ -480,4 +520,5 @@ cli.add_command(occupancies)
 cli.add_command(employees)
 cli.add_command(products)
 cli.add_command(customers)
+cli.add_command(reservations)
 cli.add_command(all)
