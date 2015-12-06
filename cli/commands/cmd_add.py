@@ -12,7 +12,7 @@ from cheermonk.blueprints.common.models import Address, Availability, Occupancy
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
-from cheermonk.blueprints.business.models.business import Business
+from cheermonk.blueprints.business.models.business import Business, Employee
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -382,6 +382,38 @@ def business_occupancies():
 
 
 @click.command()
+def employees():
+    """
+    Create random employees.
+    """
+    data = []
+    users = db.session.query(User).all()
+    businesses = db.session.query(Business).all()
+
+    for business in businesses:
+        admin_employee = random.choice(users)
+        params = {
+            'role': 'admin',
+            'business_id': business.id,
+            'user_id': admin_employee.id,
+            'active': '1'
+        }
+        data.append(params)
+
+        # Ensure that the member employee isnt the same as the admin employee
+        member_employee = random.choice(db.session.query(User).filter(User.id != admin_employee.id).all())
+        params = {
+            'role': 'member',
+            'business_id': business.id,
+            'user_id': member_employee.id,
+            'active': '1'
+        }
+        data.append(params)
+
+    return _bulk_insert(Employee, data, 'employees')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -398,7 +430,7 @@ def all(ctx):
     ctx.invoke(invoices)
     ctx.invoke(businesses)
     ctx.invoke(business_occupancies)
-
+    ctx.invoke(employees)
     return None
 
 
@@ -410,4 +442,5 @@ cli.add_command(coupons)
 cli.add_command(invoices)
 cli.add_command(businesses)
 cli.add_command(business_occupancies)
+cli.add_command(employees)
 cli.add_command(all)
