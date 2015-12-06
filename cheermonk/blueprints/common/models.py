@@ -49,6 +49,6 @@ class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     street = db.Column(db.String(128))
-    city = db.Column(db.String(20))
-    state = db.Column(db.String(20))
+    city = db.Column(db.String(30))
+    state = db.Column(db.String(30))
     zipcode = db.Column(db.String(10))

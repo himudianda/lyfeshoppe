@@ -141,41 +141,6 @@ def users():
 
 
 @click.command()
-def user_occupancies():
-    """
-    Create random user occupanices.
-    """
-    data = []
-    users = db.session.query(User).all()
-
-    for user in users:
-        for i in range(0, random.randint(1, 12)):
-
-            # Create a fake unix timestamp in the future.
-            start_time = fake.date_time_between(
-                start_date='now', end_date='+1d').strftime('%s')
-            end_time = fake.date_time_between(
-                start_date=start_time, end_date='+2d').strftime('%s')
-
-            start_time = datetime.utcfromtimestamp(
-                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-            end_time = datetime.utcfromtimestamp(
-                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-            params = {
-                'type': 'user',
-                'start_time': start_time,
-                'end_time': end_time,
-                'user_id': user.id,
-                'active': '1'
-            }
-
-            data.append(params)
-
-    return _bulk_insert(Occupancy, data, 'occupanices')
-
-
-@click.command()
 def issues():
     """
     Create random issues.
@@ -347,12 +312,37 @@ def businesses():
 
 
 @click.command()
-def business_occupancies():
+def occupancies():
     """
     Create random business occupanices.
     """
     data = []
+    users = db.session.query(User).all()
     businesses = db.session.query(Business).all()
+
+    for user in users:
+        for i in range(0, random.randint(1, 12)):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+            params = {
+                'type': 'user',
+                'start_time': start_time,
+                'end_time': end_time,
+                'user_id': user.id,
+                'active': '1'
+            }
+
+            data.append(params)
 
     for business in businesses:
         for i in range(0, random.randint(1, 12)):
@@ -424,23 +414,21 @@ def all(ctx):
     """
     ctx.invoke(addresses)
     ctx.invoke(users)
-    ctx.invoke(user_occupancies)
+    ctx.invoke(occupancies)
     ctx.invoke(issues)
-    ctx.invoke(coupons)
+    #ctx.invoke(coupons)
     ctx.invoke(invoices)
     ctx.invoke(businesses)
-    ctx.invoke(business_occupancies)
     ctx.invoke(employees)
     return None
 
 
 cli.add_command(addresses)
 cli.add_command(users)
-cli.add_command(user_occupancies)
+cli.add_command(occupancies)
 cli.add_command(issues)
-cli.add_command(coupons)
+#cli.add_command(coupons)
 cli.add_command(invoices)
 cli.add_command(businesses)
-cli.add_command(business_occupancies)
 cli.add_command(employees)
 cli.add_command(all)

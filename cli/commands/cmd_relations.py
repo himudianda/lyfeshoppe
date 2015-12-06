@@ -4,6 +4,8 @@ from cheermonk.app import create_app
 from cheermonk.extensions import db
 
 from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.business.models.business import Business
+
 
 app = create_app()
 db.app = app
@@ -38,6 +40,48 @@ def user_addresses():
 
 
 @click.command()
+def user_occupancies():
+    """
+    Read user occupancies
+    """
+    for user in db.session.query(User).all():
+        if user.occupancies and len(user.occupancies):
+            click.echo(
+                    'User {0} has {1} occupancies'.format(
+                        user.email, len(user.occupancies)
+                    )
+                )
+        else:
+            click.echo(
+                    'User {0}: has no occupancies.'.format(
+                        user.email
+                    )
+                )
+
+
+@click.command()
+def business_addresses():
+    """
+    Read business addresses
+    """
+    for business in db.session.query(Business).all():
+        if business.address:
+            click.echo(
+                    'Business {0} has address: {1},{2},{3},{4} at address_id: {5} matching address_id: {6}'.format(
+                        business.email, business.address.street, business.address.city,
+                        business.address.state, business.address.zipcode,
+                        business.address_id, business.address.id
+                    )
+                )
+        else:
+            click.echo(
+                    'Business {0}: has no addresses.'.format(
+                        business.email
+                    )
+                )
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -47,8 +91,13 @@ def all(ctx):
     :return: None
     """
     ctx.invoke(user_addresses)
+    ctx.invoke(business_addresses)
+    ctx.invoke(user_occupancies)
+
     return None
 
 
 cli.add_command(user_addresses)
+cli.add_command(business_addresses)
+cli.add_command(user_occupancies)
 cli.add_command(all)
