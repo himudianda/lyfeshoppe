@@ -60,6 +60,26 @@ def user_occupancies():
 
 
 @click.command()
+def business_occupancies():
+    """
+    Read business occupancies
+    """
+    for business in db.session.query(Business).all():
+        if business.occupancies and len(business.occupancies):
+            click.echo(
+                    'Business {0} has {1} occupancies'.format(
+                        business.email, len(business.occupancies)
+                    )
+                )
+        else:
+            click.echo(
+                    'Business {0}: has no occupancies.'.format(
+                        business.email
+                    )
+                )
+
+
+@click.command()
 def business_addresses():
     """
     Read business addresses
@@ -93,6 +113,7 @@ def all(ctx):
     ctx.invoke(user_addresses)
     ctx.invoke(business_addresses)
     ctx.invoke(user_occupancies)
+    ctx.invoke(business_occupancies)
 
     return None
 
@@ -100,4 +121,5 @@ def all(ctx):
 cli.add_command(user_addresses)
 cli.add_command(business_addresses)
 cli.add_command(user_occupancies)
+cli.add_command(business_occupancies)
 cli.add_command(all)

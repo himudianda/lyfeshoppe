@@ -317,9 +317,8 @@ def occupancies():
     Create random business occupanices.
     """
     data = []
-    users = db.session.query(User).all()
-    businesses = db.session.query(Business).all()
 
+    users = db.session.query(User).all()
     for user in users:
         for i in range(0, random.randint(1, 12)):
 
@@ -339,11 +338,13 @@ def occupancies():
                 'start_time': start_time,
                 'end_time': end_time,
                 'user_id': user.id,
+                'business_id': None,
                 'active': '1'
             }
 
             data.append(params)
 
+    businesses = db.session.query(Business).all()
     for business in businesses:
         for i in range(0, random.randint(1, 12)):
 
@@ -362,13 +363,16 @@ def occupancies():
                 'type': 'business',
                 'start_time': start_time,
                 'end_time': end_time,
+                'user_id': None,
                 'business_id': business.id,
                 'active': '1'
             }
 
+            print params
+
             data.append(params)
 
-    return _bulk_insert(Occupancy, data, 'occupanices')
+    return _bulk_insert(Occupancy, data, 'occupancies')
 
 
 @click.command()
@@ -414,21 +418,21 @@ def all(ctx):
     """
     ctx.invoke(addresses)
     ctx.invoke(users)
-    ctx.invoke(occupancies)
     ctx.invoke(issues)
     #ctx.invoke(coupons)
     ctx.invoke(invoices)
     ctx.invoke(businesses)
+    ctx.invoke(occupancies)
     ctx.invoke(employees)
     return None
 
 
 cli.add_command(addresses)
 cli.add_command(users)
-cli.add_command(occupancies)
 cli.add_command(issues)
 #cli.add_command(coupons)
 cli.add_command(invoices)
 cli.add_command(businesses)
+cli.add_command(occupancies)
 cli.add_command(employees)
 cli.add_command(all)
