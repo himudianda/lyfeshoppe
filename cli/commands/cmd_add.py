@@ -368,8 +368,6 @@ def occupancies():
                 'active': '1'
             }
 
-            print params
-
             data.append(params)
 
     return _bulk_insert(Occupancy, data, 'occupancies')
