@@ -18,101 +18,90 @@ def cli():
 
 
 @click.command()
-def user_addresses():
+def user_relations():
     """
-    Read user addresses
+    Read user relations
     """
     for user in db.session.query(User).all():
+        click.echo(" === User with id {0} and email {1} === ".format(user.id, user.email))
+
+        # User addresses
         if user.address:
             click.echo(
-                    'User {0} has address: {1},{2},{3},{4} at address_id: {5} matching address_id: {6}'.format(
-                        user.email, user.address.street, user.address.city,
-                        user.address.state, user.address.zipcode,
-                        user.address_id, user.address.id
+                    'Address: {0},{1},{2},{3}'.format(
+                        user.address.street, user.address.city,
+                        user.address.state, user.address.zipcode
                     )
                 )
         else:
-            click.echo(
-                    'User {0}: has no addresses.'.format(
-                        user.email
-                    )
-                )
+            click.echo('No address listed.')
 
-
-@click.command()
-def user_occupancies():
-    """
-    Read user occupancies
-    """
-    for user in db.session.query(User).all():
+        # User occupancies
         if user.occupancies and len(user.occupancies):
             click.echo(
-                    'User {0} has {1} occupancies'.format(
-                        user.email, len(user.occupancies)
+                    'Occupancies: {0}'.format(
+                        len(user.occupancies)
                     )
                 )
+
+            for occupancy in user.occupancies:
+                click.echo(
+                    'start_time: {0}  -  end_time: {1}  occupied for user {2}'.format(
+                        occupancy.start_time, occupancy.end_time,
+                        occupancy.user.email
+                    )
+                )
+
         else:
-            click.echo(
-                    'User {0}: has no occupancies.'.format(
-                        user.email
-                    )
-                )
+            click.echo('No occupancies listed.')
 
 
 @click.command()
-def business_occupancies():
+def business_relations():
     """
-    Read business occupancies
-    """
-    for business in db.session.query(Business).all():
-        if business.occupancies and len(business.occupancies):
-            click.echo(
-                    'Business {0} has {1} occupancies'.format(
-                        business.email, len(business.occupancies)
-                    )
-                )
-        else:
-            click.echo(
-                    'Business {0}: has no occupancies.'.format(
-                        business.email
-                    )
-                )
-
-
-@click.command()
-def business_addresses():
-    """
-    Read business addresses
+    Read business relations
     """
     for business in db.session.query(Business).all():
+        click.echo(" === Business with id {0} and email {1} === ".format(business.id, business.email))
+
+        # Business addresses
         if business.address:
             click.echo(
-                    'Business {0} has address: {1},{2},{3},{4} at address_id: {5} matching address_id: {6}'.format(
-                        business.email, business.address.street, business.address.city,
-                        business.address.state, business.address.zipcode,
-                        business.address_id, business.address.id
+                    'Address: {0},{1},{2},{3}'.format(
+                        business.address.street, business.address.city,
+                        business.address.state, business.address.zipcode
                     )
                 )
         else:
+            click.echo('No address listed.')
+
+        # Business occupancies
+        if business.occupancies and len(business.occupancies):
             click.echo(
-                    'Business {0}: has no addresses.'.format(
-                        business.email
+                    'Occupancies: {0}'.format(
+                        len(business.occupancies)
                     )
                 )
 
+            for occupancy in business.occupancies:
+                click.echo(
+                    'start_time: {0}  -  end_time: {1}  occupied for business {2}'.format(
+                        occupancy.start_time, occupancy.end_time,
+                        occupancy.business.email
+                    )
+                )
 
-@click.command()
-def business_employees():
-    """
-    Read business employees
-    """
-    for business in db.session.query(Business).all():
+        else:
+            click.echo('No occupancies listed.')
+
+        # Business employees
         if business.employees:
             click.echo(
-                    'Business {0} has {1} employees'.format(
-                        business.email, len(business.employees)
+                    'Employees: {0}'.format(
+                        len(business.employees)
                     )
                 )
+
             for employee in business.employees:
                 click.echo(
                     'employee {0} is a {1} at business {2}'.format(
@@ -122,11 +111,26 @@ def business_employees():
                 )
 
         else:
+            click.echo('No employees listed.')
+
+        # Business products
+        if business.products:
             click.echo(
-                    'Business {0}: has no employees.'.format(
-                        business.email
+                    'Products: {0}'.format(
+                        len(business.products)
                     )
                 )
+
+            for product in business.products:
+                click.echo(
+                    'product {0} with capacity {1} has price {2} cents & duration {3} mins'.format(
+                        product.name, product.capacity,
+                        product.price_cents, product.duration_mins
+                    )
+                )
+
+        else:
+            click.echo('No products listed.')
 
 
 @click.command()
@@ -138,18 +142,12 @@ def all(ctx):
     :param ctx:
     :return: None
     """
-    ctx.invoke(user_addresses)
-    ctx.invoke(business_addresses)
-    ctx.invoke(user_occupancies)
-    ctx.invoke(business_occupancies)
-    ctx.invoke(business_employees)
+    ctx.invoke(user_relations)
+    ctx.invoke(business_relations)
 
     return None
 
 
-cli.add_command(user_addresses)
-cli.add_command(business_addresses)
-cli.add_command(user_occupancies)
-cli.add_command(business_occupancies)
-cli.add_command(business_employees)
+cli.add_command(user_relations)
+cli.add_command(business_relations)
 cli.add_command(all)
