@@ -9,6 +9,7 @@ from cheermonk.app import create_app
 from cheermonk.extensions import db
 from cheermonk.blueprints.issue.models import Issue
 from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.common.models import Address, Availability, Occupancy
 from cheermonk.blueprints.billing.models.invoice import Invoice
 from cheermonk.blueprints.billing.models.coupon import Coupon
 from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
@@ -83,26 +84,37 @@ def cli():
 
 
 @click.command()
+def addresses():
+    """
+        Create random addresses
+    """
+    data = []
+    for i in range(0, 25):
+        params = {
+            'street': fake.street_address(),
+            'city': fake.city(),
+            'state': fake.state(),
+            'zipcode': fake.zipcode()
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Address, data, 'addresses')
+
+
+@click.command()
 def users():
     """
     Create random users.
     """
-    random_emails = []
     data = []
 
     # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    for i in range(0, 49):
-        random_emails.append(fake.email())
-
+    random_emails = [fake.email() for i in range(0, 49)]
     random_emails.append(SEED_ADMIN_EMAIL)
     random_emails = list(set(random_emails))
 
-    while True:
-        if len(random_emails) == 0:
-            break
-
-        email = random_emails.pop()
-
+    for email in random_emails:
         params = {
             'role': 'member',
             'email': email,
@@ -263,6 +275,7 @@ def all(ctx):
     :param ctx:
     :return: None
     """
+    ctx.invoke(addresses)
     ctx.invoke(users)
     ctx.invoke(issues)
     ctx.invoke(coupons)
@@ -271,6 +284,7 @@ def all(ctx):
     return None
 
 
+cli.add_command(addresses)
 cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(coupons)
