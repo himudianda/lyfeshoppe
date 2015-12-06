@@ -102,6 +102,34 @@ def business_addresses():
 
 
 @click.command()
+def business_employees():
+    """
+    Read business employees
+    """
+    for business in db.session.query(Business).all():
+        if business.employees:
+            click.echo(
+                    'Business {0} has {1} employees'.format(
+                        business.email, len(business.employees)
+                    )
+                )
+            for employee in business.employees:
+                click.echo(
+                    'employee {0} is a {1} at business {2}'.format(
+                        employee.user.email, employee.role,
+                        employee.business.email
+                    )
+                )
+
+        else:
+            click.echo(
+                    'Business {0}: has no employees.'.format(
+                        business.email
+                    )
+                )
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -114,6 +142,7 @@ def all(ctx):
     ctx.invoke(business_addresses)
     ctx.invoke(user_occupancies)
     ctx.invoke(business_occupancies)
+    ctx.invoke(business_employees)
 
     return None
 
@@ -122,4 +151,5 @@ cli.add_command(user_addresses)
 cli.add_command(business_addresses)
 cli.add_command(user_occupancies)
 cli.add_command(business_occupancies)
+cli.add_command(business_employees)
 cli.add_command(all)
