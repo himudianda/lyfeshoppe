@@ -39,6 +39,11 @@ fake = Faker()
 app = create_app()
 db.app = app
 
+NUM_OF_FAKE_ADDRESSES = 25
+NUM_OF_FAKE_USERS = 50
+NUM_OF_FAKE_ISSUES = 50
+NUM_OF_FAKE_COUPONS = 5
+
 
 def _log_status(count, model_label):
     """
@@ -89,7 +94,7 @@ def addresses():
         Create random addresses
     """
     data = []
-    for i in range(0, 25):
+    for i in range(0, NUM_OF_FAKE_ADDRESSES):
         params = {
             'street': fake.street_address(),
             'city': fake.city(),
@@ -110,9 +115,10 @@ def users():
     data = []
 
     # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    random_emails = [fake.email() for i in range(0, 49)]
+    random_emails = [fake.email() for i in range(0, NUM_OF_FAKE_USERS-1)]
     random_emails.append(SEED_ADMIN_EMAIL)
     random_emails = list(set(random_emails))
+    addresses = db.session.query(Address).all()
 
     for email in random_emails:
         params = {
@@ -120,7 +126,8 @@ def users():
             'email': email,
             'password': User.encrypt_password('password'),
             'name': fake.name(),
-            'locale': random.choice(ACCEPT_LANGUAGES)
+            'locale': random.choice(ACCEPT_LANGUAGES),
+            'address_id': (random.choice(addresses)).id
         }
 
         # Ensure the seeded admin is always an admin.
@@ -134,13 +141,48 @@ def users():
 
 
 @click.command()
+def user_occupancies():
+    """
+    Create random user occupanices.
+    """
+    data = []
+    users = db.session.query(User).all()
+
+    for user in users:
+        for i in range(0, random.randint(1, 12)):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+            params = {
+                'type': 'user',
+                'start_time': start_time,
+                'end_time': end_time,
+                'user_id': user.id,
+                'active': '1'
+            }
+
+            data.append(params)
+
+    return _bulk_insert(Occupancy, data, 'occupanices')
+
+
+@click.command()
 def issues():
     """
     Create random issues.
     """
     data = []
 
-    for i in range(0, 50):
+    for i in range(0, NUM_OF_FAKE_ISSUES):
         params = {
             'status': random.choice(Issue.STATUS.keys()),
             'label': random.choice(Issue.LABEL.keys()),
@@ -160,7 +202,7 @@ def coupons():
     """
     data = []
 
-    for i in range(0, 5):
+    for i in range(0, NUM_OF_FAKE_COUPONS):
         random_pct = random.random()
         duration = random.choice(Coupon.DURATION.keys())
 
@@ -277,6 +319,7 @@ def all(ctx):
     """
     ctx.invoke(addresses)
     ctx.invoke(users)
+    ctx.invoke(user_occupancies)
     ctx.invoke(issues)
     ctx.invoke(coupons)
     ctx.invoke(invoices)
@@ -286,6 +329,7 @@ def all(ctx):
 
 cli.add_command(addresses)
 cli.add_command(users)
+cli.add_command(user_occupancies)
 cli.add_command(issues)
 cli.add_command(coupons)
 cli.add_command(invoices)
