@@ -1,7 +1,6 @@
 import logging
 import random
 from datetime import datetime
-from random import randint
 import click
 from faker import Faker
 
@@ -43,6 +42,7 @@ NUM_OF_FAKE_ADDRESSES = 25
 NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_ISSUES = 50
 NUM_OF_FAKE_COUPONS = 5
+NUM_OF_FAKE_BUSINESSES = 200
 
 
 def _log_status(count, model_label):
@@ -309,6 +309,44 @@ def invoices():
 
 
 @click.command()
+def businesses():
+    """
+    Create random businesses.
+    """
+    data = []
+
+    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
+    addresses = db.session.query(Address).all()
+
+    for i in range(0, NUM_OF_FAKE_BUSINESSES):
+
+        open_time = fake.date_time_between(
+            start_date='now', end_date='+1d').strftime('%s')
+        close_time = fake.date_time_between(
+            start_date=open_time, end_date='+1d').strftime('%s')
+
+        open_time = datetime.utcfromtimestamp(
+            float(open_time)).strftime('%Y-%m-%d %H:%M:%S')
+        close_time = datetime.utcfromtimestamp(
+            float(close_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+        params = {
+            'name': fake.company(),
+            'email': fake.company_email(),
+            'type': random.choice(Business.TYPE.keys()),
+            'open_time': open_time,
+            'close_time': close_time,
+            'phone': fake.phone_number(),
+            'active': "1",
+            'address_id': (random.choice(addresses)).id
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Business, data, 'businesses')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -323,6 +361,7 @@ def all(ctx):
     ctx.invoke(issues)
     ctx.invoke(coupons)
     ctx.invoke(invoices)
+    ctx.invoke(businesses)
 
     return None
 
@@ -333,4 +372,5 @@ cli.add_command(user_occupancies)
 cli.add_command(issues)
 cli.add_command(coupons)
 cli.add_command(invoices)
+cli.add_command(businesses)
 cli.add_command(all)
