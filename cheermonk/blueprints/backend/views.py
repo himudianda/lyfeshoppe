@@ -79,7 +79,7 @@ def businesses_bulk_deactivate():
 
         for id in ids:
             business = Business.query.get(id)
-            business.active = False
+            business.active = not business.active
 
         # map(db.session.delete, [Business.query.get(id) for id in ids])
         db.session.commit()
