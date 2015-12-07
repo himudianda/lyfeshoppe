@@ -85,8 +85,9 @@
 
 
 {# Render a form for searching. #}
-{%- macro search(endpoint) -%}
-  {% call form_tag(endpoint, class='top-margin', method='get') %}
+{%- macro search(endpoint, business_id='') -%}
+  {% if business_id == '' %}
+    {% call form_tag(endpoint, class='top-margin', method='get') %}
       <label for="q"></label>
       <div class="input-group sm-margin-bottom">
           <input type="text" class="form-control"
@@ -96,5 +97,18 @@
         <i class="fa fa-fw fa-search"></i>
       </span>
       </div>
-  {% endcall %}
+    {% endcall %}
+  {% else %}
+    {% call form_tag(endpoint, business_id=business_id, class='top-margin', method='get') %}
+      <label for="q"></label>
+      <div class="input-group sm-margin-bottom">
+          <input type="text" class="form-control"
+                 id="q" name="q" value="{{ request.args.get('q', '') }}"
+                 placeholder="Search by typing, then press enter...">
+      <span class="input-group-addon">
+        <i class="fa fa-fw fa-search"></i>
+      </span>
+      </div>
+    {% endcall %}
+  {% endif %}
 {%- endmacro -%}
