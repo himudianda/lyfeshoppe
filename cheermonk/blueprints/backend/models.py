@@ -43,3 +43,41 @@ class Dashboard(object):
         }
 
         return results
+
+
+class BusinessDashboard(object):
+
+    @classmethod
+    def group_and_count_employees(cls, business):
+        """
+        Perform a group by/count on all issue types.
+
+        :return: dict
+        """
+        return cls._group_and_count(business, Employee, Employee.role)
+
+    @classmethod
+    def _group_and_count(cls, business, model, field):
+        """
+        Group results for a specific model and field.
+
+        :param model: Name of the model
+        :type model: SQLAlchemy model
+        :param field: Name of the field to group on
+        :type field: SQLAlchemy field
+        :return: dict
+        """
+
+        count = func.count(field)
+        query = db.session.query(count, field).filter(
+                model.business == business
+            ).group_by(field).all()
+
+        results = {
+            'query': query,
+            'total': db.session.query(model).filter(
+                        model.business == business
+                    ).count()
+        }
+
+        return results

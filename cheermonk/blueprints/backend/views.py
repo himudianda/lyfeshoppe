@@ -5,7 +5,7 @@ from flask_babel import ngettext as _n
 from flask_babel import gettext as _
 
 from cheermonk.extensions import db
-from cheermonk.blueprints.backend.models import Dashboard
+from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm
 from cheermonk.blueprints.business.models.business import Business, Employee
@@ -53,16 +53,6 @@ def businesses(page):
                            businesses=paginated_businesses)
 
 
-# Dashboard -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>')
-def business_dashboard(id):
-    business = Business.query.get(id)
-    group_and_count_businesses = Dashboard.group_and_count_businesses()
-
-    return render_template('backend/business/dashboard.jinja2',
-                           group_and_count_businesses=group_and_count_businesses)
-
-
 @backend.route('/businesses/bulk_deactivate', methods=['POST'])
 def businesses_bulk_deactivate():
     form = BulkDeleteForm()
@@ -91,3 +81,13 @@ def businesses_bulk_deactivate():
         flash(_('No businesses were deactivated, something went wrong.'), 'error')
 
     return redirect(url_for('backend.businesses'))
+
+
+# Business Dashboard -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>')
+def business_dashboard(id):
+    business = Business.query.get(id)
+    group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
+
+    return render_template('backend/business/dashboard.jinja2',
+                           group_and_count_employees=group_and_count_employees)

@@ -18,14 +18,14 @@
               <div class="col-md-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <a href="{{ url_for('backend.businesses') }}">Businesses</a>
+                    <a href="{{ url_for('backend.businesses') }}">Employees</a>
                     <span class="pull-right text-muted">
-                      {{ group_and_count_businesses.total }}
+                      {{ group_and_count_employees.total }}
                     </span>
                   </div>
                   <div class="panel-body">
-                    {% for item in group_and_count_businesses.query %}
-                      {% set percent = ((item[0] / group_and_count_businesses.total) * 100) | round %}
+                    {% for item in group_and_count_employees.query %}
+                      {% set percent = ((item[0] / group_and_count_employees.total) * 100) | round %}
                       <h5>
                         {{ item[1] | title }}
                         <span class="text-muted">({{ item[0] }})</span>
