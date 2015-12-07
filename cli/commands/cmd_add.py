@@ -380,28 +380,41 @@ def employees():
     Create random employees.
     """
     data = []
-    users = db.session.query(User).all()
     businesses = db.session.query(Business).all()
 
     for business in businesses:
-        admin_employee = random.choice(users)
-        params = {
-            'role': 'admin',
-            'business_id': business.id,
-            'user_id': admin_employee.id,
-            'active': '1'
-        }
-        data.append(params)
+        employees_list = []
+        for i in range(0, random.randint(12, 20)):
 
-        # Ensure that the member employee isnt the same as the admin employee
-        member_employee = random.choice(db.session.query(User).filter(User.id != admin_employee.id).all())
-        params = {
-            'role': 'member',
-            'business_id': business.id,
-            'user_id': member_employee.id,
-            'active': '1'
-        }
-        data.append(params)
+            if len(employees_list):
+                admin_employee = random.choice(
+                    db.session.query(User).filter(~User.id.in_(employees_list)).all()
+                )
+            else:
+                admin_employee = random.choice(
+                    db.session.query(User).all()
+                )
+            employees_list.append(admin_employee.id)
+            params = {
+                'role': 'admin',
+                'business_id': business.id,
+                'user_id': admin_employee.id,
+                'active': '1'
+            }
+            data.append(params)
+
+            # Ensure that the member employee isnt the same as the admin employee
+            member_employee = random.choice(
+                db.session.query(User).filter(~User.id.in_(employees_list)).all()
+            )
+            employees_list.append(member_employee.id)
+            params = {
+                'role': 'member',
+                'business_id': business.id,
+                'user_id': member_employee.id,
+                'active': '1'
+            }
+            data.append(params)
 
     return _bulk_insert(Employee, data, 'employees')
 
