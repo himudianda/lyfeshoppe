@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from sqlalchemy import or_, UniqueConstraint
+import pytz
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.common.models import Address, Occupancy, Availability
@@ -195,3 +196,28 @@ class Business(ResourceMixin, db.Model):
                         cls.name.ilike(search_query))
 
         return or_(*search_chain)
+
+    @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the business was created successfully.
+
+        :return: bool
+        """
+
+        if 'open_time' in params:
+            if params.get('open_time') is not None:
+                params['open_time'] = params.get('open_time').replace(
+                    tzinfo=pytz.UTC)
+
+        if 'close_time' in params:
+            if params.get('close_time') is not None:
+                params['close_time'] = params.get('close_time').replace(
+                    tzinfo=pytz.UTC)
+
+        business = Business(**params)
+
+        db.session.add(business)
+        db.session.commit()
+
+        return True

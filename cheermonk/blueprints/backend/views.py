@@ -7,7 +7,7 @@ from flask_babel import gettext as _
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm
+from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm
 from cheermonk.blueprints.business.models.business import Business, Employee
 
 backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
@@ -81,6 +81,31 @@ def businesses_bulk_deactivate():
         flash(_('No businesses were deactivated, something went wrong.'), 'error')
 
     return redirect(url_for('backend.businesses'))
+
+
+@backend.route('/businesses/new', methods=['GET', 'POST'])
+def businesses_new():
+    business = Business()
+    form = BusinessForm(obj=business)
+
+    if form.validate_on_submit():
+        form.populate_obj(business)
+
+        params = {
+            'name': business.name,
+            'email': business.email,
+            'type': business.type,
+            'open_time': business.open_time,
+            'close_time': business.close_time,
+            'phone': business.phone,
+            'active': business.active
+        }
+
+        if Business.create(params):
+            flash(_('Business has been created successfully.'), 'success')
+            return redirect(url_for('backend.businesses'))
+
+    return render_template('backend/business/new.jinja2', form=form, business=business)
 
 
 # Business Dashboard -------------------------------------------------------------------

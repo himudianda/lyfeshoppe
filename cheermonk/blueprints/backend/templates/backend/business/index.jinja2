@@ -18,9 +18,16 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    {{ f.search('backend.businesses') }}
+                  {{ f.search('backend.businesses') }}
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('backend.businesses_new') }}"
+                       class="btn btn-primary pull-right">
+                        Add Business
+                    </a>
                 </div>
             </div>
+
             <div class="row">
                 {% if businesses.total == 0 %}
                     <h3>No results found</h3>
