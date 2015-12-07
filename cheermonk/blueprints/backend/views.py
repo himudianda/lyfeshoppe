@@ -162,3 +162,32 @@ def business_employees(id, page):
                            form=search_form, bulk_form=bulk_form,
                            employees=paginated_employees,
                            business_id=id)
+
+
+@backend.route('/businesses/<int:id>/employees/bulk_deactivate', methods=['POST'])
+def business_employees_bulk_deactivate(id):
+    business_id = id
+    business = Business.query.get(id)
+    if not is_staff_authorized(business):
+        flash(_('You do not have permission to do that.'), 'error')
+        return redirect(url_for('backend.businesses'))
+
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Employee.get_bulk_action_ids(request.form.get('scope'),
+                                           request.form.getlist('bulk_ids'),
+                                           query=request.args.get('q', ''))
+
+        for employee_id in ids:
+            employee = Employee.query.get(employee_id)
+            employee.active = not employee.active
+        db.session.commit()
+
+        flash(_n('%(num)d employee was deactivated.',
+                 '%(num)d employees were deactivated.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No employees were deactivated, something went wrong.'), 'error')
+
+    return redirect(url_for('backend.business_employees', id=business_id))

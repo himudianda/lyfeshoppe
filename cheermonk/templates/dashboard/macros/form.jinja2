@@ -78,6 +78,30 @@
 {%- endmacro -%}
 
 
+{# Render a form tag that contains a CSRF token and all hidden fields, it also
+   properly supports all HTTP version, simply pass in method='delete', etc.. #}
+{%- macro business_form_tag(endpoint, business_id='', class='', method='post') -%}
+  {% set method = method | lower %}
+  {% set browser_method = 'post' %}
+  {% set real_method = 'post' %}
+
+  {% if method == 'get' %}
+    {% set browser_method = 'get' %}
+    {% set real_method = 'get' %}
+  {% elif method not in ('get', 'post') %}
+    {% set browser_method = 'post' %}
+    {% set real_method = method %}
+  {% endif %}
+
+    <form action="{{ url_for(endpoint, id=business_id, __method__=real_method, **kwargs) }}"
+          method="{{ browser_method }}"
+          id="{{ fid }}" class="{{ class }}" role="form">
+      {{ form.hidden_tag() }}
+      {{ caller () }}
+    </form>
+{%- endmacro -%}
+
+
 {# Render a form for searching. #}
 {%- macro search(endpoint) -%}
   {% call form_tag(endpoint, class='top-margin', method='get') %}
