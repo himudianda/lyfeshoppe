@@ -109,9 +109,25 @@ def businesses_new():
 
 
 # Business Dashboard -------------------------------------------------------------------
+def is_staff_authorized(business):
+    if not business:
+        return False
+
+    employee = Employee.query.filter(
+                    (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
+                ).first()
+    if employee not in business.employees:
+        return False
+    return True
+
+
 @backend.route('/businesses/<int:id>')
 def business_dashboard(id):
     business = Business.query.get(id)
+    if not is_staff_authorized(business):
+        flash(_('You do not have permission to do that.'), 'error')
+        return redirect(url_for('backend.businesses'))
+
     group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
     group_and_count_products = BusinessDashboard.group_and_count_products(business)
 
@@ -121,9 +137,14 @@ def business_dashboard(id):
                            business_id=id)
 
 
-@backend.route('/businesses/<int:id>/employees', defaults={'id': 1, 'page': 1})
+@backend.route('/businesses/<int:id>/employees', defaults={'page': 1})
 @backend.route('/businesses/<int:id>/employees/page/<int:page>')
 def business_employees(id, page):
+    business = Business.query.get(id)
+    if not is_staff_authorized(business):
+        flash(_('You do not have permission to do that.'), 'error')
+        return redirect(url_for('backend.businesses'))
+
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
