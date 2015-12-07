@@ -3,7 +3,7 @@
 {% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% block title %}
-    Employee / List | CheerMonk | Social Shop with huge discounts.
+    Employees / List | CheerMonk | Social Shop with huge discounts.
 {% endblock %}
 
 {% block content %}
@@ -18,8 +18,11 @@
 
             <div class="row">
                 <div class="col-md-6">
+                  {{ f.search('backend.businesses') }}
+                </div>
+                <div class="col-md-6">
                     <a href="{{ url_for('backend.businesses_new') }}"
-                       class="btn btn-primary">
+                       class="btn btn-primary pull-right">
                         Add Employee
                     </a>
                 </div>
@@ -94,6 +97,7 @@
                         </tbody>
                     </table>
                     {% endcall %}
+                    {{ items.business_paginate(employees, business_id) }}
                 {% endif %}
             </div>
         </div>

@@ -152,9 +152,6 @@ def business_employees(id, page):
                                request.args.get('direction', 'asc'))
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
-    business = Business.query.get(id)
-    # user_employee_ids = [employee.id for employee in Employee.query.filter(Employee.user == current_user)]
-
     paginated_employees = Employee.query \
         .filter(Employee.search(request.args.get('q', ''))) \
         .filter(Employee.business == business) \
