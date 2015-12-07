@@ -29,14 +29,16 @@ class Dashboard(object):
         """
 
         count = func.count(field)
+        user_employee_ids = [employee.id for employee in Employee.query.filter(Employee.user == current_user)]
+
         query = db.session.query(count, field).filter(
-                        model.employees.any(Employee.id.in_([current_user.id]))
+                        model.employees.any(Employee.id.in_(user_employee_ids))
                     ).group_by(field).all()
 
         results = {
             'query': query,
             'total': db.session.query(model).filter(
-                        model.employees.any(Employee.id.in_([current_user.id]))
+                        model.employees.any(Employee.id.in_(user_employee_ids))
                     ).count()
         }
 

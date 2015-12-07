@@ -41,9 +41,10 @@ def businesses(page):
                                request.args.get('direction', 'asc'))
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
+    user_employee_ids = [employee.id for employee in Employee.query.filter(Employee.user == current_user)]
     paginated_businesses = Business.query \
         .filter(Business.search(request.args.get('q', ''))) \
-        .filter(Business.employees.any(Employee.id.in_([current_user.id]))) \
+        .filter(Business.employees.any(Employee.id.in_(user_employee_ids))) \
         .order_by(Business.type.desc(), text(order_values)) \
         .paginate(page, 20, True)
 
