@@ -130,24 +130,6 @@ class Employee(ResourceMixin, db.Model):
 
         return True
 
-    @classmethod
-    def search(cls, query):
-        """
-        Search a resource by 1 or more fields.
-
-        :param query: Search query
-        :type query: str
-        :return: SQLAlchemy filter
-        """
-        if not query:
-            return ''
-
-        search_query = '%{0}%'.format(query)
-        search_chain = (cls.role.ilike(search_query),
-                        cls.role.ilike(search_query))
-
-        return or_(*search_chain)
-
 
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'
