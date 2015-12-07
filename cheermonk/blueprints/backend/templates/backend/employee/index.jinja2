@@ -37,7 +37,7 @@
                         <p>There are no employees present.</p>
                     {% endif %}
                 {% else %}
-                    {% call f.business_form_tag('backend.business_employees_bulk_deactivate', business_id=business_id) %}
+                    {% call f.form_tag('backend.business_employees_bulk_deactivate', business_id=business_id) %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
