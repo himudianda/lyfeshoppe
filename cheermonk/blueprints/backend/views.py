@@ -8,8 +8,7 @@ from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm
-from cheermonk.blueprints.business.models.business import Business
-from cheermonk.blueprints.user.models import User
+from cheermonk.blueprints.business.models.business import Business, Employee
 
 backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
 
@@ -44,7 +43,7 @@ def businesses(page):
 
     paginated_businesses = Business.query \
         .filter(Business.search(request.args.get('q', ''))) \
-        .filter(Business.admins.any(User.id.in_([current_user.id]))) \
+        .filter(Business.employees.any(Employee.id.in_([current_user.id]))) \
         .order_by(Business.type.desc(), text(order_values)) \
         .paginate(page, 20, True)
 
