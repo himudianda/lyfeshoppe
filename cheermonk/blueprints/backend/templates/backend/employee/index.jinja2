@@ -1,0 +1,103 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+{% import 'dashboard/macros/items.jinja2' as items %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
+
+{% block title %}
+    Employee / List | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+
+            <!-- BEGIN PAGE HEADER-->
+            <h3 class="page-title"> Employees. </h3>
+            <!-- END PAGE HEADER-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ url_for('backend.businesses_new') }}"
+                       class="btn btn-primary">
+                        Add Employee
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                {% if employees.total == 0 %}
+                    <h3>No results found</h3>
+                    {% if request.args.get('q') %}
+                        <p>Try limiting or removing your search terms.</p>
+                    {% else %}
+                        <p>There are no employees present.</p>
+                    {% endif %}
+                {% else %}
+                    {% call f.form_tag('backend.businesses_bulk_deactivate') %}
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label for="select_all"></label>
+                                    <input id="select_all" name="select_all" type="checkbox">
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('user.email', 'Email') }}
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('role') }}
+                                </th>
+                                <th class="col-header">
+                                    Num of Products
+                                </th>
+                                <th class="col-header">
+                                    Num of Reservations
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('active') }}
+                                </th>
+                                <th id="bulk_actions" colspan="5">
+                                    <div class="form-inline">
+                                        {{ f.field(bulk_form.scope, inline=True) }}
+                                        <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Employee </button>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for employee in employees.items %}
+                                <tr>
+                                    <td>
+                                        <label for="bulk_ids"></label>
+                                        <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ employee.id }}">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {{ employee.user.email }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ employee.role }}
+                                    </td>
+                                    <td>
+                                        {{ employee.products.count }}
+                                    </td>
+                                    <td>
+                                        {{ employee.reservations.count }}
+                                    </td>
+                                    <td>
+                                        {{ employee.active }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endcall %}
+                {% endif %}
+            </div>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}

@@ -117,4 +117,30 @@ def business_dashboard(id):
 
     return render_template('backend/business/dashboard.jinja2',
                            group_and_count_employees=group_and_count_employees,
-                           group_and_count_products=group_and_count_products)
+                           group_and_count_products=group_and_count_products,
+                           business_id=id)
+
+
+@backend.route('/businesses/<int:id>/employees', defaults={'id': 1, 'page': 1})
+@backend.route('/businesses/<int:id>/employees/page/<int:page>')
+def business_employees(id, page):
+    search_form = SearchForm()
+    bulk_form = BulkDeleteForm()
+
+    sort_by = Employee.sort_by(request.args.get('sort', 'role'),
+                               request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    business = Business.query.get(id)
+    # user_employee_ids = [employee.id for employee in Employee.query.filter(Employee.user == current_user)]
+
+    paginated_employees = Employee.query \
+        .filter(Employee.search(request.args.get('q', ''))) \
+        .filter(Employee.business == business) \
+        .order_by(Employee.role.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/employee/index.jinja2',
+                           form=search_form, bulk_form=bulk_form,
+                           employees=paginated_employees,
+                           business_id=id)
