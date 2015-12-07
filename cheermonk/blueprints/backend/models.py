@@ -2,7 +2,7 @@ from sqlalchemy import func
 from flask_login import current_user
 
 from cheermonk.blueprints.user.models import db
-from cheermonk.blueprints.business.models.business import Business, Employee
+from cheermonk.blueprints.business.models.business import Business, Employee, Product
 
 
 class Dashboard(object):
@@ -55,6 +55,15 @@ class BusinessDashboard(object):
         :return: dict
         """
         return cls._group_and_count(business, Employee, Employee.role)
+
+    @classmethod
+    def group_and_count_products(cls, business):
+        """
+        Perform a group by/count on all issue types.
+
+        :return: dict
+        """
+        return cls._group_and_count(business, Product, Product.duration_mins)
 
     @classmethod
     def _group_and_count(cls, business, model, field):

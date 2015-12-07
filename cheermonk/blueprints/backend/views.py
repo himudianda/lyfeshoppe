@@ -88,6 +88,8 @@ def businesses_bulk_deactivate():
 def business_dashboard(id):
     business = Business.query.get(id)
     group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
+    group_and_count_products = BusinessDashboard.group_and_count_products(business)
 
     return render_template('backend/business/dashboard.jinja2',
-                           group_and_count_employees=group_and_count_employees)
+                           group_and_count_employees=group_and_count_employees,
+                           group_and_count_products=group_and_count_products)
