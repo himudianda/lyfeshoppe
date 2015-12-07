@@ -30,7 +30,7 @@
                         <p>There are no businesses present.</p>
                     {% endif %}
                 {% else %}
-                    {% call f.form_tag('backend.businesses_bulk_delete') %}
+                    {% call f.form_tag('backend.businesses_bulk_deactivate') %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -50,10 +50,13 @@
                                 <th class="col-header">
                                     {{ items.sort('email') }}
                                 </th>
+                                <th class="col-header">
+                                    {{ items.sort('active') }}
+                                </th>
                                 <th id="bulk_actions" colspan="5">
                                     <div class="form-inline">
                                         {{ f.field(bulk_form.scope, inline=True) }}
-                                        <button type="submit" class="btn btn-danger btn-sm"> Delete items </button>
+                                        <button type="submit" class="btn btn-danger btn-sm"> Deactivate items </button>
                                     </div>
                                 </th>
                             </tr>
@@ -82,6 +85,9 @@
                                     </td>
                                     <td>
                                         {{ business.email }}
+                                    </td>
+                                    <td>
+                                        {{ business.active }}
                                     </td>
                                 </tr>
                             {% endfor %}

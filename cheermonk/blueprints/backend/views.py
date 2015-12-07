@@ -63,8 +63,8 @@ def business_dashboard(id):
                            group_and_count_businesses=group_and_count_businesses)
 
 
-@backend.route('/businesses/bulk_delete', methods=['POST'])
-def businesses_bulk_delete():
+@backend.route('/businesses/bulk_deactivate', methods=['POST'])
+def businesses_bulk_deactivate():
     form = BulkDeleteForm()
 
     if form.validate_on_submit():
@@ -77,13 +77,17 @@ def businesses_bulk_delete():
         # Business.query.filter(Business.id.in_(ids)).delete()
         # Hence use the below work-around.
 
-        map(db.session.delete, [Business.query.get(id) for id in ids])
+        for id in ids:
+            business = Business.query.get(id)
+            business.active = False
+
+        # map(db.session.delete, [Business.query.get(id) for id in ids])
         db.session.commit()
 
-        flash(_n('%(num)d business was deleted.',
-                 '%(num)d businesses were deleted.',
+        flash(_n('%(num)d business was deactivated.',
+                 '%(num)d businesses were deactivated.',
                  num=len(ids)), 'success')
     else:
-        flash(_('No businesses were deleted, something went wrong.'), 'error')
+        flash(_('No businesses were deactivated, something went wrong.'), 'error')
 
     return redirect(url_for('backend.businesses'))
