@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from sqlalchemy import or_, UniqueConstraint
 import pytz
+from flask_login import current_user
 
 from cheermonk.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from cheermonk.blueprints.common.models import Address, Occupancy, Availability
@@ -116,6 +117,19 @@ class Employee(ResourceMixin, db.Model):
         # Call Flask-SQLAlchemy's constructor.
         super(Employee, self).__init__(**kwargs)
 
+    @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the employee was created successfully.
+
+        :return: bool
+        """
+        employee = cls(**params)
+        db.session.add(employee)
+        db.session.commit()
+
+        return True
+
 
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'
@@ -219,5 +233,14 @@ class Business(ResourceMixin, db.Model):
 
         db.session.add(business)
         db.session.commit()
+
+        # Create the first Admin employee for this newly created business
+        admin_employee_params = {
+            'role': 'admin',
+            'user_id': current_user.id,
+            'business_id': business.id,
+            'user': current_user
+        }
+        Employee.create(admin_employee_params)
 
         return True
