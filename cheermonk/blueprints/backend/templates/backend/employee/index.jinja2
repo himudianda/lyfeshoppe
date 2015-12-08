@@ -8,7 +8,6 @@
 
 {% block content %}
     {% set form_kwargs = {'id': business.id} %}
-    {% set business_id = business.id %}
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -21,7 +20,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                  {{ f.search('backend.business_employees', business_id) }}
+                  {{ f.search('backend.business_employees', form_kwargs) }}
                 </div>
                 <div class="col-md-6">
                     <a href="{{ url_for('backend.business_employees_new', **form_kwargs) }}"

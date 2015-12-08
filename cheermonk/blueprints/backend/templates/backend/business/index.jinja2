@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block content %}
+    {% set form_kwargs = {} %}
+
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -18,7 +20,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                  {{ f.search('backend.businesses') }}
+                  {{ f.search('backend.businesses', form_kwargs) }}
                 </div>
                 <div class="col-md-6">
                     <a href="{{ url_for('backend.businesses_new') }}"
