@@ -140,7 +140,8 @@ def business_dashboard(id):
 
     return render_template('backend/business/dashboard.jinja2',
                            group_and_count_employees=group_and_count_employees,
-                           group_and_count_products=group_and_count_products, business_id=id)
+                           group_and_count_products=group_and_count_products,
+                           business=business)
 
 
 @backend.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
@@ -170,7 +171,7 @@ def business_edit(id):
         flash(_('Business has been saved successfully.'), 'success')
         return redirect(url_for('backend.businesses'))
 
-    return render_template('backend/business/edit.jinja2', form=form, business=business, business_id=id)
+    return render_template('backend/business/edit.jinja2', form=form, business=business)
 
 
 @backend.route('/businesses/<int:id>/employees', defaults={'page': 1})
