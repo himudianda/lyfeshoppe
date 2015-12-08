@@ -202,7 +202,6 @@ def business_employees(id, page):
 
 @backend.route('/businesses/<int:id>/employees/bulk_deactivate', methods=['POST'])
 def business_employees_bulk_deactivate(id):
-    business_id = id
     business = Business.query.get(id)
     if not is_staff_authorized(business):
         flash(_('You do not have permission to do that.'), 'error')
@@ -226,7 +225,7 @@ def business_employees_bulk_deactivate(id):
     else:
         flash(_('No employees were deactivated, something went wrong.'), 'error')
 
-    return redirect(url_for('backend.business_employees', id=business_id))
+    return redirect(url_for('backend.business_employees', id=id))
 
 
 @backend.route('/businesses/<int:id>/employees/new', methods=['GET', 'POST'])
