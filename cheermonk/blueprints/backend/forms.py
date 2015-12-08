@@ -60,4 +60,4 @@ class EmployeeForm(ModelForm):
     role = SelectField(_('Employee Role'), [DataRequired()],
                        choices=choices_from_dict(Employee.ROLE,
                                                  prepend_blank=False))
-    active = BooleanField(_('Yes, Business is active'))
+    active = BooleanField(_('Yes, Employee is active'))
