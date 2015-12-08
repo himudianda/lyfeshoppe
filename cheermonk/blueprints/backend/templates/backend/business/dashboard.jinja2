@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+    {% set form_kwargs = {'id': business_id} %}
+
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -19,7 +21,7 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">
 
-                    <a href="{{ url_for('backend.business_employees', id=business_id, page=1) }}">
+                    <a href="{{ url_for('backend.business_employees', **form_kwargs) }}">
                         Employees
                     </a>
 

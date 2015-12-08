@@ -140,8 +140,7 @@ def business_dashboard(id):
 
     return render_template('backend/business/dashboard.jinja2',
                            group_and_count_employees=group_and_count_employees,
-                           group_and_count_products=group_and_count_products,
-                           business_id=id)
+                           group_and_count_products=group_and_count_products, business_id=id)
 
 
 @backend.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
