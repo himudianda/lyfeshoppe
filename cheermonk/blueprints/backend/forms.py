@@ -7,7 +7,7 @@ from wtforms import SelectField, StringField, DateTimeField, BooleanField
 from wtforms_components import EmailField
 from wtforms.validators import DataRequired, Length, Optional
 from flask_babel import lazy_gettext as _
-from cheermonk.blueprints.business.models.business import Business
+from cheermonk.blueprints.business.models.business import Business, Employee
 
 try:
     from instance import settings
@@ -50,4 +50,14 @@ class BusinessForm(ModelForm):
     close_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
     phone = StringField(_('Business Phone number'), [Optional(), Length(1, 12)])
+    active = BooleanField(_('Yes, Business is active'))
+
+
+class EmployeeForm(ModelForm):
+
+    name = StringField(_('Employee name'), [DataRequired(), Length(1, 255)])
+    email = EmailField(_("Employee e-mail address?"), [DataRequired(), Length(3, 254)])
+    role = SelectField(_('Employee Role'), [DataRequired()],
+                       choices=choices_from_dict(Employee.ROLE,
+                                                 prepend_blank=False))
     active = BooleanField(_('Yes, Business is active'))

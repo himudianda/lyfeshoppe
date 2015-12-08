@@ -7,8 +7,9 @@ from flask_babel import gettext as _
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm
+from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm
 from cheermonk.blueprints.business.models.business import Business, Employee
+from cheermonk.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
 
@@ -190,3 +191,34 @@ def business_employees_bulk_deactivate(id):
         flash(_('No employees were deactivated, something went wrong.'), 'error')
 
     return redirect(url_for('backend.business_employees', id=business_id))
+
+
+@backend.route('/businesses/<int:id>/employees/new', methods=['GET', 'POST'])
+def business_employees_new(id):
+    employee = Employee()
+    form = EmployeeForm(obj=employee)
+
+    if form.validate_on_submit():
+        form.populate_obj(employee)
+
+        user_params = {
+            'name': employee.name,
+            'email': employee.email,
+            'password': "password",
+            'role': 'member',
+            'active': '1'
+        }
+
+        if User.create(user_params):
+
+            employee_params = {
+                'role': employee.role,
+                'business_id': id,
+                'user_id': (User.query.filter(User.email == employee.email).first()).id
+            }
+
+            if Employee.create(employee_params):
+                flash(_('Employee has been created successfully.'), 'success')
+                return redirect(url_for('backend.business_employees', id=id))
+
+    return render_template('backend/employee/new.jinja2', form=form, employee=employee, business_id=id)

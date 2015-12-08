@@ -72,6 +72,19 @@ class User(UserMixin, ResourceMixin, db.Model):
         self.password = User.encrypt_password(kwargs.get('password', ''))
 
     @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the employee was created successfully.
+
+        :return: bool
+        """
+        user = cls(**params)
+        db.session.add(user)
+        db.session.commit()
+
+        return True
+
+    @classmethod
     def search(cls, query):
         """
         Search a resource by 1 or more fields.
