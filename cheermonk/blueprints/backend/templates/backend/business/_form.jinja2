@@ -6,7 +6,7 @@
   {% set legend = 'Add a new business' %}
   {% set button = _('Add') %}
 {% else %}
-  {% set endpoint = 'backend.businesses' %}
+  {% set endpoint = 'backend.business_edit' %}
   {% set form_kwargs = {'id': business.id} %}
   {% set legend = 'Update this business' %}
   {% set button = _('Save') %}
