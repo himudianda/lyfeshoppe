@@ -142,6 +142,9 @@ def business_dashboard(id):
 @backend.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
 def business_edit(id):
     business = Business.query.get(id)
+    if not is_staff_authorized(business):
+        flash(_('You do not have permission to do that.'), 'error')
+        return redirect(url_for('backend.businesses'))
     form = BusinessForm(obj=business)
 
     if form.validate_on_submit():
@@ -223,6 +226,11 @@ def business_employees_bulk_deactivate(id):
 
 @backend.route('/businesses/<int:id>/employees/new', methods=['GET', 'POST'])
 def business_employees_new(id):
+    business = Business.query.get(id)
+    if not is_staff_authorized(business):
+        flash(_('You do not have permission to do that.'), 'error')
+        return redirect(url_for('backend.businesses'))
+
     employee = Employee()
     form = EmployeeForm(obj=employee)
 
