@@ -130,6 +130,25 @@ class Employee(ResourceMixin, db.Model):
 
         return True
 
+    @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
+        user_ids = [user.id for user in users]
+
+        search_chain = (cls.user_id.in_(user_ids))
+        return search_chain
+
     @property
     def num_of_products(self):
         # Refer notes under Using EXISTS topic under link

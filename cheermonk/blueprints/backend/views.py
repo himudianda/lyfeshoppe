@@ -190,6 +190,7 @@ def business_employees(id, page):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_employees = Employee.query \
+        .filter(Employee.search(request.args.get('q', ''))) \
         .filter(Employee.business == business) \
         .order_by(Employee.role.desc(), text(order_values)) \
         .paginate(page, 20, True)
