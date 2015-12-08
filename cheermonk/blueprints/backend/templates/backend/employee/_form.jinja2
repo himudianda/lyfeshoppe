@@ -2,7 +2,7 @@
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'backend.business_employees_new' %}
-  {% set form_kwargs = {} %}
+  {% set form_kwargs = {'id': business.id} %}
   {% set legend = 'Add a new Employee' %}
   {% set button = _('Add') %}
 {% else %}
@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4 well">
-      {% call f.form_tag(endpoint, business_id=business_id, **form_kwargs) %}
+      {% call f.form_tag(endpoint, **form_kwargs) %}
 
         {% call f.form_group(form.name, css_class='sm-margin-bottom') %}
         {% endcall %}
@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-6">
                   <div class="visible-xs visible-sm sm-margin-top"></div>
-                  <a href="{{ url_for('backend.business_employees', id=business_id) }}"
+                  <a href="{{ url_for('backend.business_employees', **form_kwargs) }}"
                      class="btn btn-default btn-block">
                     {{ _('Cancel') }}
                   </a>

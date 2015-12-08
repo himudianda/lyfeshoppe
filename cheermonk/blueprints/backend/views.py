@@ -262,4 +262,4 @@ def business_employees_new(id):
                 flash(_('Employee has been created successfully.'), 'success')
                 return redirect(url_for('backend.business_employees', id=id))
 
-    return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business, business_id=id)
+    return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business)
