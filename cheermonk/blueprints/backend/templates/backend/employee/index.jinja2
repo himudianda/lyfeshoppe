@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block content %}
+    {% set form_kwargs = {'id': business.id} %}
+    {% set business_id = business.id %}
+
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -21,7 +24,7 @@
                   {{ f.search('backend.business_employees', business_id) }}
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ url_for('backend.business_employees_new', id=business_id) }}"
+                    <a href="{{ url_for('backend.business_employees_new', **form_kwargs) }}"
                        class="btn btn-primary pull-right">
                         Add Employee
                     </a>
@@ -37,7 +40,7 @@
                         <p>There are no employees present.</p>
                     {% endif %}
                 {% else %}
-                    {% call f.form_tag('backend.business_employees_bulk_deactivate', business_id=business_id) %}
+                    {% call f.form_tag('backend.business_employees_bulk_deactivate', **form_kwargs) %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
