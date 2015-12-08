@@ -100,7 +100,7 @@
                         </tbody>
                     </table>
                     {% endcall %}
-                    {{ items.business_paginate(employees, business_id) }}
+                    {{ items.paginate(employees, form_kwargs) }}
                 {% endif %}
             </div>
         </div>

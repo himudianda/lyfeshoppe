@@ -29,8 +29,10 @@
 {%- endmacro %}
 
 
-{% macro paginate(pagination) -%}
+{% macro paginate(pagination, form_kwargs) -%}
   {% set args = request.args.to_dict() %}
+
+  {% do args.update(form_kwargs) %}
 
     <ul class="pagination">
         <li class="{{ 'disabled' if pagination.page == 1 }}">
@@ -67,52 +69,6 @@
         </li>
         <li class="{{ 'disabled' if pagination.page == pagination.pages }}">
             <a href="{{ url_for(request.endpoint, page=pagination.pages, **args) }}"
-               aria-label="Last">
-                Last &raquo;
-            </a>
-        </li>
-    </ul>
-{%- endmacro %}
-
-
-{% macro business_paginate(pagination, business_id) -%}
-  {% set args = request.args.to_dict() %}
-
-    <ul class="pagination">
-        <li class="{{ 'disabled' if pagination.page == 1 }}">
-            <a href="{{ url_for(request.endpoint, id=business_id, page=1, **args) }}"
-               aria-label="First">
-                &laquo; First
-            </a>
-        </li>
-
-        <li class="{{ 'disabled' if not pagination.has_prev }}">
-            <a href="{{ url_for(request.endpoint, id=business_id, page=pagination.page - 1, **args) }}"
-               aria-label="Previous">
-                Prev
-            </a>
-        </li>
-      {%- for page in pagination.iter_pages() %}
-          <li class="{{ 'active' if page and page == pagination.page }}">
-            {% if page %}
-              {% if page != pagination.page %}
-                  <a href="{{ url_for(request.endpoint, id=business_id, page=page, **args) }}">{{ page }}</a>
-              {% else %}
-                  <span class="text-muted">{{ page }}</span>
-              {% endif %}
-            {% else %}
-                <span class="ellipsis">…</span>
-            {% endif %}
-          </li>
-      {%- endfor %}
-        <li class="{{ 'disabled' if not pagination.has_next }}">
-            <a href="{{ url_for(request.endpoint, id=business_id, page=pagination.page + 1, **args) }}"
-               aria-label="Next">
-                Next
-            </a>
-        </li>
-        <li class="{{ 'disabled' if pagination.page == pagination.pages }}">
-            <a href="{{ url_for(request.endpoint, id=business_id, page=pagination.pages, **args) }}"
                aria-label="Last">
                 Last &raquo;
             </a>
