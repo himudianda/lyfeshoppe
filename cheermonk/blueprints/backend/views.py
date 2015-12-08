@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
+import pytz
 
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
@@ -148,6 +149,15 @@ def business_edit(id):
 
         if business.name == '':
             business.business = None
+
+        if business.open_time:
+            business.open_time = business.open_time.replace(
+                tzinfo=pytz.UTC)
+
+        if business.close_time:
+            business.close_time = business.close_time.replace(
+                tzinfo=pytz.UTC)
+
         business.save()
 
         flash(_('Business has been saved successfully.'), 'success')
