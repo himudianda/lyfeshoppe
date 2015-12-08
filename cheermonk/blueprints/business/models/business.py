@@ -130,6 +130,21 @@ class Employee(ResourceMixin, db.Model):
 
         return True
 
+    @property
+    def num_of_products(self):
+        # Refer notes under Using EXISTS topic under link
+        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
+        return Product.query.filter(Product.employees.any(Employee.id == self.id)).count()
+
+    @property
+    def num_of_reservations(self):
+        # Refer notes under Using EXISTS topic under link
+        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
+        return Reservation.query.filter(Reservation.employee_id == self.id).count()
+        # NOTE: below is an example of using any() & it also works. But the above statment
+        # is easier to use & understand
+        # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
+
 
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'

@@ -48,6 +48,9 @@
                                     <input id="select_all" name="select_all" type="checkbox">
                                 </th>
                                 <th class="col-header">
+                                    {{ items.sort('user.name', 'Name') }}
+                                </th>
+                                <th class="col-header">
                                     {{ items.sort('user.email', 'Email') }}
                                 </th>
                                 <th class="col-header">
@@ -79,6 +82,11 @@
                                     </td>
                                     <td>
                                         <div>
+                                            {{ employee.user.name }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
                                             {{ employee.user.email }}
                                         </div>
                                     </td>
@@ -86,10 +94,10 @@
                                         {{ employee.role }}
                                     </td>
                                     <td>
-                                        {{ employee.products.count }}
+                                        {{ employee.num_of_products }}
                                     </td>
                                     <td>
-                                        {{ employee.reservations.count }}
+                                        {{ employee.num_of_reservations }}
                                     </td>
                                     <td>
                                         {{ employee.active }}
