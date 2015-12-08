@@ -118,8 +118,13 @@ def is_staff_authorized(business):
     employee = Employee.query.filter(
                     (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
                 ).first()
+
+    if not employee:
+        return False
+
     if employee not in business.employees:
         return False
+
     return True
 
 
