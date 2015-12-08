@@ -60,6 +60,12 @@
                                 <th class="col-header">
                                     {{ items.sort('active') }}
                                 </th>
+                                <th class="col-header">
+                                    Visit Dashboard
+                                </th>
+                                <th class="col-header">
+                                    Edit Business
+                                </th>
                                 <th id="bulk_actions" colspan="5">
                                     <div class="form-inline">
                                         {{ f.field(bulk_form.scope, inline=True) }}
@@ -95,6 +101,16 @@
                                     </td>
                                     <td>
                                         {{ business.active }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('backend.business_dashboard', id=business.id) }}">
+                                            Dashboard
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('backend.business_edit', id=business.id) }}">
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                             {% endfor %}
