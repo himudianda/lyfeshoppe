@@ -428,7 +428,7 @@ def business_reservations(id, page):
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
-    sort_by = Reservation.sort_by(request.args.get('active', 'created_on'),
+    sort_by = Reservation.sort_by(request.args.get('created_on', 'status'),
                                   request.args.get('direction', 'asc'))
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 

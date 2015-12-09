@@ -39,14 +39,9 @@
                         <p>There are no reservations present.</p>
                     {% endif %}
                 {% else %}
-                    {% call f.form_tag('backend.business_products_bulk_deactivate', **form_kwargs) %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>
-                                    <label for="select_all"></label>
-                                    <input id="select_all" name="select_all" type="checkbox">
-                                </th>
                                 <th class="col-header">
                                     {{ items.sort('status', 'Status') }}
                                 </th>
@@ -59,21 +54,11 @@
                                 <th class="col-header">
                                     {{ items.sort('active') }}
                                 </th>
-                                <th id="bulk_actions" colspan="5">
-                                    <div class="form-inline">
-                                        {{ f.field(bulk_form.scope, inline=True) }}
-                                        <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Product </button>
-                                    </div>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for reservation in reservations.items %}
                                 <tr>
-                                    <td>
-                                        <label for="bulk_ids"></label>
-                                        <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ reservation.id }}">
-                                    </td>
                                     <td>
                                         {{ reservation.status }}
                                     </td>
@@ -90,7 +75,6 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    {% endcall %}
                     {{ items.paginate(reservations, form_kwargs) }}
                 {% endif %}
             </div>

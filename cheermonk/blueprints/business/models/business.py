@@ -24,7 +24,6 @@ class Reservation(ResourceMixin, db.Model):
     status = db.Column(db.Enum(*STATUS, name='reservation_statuses'), index=True, nullable=False, server_default='new')
     start_time = db.Column(AwareDateTime())
     end_time = db.Column(AwareDateTime())
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     # Relationships
     customer_id = db.Column(db.Integer, db.ForeignKey(

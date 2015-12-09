@@ -540,7 +540,6 @@ def reservations():
                 'status': random.choice(Reservation.STATUS.keys()),
                 'start_time': start_time,
                 'end_time': end_time,
-                'active': random.randint(100, 100000),
                 'business_id': business.id,
                 'customer_id': (random.choice(customers)).id,
                 'employee_id': (random.choice(employees)).id,
