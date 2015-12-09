@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+    {% set form_kwargs = {} %}
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -16,7 +17,7 @@
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title"> Issues. </h3>
             <!-- END PAGE HEADER-->
-            {{ f.search('admin.issues') }}
+            {{ f.search('admin.issues', form_kwargs) }}
 
             {% if issues.total == 0 %}
               <h3>No results found</h3>
