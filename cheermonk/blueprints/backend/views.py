@@ -111,29 +111,36 @@ def businesses_new():
 
 
 # Business Dashboard -------------------------------------------------------------------
-def is_staff_authorized(business):
-    if not business:
-        return False
+def is_staff_authorized(func):
+    from functools import wraps
 
-    employee = Employee.query.filter(
-                    (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
-                ).first()
+    @wraps(func)
+    def func_wrapper(id, **kwargs):
+        business = Business.query.get(id)
+        if not business:
+            flash(_('You do not have permission to do that.'), 'error')
+            return redirect(url_for('backend.businesses'))
 
-    if not employee:
-        return False
+        employee = Employee.query.filter(
+                        (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
+                    ).first()
 
-    if employee not in business.employees:
-        return False
+        if not employee:
+            flash(_('You do not have permission to do that.'), 'error')
+            return redirect(url_for('backend.businesses'))
 
-    return True
+        if employee not in business.employees:
+            flash(_('You do not have permission to do that.'), 'error')
+            return redirect(url_for('backend.businesses'))
+
+        return func(id, **kwargs)
+    return func_wrapper
 
 
 @backend.route('/businesses/<int:id>')
+@is_staff_authorized
 def business_dashboard(id):
     business = Business.query.get(id)
-    if not is_staff_authorized(business):
-        flash(_('You do not have permission to do that.'), 'error')
-        return redirect(url_for('backend.businesses'))
 
     group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
     group_and_count_products = BusinessDashboard.group_and_count_products(business)
@@ -145,11 +152,9 @@ def business_dashboard(id):
 
 
 @backend.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
+@is_staff_authorized
 def business_edit(id):
     business = Business.query.get(id)
-    if not is_staff_authorized(business):
-        flash(_('You do not have permission to do that.'), 'error')
-        return redirect(url_for('backend.businesses'))
     form = BusinessForm(obj=business)
 
     if form.validate_on_submit():
@@ -176,12 +181,9 @@ def business_edit(id):
 
 @backend.route('/businesses/<int:id>/employees', defaults={'page': 1})
 @backend.route('/businesses/<int:id>/employees/page/<int:page>')
+@is_staff_authorized
 def business_employees(id, page):
     business = Business.query.get(id)
-    if not is_staff_authorized(business):
-        flash(_('You do not have permission to do that.'), 'error')
-        return redirect(url_for('backend.businesses'))
-
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
@@ -202,12 +204,8 @@ def business_employees(id, page):
 
 
 @backend.route('/businesses/<int:id>/employees/bulk_deactivate', methods=['POST'])
+@is_staff_authorized
 def business_employees_bulk_deactivate(id):
-    business = Business.query.get(id)
-    if not is_staff_authorized(business):
-        flash(_('You do not have permission to do that.'), 'error')
-        return redirect(url_for('backend.businesses'))
-
     form = BulkDeleteForm()
 
     if form.validate_on_submit():
@@ -230,11 +228,9 @@ def business_employees_bulk_deactivate(id):
 
 
 @backend.route('/businesses/<int:id>/employees/new', methods=['GET', 'POST'])
+@is_staff_authorized
 def business_employees_new(id):
     business = Business.query.get(id)
-    if not is_staff_authorized(business):
-        flash(_('You do not have permission to do that.'), 'error')
-        return redirect(url_for('backend.businesses'))
 
     employee = Employee()
     form = EmployeeForm(obj=employee)
