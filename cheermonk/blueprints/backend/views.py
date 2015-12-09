@@ -275,7 +275,15 @@ def business_employees_new(id):
 def business_employee_edit(id, employee_id):
     business = Business.query.get(id)
     employee = Employee.query.get(employee_id)
-    form = EmployeeForm(obj=employee)
+
+    form_data = {
+        "name": employee.user.name,
+        "email": employee.user.email,
+        "role": employee.role,
+        "active": employee.active
+    }
+
+    form = EmployeeForm(**form_data)
 
     if form.validate_on_submit():
         form.populate_obj(employee)
