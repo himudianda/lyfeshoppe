@@ -4,7 +4,7 @@ from cheermonk.app import create_app
 from cheermonk.extensions import db
 
 from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.business.models.business import Business, Employee
+from cheermonk.blueprints.business.models.business import Business, Employee, Product
 
 
 app = create_app()
@@ -208,6 +208,37 @@ def employee_relations():
 
 
 @click.command()
+def product_relations():
+    """
+    Read product relations
+    """
+    for product in db.session.query(Product).all():
+        click.echo(
+            " === Product with id {0} has {1} number of employees === ".format(
+                product.id, len(product.employees)
+            )
+        )
+
+        # Product Employees
+        if product.employees:
+            click.echo(
+                    'Employees: {0}'.format(
+                        len(product.employees)
+                    )
+                )
+
+            for employee in product.employees:
+                click.echo(
+                    'employee {0} handles product with name {3}'.format(
+                        employee.email, product.name,
+                    )
+                )
+
+        else:
+            click.echo('No products listed.')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -219,6 +250,7 @@ def all(ctx):
     ctx.invoke(user_relations)
     ctx.invoke(business_relations)
     ctx.invoke(employee_relations)
+    ctx.invoke(product_relations)
 
     return None
 
@@ -226,4 +258,5 @@ def all(ctx):
 cli.add_command(user_relations)
 cli.add_command(business_relations)
 cli.add_command(employee_relations)
+cli.add_command(product_relations)
 cli.add_command(all)
