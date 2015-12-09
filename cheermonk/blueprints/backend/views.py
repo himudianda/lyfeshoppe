@@ -433,6 +433,7 @@ def business_reservations(id, page):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_reservations = Reservation.query \
+        .filter(Reservation.business == business) \
         .order_by(Reservation.status.desc(), text(order_values)) \
         .paginate(page, 20, True)
 
