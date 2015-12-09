@@ -1,0 +1,17 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+
+{% block title %}
+    Admin - Reservations / Add | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            {% include 'backend/reservation/_form.jinja2' with context %}
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}

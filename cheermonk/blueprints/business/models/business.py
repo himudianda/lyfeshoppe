@@ -43,6 +43,31 @@ class Reservation(ResourceMixin, db.Model):
         # Call Flask-SQLAlchemy's constructor.
         super(Reservation, self).__init__(**kwargs)
 
+    @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the employee was created successfully.
+
+        :return: bool
+        """
+
+        if 'start_time' in params:
+            if params.get('start_time') is not None:
+                params['start_time'] = params.get('start_time').replace(
+                    tzinfo=pytz.UTC)
+
+        if 'end_time' in params:
+            if params.get('end_time') is not None:
+                params['end_time'] = params.get('end_time').replace(
+                    tzinfo=pytz.UTC)
+
+        reservation = cls(**params)
+
+        db.session.add(reservation)
+        db.session.commit()
+
+        return True
+
 
 class Customer(ResourceMixin, db.Model):
     __tablename__ = 'customers'

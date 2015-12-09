@@ -7,7 +7,7 @@ from wtforms import SelectField, StringField, DateTimeField, BooleanField, TextA
 from wtforms_components import EmailField, IntegerField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
-from cheermonk.blueprints.business.models.business import Business, Employee
+from cheermonk.blueprints.business.models.business import Business, Employee, Reservation
 
 try:
     from instance import settings
@@ -72,3 +72,12 @@ class ProductForm(ModelForm):
     duration_mins = IntegerField(_('Duration in mins'), [Optional(), NumberRange(min=1, max=1000)])
 
     active = BooleanField(_('Yes, Product is active'))
+
+
+class ReservationForm(ModelForm):
+
+    status = SelectField(_('Reservation Status'), [DataRequired()],
+                         choices=choices_from_dict(Reservation.STATUS,
+                         prepend_blank=False))
+    start_time = DateTimeField(_('Reservation Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    end_time = DateTimeField(_('Reservation End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')

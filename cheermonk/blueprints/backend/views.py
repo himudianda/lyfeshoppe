@@ -8,7 +8,7 @@ import pytz
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, ProductForm
+from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, ProductForm, ReservationForm
 from cheermonk.blueprints.business.models.business import Business, Employee, Product, Reservation
 from cheermonk.blueprints.user.models import User
 
@@ -441,3 +441,29 @@ def business_reservations(id, page):
                            form=search_form, bulk_form=bulk_form,
                            reservations=paginated_reservations,
                            business=business)
+
+
+@backend.route('/businesses/<int:id>/reservations/new', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_reservations_new(id):
+
+    business = Business.query.get(id)
+
+    reservation = Reservation()
+    form = ReservationForm(obj=reservation)
+
+    if form.validate_on_submit():
+        form.populate_obj(reservation)
+
+        params = {
+            'status': reservation.status,
+            'start_time': reservation.start_time,
+            'end_time': reservation.end_time,
+            'business_id': id
+        }
+
+        if Reservation.create(params):
+            flash(_('Reservation has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_reservations', id=id))
+
+    return render_template('backend/reservation/new.jinja2', form=form, reservation=reservation, business=business)
