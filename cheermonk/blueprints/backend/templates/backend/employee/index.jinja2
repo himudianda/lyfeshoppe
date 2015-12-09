@@ -87,7 +87,9 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{ employee.user.email }}
+                                            <a href="{{ url_for('backend.business_employee_edit', id=business.id, employee_id=employee.id) }}">
+                                                {{ employee.user.email }}
+                                            </a>
                                         </div>
                                     </td>
                                     <td>

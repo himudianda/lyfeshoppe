@@ -133,6 +133,15 @@ def is_staff_authorized(func):
             flash(_('You do not have permission to do that.'), 'error')
             return redirect(url_for('backend.businesses'))
 
+        # For API editing employee data
+        if kwargs.get('employee_id', None):
+            emp = Employee.query.filter(
+                        (Employee.id == kwargs['employee_id']) & (Employee.business_id == business.id)
+                    ).first()
+            if not emp:
+                flash(_('You do not have permission to do that.'), 'error')
+                return redirect(url_for('backend.business_employees', id=id))
+
         return func(id, **kwargs)
     return func_wrapper
 
