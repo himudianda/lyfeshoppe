@@ -519,33 +519,35 @@ def reservations():
     """
     data = []
 
-    customers = db.session.query(Customer).all()
-    employees = db.session.query(Employee).all()
-    products = db.session.query(Product).all()
+    for business in db.session.query(Business).all():
+        customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
+        employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
+        products = db.session.query(Product).filter(Product.business_id == business.id).all()
 
-    # Create a fake unix timestamp in the future.
-    start_time = fake.date_time_between(
-        start_date='now', end_date='+1d').strftime('%s')
-    end_time = fake.date_time_between(
-        start_date=start_time, end_date='+2d').strftime('%s')
+        # Create a fake unix timestamp in the future.
+        start_time = fake.date_time_between(
+            start_date='now', end_date='+1d').strftime('%s')
+        end_time = fake.date_time_between(
+            start_date=start_time, end_date='+2d').strftime('%s')
 
-    start_time = datetime.utcfromtimestamp(
-        float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-    end_time = datetime.utcfromtimestamp(
-        float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+        start_time = datetime.utcfromtimestamp(
+            float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+        end_time = datetime.utcfromtimestamp(
+            float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
 
-    for i in range(0, NUM_OF_FAKE_RESERVATIONS):
-        params = {
-            'status': random.choice(Reservation.STATUS.keys()),
-            'start_time': start_time,
-            'end_time': end_time,
-            'active': random.randint(100, 100000),
-            'customer_id': (random.choice(customers)).id,
-            'employee_id': (random.choice(employees)).id,
-            'product_id': (random.choice(products)).id
-        }
+        for i in range(0, 20):
+            params = {
+                'status': random.choice(Reservation.STATUS.keys()),
+                'start_time': start_time,
+                'end_time': end_time,
+                'active': random.randint(100, 100000),
+                'business_id': business.id,
+                'customer_id': (random.choice(customers)).id,
+                'employee_id': (random.choice(employees)).id,
+                'product_id': (random.choice(products)).id
+            }
 
-        data.append(params)
+            data.append(params)
 
     return _bulk_insert(Reservation, data, 'reservations')
 

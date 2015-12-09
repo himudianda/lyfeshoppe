@@ -78,6 +78,36 @@
                 </div>
               </div>
 
+              <div class="row">
+              <div class="col-md-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <a href="{{ url_for('backend.business_reservations', **form_kwargs) }}">
+                        Reservations
+                    </a>
+                    <span class="pull-right text-muted">
+                      {{ group_and_count_reservations.total }}
+                    </span>
+                  </div>
+                  <div class="panel-body">
+                    {% for item in group_and_count_reservations.query %}
+                      {% set percent = ((item[0] / group_and_count_reservations.total) * 100) | round %}
+                      <h5>
+                        {{ item[1] | title }}
+                        <span class="text-muted">({{ item[0] }})</span>
+                      </h5>
+                      <div class="progress progress-striped active">
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="{{ percent }}" aria-valuemin="0"
+                             aria-valuemax="100" style="width: {{ percent }}%;">
+                          {{ percent }}%
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
         </div>
         <!-- END CONTENT BODY -->
     </div>

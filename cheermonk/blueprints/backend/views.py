@@ -9,7 +9,7 @@ from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, ProductForm
-from cheermonk.blueprints.business.models.business import Business, Employee, Product
+from cheermonk.blueprints.business.models.business import Business, Employee, Product, Reservation
 from cheermonk.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
@@ -162,10 +162,12 @@ def business_dashboard(id):
 
     group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
     group_and_count_products = BusinessDashboard.group_and_count_products(business)
+    group_and_count_reservations = BusinessDashboard.group_and_count_reservations(business)
 
     return render_template('backend/business/dashboard.jinja2',
                            group_and_count_employees=group_and_count_employees,
                            group_and_count_products=group_and_count_products,
+                           group_and_count_reservations=group_and_count_reservations,
                            business=business)
 
 
@@ -197,6 +199,7 @@ def business_edit(id):
     return render_template('backend/business/edit.jinja2', form=form, business=business)
 
 
+# Business Employees -------------------------------------------------------------------
 @backend.route('/businesses/<int:id>/employees', defaults={'page': 1})
 @backend.route('/businesses/<int:id>/employees/page/<int:page>')
 @is_staff_authorized
@@ -308,6 +311,7 @@ def business_employee_edit(id, employee_id):
     return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
 
 
+# Business Products -------------------------------------------------------------------
 @backend.route('/businesses/<int:id>/products', defaults={'page': 1})
 @backend.route('/businesses/<int:id>/products/page/<int:page>')
 @is_staff_authorized
@@ -413,3 +417,26 @@ def business_product_edit(id, product_id):
         return redirect(url_for('backend.business_products', id=id))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
+
+
+# Business Reservations -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>/reservations', defaults={'page': 1})
+@backend.route('/businesses/<int:id>/reservations/page/<int:page>')
+@is_staff_authorized
+def business_reservations(id, page):
+    business = Business.query.get(id)
+    search_form = SearchForm()
+    bulk_form = BulkDeleteForm()
+
+    sort_by = Reservation.sort_by(request.args.get('active', 'created_on'),
+                                  request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_reservations = Reservation.query \
+        .order_by(Reservation.status.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/reservation/index.jinja2',
+                           form=search_form, bulk_form=bulk_form,
+                           reservations=paginated_reservations,
+                           business=business)

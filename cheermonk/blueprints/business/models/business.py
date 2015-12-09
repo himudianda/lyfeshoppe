@@ -36,6 +36,9 @@ class Reservation(ResourceMixin, db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey(
                         'products.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey(
+                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
@@ -254,6 +257,7 @@ class Business(ResourceMixin, db.Model):
     occupancies = db.relationship(Occupancy, backref="business")
     products = db.relationship(Product, backref='business', passive_deletes=True)
     employees = db.relationship(Employee, backref='business', passive_deletes=True)
+    reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
