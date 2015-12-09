@@ -171,6 +171,22 @@ def employee_relations():
         else:
             click.echo('No occupancies listed.')
 
+        # Employee reservations
+        if employee.reservations:
+            click.echo(
+                    'Reservation: {0}'.format(
+                        len(employee.reservations)
+                    )
+                )
+
+            for reservation in employee.reservations:
+                click.echo(
+                    'reservation {0} with status {1} for customer {2} has product {3}'.format(
+                        reservation.id, reservation.status,
+                        reservation.customer.user.email, reservation.product.name
+                    )
+                )
+
         # Employee products
         if employee.products:
             click.echo(
