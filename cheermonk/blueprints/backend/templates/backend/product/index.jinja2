@@ -23,7 +23,7 @@
                   {{ f.search('backend.business_products', form_kwargs) }}
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ url_for('backend.business_employees_new', **form_kwargs) }}"
+                    <a href="{{ url_for('backend.business_products_new', **form_kwargs) }}"
                        class="btn btn-primary pull-right">
                         Add Product
                     </a>
@@ -39,7 +39,7 @@
                         <p>There are no products present.</p>
                     {% endif %}
                 {% else %}
-                    {% call f.form_tag('backend.business_employees_bulk_deactivate', **form_kwargs) %}
+                    {% call f.form_tag('backend.business_products_bulk_deactivate', **form_kwargs) %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>

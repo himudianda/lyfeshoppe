@@ -3,9 +3,9 @@ from collections import OrderedDict
 from cheermonk.lib.util_wtforms import ModelForm
 
 from flask_wtf import Form
-from wtforms import SelectField, StringField, DateTimeField, BooleanField
-from wtforms_components import EmailField
-from wtforms.validators import DataRequired, Length, Optional
+from wtforms import SelectField, StringField, DateTimeField, BooleanField, TextAreaField
+from wtforms_components import EmailField, IntegerField
+from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
 from cheermonk.blueprints.business.models.business import Business, Employee
 
@@ -61,3 +61,14 @@ class EmployeeForm(ModelForm):
                        choices=choices_from_dict(Employee.ROLE,
                                                  prepend_blank=False))
     active = BooleanField(_('Yes, Employee is active'))
+
+
+class ProductForm(ModelForm):
+
+    name = StringField(_('Product name'), [DataRequired(), Length(1, 255)])
+    description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
+    capacity = IntegerField(_('Service Capacity'), [Optional(), NumberRange(min=1, max=1000)])
+    price_cents = IntegerField(_('Price in cents'), [Optional(), NumberRange(min=1, max=1000000)])
+    duration_mins = IntegerField(_('Duration in mins'), [Optional(), NumberRange(min=1, max=1000)])
+
+    active = BooleanField(_('Yes, Product is active'))

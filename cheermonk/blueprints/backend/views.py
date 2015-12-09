@@ -8,7 +8,7 @@ import pytz
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm
+from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, ProductForm
 from cheermonk.blueprints.business.models.business import Business, Employee, Product
 from cheermonk.blueprints.user.models import User
 
@@ -321,3 +321,84 @@ def business_products(id, page):
                            form=search_form, bulk_form=bulk_form,
                            products=paginated_products,
                            business=business)
+
+
+@backend.route('/businesses/<int:id>/products/bulk_deactivate', methods=['POST'])
+@is_staff_authorized
+def business_products_bulk_deactivate(id):
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Product.get_bulk_action_ids(request.form.get('scope'),
+                                          request.form.getlist('bulk_ids'),
+                                          query=request.args.get('q', ''))
+
+        for product_id in ids:
+            product = Product.query.get(product_id)
+            #product.active = not product.active
+        db.session.commit()
+
+        flash(_n('%(num)d product was deactivated.',
+                 '%(num)d products were deactivated.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No products were deactivated, something went wrong.'), 'error')
+
+    return redirect(url_for('backend.business_products', id=id))
+
+
+@backend.route('/businesses/<int:id>/products/new', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_products_new(id):
+    business = Business.query.get(id)
+
+    product = Product()
+    form = ProductForm(obj=product)
+
+    if form.validate_on_submit():
+        form.populate_obj(product)
+
+        params = {
+            'name': product.name,
+            'description': product.description,
+            'capacity': product.capacity,
+            'price_cents': product.price_cents,
+            'duration_mins': product.duration_mins,
+            'active': '1'
+        }
+
+        if Product.create(params):
+            flash(_('Product has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_products', id=id))
+
+    return render_template('backend/product/new.jinja2', form=form, product=product, business=business)
+
+'''
+@backend.route('/businesses/<int:id>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_employee_edit(id, employee_id):
+    business = Business.query.get(id)
+    employee = Employee.query.get(employee_id)
+
+    form_data = {
+        "name": employee.user.name,
+        "email": employee.user.email,
+        "role": employee.role,
+        "active": employee.active
+    }
+
+    form = EmployeeForm(**form_data)
+
+    if form.validate_on_submit():
+        form.populate_obj(employee)
+
+        if employee.name == '':
+            employee.name = None
+
+        employee.save()
+
+        flash(_('Employee has been saved successfully.'), 'success')
+        return redirect(url_for('backend.business_employees', id=id))
+
+    return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
+'''
