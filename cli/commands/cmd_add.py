@@ -457,11 +457,24 @@ def employees():
                 'role': 'member',
                 'business_id': business.id,
                 'user_id': member_employee.id,
+                'products': Product.query.filter(Product.business_id == business.id).all(),
                 'active': '1'
             }
             data.append(params)
 
     return _bulk_insert(Employee, data, 'employees')
+
+
+@click.command()
+def employee_product_relations():
+    """
+    Create random employee_product_relations.
+    """
+    products = db.session.query(Product).all()
+
+    for product in products:
+        product.employees.extend(Employee.query.filter(Employee.business_id == product.business_id).all())
+        product.save()
 
 
 @click.command()
@@ -555,6 +568,7 @@ def all(ctx):
     ctx.invoke(occupancies)
     ctx.invoke(employees)
     ctx.invoke(products)
+    ctx.invoke(employee_product_relations)
     ctx.invoke(availabilities)
     ctx.invoke(customers)
     ctx.invoke(reservations)
@@ -570,6 +584,7 @@ cli.add_command(businesses)
 cli.add_command(occupancies)
 cli.add_command(employees)
 cli.add_command(products)
+cli.add_command(employee_product_relations)
 cli.add_command(availabilities)
 cli.add_command(customers)
 cli.add_command(reservations)

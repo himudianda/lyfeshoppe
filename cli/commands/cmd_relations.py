@@ -229,8 +229,8 @@ def product_relations():
 
             for employee in product.employees:
                 click.echo(
-                    'employee {0} handles product with name {3}'.format(
-                        employee.email, product.name,
+                    'employee {0} handles product with name {1}'.format(
+                        employee.user.email, product.name,
                     )
                 )
 
