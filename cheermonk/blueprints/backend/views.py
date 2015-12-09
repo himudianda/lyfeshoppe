@@ -9,7 +9,7 @@ from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm
-from cheermonk.blueprints.business.models.business import Business, Employee
+from cheermonk.blueprints.business.models.business import Business, Employee, Product
 from cheermonk.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
@@ -297,3 +297,27 @@ def business_employee_edit(id, employee_id):
         return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
+
+
+@backend.route('/businesses/<int:id>/products', defaults={'page': 1})
+@backend.route('/businesses/<int:id>/products/page/<int:page>')
+@is_staff_authorized
+def business_products(id, page):
+    business = Business.query.get(id)
+    search_form = SearchForm()
+    bulk_form = BulkDeleteForm()
+
+    sort_by = Product.sort_by(request.args.get('sort', 'capacity'),
+                              request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_products = Product.query \
+        .filter(Product.search(request.args.get('q', ''))) \
+        .filter(Product.business == business) \
+        .order_by(Product.price_cents.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/product/index.jinja2',
+                           form=search_form, bulk_form=bulk_form,
+                           products=paginated_products,
+                           business=business)

@@ -186,6 +186,24 @@ class Product(ResourceMixin, db.Model):
         # Call Flask-SQLAlchemy's constructor.
         super(Product, self).__init__(**kwargs)
 
+    @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        search_chain = (cls.name.ilike(search_query),
+                        cls.description.ilike(search_query))
+
+        return or_(*search_chain)
+
 
 class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'

@@ -52,7 +52,9 @@
               <div class="col-md-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <a href="{{ url_for('backend.businesses') }}">Products</a>
+                    <a href="{{ url_for('backend.business_products', **form_kwargs) }}">
+                        Products
+                    </a>
                     <span class="pull-right text-muted">
                       {{ group_and_count_products.total }}
                     </span>
