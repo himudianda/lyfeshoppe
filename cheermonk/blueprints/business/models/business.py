@@ -181,6 +181,7 @@ class Product(ResourceMixin, db.Model):
                     ), index=True, nullable=False)
     availabilities = db.relationship(Availability, backref="product")
     reservations = db.relationship(Reservation, backref='product', passive_deletes=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
@@ -203,6 +204,19 @@ class Product(ResourceMixin, db.Model):
                         cls.description.ilike(search_query))
 
         return or_(*search_chain)
+
+    @classmethod
+    def create(cls, params):
+        """
+        Return whether or not the product was created successfully.
+
+        :return: bool
+        """
+        product = cls(**params)
+        db.session.add(product)
+        db.session.commit()
+
+        return True
 
 
 class Business(ResourceMixin, db.Model):

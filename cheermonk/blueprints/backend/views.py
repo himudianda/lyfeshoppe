@@ -335,7 +335,7 @@ def business_products_bulk_deactivate(id):
 
         for product_id in ids:
             product = Product.query.get(product_id)
-            #product.active = not product.active
+            product.active = not product.active
         db.session.commit()
 
         flash(_n('%(num)d product was deactivated.',
@@ -364,7 +364,8 @@ def business_products_new(id):
             'capacity': product.capacity,
             'price_cents': product.price_cents,
             'duration_mins': product.duration_mins,
-            'active': '1'
+            'active': '1',
+            'business_id': id
         }
 
         if Product.create(params):
