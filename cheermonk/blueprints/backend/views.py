@@ -142,6 +142,15 @@ def is_staff_authorized(func):
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(url_for('backend.business_employees', id=id))
 
+        # For API editing product data
+        if kwargs.get('product_id', None):
+            emp = Product.query.filter(
+                        (Product.id == kwargs['product_id']) & (Product.business_id == business.id)
+                    ).first()
+            if not emp:
+                flash(_('You do not have permission to do that.'), 'error')
+                return redirect(url_for('backend.business_products', id=id))
+
         return func(id, **kwargs)
     return func_wrapper
 
@@ -374,32 +383,33 @@ def business_products_new(id):
 
     return render_template('backend/product/new.jinja2', form=form, product=product, business=business)
 
-'''
-@backend.route('/businesses/<int:id>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
+
+@backend.route('/businesses/<int:id>/products/edit/<int:product_id>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_employee_edit(id, employee_id):
+def business_product_edit(id, product_id):
     business = Business.query.get(id)
-    employee = Employee.query.get(employee_id)
+    product = Product.query.get(product_id)
 
     form_data = {
-        "name": employee.user.name,
-        "email": employee.user.email,
-        "role": employee.role,
-        "active": employee.active
+        "name": product.name,
+        "description": product.description,
+        "capacity": product.capacity,
+        "price_cents": product.price_cents,
+        "duration_mins": product.duration_mins,
+        "active": product.active
     }
 
-    form = EmployeeForm(**form_data)
+    form = ProductForm(**form_data)
 
     if form.validate_on_submit():
-        form.populate_obj(employee)
+        form.populate_obj(product)
 
-        if employee.name == '':
-            employee.name = None
+        if product.name == '':
+            product.name = None
 
-        employee.save()
+        product.save()
 
-        flash(_('Employee has been saved successfully.'), 'success')
-        return redirect(url_for('backend.business_employees', id=id))
+        flash(_('Product has been saved successfully.'), 'success')
+        return redirect(url_for('backend.business_products', id=id))
 
-    return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
-'''
+    return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)

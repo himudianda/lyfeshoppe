@@ -81,7 +81,11 @@
                                         <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ product.id }}">
                                     </td>
                                     <td>
-                                        {{ product.name }}
+                                        <div>
+                                            <a href="{{ url_for('backend.business_product_edit', id=business.id, product_id=product.id) }}">
+                                                {{ product.name }}
+                                            </a>
+                                        </div>
                                     </td>
                                     <td>
                                         {{ product.description }}
