@@ -43,6 +43,9 @@
                         <thead>
                             <tr>
                                 <th class="col-header">
+                                    {{ items.sort('id', 'Id') }}
+                                </th>
+                                <th class="col-header">
                                     {{ items.sort('status', 'Status') }}
                                 </th>
                                 <th class="col-header">
@@ -51,14 +54,18 @@
                                 <th class="col-header">
                                     {{ items.sort('end_time', 'End time') }}
                                 </th>
-                                <th class="col-header">
-                                    {{ items.sort('active') }}
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for reservation in reservations.items %}
                                 <tr>
+                                    <td>
+                                        <div>
+                                            <a href="{{ url_for('backend.business_reservation_edit', id=business.id, reservation_id=reservation.id) }}">
+                                                {{ reservation.id }}
+                                            </a>
+                                        </div>
+                                    </td>
                                     <td>
                                         {{ reservation.status }}
                                     </td>
@@ -67,9 +74,6 @@
                                     </td>
                                     <td>
                                         {{ reservation.end_time }}
-                                    </td>
-                                    <td>
-                                        {{ reservation.active }}
                                     </td>
                                 </tr>
                             {% endfor %}

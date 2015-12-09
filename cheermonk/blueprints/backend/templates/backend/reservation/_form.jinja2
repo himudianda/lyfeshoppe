@@ -6,8 +6,8 @@
   {% set legend = 'Add a new Reservation' %}
   {% set button = _('Add') %}
 {% else %}
-  {% set endpoint = 'backend.business_product_edit' %}
-  {% set form_kwargs = {'id': business.id, 'product_id': reservation.id} %}
+  {% set endpoint = 'backend.business_reservation_edit' %}
+  {% set form_kwargs = {'id': business.id, 'reservation_id': reservation.id} %}
   {% set legend = 'Update this reservation' %}
   {% set button = _('Save') %}
 {% endif %}

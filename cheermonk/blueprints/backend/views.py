@@ -151,6 +151,15 @@ def is_staff_authorized(func):
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(url_for('backend.business_products', id=id))
 
+        # For API editing reservation data
+        if kwargs.get('reservation_id', None):
+            emp = Reservation.query.filter(
+                        (Reservation.id == kwargs['reservation_id']) & (Reservation.business_id == business.id)
+                    ).first()
+            if not emp:
+                flash(_('You do not have permission to do that.'), 'error')
+                return redirect(url_for('backend.business_reservations', id=id))
+
         return func(id, **kwargs)
     return func_wrapper
 
@@ -467,3 +476,36 @@ def business_reservations_new(id):
             return redirect(url_for('backend.business_reservations', id=id))
 
     return render_template('backend/reservation/new.jinja2', form=form, reservation=reservation, business=business)
+
+
+@backend.route('/businesses/<int:id>/reservations/edit/<int:reservation_id>', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_reservation_edit(id, reservation_id):
+    business = Business.query.get(id)
+    reservation = Reservation.query.get(reservation_id)
+
+    form_data = {
+        "status": reservation.status,
+        "start_time": reservation.start_time,
+        "end_time": reservation.end_time,
+    }
+
+    form = ReservationForm(**form_data)
+
+    if form.validate_on_submit():
+        form.populate_obj(reservation)
+
+        if reservation.start_time:
+            reservation.start_time = reservation.start_time.replace(
+                tzinfo=pytz.UTC)
+
+        if reservation.end_time:
+            reservation.end_time = reservation.end_time.replace(
+                tzinfo=pytz.UTC)
+
+        reservation.save()
+
+        flash(_('Reservation has been saved successfully.'), 'success')
+        return redirect(url_for('backend.business_reservations', id=id))
+
+    return render_template('backend/reservation/edit.jinja2', form=form, business=business, reservation=reservation)
