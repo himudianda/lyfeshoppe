@@ -259,3 +259,24 @@ def business_employees_new(id):
                 return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business)
+
+
+@backend.route('/businesses/<int:id>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_employee_edit(id, employee_id):
+    business = Business.query.get(id)
+    employee = Employee.query.get(employee_id)
+    form = EmployeeForm(obj=employee)
+
+    if form.validate_on_submit():
+        form.populate_obj(employee)
+
+        if employee.name == '':
+            employee.name = None
+
+        employee.save()
+
+        flash(_('Employee has been saved successfully.'), 'success')
+        return redirect(url_for('backend.business_employees', id=id))
+
+    return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
