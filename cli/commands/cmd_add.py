@@ -43,7 +43,7 @@ NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_ISSUES = 50
 NUM_OF_FAKE_COUPONS = 5
 NUM_OF_FAKE_BUSINESSES = 200
-NUM_OF_FAKE_RESERVATIONS = 1000
+NUM_OF_FAKE_RESERVATIONS = 10000
 
 
 def _log_status(count, model_label):
@@ -375,51 +375,6 @@ def occupancies():
 
 
 @click.command()
-def employees():
-    """
-    Create random employees.
-    """
-    data = []
-    businesses = db.session.query(Business).all()
-
-    for business in businesses:
-        employees_list = []
-        for i in range(0, random.randint(12, 20)):
-
-            if len(employees_list):
-                admin_employee = random.choice(
-                    db.session.query(User).filter(~User.id.in_(employees_list)).all()
-                )
-            else:
-                admin_employee = random.choice(
-                    db.session.query(User).all()
-                )
-            employees_list.append(admin_employee.id)
-            params = {
-                'role': 'admin',
-                'business_id': business.id,
-                'user_id': admin_employee.id,
-                'active': '1'
-            }
-            data.append(params)
-
-            # Ensure that the member employee isnt the same as the admin employee
-            member_employee = random.choice(
-                db.session.query(User).filter(~User.id.in_(employees_list)).all()
-            )
-            employees_list.append(member_employee.id)
-            params = {
-                'role': 'member',
-                'business_id': business.id,
-                'user_id': member_employee.id,
-                'active': '1'
-            }
-            data.append(params)
-
-    return _bulk_insert(Employee, data, 'employees')
-
-
-@click.command()
 def customers():
     """
     Create random customers.
@@ -461,6 +416,52 @@ def products():
             data.append(params)
 
     return _bulk_insert(Product, data, 'products')
+
+
+@click.command()
+def employees():
+    """
+    Create random employees.
+    """
+    data = []
+    businesses = db.session.query(Business).all()
+
+    for business in businesses:
+        employees_list = []
+        for i in range(0, random.randint(12, 20)):
+
+            if len(employees_list):
+                admin_employee = random.choice(
+                    db.session.query(User).filter(~User.id.in_(employees_list)).all()
+                )
+            else:
+                admin_employee = random.choice(
+                    db.session.query(User).all()
+                )
+            employees_list.append(admin_employee.id)
+            params = {
+                'role': 'admin',
+                'business_id': business.id,
+                'user_id': admin_employee.id,
+                'products': Product.query.filter(Product.business_id == business.id).all(),
+                'active': '1'
+            }
+            data.append(params)
+
+            # Ensure that the member employee isnt the same as the admin employee
+            member_employee = random.choice(
+                db.session.query(User).filter(~User.id.in_(employees_list)).all()
+            )
+            employees_list.append(member_employee.id)
+            params = {
+                'role': 'member',
+                'business_id': business.id,
+                'user_id': member_employee.id,
+                'active': '1'
+            }
+            data.append(params)
+
+    return _bulk_insert(Employee, data, 'employees')
 
 
 @click.command()

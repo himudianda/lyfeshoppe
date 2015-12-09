@@ -4,7 +4,7 @@ from cheermonk.app import create_app
 from cheermonk.extensions import db
 
 from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.business.models.business import Business
+from cheermonk.blueprints.business.models.business import Business, Employee
 
 
 app = create_app()
@@ -134,6 +134,64 @@ def business_relations():
 
 
 @click.command()
+def employee_relations():
+    """
+    Read employee relations
+    """
+    for employee in db.session.query(Employee).all():
+        click.echo(" === Employee with id {0} and email {1} === ".format(employee.id, employee.user.email))
+
+        # Employee User addresses
+        if employee.user.address:
+            click.echo(
+                    'Address: {0},{1},{2},{3}'.format(
+                        employee.user.address.street, employee.user.address.city,
+                        employee.user.address.state, employee.user.address.zipcode
+                    )
+                )
+        else:
+            click.echo('No address listed.')
+
+        # Employee User occupancies
+        if employee.user.occupancies and len(employee.user.occupancies):
+            click.echo(
+                    'Occupancies: {0}'.format(
+                        len(employee.user.occupancies)
+                    )
+                )
+
+            for occupancy in employee.user.occupancies:
+                click.echo(
+                    'start_time: {0}  -  end_time: {1}  occupied for user {2}'.format(
+                        occupancy.start_time, occupancy.end_time,
+                        occupancy.user.email
+                    )
+                )
+
+        else:
+            click.echo('No occupancies listed.')
+
+        # Employee products
+        if employee.products:
+            click.echo(
+                    'Products: {0}'.format(
+                        len(employee.products)
+                    )
+                )
+
+            for product in employee.products:
+                click.echo(
+                    'product {0} with capacity {1} has price {2} cents & duration {3} mins'.format(
+                        product.name, product.capacity,
+                        product.price_cents, product.duration_mins
+                    )
+                )
+
+        else:
+            click.echo('No products listed.')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -144,10 +202,12 @@ def all(ctx):
     """
     ctx.invoke(user_relations)
     ctx.invoke(business_relations)
+    ctx.invoke(employee_relations)
 
     return None
 
 
 cli.add_command(user_relations)
 cli.add_command(business_relations)
+cli.add_command(employee_relations)
 cli.add_command(all)
