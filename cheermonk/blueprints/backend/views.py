@@ -8,7 +8,8 @@ import pytz
 from cheermonk.extensions import db
 from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
-from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, ProductForm, ReservationForm
+from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, \
+     ProductForm, ReservationForm
 from cheermonk.blueprints.business.models.business import Business, Employee, Product, Reservation
 from cheermonk.blueprints.user.models import User
 
@@ -21,6 +22,15 @@ backend = Blueprint('backend', __name__, template_folder='templates', url_prefix
 def before_request():
     """ We are protecting all of our backend endpoints. """
     pass
+
+
+# Shop -------------------------------------------------------------------
+@backend.route('')
+def shop():
+    group_and_count_businesses = Dashboard.group_and_count_businesses()
+
+    return render_template('backend/page/shop.jinja2',
+                           group_and_count_businesses=group_and_count_businesses)
 
 
 # Dashboard -------------------------------------------------------------------
