@@ -65,3 +65,6 @@ instance/settings.py
 celerybeat.pid
 celerybeat-schedule
 core
+
+cheermonk/templates/sample_dashboard/*
+cheermonk/templates/sample_frontend/*
