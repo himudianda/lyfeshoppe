@@ -25,7 +25,7 @@ def before_request():
 
 
 # Shop -------------------------------------------------------------------
-@backend.route('')
+@backend.route('/shop')
 def shop():
     group_and_count_businesses = Dashboard.group_and_count_businesses()
 
