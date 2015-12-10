@@ -33,6 +33,10 @@
     <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 
+  {% if request.endpoint in ('backend.shop_details') %}
+    <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
+  {% endif %}
+
 {%- endmacro -%}
 
 
