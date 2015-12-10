@@ -27,10 +27,12 @@ def before_request():
 # Shop -------------------------------------------------------------------
 @backend.route('/shop')
 def shop():
-    group_and_count_businesses = Dashboard.group_and_count_businesses()
+    return render_template('backend/shop/index.jinja2')
 
-    return render_template('backend/page/shop.jinja2',
-                           group_and_count_businesses=group_and_count_businesses)
+
+@backend.route('/shop/<int:id>')
+def shop_details(id):
+    return render_template('backend/shop/details.jinja2')
 
 
 # Dashboard -------------------------------------------------------------------
