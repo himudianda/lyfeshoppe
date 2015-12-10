@@ -1,0 +1,42 @@
+{# Render scripts that get included on all pages. #}
+{%- macro render() -%}
+
+
+  {{ javascript_tag('vendor_js', 'app_js') | safe }}
+
+  <!-- BEGIN CORE PLUGINS -->
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+  <!-- END CORE PLUGINS -->
+  <!-- BEGIN THEME GLOBAL SCRIPTS -->
+  <script src="{{ url_for('static', filename='dashboard/global/scripts/app.min.js') }}" type="text/javascript"></script>
+  <!-- END THEME GLOBAL SCRIPTS -->
+  <!-- BEGIN THEME LAYOUT SCRIPTS -->
+  <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/layout.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/demo.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='dashboard/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
+  <!-- END THEME LAYOUT SCRIPTS -->
+
+  {{ situational() }}
+  
+{%- endmacro -%}
+
+{# Render assets that get situationally loaded based on the endpoint. #}
+{%- macro situational() -%}
+
+  {% if request.endpoint in ('backend.shop') %}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js') }}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ url_for('static', filename='dashboard/pages/scripts/portfolio-1.min.js') }}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+  {% endif %}
+
+{%- endmacro -%}
