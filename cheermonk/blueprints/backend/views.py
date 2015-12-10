@@ -30,8 +30,8 @@ def shop():
     return render_template('backend/shop/index.jinja2')
 
 
-@backend.route('/shop/<int:id>')
-def shop_details(id):
+@backend.route('/shop/<string:username>')
+def shop_details(username):
     return render_template('backend/shop/details.jinja2')
 
 
