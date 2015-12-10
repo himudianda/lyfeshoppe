@@ -31,15 +31,9 @@
 {# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro situational() -%}
 
-  {% if request.endpoint in ('backend.shop',
-                              'backend.shop_details'
-                            ) %}
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
+  {% if request.endpoint in ('backend.shop') %}
     <script src="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js') }}" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ url_for('static', filename='dashboard/pages/scripts/portfolio-1.min.js') }}" type="text/javascript"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
   {% endif %}
 
 {%- endmacro -%}
