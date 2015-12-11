@@ -39,6 +39,7 @@
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.js') }}" type="text/javascript"></script>
+      <script src="{{ url_for('static', filename='dashboard/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
   {% endif %}
 {%- endmacro -%}
 
@@ -47,6 +48,7 @@
 {%- macro situational_page_level_scripts() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-datepaginator.min.js') }}" type="text/javascript"></script>
+      <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-select2.min.js') }}" type="text/javascript"></script>
   {% endif %}
 {%- endmacro -%}
 
