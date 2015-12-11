@@ -16,6 +16,9 @@
   <link href="{{ url_for('static', filename='dashboard/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
   <link href="{{ url_for('static', filename='dashboard/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
   <!-- END THEME GLOBAL STYLES -->
+
+  {{ situational_page_level_styles() }}
+
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
@@ -36,6 +39,15 @@
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+  {% endif %}
+{%- endmacro -%}
+
+
+{# Render assets that get situationally loaded based on the endpoint. #}
+{%- macro situational_page_level_styles() -%}
+  {% if request.endpoint in ('backend.shop_details') %}
+      <link href="{{ url_for('static', filename='dashboard/pages/css/profile-2.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {%- endmacro -%}
 
