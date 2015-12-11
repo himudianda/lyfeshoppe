@@ -28,7 +28,7 @@
 {# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro situational() -%}
 
-  {% if request.endpoint in ('backend.shop') %}
+  {% if request.endpoint in ('backend.shop', 'backend.shop_details') %}
     <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
