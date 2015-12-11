@@ -9,6 +9,9 @@
   <link href="{{ url_for('static', filename='dashboard/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
   <!-- END GLOBAL MANDATORY STYLES -->
+
+  {{ situational_page_level_plugins() }}
+
   <!-- BEGIN THEME GLOBAL STYLES -->
   <link href="{{ url_for('static', filename='dashboard/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
   <link href="{{ url_for('static', filename='dashboard/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
@@ -25,26 +28,31 @@
 
 {%- endmacro -%}
 
+
+{# Render assets that get situationally loaded based on the endpoint. #}
+{%- macro situational_page_level_plugins() -%}
+  {% if request.endpoint in ('backend.shop_details') %}
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.css') }}" rel="stylesheet" type="text/css" />
+  {% endif %}
+{%- endmacro -%}
+
+
 {# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro situational() -%}
-
   {% if request.endpoint in ('backend.shop', 'backend.shop_details') %}
-    <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
-
   {% if request.endpoint in ('backend.shop_details') %}
-    <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
-
 {%- endmacro -%}
 
 
 {# Render polyfills for out dated browsers. #}
 {%- macro polyfills() -%}
-
     <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
     <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
     <!--[if !IE]><!-->
-
 {%- endmacro -%}
