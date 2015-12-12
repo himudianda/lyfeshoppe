@@ -23,23 +23,18 @@
 <div class="portlet box green">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-gift"></i> {{ legend }} </div>
-        <div class="tools">
-            <a href="javascript:;" class="collapse"> </a>
-            <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-            <a href="javascript:;" class="reload"> </a>
-            <a href="javascript:;" class="remove"> </a>
+            <i class="fa fa-plus"></i> {{ legend }} 
         </div>
     </div>
     <div class="portlet-body form">
         <!-- BEGIN FORM-->
         <form action="#" class="form-horizontal">
             <div class="form-body">
-                <h3 class="form-section">Person Info</h3>
+                <h3 class="form-section">Business Info</h3>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">First Name</label>
+                            <label class="control-label col-md-3">Business Name</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="Chee Kin">
                                 <span class="help-block"> This is inline help </span>
@@ -49,7 +44,7 @@
                     <!--/span-->
                     <div class="col-md-6">
                         <div class="form-group has-error">
-                            <label class="control-label col-md-3">Last Name</label>
+                            <label class="control-label col-md-3">Business Username</label>
                             <div class="col-md-9">
                                 <select name="foo" class="form-control">
                                     <option value="1">Option 1</option>
@@ -66,7 +61,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Gender</label>
+                            <label class="control-label col-md-3">Business Email</label>
                             <div class="col-md-9">
                                 <select class="form-control">
                                     <option value="">Male</option>
@@ -79,7 +74,7 @@
                     <!--/span-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Date of Birth</label>
+                            <label class="control-label col-md-3">Business Phone</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="dd/mm/yyyy"> </div>
                         </div>
@@ -90,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Category</label>
+                            <label class="control-label col-md-3">Business Type</label>
                             <div class="col-md-9">
                                 <select class="form-control" data-placeholder="Choose a Category" tabindex="1">
                                     <option value="Category 1">Category 1</option>
@@ -104,20 +99,20 @@
                     <!--/span-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Membership</label>
+                            <label class="control-label col-md-3">Is Active</label>
                             <div class="col-md-9">
                                 <div class="radio-list">
                                     <label class="radio-inline">
-                                        <input type="radio" name="optionsRadios2" value="option1" /> Free </label>
+                                        <input type="radio" name="optionsRadios2" value="option1" checked/> True </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="optionsRadios2" value="option2" checked/> Professional </label>
+                                        <input type="radio" name="optionsRadios2" value="option2" /> False </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--/span-->
                 </div>
-                <h3 class="form-section">Address</h3>
+                <h3 class="form-section">Business Address</h3>
                 <!--/row-->
                 <div class="row">
                     <div class="col-md-6">
@@ -183,7 +178,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn green">Submit</button>
+                                <button type="submit" class="btn green">{{ button }}</button>
                                 <button type="button" class="btn default">Cancel</button>
                             </div>
                         </div>
