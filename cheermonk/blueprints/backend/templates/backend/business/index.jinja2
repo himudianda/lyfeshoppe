@@ -107,7 +107,12 @@
                                                             {{ business.email }}
                                                         </td>
                                                         <td>
-                                                            {{ business.active }}
+                                                            {% if business.active %}
+                                                                {% set data = "label label-md label-success label" %}
+                                                            {% else %}
+                                                                {% set data = "label label-md label-warning label" %}
+                                                            {% endif %}
+                                                            <span class="{{ data }}"> {{ business.active }} </span>
                                                         </td>
                                                         <td>
                                                             <a href="{{ url_for('backend.business_dashboard', id=business.id) }}" class="btn btn-outline btn-circle red btn-sm blue">
