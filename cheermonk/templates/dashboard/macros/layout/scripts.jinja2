@@ -3,13 +3,13 @@
 
   {{ CORE_PLUGINS() }}
 
-  {{ situational_page_level_plugins() }}
+  {{ PAGE_LEVEL_PLUGINS() }}
 
   {{ javascript_tag('vendor_js', 'app_js') | safe }}
 
   {{ THEME_GLOBAL_SCRIPTS() }}
 
-  {{ situational_page_level_scripts() }}
+  {{ PAGE_LEVEL_SCRIPTS() }}
 
   {{ THEME_LAYOUT_SCRIPTS() }}
 
@@ -53,42 +53,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {# Render assets that get situationally loaded based on the endpoint. #}
-{%- macro situational_page_level_plugins() -%}
+{%- macro PAGE_LEVEL_PLUGINS() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
@@ -131,7 +97,7 @@
 
 
 {# Render assets that get situationally loaded based on the endpoint. #}
-{%- macro situational_page_level_scripts() -%}
+{%- macro PAGE_LEVEL_SCRIPTS() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-datepaginator.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-select2.min.js') }}" type="text/javascript"></script>
