@@ -1,4 +1,4 @@
-{% import 'macros/form.jinja2' as f with context %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'backend.businesses_new' %}
@@ -11,13 +11,6 @@
   {% set legend = 'Update this business' %}
   {% set button = _('Save') %}
 {% endif %}
-
-
-
-
-
-
-
 
 
 <div class="portlet box green">
@@ -190,39 +183,6 @@
         <!-- END FORM-->
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
