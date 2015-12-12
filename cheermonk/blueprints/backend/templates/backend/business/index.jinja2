@@ -53,25 +53,22 @@
                                                         <input id="select_all" name="select_all" type="checkbox">
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('created_on', 'Date') }}
-                                                    </th>
-                                                    <th class="col-header">
-                                                        {{ items.sort('type', 'Business Type') }}
+                                                        Edit Business
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('name') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('email') }}
+                                                        {{ items.sort('type', 'Business Type') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('active') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        Visit Dashboard
+                                                        {{ items.sort('email') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        Edit Business
+                                                        Visit Dashboard
                                                     </th>
                                                     <th id="bulk_actions" colspan="5">
                                                         <div class="form-inline">
@@ -89,14 +86,9 @@
                                                             <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ business.id }}">
                                                         </td>
                                                         <td>
-                                                            <time class="from-now" data-datetime="{{ business.created_on }}">
-                                                                {{ business.created_on }}
-                                                            </time>
-                                                        </td>
-                                                        <td>
-                                                            <div>
-                                                                {{ business.type }}
-                                                            </div>
+                                                            <a href="{{ url_for('backend.business_edit', id=business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                <i class="fa fa-edit"></i> Edit
+                                                            </a>
                                                         </td>
                                                         <td>
                                                             <a href="{{ url_for('backend.business_dashboard', id=business.id) }}">
@@ -104,7 +96,9 @@
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            {{ business.email }}
+                                                            <div>
+                                                                {{ business.type }}
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             {% if business.active %}
@@ -115,15 +109,13 @@
                                                             <span class="{{ data }}"> {{ business.active }} </span>
                                                         </td>
                                                         <td>
+                                                            {{ business.email }}
+                                                        </td>
+                                                        <td>
                                                             <a href="{{ url_for('backend.business_dashboard', id=business.id) }}" class="btn btn-outline btn-circle red btn-sm blue">
                                                                 <i class="fa fa-share"></i> Dashboard
                                                             </a>
 
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{ url_for('backend.business_edit', id=business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
-                                                                <i class="fa fa-edit"></i> Edit
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
