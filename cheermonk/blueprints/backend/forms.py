@@ -52,6 +52,11 @@ class BusinessForm(ModelForm):
     phone = StringField(_('Business Phone number'), [Optional(), Length(1, 12)])
     active = BooleanField(_('Yes, Business is active'))
 
+    street = StringField(_('Street Address'), [Optional(), Length(1, 255)])
+    city = StringField(_('City'), [Optional(), Length(1, 30)])
+    state = StringField(_('State'), [Optional(), Length(1, 30)])
+    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+
 
 class EmployeeForm(ModelForm):
 
