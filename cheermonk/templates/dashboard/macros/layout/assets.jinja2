@@ -1,38 +1,48 @@
 {# Render assets that get included on all pages. #}
 {%- macro render() -%}
 
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END GLOBAL MANDATORY STYLES -->
+    {{ GLOBAL_MANDATORY_STYLES() }}
 
-  {{ situational_page_level_plugins() }}
+    {{ situational_page_level_plugins() }}
 
-  <!-- BEGIN THEME GLOBAL STYLES -->
-  <link href="{{ url_for('static', filename='dashboard/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END THEME GLOBAL STYLES -->
+    {{ THEME_GLOBAL_STYLES() }}
 
-  {{ situational_page_level_styles() }}
+    {{ situational_page_level_styles() }}
 
-  <!-- BEGIN THEME LAYOUT STYLES -->
-  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
-  <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END THEME LAYOUT STYLES -->
+    {{ THEME_LAYOUT_STYLES() }}
 
-  <link rel="shortcut icon" href="favicon.ico" /> </head>
+    <link rel="shortcut icon" href="favicon.ico" /> </head>
 
-  {{ situational() }}
+    {{ situational() }}
 
 {%- endmacro -%}
 
 
-{# Render assets that get situationally loaded based on the endpoint. #}
+
+{%- macro GLOBAL_MANDATORY_STYLES() -%}
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
+{%- endmacro -%}
+
+{%- macro THEME_GLOBAL_STYLES() -%}
+    <link href="{{ url_for('static', filename='dashboard/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
+{%- endmacro -%}
+
+{%- macro THEME_LAYOUT_STYLES() -%}
+    <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="{{ url_for('static', filename='dashboard/layouts/layout2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+{%- endmacro -%}
+
+
+
+
+
 {%- macro situational_page_level_plugins() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
@@ -47,11 +57,14 @@
       <link href="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
-
 {%- endmacro -%}
 
 
-{# Render assets that get situationally loaded based on the endpoint. #}
+
+
+
+
+
 {%- macro situational_page_level_styles() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <link href="{{ url_for('static', filename='dashboard/pages/css/profile-2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -59,7 +72,11 @@
 {%- endmacro -%}
 
 
-{# Render assets that get situationally loaded based on the endpoint. #}
+
+
+
+
+
 {%- macro situational() -%}
   {% if request.endpoint in ('backend.shop', 'backend.shop_details') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
@@ -69,6 +86,11 @@
       <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {%- endmacro -%}
+
+
+
+
+
 
 
 {# Render polyfills for out dated browsers. #}
