@@ -1,36 +1,90 @@
 {# Render scripts that get included on all pages. #}
 {%- macro render() -%}
 
-  <!-- BEGIN CORE PLUGINS -->
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
-  <!-- END CORE PLUGINS -->
+  {{ CORE_PLUGINS() }}
 
   {{ situational_page_level_plugins() }}
 
   {{ javascript_tag('vendor_js', 'app_js') | safe }}
 
-  <!-- BEGIN THEME GLOBAL SCRIPTS -->
-  <script src="{{ url_for('static', filename='dashboard/global/scripts/app.min.js') }}" type="text/javascript"></script>
-  <!-- END THEME GLOBAL SCRIPTS -->
+  {{ THEME_GLOBAL_SCRIPTS() }}
 
   {{ situational_page_level_scripts() }}
 
-  <!-- BEGIN THEME LAYOUT SCRIPTS -->
-  <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/layout.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/demo.min.js') }}" type="text/javascript"></script>
-  <script src="{{ url_for('static', filename='dashboard/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
-  <!-- END THEME LAYOUT SCRIPTS -->
+  {{ THEME_LAYOUT_SCRIPTS() }}
 
   {{ situational() }}
 
 {%- endmacro -%}
+
+
+
+
+
+
+
+
+{%- macro CORE_PLUGINS() -%}
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+{%- endmacro -%}
+
+
+{%- macro THEME_GLOBAL_SCRIPTS() -%}
+    <script src="{{ url_for('static', filename='dashboard/global/scripts/app.min.js') }}" type="text/javascript"></script>
+{%- endmacro -%}
+
+
+{%- macro THEME_LAYOUT_SCRIPTS() -%}
+    <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/layout.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/layouts/layout2/scripts/demo.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
+{%- endmacro -%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {# Render assets that get situationally loaded based on the endpoint. #}
