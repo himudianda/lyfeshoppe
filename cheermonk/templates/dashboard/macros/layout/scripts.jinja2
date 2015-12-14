@@ -1,6 +1,5 @@
 {# Render scripts that get included on all pages. #}
 {%- macro render() -%}
-
   {{ CORE_PLUGINS() }}
 
   {{ PAGE_LEVEL_PLUGINS() }}
@@ -16,11 +15,6 @@
   {{ situational() }}
 
 {%- endmacro -%}
-
-
-
-
-
 
 
 
@@ -48,12 +42,6 @@
 {%- endmacro -%}
 
 
-
-
-
-
-
-{# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro PAGE_LEVEL_PLUGINS() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
@@ -95,8 +83,6 @@
   {% endif %}
 {%- endmacro -%}
 
-
-{# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro PAGE_LEVEL_SCRIPTS() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-datepaginator.min.js') }}" type="text/javascript"></script>
@@ -111,7 +97,6 @@
 {%- endmacro -%}
 
 
-{# Render assets that get situationally loaded based on the endpoint. #}
 {%- macro situational() -%}
   {% if request.endpoint in ('backend.shop', 'backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js') }}" type="text/javascript"></script>

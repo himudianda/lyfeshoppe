@@ -7,7 +7,7 @@
 
     {{ THEME_GLOBAL_STYLES() }}
 
-    {{ situational_page_level_styles() }}
+    {{ PAGE_LEVEL_STYLES() }}
 
     {{ THEME_LAYOUT_STYLES() }}
 
@@ -40,9 +40,6 @@
 {%- endmacro -%}
 
 
-
-
-
 {%- macro PAGE_LEVEL_PLUGINS() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
@@ -60,21 +57,11 @@
 {%- endmacro -%}
 
 
-
-
-
-
-
-{%- macro situational_page_level_styles() -%}
+{%- macro PAGE_LEVEL_STYLES() -%}
   {% if request.endpoint in ('backend.shop_details') %}
       <link href="{{ url_for('static', filename='dashboard/pages/css/profile-2.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {%- endmacro -%}
-
-
-
-
-
 
 
 {%- macro situational() -%}
@@ -86,11 +73,6 @@
       <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {%- endmacro -%}
-
-
-
-
-
 
 
 {# Render polyfills for out dated browsers. #}
