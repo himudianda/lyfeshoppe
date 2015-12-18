@@ -6,7 +6,7 @@ from flask_babel import gettext as _
 import pytz
 
 from cheermonk.extensions import db
-from cheermonk.blueprints.backend.models import Dashboard, BusinessDashboard
+from cheermonk.blueprints.backend.models import BusinessDashboard
 from cheermonk.blueprints.user.decorators import role_required
 from cheermonk.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, \
      ProductForm, ReservationForm
@@ -25,6 +25,7 @@ def before_request():
 
 
 # Shop -------------------------------------------------------------------
+@backend.route('')
 @backend.route('/shop')
 def shop():
     return render_template('backend/shop/index.jinja2')
@@ -33,15 +34,6 @@ def shop():
 @backend.route('/shop/<string:username>')
 def shop_details(username):
     return render_template('backend/shop/details.jinja2')
-
-
-# Dashboard -------------------------------------------------------------------
-@backend.route('')
-def dashboard():
-    group_and_count_businesses = Dashboard.group_and_count_businesses()
-
-    return render_template('backend/page/dashboard.jinja2',
-                           group_and_count_businesses=group_and_count_businesses)
 
 
 # Businesses -----------------------------------------------------------------------

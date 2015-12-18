@@ -6,6 +6,6 @@ def get_dashboard_url():
     if current_user.role == "admin":
         return url_for('admin.dashboard')
     elif current_user.role == "member":
-        return url_for('backend.dashboard')
+        return url_for('backend.shop')
     else:
         return url_for('page.home')
