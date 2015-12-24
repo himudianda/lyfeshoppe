@@ -8,8 +8,8 @@ import pytz
 
 from faker import Faker
 
-from cheermonk.blueprints.stream.twitter import TwitterStream
-from cheermonk.blueprints.stream.tasks import broadcast_message
+from lyfeshoppe.blueprints.stream.twitter import TwitterStream
+from lyfeshoppe.blueprints.stream.tasks import broadcast_message
 
 TWITTER_CONSUMER_KEY = None
 TWITTER_CONSUMER_SECRET = None

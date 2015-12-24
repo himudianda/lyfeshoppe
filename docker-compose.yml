@@ -1,19 +1,19 @@
 postgres:
   image: postgres:9.4.3
   environment:
-    POSTGRES_USER: cheermonk
+    POSTGRES_USER: lyfeshoppe
     POSTGRES_PASSWORD: bestpassword
   ports:
     - 5432:5432
   volumes:
-    - ~/.docker-volumes/cheermonk/postgresql/data:/var/lib/postgresql/data
+    - ~/.docker-volumes/lyfeshoppe/postgresql/data:/var/lib/postgresql/data
 
 redis:
   image: redis:2.8.21
   ports:
     - 6379:6379
   volumes:
-    - ~/.docker-volumes/cheermonk/redis/data:/var/lib/redis/data
+    - ~/.docker-volumes/lyfeshoppe/redis/data:/var/lib/redis/data
 
 faye:
   image: nickjj/faye:latest
@@ -50,14 +50,14 @@ cadvisor:
 #
 #celery:
 #  build: .
-#  command: celery worker -B -A cheermonk.blueprints.user.tasks -l info
+#  command: celery worker -B -A lyfeshoppe.blueprints.user.tasks -l info
 #  links:
 #    - redis
 #    - postgres
 #
 #flower:
 #  build: .
-#  command: flower -A cheermonk.blueprints.user.tasks --port=8081
+#  command: flower -A lyfeshoppe.blueprints.user.tasks --port=8081
 #  links:
 #    - redis
 #  ports:

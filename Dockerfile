@@ -6,7 +6,7 @@ MAINTAINER Harshit Imudianda <harshit.imudianda@gmail.com>
 RUN apt-get update && apt-get install -qq -y build-essential nodejs nodejs-legacy npm libpq-dev postgresql-client-9.4 libpng-dev --fix-missing --no-install-recommends
 
 # Setup the install path for this service.
-ENV INSTALL_PATH /cheermonk
+ENV INSTALL_PATH /lyfeshoppe
 RUN mkdir -p $INSTALL_PATH
 
 # Update the workdir to be where our app is installed.
@@ -33,4 +33,4 @@ RUN pip install --editable .
 VOLUME ["$INSTALL_PATH/build/public"]
 
 # The default command to run if no command is specified.
-CMD gunicorn -b 0.0.0.0:8000 "cheermonk.app:create_app()"
+CMD gunicorn -b 0.0.0.0:8000 "lyfeshoppe.app:create_app()"

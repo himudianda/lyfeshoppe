@@ -4,15 +4,15 @@ from datetime import datetime
 import click
 from faker import Faker
 
-from cheermonk.app import create_app
-from cheermonk.extensions import db
-from cheermonk.blueprints.issue.models import Issue
-from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.common.models import Address, Availability, Occupancy
-from cheermonk.blueprints.billing.models.invoice import Invoice
-from cheermonk.blueprints.billing.models.coupon import Coupon
-from cheermonk.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
-from cheermonk.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
+from lyfeshoppe.app import create_app
+from lyfeshoppe.extensions import db
+from lyfeshoppe.blueprints.issue.models import Issue
+from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.common.models import Address, Availability, Occupancy
+from lyfeshoppe.blueprints.billing.models.invoice import Invoice
+from lyfeshoppe.blueprints.billing.models.coupon import Coupon
+from lyfeshoppe.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None

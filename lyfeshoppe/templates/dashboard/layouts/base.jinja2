@@ -1,0 +1,50 @@
+{% import 'dashboard/macros/layout/meta_tags.jinja2' as meta_tags %}
+{% import 'dashboard/macros/layout/fav_icons.jinja2' as fav_icons %}
+{% import 'dashboard/macros/layout/assets.jinja2' as assets with context %}
+{% import 'dashboard/macros/layout/scripts.jinja2' as scripts with context %}
+{% import 'dashboard/macros/layout/analytics.jinja2' as analytics with context %}
+{% import 'dashboard/macros/layout/flash.jinja2' as flash with context %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    {{ meta_tags.render(csrf_token()) }}
+    {{ fav_icons.render(self.title()) }}
+    {{ assets.render() }}
+
+    {{ assets.polyfills() }}
+    {{ analytics.google_ua() }}
+  </head>
+
+
+  <body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }} class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+
+        {% block header %}{% endblock %}
+
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+          {{ flash.render() }}
+          {% block sidebar %}{% endblock %}
+          {% block content %}{% endblock %}
+          {% block quick_sidebar %}{% endblock %}
+        </div>
+        <!-- END CONTAINER -->
+
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                {{ _('LyfeShoppe') }} &copy; 2015
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+
+    <!-- Scripts
+    ============================================= -->
+    {{ scripts.render() }}
+
+  </body>
+</html>

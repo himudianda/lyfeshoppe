@@ -3,7 +3,7 @@ import logging
 import click
 import stripe
 
-from cheermonk.blueprints.billing.gateways.stripecom import Plan as PaymentPlan
+from lyfeshoppe.blueprints.billing.gateways.stripecom import Plan as PaymentPlan
 
 STRIPE_SECRET_KEY = None
 STRIPE_PLANS = None

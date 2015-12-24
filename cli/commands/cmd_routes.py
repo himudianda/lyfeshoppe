@@ -2,7 +2,7 @@ import logging
 
 import click
 
-from cheermonk.app import create_app
+from lyfeshoppe.app import create_app
 
 app = create_app()
 

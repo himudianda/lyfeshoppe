@@ -1,0 +1,54 @@
+{% extends 'frontend/layouts/base.jinja2' %}
+{% import 'macros/role_urls.jinja2' as role_urls with context %}
+
+{% block header %}
+  
+    <!-- Header
+    ============================================= -->
+    <header id="header">
+      <div id="header-wrap">
+        <div class="container clearfix">
+          <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+          <!-- Logo
+          ============================================= -->
+          <div id="logo">
+            <a href="{{ url_for('page.home') }}" class="standard-logo" data-dark-logo="{{ url_for('static', filename='common/images/lyfeshoppe_logo.png') }}"><img src="{{ url_for('static', filename='common/images/lyfeshoppe_logo.png') }}" alt="LyfeShoppe Logo"></a>
+            <a href="{{ url_for('page.home') }}" class="retina-logo" data-dark-logo="{{ url_for('static', filename='common/images/lyfeshoppe_logo@2x.png') }}"><img src="{{ url_for('static', filename='common/images/lyfeshoppe_logo@2x.png') }}" alt="LyfeShoppe Logo"></a>
+          </div>
+          <!-- #logo end -->
+
+          <!-- Primary Navigation
+          ============================================= -->
+          <nav id="primary-menu">
+            <ul>
+              <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
+              <li {% if request.endpoint in ('page.faq') %} class="current"{% endif %}><a href="{{ url_for('page.faq') }}">FAQ</a></li>
+              <li {% if request.endpoint in ('issue.support') %} class="current"{% endif %}><a href="{{ url_for('issue.support') }}">Support</a></li>
+              <li {% if request.endpoint in ('page.investors') %} class="current"{% endif %}><a href="{{ url_for('page.investors') }}">Investors</a></li>
+              <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}">Businesses</a></li>
+              {% if current_user.is_authenticated() %}
+                <li>
+                    {% call role_urls.dashboard_url() %}
+                        Dashboard
+                    {% endcall %}
+                </li>
+                <li {% if request.endpoint in ('user.logout') %} class="current"{% endif %}><a href="{{ url_for('user.logout') }}">Logout</a></li>
+              {% else %}
+                <li {% if request.endpoint in ('user.login') %} class="current"{% endif %}><a href="{{ url_for('user.login') }}">Login</a></li>
+                <li {% if request.endpoint in ('user.signup') %} class="current"{% endif %}><a href="{{ url_for('user.signup') }}">Register</a></li>
+              {% endif %}
+            </ul>
+          </nav><!-- #primary-menu end -->
+        </div>
+      </div>
+    </header><!-- #header end -->
+
+{% endblock %}
+
+{% block footer %}
+    <li><a href="{{ url_for('page.faq') }}">FAQ</a></li>
+    <li><a href="{{ url_for('issue.support') }}">Support</a></li>
+    <li><a href="{{ url_for('page.privacy') }}">Privacy policy</a></li>
+    <li><a href="{{ url_for('page.terms') }}">Terms of service</a></li>
+{% endblock %}

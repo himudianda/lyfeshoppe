@@ -10,7 +10,7 @@ from celery.schedules import crontab
 # it really should be your module's name.
 #   Database name
 #   Cache redis prefix
-APP_NAME = 'cheermonk'
+APP_NAME = 'lyfeshoppe'
 APP_ROOT = path.join(path.dirname(path.abspath(__file__)), '..')
 
 # App settings, most settings you see here will change in production.
@@ -50,7 +50,7 @@ SEED_ADMIN_EMAIL = 'dev@localhost.com'
 
 # Database settings,
 # The username and password must match what's in docker-compose.yml for dev.
-db_uri = 'postgresql://cheermonk:bestpassword@localhost:5432/{0}'
+db_uri = 'postgresql://lyfeshoppe:bestpassword@localhost:5432/{0}'
 SQLALCHEMY_DATABASE_URI = db_uri.format(APP_NAME)
 SQLALCHEMY_POOL_SIZE = 5
 
@@ -70,11 +70,11 @@ CELERY_RESULT_SERIALIZER = 'json'
 # Celery recurring scheduled tasks.
 CELERYBEAT_SCHEDULE = {
     'mark-soon-to-expire-credit-cards': {
-        'task': 'cheermonk.blueprints.billing.tasks.mark_old_credit_cards',
+        'task': 'lyfeshoppe.blueprints.billing.tasks.mark_old_credit_cards',
         'schedule': crontab(hour=12, minute=1)
     },
     'mark-invalid-coupons': {
-        'task': 'cheermonk.blueprints.billing.tasks.expire_old_coupons',
+        'task': 'lyfeshoppe.blueprints.billing.tasks.expire_old_coupons',
         'schedule': crontab(hour=12, minute=2)
     },
 }
@@ -83,7 +83,7 @@ CELERYBEAT_SCHEDULE = {
 REMEMBER_COOKIE_DURATION = timedelta(days=90)
 
 # Mail settings.
-MAIL_DEFAULT_SENDER = 'support@cheermonk.com'
+MAIL_DEFAULT_SENDER = 'support@lyfeshoppe.com'
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True

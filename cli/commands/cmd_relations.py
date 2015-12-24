@@ -1,10 +1,10 @@
 import click
 
-from cheermonk.app import create_app
-from cheermonk.extensions import db
+from lyfeshoppe.app import create_app
+from lyfeshoppe.extensions import db
 
-from cheermonk.blueprints.user.models import User
-from cheermonk.blueprints.business.models.business import Business, Employee, Product
+from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product
 
 
 app = create_app()

@@ -1,0 +1,47 @@
+{% extends 'frontend/layouts/app.jinja2' %}
+{% import 'macros/form.jinja2' as f with context %}
+
+{% block title %}
+    Support | CheerMonk | Social Shop with huge discounts.
+{% endblock %}
+
+{% block meta_description %}
+    LyfeShoppe Support page.
+{% endblock %}
+
+{% block body %}
+        <!-- Content
+        ============================================= -->
+        <section id="content">
+            <div class="content-wrap">
+                <div class="container clearfix">
+                <h3>Support:</h3>
+                    <p>Send any support requests using the form below.</p>
+                    <div class="divider"><i class="icon-circle"></i></div>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 well">
+                              {% call f.form_tag('issue.support') %}
+                                  <legend>We're here to help</legend>
+
+                                {% call f.form_group(form.label, css_class='margin-bottom') %}
+                                {% endcall %}
+
+                                {% call f.form_group(form.email, css_class='margin-bottom',
+                                                 placeholder='E-mail address') %}
+                                {% endcall %}
+
+                                {% call f.form_group(form.question, css_class='margin-bottom',
+                                                 placeholder='The more we know, the easier it will be to help you',
+                                                 rows='12') %}
+                                {% endcall %}
+
+                                  <button type="submit" class="btn btn-primary">
+                                      Submit this support request
+                                  </button>
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section><!-- #content end -->
+{% endblock %}

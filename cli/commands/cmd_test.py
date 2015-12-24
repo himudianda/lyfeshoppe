@@ -15,7 +15,7 @@ except AttributeError:
 
     APP_ROOT = settings.APP_ROOT
 
-TESTS_PATH = '{0}/{1}'.format(APP_ROOT, '/cheermonk/tests')
+TESTS_PATH = '{0}/{1}'.format(APP_ROOT, '/lyfeshoppe/tests')
 
 
 @click.command()

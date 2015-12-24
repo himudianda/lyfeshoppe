@@ -42,7 +42,7 @@ def extract():
     :return: Subprocess call result
     """
     babel_cmd = 'pybabel extract -F babel.cfg -k lazy_gettext ' \
-                '-o {0} cheermonk'.format(MESSAGES_PATH)
+                '-o {0} lyfeshoppe'.format(MESSAGES_PATH)
     return subprocess.call(babel_cmd, shell=True)
 
 

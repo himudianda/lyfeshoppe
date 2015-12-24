@@ -19,7 +19,7 @@ var node_env = process.env.NODE_ENV || 'development';
 var context = path.join(__dirname, '..');
 
 // Where are your source assets located?
-var rootAssetPath = './cheermonk/assets';
+var rootAssetPath = './lyfeshoppe/assets';
 var contextRoot = path.join(context, rootAssetPath);
 
 // Which human languages do you want to support? (regex)

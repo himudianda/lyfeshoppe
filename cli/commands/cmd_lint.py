@@ -15,7 +15,7 @@ except AttributeError:
 
     APP_ROOT = settings.APP_ROOT
 
-PACKAGE_PATH = '{0}/{1}'.format(APP_ROOT, 'cheermonk')
+PACKAGE_PATH = '{0}/{1}'.format(APP_ROOT, 'lyfeshoppe')
 
 
 @click.command()

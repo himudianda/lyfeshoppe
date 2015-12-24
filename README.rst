@@ -2,7 +2,7 @@
 What is this project?
 ^^^^^^^^^^^^^^^^^^^^^
 
-Cheermonk
+LyfeShoppe
 
 Installation instructions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -47,15 +47,15 @@ I installed everything, now what?
 Create a bit of supporting directory structure
 ----------------------------------------------
 
-- Create a new folder somewhere, let's say: ``/tmp/cheermonk``
-- Create a new ``website`` folder inside of that: ``/tmp/cheermonk/website``
-- CD into that directory: ``cd /tmp/cheermonk/website``
+- Create a new folder somewhere, let's say: ``/tmp/lyfeshoppe``
+- Create a new ``website`` folder inside of that: ``/tmp/lyfeshoppe/website``
+- CD into that directory: ``cd /tmp/lyfeshoppe/website``
 
 Clone the repo and install all dependencies
 -------------------------------------------
 
-- Clone this repo ``git clone git@github.com:himudianda/cheermonk.git``
-- Type ``cd cheermonk``
+- Clone this repo ``git clone git@github.com:himudianda/lyfeshoppe.git``
+- Type ``cd lyfeshoppe``
 - Activate your virtualenv
 - Type ``pip install --editable .`` to activate the CLI
 - Type ``pip install -r requirements.txt`` to install dependencies
@@ -73,7 +73,7 @@ Initialize everything and view the app
 - Open a new terminal window
 - Type ``run assets build`` to create the build directory and manifest file
 - Type ``run`` to see a list of what's available
-- Type ``run db reset cheermonk cheermonk_test`` to initialize the databases
+- Type ``run db reset lyfeshoppe lyfeshoppe_test`` to initialize the databases
 - Type ``run stripe sync_plans`` to sync your ``STRIPE_PLANS`` to the gateway
 - Type ``run all`` to start everything
 - Visit http://localhost:8000 in your browser
@@ -107,7 +107,7 @@ How do I provide my own settings?
 
 - Create a ``settings.py`` file at ``$PROJECT_ROOT/instance/settings.py``
 - Overwrite as many settings as you want
-View the `example production settings.py <https://github.com/himudianda/cheermonk/blob/master/instance/settings.py.production_example>`_.
+View the `example production settings.py <https://github.com/himudianda/lyfeshoppe/blob/master/instance/settings.py.production_example>`_.
 
 Can I quickly change my schema without migrating?
 '''''''''''''''''''''''''''''''''''''''''''''''''
@@ -118,7 +118,7 @@ your schema very frequently.
 
 - Shut everything down
 - Type ``docker-compose run postgres``
-- Type ``run db reset cheermonk cheermonk_test``
+- Type ``run db reset lyfeshoppe lyfeshoppe_test``
 - Type ``run add all``
 
 This will drop your database, create a new one and seed it with fake data.

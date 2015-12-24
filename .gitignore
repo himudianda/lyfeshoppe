@@ -66,5 +66,5 @@ celerybeat.pid
 celerybeat-schedule
 core
 
-cheermonk/templates/sample_dashboard/*
-cheermonk/templates/sample_frontend/*
+lyfeshoppe/templates/sample_dashboard/*
+lyfeshoppe/templates/sample_frontend/*

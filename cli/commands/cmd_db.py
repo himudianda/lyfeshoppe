@@ -2,9 +2,9 @@ import subprocess
 
 import click
 
-from cheermonk.lib.db_seed import seed_database
-from cheermonk.app import create_app
-from cheermonk.extensions import db
+from lyfeshoppe.lib.db_seed import seed_database
+from lyfeshoppe.app import create_app
+from lyfeshoppe.extensions import db
 
 
 # Create a context for the database connection.
