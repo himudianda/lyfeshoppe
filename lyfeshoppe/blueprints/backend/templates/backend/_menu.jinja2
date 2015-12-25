@@ -21,7 +21,7 @@
 </li>
 <li class="nav-item">
     {% if current_user.num_of_businesses == 0 %}
-        <a href="{{ url_for('backend.businesses') }}" class="nav-link nav-toggle">
+        <a href="{{ url_for('backend.businesses_new') }}" class="nav-link nav-toggle">
             <i class="icon-basket"></i>
             <span class="title">Create your Shop</span>
             <span class="arrow"></span>
