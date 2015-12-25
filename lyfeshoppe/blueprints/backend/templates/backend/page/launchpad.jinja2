@@ -75,7 +75,6 @@
                                     <li>
                                         <a href="{{ url_for('backend.account') }}">
                                             <i class="icon-user"></i> My Profile
-                                            <span class="badge badge-danger">1</span>
                                         </a>
                                     </li>
                                     <li class="divider"> </li>
@@ -132,6 +131,16 @@
                                     </div>
                                 {% endif %}
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 margin-bottom-30 col-md-offset-3">
+                                    <a class="webapp-btn" href="{{ url_for('backend.account') }}">
+                                        <h3>Your Profile</h3>
+                                        <p>Your profile on LyfeShoppe</p>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
