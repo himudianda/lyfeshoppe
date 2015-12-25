@@ -24,8 +24,13 @@ def before_request():
     pass
 
 
-# Shop -------------------------------------------------------------------
+# Launchpad
 @backend.route('')
+def launchpad():
+    return render_template('backend/page/launchpad.jinja2')
+
+
+# Shop -------------------------------------------------------------------
 @backend.route('/shop')
 def shop():
     return render_template('backend/shop/index.jinja2')
