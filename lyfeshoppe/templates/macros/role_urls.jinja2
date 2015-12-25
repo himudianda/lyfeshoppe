@@ -4,7 +4,7 @@
   {% if current_user.role == "admin" %}
       <a href="{{ url_for('admin.dashboard') }}">
   {% elif current_user.role == "member" %}
-      <a href="{{ url_for('backend.shop') }}">
+        <a href="{{ url_for('backend.launchpad') }}">
   {% else %}
       <a href="{{ url_for('page.home') }}">
   {% endif %}
