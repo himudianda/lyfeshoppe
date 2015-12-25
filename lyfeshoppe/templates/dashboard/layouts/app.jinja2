@@ -77,16 +77,12 @@
                         {% if current_user.role == 'admin' %}
                             {% include 'admin/_menu.jinja2' %}
                         {% elif current_user.role == 'member' %}
-
-
                             {% if request.endpoint.startswith('backend.business_') %}
                                 {% include 'backend/_business_menu.jinja2' %}
                             {% else %}
                                 {% include 'backend/_menu.jinja2' %}
                             {% endif %}
-
                         {% endif %}
-
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
