@@ -13,7 +13,7 @@ from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, Busi
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation
 from lyfeshoppe.blueprints.user.models import User
 
-backend = Blueprint('backend', __name__, template_folder='templates', url_prefix='/backend')
+backend = Blueprint('backend', __name__, template_folder='templates')
 
 
 @backend.before_request
@@ -25,7 +25,7 @@ def before_request():
 
 
 # Launchpad
-@backend.route('')
+@backend.route('/')
 def launchpad():
     return render_template('backend/page/launchpad.jinja2')
 
