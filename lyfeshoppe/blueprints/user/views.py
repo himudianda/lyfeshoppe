@@ -124,7 +124,7 @@ def signup():
 
         if login_user(u):
             flash(_('Awesome, thanks for signing up!'), 'success')
-            return redirect(get_dashboard_url())
+            return redirect(url_for('backend.launchpad'))
 
     return render_template('user/signup.jinja2', form=form)
 
