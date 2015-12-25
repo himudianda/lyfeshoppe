@@ -109,12 +109,28 @@
                                         <p>Start shopping on LyfeShoppe</p>
                                     </a>
                                 </div>
-                                <div class="col-sm-6 margin-bottom-30">
-                                    <a class="webapp-btn" href="{{ url_for('backend.businesses') }}">
-                                        <h3>Create a Shop</h3>
-                                        <p>Create your shop on LyfeShoppe</p>
-                                    </a>
-                                </div>
+                                {% if current_user.num_of_businesses == 0 %}
+                                    <div class="col-sm-6 margin-bottom-30">
+                                        <a class="webapp-btn" href="{{ url_for('backend.businesses') }}">
+                                            <h3>Create a Shop</h3>
+                                            <p>Create your shop on LyfeShoppe</p>
+                                        </a>
+                                    </div>
+                                {% elif current_user.num_of_businesses == 1 %}
+                                    <div class="col-sm-6 margin-bottom-30">
+                                        <a class="webapp-btn" href="{{ url_for('backend.business_dashboard', id=current_user.id_of_businesses[0]) }}">
+                                            <h3>Your Shop</h3>
+                                            <p>You have {{ current_user.num_of_businesses }} shop on LyfeShoppe</p>
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <div class="col-sm-6 margin-bottom-30">
+                                        <a class="webapp-btn" href="{{ url_for('backend.businesses') }}">
+                                            <h3>Your Shops</h3>
+                                            <p>You have {{ current_user.num_of_businesses }} shops on LyfeShoppe</p>
+                                        </a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
