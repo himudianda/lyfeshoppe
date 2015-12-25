@@ -124,15 +124,16 @@ class Employee(ResourceMixin, db.Model):
     role = db.Column(db.Enum(*ROLE, name='employee_roles'), index=True, nullable=False, server_default='member')
 
     # Relationships.
-    business_id = db.Column(db.Integer, db.ForeignKey(
-                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
-                    ), index=True, nullable=False)
-
     # Many to One relationship: Many employees can have same user
     # Thats becoz; A user can be employed with multiple businesses.
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship(User)
+    business_id = db.Column(db.Integer, db.ForeignKey(
+                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+                        'users.id', onupdate='CASCADE', ondelete='CASCADE'
+                        ), index=True, nullable=False)
+
     products = db.relationship('Product', secondary=employee_product_relations, backref='employees')
     reservations = db.relationship(Reservation, backref='employee', passive_deletes=True)
 

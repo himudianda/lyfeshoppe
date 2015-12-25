@@ -17,6 +17,7 @@ from lyfeshoppe.blueprints.common.models import Address, Occupancy
 from lyfeshoppe.blueprints.billing.models.credit_card import CreditCard
 from lyfeshoppe.blueprints.billing.models.subscription import Subscription
 from lyfeshoppe.blueprints.billing.models.invoice import Invoice
+from lyfeshoppe.blueprints.business.models.business import Business, Employee
 from lyfeshoppe.extensions import db, bcrypt
 
 
@@ -40,6 +41,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     address = db.relationship(Address)
     # One to Many relationship: One user can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="user")
+    employee_refs = db.relationship(Employee, backref='user', passive_deletes=True)
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
@@ -295,3 +297,7 @@ class User(UserMixin, ResourceMixin, db.Model):
             delete_count += 1
 
         return delete_count
+
+    @property
+    def num_of_businesses(self):
+        return Business.query.filter(Business.employees.in_(self.employee_refs)).count()
