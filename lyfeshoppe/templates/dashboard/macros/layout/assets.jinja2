@@ -62,6 +62,9 @@
   {% if request.endpoint in ('backend.account') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
+  {% if request.endpoint in ('backend.account_settings') %}
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+  {% endif %}
 {%- endmacro -%}
 
 
@@ -75,6 +78,9 @@
       <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
   {% if request.endpoint in ('backend.account') %}
+      <link href="{{ url_for('static', filename='dashboard/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
+  {% endif %}
+  {% if request.endpoint in ('backend.account_settings') %}
       <link href="{{ url_for('static', filename='dashboard/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {%- endmacro -%}

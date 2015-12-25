@@ -46,6 +46,9 @@ def shop_details(username):
 def account():
     return render_template('backend/account/profile.jinja2')
 
+@backend.route('/account/settings')
+def account_settings():
+    return render_template('backend/account/settings.jinja2')
 
 # Businesses -----------------------------------------------------------------------
 @backend.route('/businesses', defaults={'page': 1})
