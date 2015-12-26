@@ -1,0 +1,137 @@
+
+{# Products & Services. #}
+{%- macro services(business) -%}
+    <div class="row">
+        <div class="col-md-offset-0 col-md-12">
+            <div class="mt-element-list">
+                <div class="mt-list-head list-todo opt-2 font-white bg-dark">
+                    <div class="list-head-title-container">
+                        <h3 class="list-title" style="text-align: center;">Services available for Dec 11, 2015</h3>
+                    </div>
+                </div>
+                <div class="mt-list-container list-todo opt-2">
+                    <div class="list-todo-line bg-red"></div>
+                    <ul>
+                        <li class="mt-list-item">
+                            <div class="list-todo-icon bg-white font-blue-steel">
+                                <i class="fa fa-database"></i>
+                            </div>
+                            <div class="list-todo-item item-1">
+                                <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-1-2" aria-expanded="false">
+                                    <div class="list-toggle done uppercase bg-blue-steel">
+                                        <div class="list-toggle-title bold">Massage</div>
+                                        <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
+                                    </div>
+                                </a>
+                                <div class="task-list panel-collapse collapse in" id="task-1-2">
+                                    <ul>
+                                    {% for product in business.products %}
+                                        <li class="task-list-item done">
+                                            <div class="task-content">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h5 class="uppercase bold">
+                                                                {{ product.name }}
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <h5 class="uppercase bold">
+                                                                ${{ product.price_cents/100 }}+
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <a class="btn btn-default">Book</a>
+                                                        </div>
+                                                    </div>
+                                                <p> {{ product.description }} </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mt-list-item">
+                            <div class="list-todo-icon bg-white font-green-meadow">
+                                <i class="fa fa-paint-brush"></i>
+                            </div>
+                            <div class="list-todo-item item-2">
+                                <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-2-2" aria-expanded="false">
+                                    <div class="list-toggle done uppercase bg-green-meadow">
+                                        <div class="list-toggle-title bold">Hair Art</div>
+                                        <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
+                                    </div>
+                                </a>
+                                <div class="task-list panel-collapse collapse" id="task-2-2">
+                                    <ul>
+                                    {% for product in business.products %}
+                                        <li class="task-list-item done">
+                                            <div class="task-content">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h5 class="uppercase bold">
+                                                                {{ product.name }}
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <h5 class="uppercase bold">
+                                                                ${{ product.price_cents/100 }}+
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <a class="btn btn-default">Book</a>
+                                                        </div>
+                                                    </div>
+                                                <p> {{ product.description }} </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mt-list-item">
+                            <div class="list-todo-icon bg-white font-yellow-crusta">
+                                <i class="fa fa-sticky-note-o"></i>
+                            </div>
+                            <div class="list-todo-item item-3">
+                                <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-3-2" aria-expanded="false">
+                                    <div class="list-toggle done uppercase bg-yellow-crusta">
+                                        <div class="list-toggle-title bold">Nail Spa</div>
+                                        <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
+                                    </div>
+                                </a>
+                                <div class="task-list panel-collapse collapse" id="task-3-2">
+                                    <ul>
+                                    {% for product in business.products %}
+                                        <li class="task-list-item done">
+                                            <div class="task-content">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h5 class="uppercase bold">
+                                                                {{ product.name }}
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <h5 class="uppercase bold">
+                                                                ${{ product.price_cents/100 }}+
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <a class="btn btn-default">Book</a>
+                                                        </div>
+                                                    </div>
+                                                <p> {{ product.description }} </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro -%}
