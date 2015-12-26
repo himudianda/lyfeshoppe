@@ -53,7 +53,21 @@ def shop(page):
 @backend.route('/shops/<string:id>')
 def shop_details(id):
     business = Business.query.get(id)
-    return render_template('backend/shop/details.jinja2', business=business)
+    employees = list()
+    for employee in business.employees:
+        user = User.query.get(employee.user_id)
+        item = {
+            'name': user.name,
+            'email': user.email,
+            'city': user.address.city,
+            'mobile_phone': user.mobile_phone,
+            'home_phone': user.home_phone,
+            'services': ','.join([str(product.id) for product in employee.products]),
+            'total_reservations': len(employee.reservations),
+            'num_of_services': len(employee.products),
+        }
+        employees.append(item)
+    return render_template('backend/shop/details.jinja2', business=business, employees=employees)
 
 
 # Account -------------------------------------------------------------------

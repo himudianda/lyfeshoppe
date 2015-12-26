@@ -235,7 +235,7 @@
 
 
 
-                                    {% for employee in business.employees %}
+                                    {% for employee in employees %}
                                         <div class="profile">
                                             <div class="tabbable-line tabbable-full-width">
                                                 <ul class="nav nav-tabs">
@@ -259,19 +259,21 @@
                                                             <div class="col-md-9">
                                                                 <div class="row">
                                                                     <div class="col-md-8 profile-info">
-                                                                        <h1 class="font-green sbold uppercase">John Doe</h1>
+                                                                        <h1 class="font-green sbold uppercase">{{ employee['name'] }}</h1>
                                                                         <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
                                                                             </p>
                                                                         <p>
-                                                                            <a href="javascript:;"> www.mywebsite.com </a>
+                                                                            <a href="mailto:{{ employee['email'] }}">{{ employee['email'] }}</a>
                                                                         </p>
                                                                         <ul class="list-inline">
                                                                             <li>
-                                                                                <i class="fa fa-map-marker"></i> Spain </li>
+                                                                                <i class="fa fa-map-marker"></i> {{ employee['city'] }} </li>
                                                                             <li>
-                                                                                <i class="fa fa-calendar"></i> 18 Jan 1982 </li>
+                                                                                <i class="fa fa-mobile"></i> {{ employee['mobile_phone'] }} </li>
                                                                             <li>
-                                                                                <i class="fa fa-briefcase"></i> Design </li>
+                                                                                <i class="fa fa-phone"></i> {{ employee['home_phone'] }} </li>
+                                                                            <li>
+                                                                                <i class="fa fa-briefcase"></i> {{ employee['services'] }} </li>
                                                                             <li>
                                                                                 <i class="fa fa-star"></i> Top Seller </li>
                                                                             <li>
@@ -290,16 +292,16 @@
                                                                             <div class="portlet-body">
                                                                                 <ul class="list-unstyled">
                                                                                     <li>
-                                                                                        <span class="sale-info"> TODAY SOLD
+                                                                                        <span class="sale-info"> TOTAL RESERVATIONS
                                                                                             <i class="fa fa-img-up"></i>
                                                                                         </span>
-                                                                                        <span class="sale-num"> 23 </span>
+                                                                                        <span class="sale-num"> {{ employee.total_reservations }} </span>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <span class="sale-info"> WEEKLY SALES
+                                                                                        <span class="sale-info"> NUMBER OF SERVICES
                                                                                             <i class="fa fa-img-down"></i>
                                                                                         </span>
-                                                                                        <span class="sale-num"> 87 </span>
+                                                                                        <span class="sale-num"> {{ employee.num_of_services }} </span>
                                                                                     </li>
                                                                                     <li>
                                                                                         <span class="sale-info"> TOTAL SOLD </span>
