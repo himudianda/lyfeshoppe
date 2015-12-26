@@ -70,6 +70,12 @@ def shop_details(id):
     return render_template('backend/shop/details.jinja2', business=business, employees=employees)
 
 
+@backend.route('/shops/<string:id>/booking')
+def shop_booking(id):
+    business = Business.query.get(id)
+    return render_template('backend/shop/booking.jinja2', business=business)
+
+
 # Account -------------------------------------------------------------------
 @backend.route('/account')
 def account():
