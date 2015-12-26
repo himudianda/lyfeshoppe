@@ -223,18 +223,31 @@
                                     <div class="tab-pane" id="tab_1_1_2">
                                         
 
+
+
+
+
+
+
+
+
+
+
+
+
+                                    {% for employee in business.employees %}
                                         <div class="profile">
                                             <div class="tabbable-line tabbable-full-width">
                                                 <ul class="nav nav-tabs">
                                                     <li class="active">
-                                                        <a href="#tab_1_1" data-toggle="tab"> Overview </a>
+                                                        <a href="#tab_{{loop.index}}_1" data-toggle="tab"> Overview </a>
                                                     </li>
                                                     <li>
-                                                        <a href="#tab_1_2" data-toggle="tab"> Recommendations </a>
+                                                        <a href="#tab_{{loop.index}}_2" data-toggle="tab"> Recommendations </a>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_1">
+                                                    <div class="tab-pane active" id="tab_{{loop.index}}_1">
                                                         <div class="row">
                                                             <div class="col-md-3">
                                                                 <ul class="list-unstyled profile-nav">
@@ -303,7 +316,7 @@
                                                         </div>
                                                     </div>
                                                     <!--tab_1_2-->
-                                                    <div class="tab-pane" id="tab_1_2">
+                                                    <div class="tab-pane" id="tab_{{loop.index}}_2">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="tab-content">
@@ -316,11 +329,7 @@
                                                                                     </h4>
                                                                                 </div>
                                                                                 <div id="accordion1_2" class="panel-collapse collapse">
-                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche reprehenderit,
-                                                                                        enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                                                                                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                                                                                        ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                                                                                        VHS. </div>
+                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor. </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="panel panel-success">
@@ -330,11 +339,7 @@
                                                                                     </h4>
                                                                                 </div>
                                                                                 <div id="accordion1_3" class="panel-collapse collapse">
-                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche reprehenderit,
-                                                                                        enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                                                                                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                                                                                        ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                                                                                        VHS. </div>
+                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor. </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="panel panel-warning">
@@ -344,9 +349,7 @@
                                                                                     </h4>
                                                                                 </div>
                                                                                 <div id="accordion1_4" class="panel-collapse collapse">
-                                                                                    <div class="panel-body"> 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                                                                                        nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-                                                                                        craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor. </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="panel panel-danger">
@@ -356,10 +359,7 @@
                                                                                     </h4>
                                                                                 </div>
                                                                                 <div id="accordion1_5" class="panel-collapse collapse">
-                                                                                    <div class="panel-body"> 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                                                                                        nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-                                                                                        craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-                                                                                        wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et </div>
+                                                                                    <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor. </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -372,6 +372,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                     </div>
                                     <div class="tab-pane" id="tab_1_1_3">
@@ -379,7 +396,7 @@
                                         <p> Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
                                             iriure dolor in hendrerit in vulputate velit esse molestie consequat </p>
                                         <p>
-                                            <a class="btn yellow" href="ui_tabs_accordions_navs.html#tab_1_1_4" target="_blank"> Activate this tab via URL </a>
+                                            <a class="btn yellow" href="ui_tabs_accordions_navs.html#tab_1_1_2" target="_blank"> Activate this tab via URL </a>
                                         </p>
                                     </div>
                                 </div>
