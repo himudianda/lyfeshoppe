@@ -1,4 +1,5 @@
 {% extends 'dashboard/layouts/app.jinja2' %}
+{% import 'dashboard/macros/items.jinja2' as items %}
 
 {% block title %}
     Shop | LyfeShoppe | Social Shop with huge discounts.
@@ -73,15 +74,12 @@
                         <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center">{{ business.type }}</div>
                     </div>
                 {% endfor %}
+                </div>
 
-                </div>
                 <div id="js-loadMore-juicy-projects" class="cbp-l-loadMore-button">
-                    <a href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/ajax/loadMore.html') }}" class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
-                        <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
-                        <span class="cbp-l-loadMore-loadingText">LOADING...</span>
-                        <span class="cbp-l-loadMore-noMoreLoading">NO MORE WORKS</span>
-                    </a>
+                    {{ items.paginate(businesses) }}
                 </div>
+
             </div>
         </div>
         <!-- END CONTENT BODY -->
