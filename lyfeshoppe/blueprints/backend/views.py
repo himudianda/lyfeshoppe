@@ -47,7 +47,8 @@ def shop(page):
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
                            business_types=Business.TYPE,
-                           businesses=paginated_businesses)
+                           businesses=paginated_businesses,
+                           sample_image='dashboard/global/img/portfolio/600x600/013.jpg')
 
 
 @backend.route('/shop/<string:username>')
