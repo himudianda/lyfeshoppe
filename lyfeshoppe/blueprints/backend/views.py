@@ -10,7 +10,7 @@ from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, \
      ProductForm, ReservationForm
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates')
@@ -85,6 +85,27 @@ def account():
 @backend.route('/account/settings')
 def account_settings():
     return render_template('backend/account/settings.jinja2')
+
+
+# Purchases -------------------------------------------------------------------
+@backend.route('/purchases', defaults={'page': 1})
+@backend.route('/purchases/page/<int:page>')
+def purchases(page):
+    search_form = SearchForm()
+
+    sort_by = Reservation.sort_by(request.args.get('created_on', 'status'),
+                                  request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    user_customer_ids = [customer.id for customer in Customer.query.filter(Customer.user == current_user)]
+    paginated_reservations = Reservation.query \
+        .filter(Reservation.customer_id.in_(user_customer_ids)) \
+        .order_by(Reservation.status.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/purchase/index.jinja2',
+                           form=search_form,
+                           purchases=paginated_reservations)
 
 
 # Businesses -----------------------------------------------------------------------
