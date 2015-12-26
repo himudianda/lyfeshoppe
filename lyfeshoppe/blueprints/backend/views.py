@@ -41,14 +41,13 @@ def shop(page):
 
     paginated_businesses = Business.query \
         .filter(Business.search(request.args.get('q', ''))) \
-        .order_by(Business.type.desc(), text(order_values)) \
+        .order_by(text(order_values)) \
         .paginate(page, 20, True)
 
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
                            business_types=Business.TYPE,
-                           businesses=paginated_businesses,
-                           sample_image='dashboard/global/img/portfolio/600x600/013.jpg')
+                           businesses=paginated_businesses)
 
 
 @backend.route('/shop/<string:username>')

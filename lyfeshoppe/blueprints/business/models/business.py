@@ -251,15 +251,42 @@ class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'
 
     TYPE = OrderedDict([
-        ('acupuncture', 'Acupuncture'),
-        ('barber', 'Barber'),
-        ('massage', 'Massage'),
-        ('makeup', 'Makeup'),
-        ('pets_salon', 'Pets Salon'),
-        ('spa', 'Spa'),
-        ('tattoo', 'Tattoo'),
-        ('tanning', 'Tanning'),
-        ('photo_studio', 'Photo Studio')
+        ('acupuncture', {
+            'name': 'Acupuncture',
+            'image': 'dashboard/global/img/portfolio/600x600/013.jpg'
+        }),
+        ('barber', {
+            'name': 'Barber',
+            'image': 'dashboard/global/img/portfolio/600x600/05.jpg'
+        }),
+        ('massage', {
+            'name': 'Massage',
+            'image': 'dashboard/global/img/portfolio/600x600/16.jpg'
+        }),
+        ('makeup', {
+            'name': 'Makeup',
+            'image': 'dashboard/global/img/portfolio/600x600/33.jpg'
+        }),
+        ('pets_salon', {
+            'name': 'Pets Salon',
+            'image': 'dashboard/global/img/portfolio/600x600/38.jpg'
+        }),
+        ('spa', {
+            'name': 'Spa',
+            'image': 'dashboard/global/img/portfolio/600x600/88.jpg'
+        }),
+        ('tattoo', {
+            'name': 'Tattoo',
+            'image': 'dashboard/global/img/portfolio/600x600/02.jpg'
+        }),
+        ('tanning', {
+            'name': 'Tanning',
+            'image': 'dashboard/global/img/portfolio/600x600/62.jpg'
+        }),
+        ('photo_studio', {
+            'name': 'Photo Studio',
+            'image': 'dashboard/global/img/portfolio/600x600/81.jpg'
+        })
     ])
 
     # Details
