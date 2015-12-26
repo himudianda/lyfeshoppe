@@ -405,8 +405,8 @@ def products():
     for business in businesses:
         for i in range(0, random.randint(1, 10)):
             params = {
-                'name': fake.text(max_nb_chars=128),
-                'description': fake.paragraph(nb_sentences=8, variable_nb_sentences=True),
+                'name': fake.text(max_nb_chars=48),
+                'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),
                 'duration_mins': random.randint(10, 180),

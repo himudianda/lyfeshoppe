@@ -104,71 +104,33 @@
                                                                     <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-1-2" aria-expanded="false">
                                                                         <div class="list-toggle done uppercase bg-blue-steel">
                                                                             <div class="list-toggle-title bold">Massage</div>
-                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">3</div>
+                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
                                                                         </div>
                                                                     </a>
                                                                     <div class="task-list panel-collapse collapse in" id="task-1-2">
                                                                         <ul>
+                                                                        {% for product in business.products %}
                                                                             <li class="task-list-item done">
                                                                                 <div class="task-content">
                                                                                         <div class="row">
                                                                                             <div class="col-md-9">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    Swedish Massage
+                                                                                                    {{ product.name }}
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-2">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    $350+
+                                                                                                    ${{ product.price_cents/100 }}+
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-1">
                                                                                                 <a class="btn btn-default">Book</a>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
+                                                                                    <p> {{ product.description }} </p>
                                                                                 </div>
                                                                             </li>
-                                                                            <li class="task-list-item">
-                                                                                <div class="task-content">
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    Thai Massage
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    $250+
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-1">
-                                                                                                <a class="btn btn-default">Book</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="task-list-item">
-                                                                                <div class="task-content">
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    Foot Massage
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    $135+
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-1">
-                                                                                                <a class="btn btn-default">Book</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
-                                                                                </div>
-                                                                            </li>
+                                                                        {% endfor %}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -181,71 +143,33 @@
                                                                     <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-2-2" aria-expanded="false">
                                                                         <div class="list-toggle done uppercase bg-green-meadow">
                                                                             <div class="list-toggle-title bold">Hair Art</div>
-                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">3</div>
+                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
                                                                         </div>
                                                                     </a>
                                                                     <div class="task-list panel-collapse collapse" id="task-2-2">
                                                                         <ul>
-                                                                            <li class="task-list-item">
+                                                                        {% for product in business.products %}
+                                                                            <li class="task-list-item done">
                                                                                 <div class="task-content">
-                                                                                    <div class="row">
+                                                                                        <div class="row">
                                                                                             <div class="col-md-9">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    Hair Cut
+                                                                                                    {{ product.name }}
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-2">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    $75+
+                                                                                                    ${{ product.price_cents/100 }}+
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-1">
                                                                                                 <a class="btn btn-default">Book</a>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
+                                                                                    <p> {{ product.description }} </p>
                                                                                 </div>
                                                                             </li>
-                                                                            <li class="task-list-item">
-                                                                                <div class="task-content">
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    Hair Color
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    $235+
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-1">
-                                                                                                <a class="btn btn-default">Book</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="task-list-item">
-                                                                                <div class="task-content">
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    Hair Extensions
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    $315+
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-1">
-                                                                                                <a class="btn btn-default">Book</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
-                                                                                </div>
-                                                                            </li>
+                                                                        {% endfor %}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -258,51 +182,33 @@
                                                                     <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-3-2" aria-expanded="false">
                                                                         <div class="list-toggle done uppercase bg-yellow-crusta">
                                                                             <div class="list-toggle-title bold">Nail Spa</div>
-                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">2</div>
+                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
                                                                         </div>
                                                                     </a>
                                                                     <div class="task-list panel-collapse collapse" id="task-3-2">
                                                                         <ul>
-                                                                            <li class="task-list-item">
+                                                                        {% for product in business.products %}
+                                                                            <li class="task-list-item done">
                                                                                 <div class="task-content">
-                                                                                    <div class="row">
+                                                                                        <div class="row">
                                                                                             <div class="col-md-9">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    Maincure &amp; Pedicure
+                                                                                                    {{ product.name }}
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-2">
                                                                                                 <h5 class="uppercase bold">
-                                                                                                    $115+
+                                                                                                    ${{ product.price_cents/100 }}+
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-md-1">
                                                                                                 <a class="btn btn-default">Book</a>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
+                                                                                    <p> {{ product.description }} </p>
                                                                                 </div>
                                                                             </li>
-                                                                            <li class="task-list-item">
-                                                                                <div class="task-content">
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    Nail color &amp; polishing
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <h5 class="uppercase bold">
-                                                                                                    $210+
-                                                                                                </h5>
-                                                                                            </div>
-                                                                                            <div class="col-md-1">
-                                                                                                <a class="btn btn-default">Book</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum gravida mauris, a tincidunt dolor porttitor eu. </p>
-                                                                                </div>
-                                                                            </li>
+                                                                        {% endfor %}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
