@@ -50,9 +50,10 @@ def shop(page):
                            businesses=paginated_businesses)
 
 
-@backend.route('/shops/<string:username>')
-def shop_details(username):
-    return render_template('backend/shop/details.jinja2')
+@backend.route('/shops/<string:id>')
+def shop_details(id):
+    business = Business.query.get(id)
+    return render_template('backend/shop/details.jinja2', business=business)
 
 
 # Account -------------------------------------------------------------------
