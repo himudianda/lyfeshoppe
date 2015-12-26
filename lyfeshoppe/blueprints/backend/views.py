@@ -31,9 +31,23 @@ def launchpad():
 
 
 # Shop -------------------------------------------------------------------
-@backend.route('/shop')
-def shop():
-    return render_template('backend/shop/index.jinja2')
+@backend.route('/shops', defaults={'page': 1})
+@backend.route('/shops/page/<int:page>')
+def shop(page):
+    search_form = SearchForm()
+    sort_by = Business.sort_by(request.args.get('sort', 'name'),
+                               request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_businesses = Business.query \
+        .filter(Business.search(request.args.get('q', ''))) \
+        .order_by(Business.type.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/shop/index.jinja2',
+                           form=search_form,
+                           business_types=Business.TYPE,
+                           businesses=paginated_businesses)
 
 
 @backend.route('/shop/<string:username>')
@@ -46,9 +60,11 @@ def shop_details(username):
 def account():
     return render_template('backend/account/profile.jinja2')
 
+
 @backend.route('/account/settings')
 def account_settings():
     return render_template('backend/account/settings.jinja2')
+
 
 # Businesses -----------------------------------------------------------------------
 @backend.route('/businesses', defaults={'page': 1})

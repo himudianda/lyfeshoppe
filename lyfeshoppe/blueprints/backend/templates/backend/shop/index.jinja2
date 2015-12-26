@@ -38,21 +38,13 @@
                             <div data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase"> All
                                 <div class="cbp-filter-counter"></div>
                             </div>
-                            <div data-filter=".massage" class="cbp-filter-item btn dark btn-outline uppercase"> Massage
+                            {% for key, value in business_types.iteritems() %}
+
+                            <div data-filter=".{{ key }}" class="cbp-filter-item btn dark btn-outline uppercase"> {{ value }}
                                 <div class="cbp-filter-counter"></div>
                             </div>
-                            <div data-filter=".stylist" class="cbp-filter-item btn dark btn-outline uppercase"> Stylist
-                                <div class="cbp-filter-counter"></div>
-                            </div>
-                            <div data-filter=".clothing" class="cbp-filter-item btn dark btn-outline uppercase"> Clothing
-                                <div class="cbp-filter-counter"></div>
-                            </div>
-                            <div data-filter=".sport-training" class="cbp-filter-item btn dark btn-outline uppercase"> Sport Training
-                                <div class="cbp-filter-counter"></div>
-                            </div>
-                            <div data-filter=".legal" class="cbp-filter-item btn dark btn-outline uppercase"> Legal
-                                <div class="cbp-filter-counter"></div>
-                            </div>
+
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
