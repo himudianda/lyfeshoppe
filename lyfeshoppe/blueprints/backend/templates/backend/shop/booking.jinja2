@@ -114,7 +114,8 @@
                         header: h,
                         defaultView: 'agendaWeek', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
                         slotMinutes: 15,
-                        editable: false,
+                        editable: true,
+                        selectable: true,
                         events: events,
                         eventClick: function(calEvent, jsEvent, view) {
                             if (calEvent.title == "Store Closed") {
@@ -123,12 +124,14 @@
                                 alert('Not Available. Select another time');
                             }
                         },
-                        dayClick: function(date, allDay, jsEvent, view) {
+                        dayClick: function(start, allDay, jsEvent, view) {
                             var title = prompt('Event Title:');
+                            //console.log(start);
                             if (title) {
                                 var newEvent = {
                                     title: title,
-                                    start: date,
+                                    start: start,
+                                    end: moment(start).add(30, 'minutes')
                                 };
                                 $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick');
                             }
