@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user, login_user
+from flask_login import login_required, current_user
 from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
@@ -94,29 +94,23 @@ def account_settings():
     }
 
     form = UserAccountForm(obj=current_user, **form_data)
-    password_reset_form = PasswordResetForm(reset_token=request.args.get('reset_token'))
+    password_reset_form = PasswordResetForm()
 
-    if form.validate_on_submit():
+    # form.is_submitted() ensures that this block of code is
+    # only triggered if this form was submitted
+    if form.is_submitted() and form.validate_on_submit():
         form.populate_obj(current_user)
         current_user.save()
         flash(_('User Account has been saved successfully.'), 'success')
         return redirect(url_for('backend.account'))
 
-    if password_reset_form.validate_on_submit():
-        u = User.deserialize_token(request.form.get('reset_token'))
+    if password_reset_form.is_submitted() and password_reset_form.validate_on_submit():
+        password_reset_form.populate_obj(current_user)
+        current_user.password = User.encrypt_password(request.form.get('password', None))
+        current_user.save()
 
-        if u is None:
-            flash(_('Your reset token has expired or was tampered with.'),
-                  'error')
-            return redirect(url_for('backend.account_settings'))
-
-        password_reset_form.populate_obj(u)
-        u.password = User.encrypt_password(request.form.get('password', None))
-        u.save()
-
-        if login_user(u):
-            flash(_('Your password has been reset.'), 'success')
-            return redirect(url_for('backend.account'))
+        flash(_('Your password has been reset.'), 'success')
+        return redirect(url_for('backend.account'))
 
     return render_template('backend/account/settings.jinja2', form=form, password_reset_form=password_reset_form)
 
