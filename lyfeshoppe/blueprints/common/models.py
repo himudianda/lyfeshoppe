@@ -52,3 +52,5 @@ class Address(db.Model):
     city = db.Column(db.String(30))
     state = db.Column(db.String(30))
     zipcode = db.Column(db.String(10))
+    district = db.Column(db.String(30))  # or county name
+    country = db.Column(db.String(30))

@@ -100,7 +100,9 @@ def addresses():
             'street': fake.street_address(),
             'city': fake.city(),
             'state': fake.state(),
-            'zipcode': fake.zipcode()
+            'zipcode': fake.zipcode(),
+            'district': fake.street_name(),
+            'country': fake.country()
         }
 
         data.append(params)

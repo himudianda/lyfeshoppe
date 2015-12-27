@@ -30,7 +30,8 @@ def user_relations():
             click.echo(
                     'Address: {0},{1},{2},{3}'.format(
                         user.address.street, user.address.city,
-                        user.address.state, user.address.zipcode
+                        user.address.state, user.address.zipcode,
+                        user.address.district, user.address.country
                     )
                 )
         else:
@@ -69,7 +70,8 @@ def business_relations():
             click.echo(
                     'Address: {0},{1},{2},{3}'.format(
                         business.address.street, business.address.city,
-                        business.address.state, business.address.zipcode
+                        business.address.state, business.address.zipcode,
+                        business.address.district, business.address.country
                     )
                 )
         else:
@@ -146,7 +148,8 @@ def employee_relations():
             click.echo(
                     'Address: {0},{1},{2},{3}'.format(
                         employee.user.address.street, employee.user.address.city,
-                        employee.user.address.state, employee.user.address.zipcode
+                        employee.user.address.state, employee.user.address.zipcode,
+                        employee.address.district, employee.address.country
                     )
                 )
         else:
