@@ -33,8 +33,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     # Details
     username = db.Column(db.String(24), unique=True, index=True)
     name = db.Column(db.String(128), index=True)
-    mobile_phone = db.Column(db.String(20), index=True)
-    home_phone = db.Column(db.String(20), index=True)
+    phone = db.Column(db.String(20), index=True)
     email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
 
     # Authentication.
