@@ -30,10 +30,19 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    # Details
+    username = db.Column(db.String(24), unique=True, index=True)
+    name = db.Column(db.String(128), index=True)
+    mobile_phone = db.Column(db.String(20), index=True)
+    home_phone = db.Column(db.String(20), index=True)
+    email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
+
+    # Authentication.
+    role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+    password = db.Column(db.String(128), nullable=False, server_default='')
+
     # Relationships.
-    credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
-    subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
-    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
     # Many to One relationship: Many users can have same address
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
@@ -42,17 +51,14 @@ class User(UserMixin, ResourceMixin, db.Model):
     occupancies = db.relationship(Occupancy, backref="user")
     employee_refs = db.relationship('Employee', backref='user', passive_deletes=True)
 
-    # Authentication.
-    role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-    username = db.Column(db.String(24), unique=True, index=True)
-    email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
-    password = db.Column(db.String(128), nullable=False, server_default='')
+    # Locale.
+    locale = db.Column(db.String(5), nullable=False, server_default='en')
+
+    credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
+    subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
+    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
 
     # Billing.
-    name = db.Column(db.String(128), index=True)
-    mobile_phone = db.Column(db.String(20), index=True)
-    home_phone = db.Column(db.String(20), index=True)
     payment_id = db.Column(db.String(128), index=True)
     cancelled_subscription_on = db.Column(AwareDateTime())
 
@@ -62,9 +68,6 @@ class User(UserMixin, ResourceMixin, db.Model):
     current_sign_in_ip = db.Column(db.String(45))
     last_sign_in_on = db.Column(AwareDateTime())
     last_sign_in_ip = db.Column(db.String(45))
-
-    # Locale.
-    locale = db.Column(db.String(5), nullable=False, server_default='en')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
