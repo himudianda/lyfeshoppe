@@ -83,8 +83,6 @@ def account():
 
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
-    form = UserAccountForm(obj=current_user)
-
     form_data = {
         "street": current_user.address.street,
         "city": current_user.address.city,
@@ -94,7 +92,7 @@ def account_settings():
         "country": current_user.address.country,
     }
 
-    form = UserAccountForm(**form_data)
+    form = UserAccountForm(obj=current_user, **form_data)
 
     if form.validate_on_submit():
         form.populate_obj(current_user)
@@ -278,7 +276,16 @@ def business_dashboard(id):
 @is_staff_authorized
 def business_edit(id):
     business = Business.query.get(id)
-    form = BusinessForm(obj=business)
+    form_data = {
+        "street": business.address.street,
+        "city": business.address.city,
+        "state": business.address.state,
+        "zipcode": business.address.zipcode,
+        "district": business.address.district,
+        "country": business.address.country,
+    }
+
+    form = BusinessForm(obj=business, **form_data)
 
     if form.validate_on_submit():
         form.populate_obj(business)
