@@ -88,14 +88,8 @@
                         title: 'Store Closed',
                         start: day_start,
                         end: day_end,
-                        dow: [ 6, 7 ],
+                        dow: [ 6, 0 ],
                         backgroundColor: App.getBrandColor('grey')
-                    },{
-                        title: 'Available',
-                        start: open_time,
-                        end: close_time,
-                        dow: [ 1, 2, 3, 4, 5 ],
-                        backgroundColor: App.getBrandColor('green')
                     }];
                     
                     // Some code for responsive calendar design
@@ -122,6 +116,23 @@
                         slotMinutes: 15,
                         editable: false,
                         events: events,
+                        eventClick: function(calEvent, jsEvent, view) {
+                            if (calEvent.title == "Store Closed") {
+                                alert(calEvent.title + ". Select another time");
+                            } else {
+                                alert('Not Available. Select another time');
+                            }
+                        },
+                        dayClick: function(date, allDay, jsEvent, view) {
+                            var title = prompt('Event Title:');
+                            if (title) {
+                                var newEvent = {
+                                    title: title,
+                                    start: date,
+                                };
+                                $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick');
+                            }
+                        }
                     });
                 }
             };
