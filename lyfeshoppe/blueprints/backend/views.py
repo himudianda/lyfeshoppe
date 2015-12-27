@@ -8,7 +8,7 @@ import pytz
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
-from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, BusinessForm, EmployeeForm, \
+from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, EmployeeForm, \
      ProductForm, ReservationForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
@@ -81,9 +81,17 @@ def account():
     return render_template('backend/account/profile.jinja2')
 
 
-@backend.route('/account/settings')
+@backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
-    return render_template('backend/account/settings.jinja2')
+    form = UserAccountForm(obj=current_user)
+
+    if form.validate_on_submit():
+        form.populate_obj(current_user)
+        current_user.save()
+        flash(_('User Account has been saved successfully.'), 'success')
+        return redirect(url_for('backend.account'))
+
+    return render_template('backend/account/settings.jinja2', form=form)
 
 
 # Purchases -------------------------------------------------------------------

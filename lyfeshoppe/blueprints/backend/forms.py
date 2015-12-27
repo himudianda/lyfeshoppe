@@ -38,6 +38,20 @@ class BulkDeleteForm(Form):
                         choices=choices_from_dict(SCOPE, prepend_blank=False))
 
 
+class UserAccountForm(ModelForm):
+
+    name = StringField(_('Name'), [Optional(), Length(1, 255)])
+    email = EmailField(_("What's your e-mail address?"),
+                       [DataRequired(), Length(3, 254)])
+    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+    street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
+    city = StringField(_('City'), [Optional(), Length(1, 30)])
+    state = StringField(_('State'), [Optional(), Length(1, 30)])
+    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
+    country = StringField(_('Country'), [Optional(), Length(1, 30)])
+
+
 class BusinessForm(ModelForm):
 
     name = StringField(_('Business name'), [Optional(), Length(1, 255)])
@@ -56,6 +70,8 @@ class BusinessForm(ModelForm):
     city = StringField(_('City'), [Optional(), Length(1, 30)])
     state = StringField(_('State'), [Optional(), Length(1, 30)])
     zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
+    country = StringField(_('Country'), [Optional(), Length(1, 30)])
 
 
 class EmployeeForm(ModelForm):
