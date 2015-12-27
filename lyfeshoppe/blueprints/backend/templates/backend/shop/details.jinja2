@@ -329,12 +329,86 @@
 
                                     </div>
                                     <div class="tab-pane" id="tab_1_1_3">
-                                        <p> Howdy, I'm in Section 4. </p>
-                                        <p> Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-                                            iriure dolor in hendrerit in vulputate velit esse molestie consequat </p>
-                                        <p>
-                                            <a class="btn yellow" href="ui_tabs_accordions_navs.html#tab_1_1_2" target="_blank"> Activate this tab via URL </a>
-                                        </p>
+                                        <div class="profile">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <ul class="list-unstyled profile-nav">
+                                                        <li>
+                                                            <img src="{{ url_for('static', filename='dashboard/global/img/portfolio/600x600/62.jpg') }}" class="img-responsive pic-bordered" alt="" />
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="row">
+                                                        <div class="col-md-8 profile-info">
+                                                            <h1 class="font-green sbold uppercase">{{ business.name }}</h1>
+                                                            <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                                                                </p>
+                                                            <p><a href="apple.com">www.apple.com</a></p>
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <i class="fa fa-map-marker"></i> {{ business.address.city }} </li>
+                                                                <li>
+                                                                    <i class="fa fa-briefcase"></i> {{ business.type }} </li>
+                                                                <li>
+                                                                    <i class="fa fa-star"></i> Top Seller </li>
+                                                                <li>
+                                                                    <i class="fa fa-heart"></i> BASE Jumping </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!--end col-md-8-->
+                                                        <div class="col-md-4">
+                                                            <div data-auto-height=".c-height">
+                                                                <div>
+                                                                    <div class="c-body">
+                                                                        <div class="c-section">
+                                                                            <div class="uppercase bg-blue">Address</div>
+                                                                            <p>
+                                                                                {{ business.address.street }},
+                                                                                <br/>{{ business.address.city }},
+                                                                                <br/>{{ business.address.state }} - {{ business.address.zipcode }}
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="c-section">
+                                                                            <div class="uppercase bg-blue">Phone &amp; Email</div>
+                                                                            <p>
+                                                                                <strong>Phone: </strong> {{ business.phone }}
+                                                                                <br/>
+                                                                                <strong>Email: </strong> {{ business.email }}
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="c-section">
+                                                                            <div class="uppercase bg-blue">Business Hours</div>
+                                                                            <p>
+                                                                                <strong>Open: </strong> {{ business.open_time }}
+                                                                                <br/>
+                                                                                <strong>Close: </strong> {{ business.close_time }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-md-4-->
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
