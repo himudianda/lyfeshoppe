@@ -8,8 +8,8 @@ import pytz
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
-from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, EmployeeForm, \
-     ProductForm, ReservationForm
+from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
+    EmployeeForm, ProductForm, ReservationForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
 
@@ -84,6 +84,17 @@ def account():
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
     form = UserAccountForm(obj=current_user)
+
+    form_data = {
+        "street": current_user.address.street,
+        "city": current_user.address.city,
+        "state": current_user.address.state,
+        "zipcode": current_user.address.zipcode,
+        "district": current_user.address.district,
+        "country": current_user.address.country,
+    }
+
+    form = UserAccountForm(**form_data)
 
     if form.validate_on_submit():
         form.populate_obj(current_user)
