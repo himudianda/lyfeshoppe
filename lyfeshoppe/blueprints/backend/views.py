@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_user
 from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
@@ -10,6 +10,7 @@ from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
     EmployeeForm, ProductForm, ReservationForm
+from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
 
@@ -93,6 +94,7 @@ def account_settings():
     }
 
     form = UserAccountForm(obj=current_user, **form_data)
+    password_reset_form = PasswordResetForm(reset_token=request.args.get('reset_token'))
 
     if form.validate_on_submit():
         form.populate_obj(current_user)
@@ -100,7 +102,23 @@ def account_settings():
         flash(_('User Account has been saved successfully.'), 'success')
         return redirect(url_for('backend.account'))
 
-    return render_template('backend/account/settings.jinja2', form=form)
+    if password_reset_form.validate_on_submit():
+        u = User.deserialize_token(request.form.get('reset_token'))
+
+        if u is None:
+            flash(_('Your reset token has expired or was tampered with.'),
+                  'error')
+            return redirect(url_for('backend.account_settings'))
+
+        password_reset_form.populate_obj(u)
+        u.password = User.encrypt_password(request.form.get('password', None))
+        u.save()
+
+        if login_user(u):
+            flash(_('Your password has been reset.'), 'success')
+            return redirect(url_for('backend.account'))
+
+    return render_template('backend/account/settings.jinja2', form=form, password_reset_form=password_reset_form)
 
 
 # Purchases -------------------------------------------------------------------
