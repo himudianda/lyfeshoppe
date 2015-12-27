@@ -42,7 +42,7 @@
 
 
 {%- macro PAGE_LEVEL_PLUGINS() -%}
-  {% if request.endpoint in ('backend.shop') %}
+  {% if request.endpoint in ('backend.shops_list') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
   {% if request.endpoint in ('backend.shop_details') %}
@@ -67,7 +67,7 @@
 
 
 {%- macro PAGE_LEVEL_STYLES() -%}
-  {% if request.endpoint in ('backend.shop') %}
+  {% if request.endpoint in ('backend.shops_list') %}
       <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
   {% if request.endpoint in ('backend.shop_details') %}

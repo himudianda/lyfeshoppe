@@ -33,7 +33,7 @@ def launchpad():
 # Shop -------------------------------------------------------------------
 @backend.route('/shops', defaults={'page': 1})
 @backend.route('/shops/page/<int:page>')
-def shop(page):
+def shops_list(page):
     search_form = SearchForm()
     sort_by = Business.sort_by(request.args.get('sort', 'name'),
                                request.args.get('direction', 'asc'))
