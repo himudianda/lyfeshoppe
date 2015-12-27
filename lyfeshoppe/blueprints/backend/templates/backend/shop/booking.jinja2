@@ -22,11 +22,9 @@
                         <div class="portlet-body">
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-
-                                <h4>Staff:</h4> Daymond James
-                                <br/>
-                                <hr/>
-                                <h4>Service:</h4> Thai Massage
+                                    <h4><strong>Staff:</strong> Daymond James</h4>
+                                    <br/><hr/>
+                                    <h4><strong>Service:</strong> Thai Massage</h4>
                                 </div>
                                 <div class="col-md-9 col-sm-12">
                                     <div id="calendar" class="has-toolbar"> </div>
@@ -40,6 +38,97 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
+
 {% endblock %}
 
+{% block footer_scripts %}
+    <script type="text/javascript">
+        var AppCalendar = function() {
+            return {
+                //main function to initiate the module
+                init: function() {
+                    this.initCalendar();
+                },
 
+                initCalendar: function() {
+
+                    if (!jQuery().fullCalendar) {
+                        return;
+                    }
+
+                    var date = new Date();
+                    var d = date.getDate();
+                    var m = date.getMonth();
+                    var y = date.getFullYear();
+
+                    var day_start = new Date(y, m, d);
+                    var day_end = new Date(y, m, d, 23, 59, 59);
+                    var open_time = new Date('{{ business.open_time }}');
+                    var close_time = new Date('{{ business.close_time }}');
+
+                    //console.log(day_start);
+                    //console.log(day_end);
+                    //console.log(open_time);
+                    //console.log(close_time);
+
+                    var events = [{
+                        title: 'Store Closed',
+                        start: day_start,
+                        end: open_time,
+                        dow: [ 1, 2, 3, 4, 5 ],
+                        backgroundColor: App.getBrandColor('grey')
+                    }, {
+                        title: 'Store Closed',
+                        start: close_time,
+                        end: day_end,
+                        dow: [ 1, 2, 3, 4, 5 ],
+                        backgroundColor: App.getBrandColor('grey')
+                    },{
+                        // Closed on weekends
+                        title: 'Store Closed',
+                        start: day_start,
+                        end: day_end,
+                        dow: [ 6, 7 ],
+                        backgroundColor: App.getBrandColor('grey')
+                    },{
+                        title: 'Available',
+                        start: open_time,
+                        end: close_time,
+                        dow: [ 1, 2, 3, 4, 5 ],
+                        backgroundColor: App.getBrandColor('green')
+                    }];
+                    
+                    // Some code for responsive calendar design
+                    if ($('#calendar').parents(".portlet").width() <= 720) {
+                        $('#calendar').addClass("mobile");
+                        h = {
+                            left: 'title, prev, next',
+                            center: '',
+                            right: 'today,month,agendaWeek,agendaDay'
+                        };
+                    } else {
+                        $('#calendar').removeClass("mobile");
+                        h = {
+                            left: 'title',
+                            center: '',
+                            right: 'prev,next,today,month,agendaWeek,agendaDay'
+                        };
+                    }
+
+                    $('#calendar').fullCalendar('destroy'); // destroy the calendar
+                    $('#calendar').fullCalendar({ //re-initialize the calendar
+                        header: h,
+                        defaultView: 'agendaWeek', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
+                        slotMinutes: 15,
+                        editable: false,
+                        events: events,
+                    });
+                }
+            };
+        }();
+
+        jQuery(document).ready(function() {    
+           AppCalendar.init(); 
+        });
+    </script>
+{% endblock %}
