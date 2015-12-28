@@ -44,9 +44,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-9" id="employee-name">
                                                             <h5><strong>Employee:</strong></h5>
-                                                            Chastity Streich
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -63,20 +63,11 @@
                                             </div>
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <div class="col-md-9">
-                                                          {% call f.form_group(form.start_time, css_class='sm-margin-bottom') %}
-                                                          {% endcall %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-9">
-                                                            {% call f.form_group(form.end_time, css_class='sm-margin-bottom') %}
-                                                            {% endcall %}
+                                                        <div class="col-md-9" id="booking-times">
+                                                            <h5><strong>When:</strong></h5>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,7 +148,7 @@
                             <div class="caption">
                                 <i class=" icon-layers font-green"></i>&nbsp;
                                 <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
-                                <select class="bs-select input-large" data-style="green">
+                                <select id="employee-select" class="bs-select input-large" data-style="green">
                                 {% for employee in business.employees %}
                                     <option>{{employee.user.name}}</option>
                                 {% endfor %}
@@ -291,6 +282,9 @@
                         select: function(start, end, allDay) {
                             var mywhen = start.format("ddd, MMM Do, h:mm a") + ' - ' + end.format("h:mm a");
 
+                            $('#employee-name p').text($('#employee-select').val());
+                            $('#booking-times p').text(mywhen);
+
                             // NOTE: start & end are moment objects. The below code
                             // converts the start/end moment objects into string format while preserving
                             // the timezone information.
@@ -305,6 +299,7 @@
                             $('#createEventModal #apptEndTime').val(end);
                             $('#createEventModal #apptAllDay').val(allDay);
                             $('#createEventModal #when').text(mywhen);
+
                             $('#createEventModal').modal('show');
                         },
                         droppable: true, // this allows things to be dropped onto the calendar !!!

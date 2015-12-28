@@ -105,8 +105,6 @@ class ReservationForm(ModelForm):
 
 class BookingForm(Form):
     products = SelectField(_('Products'), [DataRequired()], choices=[])
-    start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
-    end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
     def __init__(self, formdata=None, obj=None, prefix='', **kwargs):
         kwargs.setdefault('products', None)
