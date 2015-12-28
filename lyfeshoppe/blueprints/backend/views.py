@@ -100,6 +100,7 @@ def account_settings():
     # only triggered if this form was submitted
     if form.is_submitted() and form.validate_on_submit():
         form.populate_obj(current_user)
+        form.populate_obj(current_user.address)
         current_user.save()
         flash(_('User Account has been saved successfully.'), 'success')
         return redirect(url_for('backend.account'))
