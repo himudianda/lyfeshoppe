@@ -59,6 +59,7 @@
   {% endif %}
   {% if request.endpoint in ('backend.business_calendar') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
