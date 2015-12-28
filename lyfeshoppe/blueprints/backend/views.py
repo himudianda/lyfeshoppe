@@ -77,11 +77,6 @@ def shop_booking(id):
 
 
 # Account -------------------------------------------------------------------
-@backend.route('/account')
-def account():
-    return render_template('backend/account/profile.jinja2')
-
-
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
     form_data = {
@@ -103,7 +98,7 @@ def account_settings():
         form.populate_obj(current_user.address)
         current_user.save()
         flash(_('User Account has been saved successfully.'), 'success')
-        return redirect(url_for('backend.account'))
+        return redirect(url_for('backend.account_settings'))
 
     if password_reset_form.is_submitted() and password_reset_form.validate_on_submit():
         password_reset_form.populate_obj(current_user)
@@ -111,7 +106,7 @@ def account_settings():
         current_user.save()
 
         flash(_('Your password has been reset.'), 'success')
-        return redirect(url_for('backend.account'))
+        return redirect(url_for('backend.account_settings'))
 
     return render_template('backend/account/settings.jinja2', form=form, password_reset_form=password_reset_form)
 

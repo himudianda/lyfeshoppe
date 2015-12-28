@@ -57,9 +57,6 @@
       <link href="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
-  {% if request.endpoint in ('backend.account') %}
-      <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-  {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
@@ -74,9 +71,6 @@
       <link href="{{ url_for('static', filename='dashboard/pages/css/profile-2.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/pages/css/portfolio.min.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='dashboard/pages/css/about.min.css') }}" rel="stylesheet" type="text/css" />
-  {% endif %}
-  {% if request.endpoint in ('backend.account') %}
-      <link href="{{ url_for('static', filename='dashboard/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
       <link href="{{ url_for('static', filename='dashboard/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
