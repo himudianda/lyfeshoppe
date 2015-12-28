@@ -9,7 +9,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm
+    EmployeeForm, ProductForm, ReservationForm, BookingForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
@@ -638,15 +638,10 @@ def business_calendar(id):
         "country": business.address.country,
     }
 
-    form = BusinessForm(obj=business, **form_data)
+    form = BookingForm(obj=business, **form_data)
 
     if form.validate_on_submit():
         flash(_('Reservation has been created successfully.'), 'success')
         return redirect(url_for('backend.business_calendar', id=id))
 
     return render_template('backend/business/calendar.jinja2', form=form, business=business)
-
-    '''
-    business = Business.query.get(id)
-    return render_template('backend/business/calendar.jinja2', business=business)
-    '''

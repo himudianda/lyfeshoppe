@@ -101,3 +101,23 @@ class ReservationForm(ModelForm):
                          prepend_blank=False))
     start_time = DateTimeField(_('Reservation Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('Reservation End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+
+
+class BookingForm(Form):
+    name = StringField(_('Business name'), [Optional(), Length(1, 255)])
+    email = EmailField(_("Email Address"),
+                       [DataRequired(), Length(3, 254)])
+    type = SelectField(_('Business Type'), [DataRequired()],
+                       choices=choices_from_dict(Business.TYPE, prepend_blank=False))
+    open_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    close_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+
+    phone = StringField(_('Business Phone number'), [Optional(), Length(1, 12)])
+    active = BooleanField(_('Yes, Business is active'))
+
+    street = StringField(_('Street Address'), [Optional(), Length(1, 255)])
+    city = StringField(_('City'), [Optional(), Length(1, 30)])
+    state = StringField(_('State'), [Optional(), Length(1, 30)])
+    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
+    country = StringField(_('Country'), [Optional(), Length(1, 30)])
