@@ -294,6 +294,7 @@ class Business(ResourceMixin, db.Model):
     occupancies = db.relationship(Occupancy, backref="business")
     products = db.relationship(Product, backref='business', passive_deletes=True)
     employees = db.relationship(Employee, backref='business', passive_deletes=True)
+    customers = db.relationship(Customer, backref='business', passive_deletes=True)
     reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
 
     def __init__(self, **kwargs):

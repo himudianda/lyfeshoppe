@@ -53,8 +53,8 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9" id="products-select">
-                                                          {% call f.form_group(form.products, css_class='sm-margin-bottom') %}
+                                                        <div class="col-md-9" id="product-select">
+                                                          {% call f.form_group(form.product, css_class='sm-margin-bottom') %}
                                                           {% endcall %}
                                                         </div>
                                                     </div>
@@ -63,7 +63,7 @@
                                             </div>
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="booking-times">
                                                             <h5><strong>When:</strong></h5>
@@ -75,6 +75,15 @@
                                                 <input type="hidden" id="apptStartTime"/>
                                                 <input type="hidden" id="apptEndTime"/>
                                                 <input type="hidden" id="apptAllDay" />
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="customer-select">
+                                                          {% call f.form_group(form.customer, css_class='sm-margin-bottom') %}
+                                                          {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
                                             </div>
                                         </div>
 
