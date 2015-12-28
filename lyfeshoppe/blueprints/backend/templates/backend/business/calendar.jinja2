@@ -14,31 +14,41 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
 
-            <table class="table table-hover table-striped table-bordered">
-                <tr>
-                    <td> Large Width Example </td>
-                    <td>
-                        <a class="btn purple btn-outline sbold" data-toggle="modal" href="#large"> View Demo </a>
-                    </td>
-                </tr>
-            </table>
-            <div class="modal fade bs-modal-lg" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade bs-modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal Title</h4>
+                            <h4 class="modal-title">Create Appointment</h4>
                         </div>
-                        <div class="modal-body"> Modal body goes here </div>
+                        <div class="modal-body">
+                            <form id="createAppointmentForm" class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="inputPatient">Customer Name:</label>
+                                    <div class="controls">
+                                        <input type="text" name="patientName" id="patientName" tyle="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]">
+                                          <input type="hidden" id="apptStartTime"/>
+                                          <input type="hidden" id="apptEndTime"/>
+                                          <input type="hidden" id="apptAllDay" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="when">When:</label>
+                                    <div class="controls controls-row" id="when" style="margin-top:5px;">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn green">Save changes</button>
+                            <button id="submitButton" type="button" class="btn green">Save changes</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal-dialog -->
             </div>
+
 
             <div class="row">
                 <div class="col-md-12">
@@ -174,9 +184,18 @@
                     $('#calendar').fullCalendar('destroy'); // destroy the calendar
                     $('#calendar').fullCalendar({ //re-initialize the calendar
                         header: h,
-                        defaultView: 'month', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
+                        defaultView: 'agendaWeek', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
                         slotMinutes: 15,
                         editable: true,
+                        selectable: true,
+                        select: function(start, end, allDay) {
+                            var mywhen = start.format("ddd, MMM Do, h:mm a") + ' - ' + end.format("h:mm a");
+                            $('#createEventModal #apptStartTime').val(start);
+                            $('#createEventModal #apptEndTime').val(end);
+                            $('#createEventModal #apptAllDay').val(allDay);
+                            $('#createEventModal #when').text(mywhen);
+                            $('#createEventModal').modal('show');
+                        },
                         droppable: true, // this allows things to be dropped onto the calendar !!!
                         drop: function(date, allDay) { // this function is called when something is dropped
 
@@ -249,6 +268,31 @@
             };
         }();
 
+
+        $('#submitButton').on('click', function(e){
+            // We don't want this to act as a link so cancel the link action
+            e.preventDefault();
+
+            doSubmit();
+        });
+
+        function doSubmit(){
+            $("#createEventModal").modal('hide');
+            console.log($('#apptStartTime').val());
+            console.log($('#apptEndTime').val());
+            console.log($('#apptAllDay').val());
+            alert("form submitted");
+
+            $("#calendar").fullCalendar('renderEvent',
+                {
+                    title: $('#patientName').val(),
+                    start: new Date($('#apptStartTime').val()),
+                    end: new Date($('#apptEndTime').val()),
+                    allDay: ($('#apptAllDay').val() == "true"),
+                },
+            true);
+        }
+        
         jQuery(document).ready(function() {    
            AppCalendar.init(); 
         });
