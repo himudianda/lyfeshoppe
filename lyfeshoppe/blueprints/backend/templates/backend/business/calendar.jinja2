@@ -78,8 +78,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="customer-select">
-                                                          {% call f.form_group(form.customer, css_class='sm-margin-bottom') %}
-                                                          {% endcall %}
+                                                            {% call f.form_group(form.customer, css_class='sm-margin-bottom') %}
+                                                            {% endcall %}
+                                                                {{_('New Customer?')}}
+                                                            <a href="{{ url_for('backend.business_employees_new', id=business.id) }}"
+                                                                class="green">
+                                                                    {{ _(' First Register here.') }}
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
