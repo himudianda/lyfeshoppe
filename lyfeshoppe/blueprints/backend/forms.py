@@ -41,7 +41,7 @@ class BulkDeleteForm(Form):
 class UserAccountForm(ModelForm):
 
     name = StringField(_('Name'), [Optional(), Length(1, 255)])
-    email = EmailField(_("What's your e-mail address?"),
+    email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
     phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
     street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
@@ -55,11 +55,10 @@ class UserAccountForm(ModelForm):
 class BusinessForm(ModelForm):
 
     name = StringField(_('Business name'), [Optional(), Length(1, 255)])
-    email = EmailField(_("What's your e-mail address?"),
+    email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
     type = SelectField(_('Business Type'), [DataRequired()],
-                       choices=choices_from_dict(Business.TYPE,
-                                                 prepend_blank=False))
+                       choices=choices_from_dict(Business.TYPE, prepend_blank=False))
     open_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     close_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
