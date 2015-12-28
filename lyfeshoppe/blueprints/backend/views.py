@@ -625,8 +625,28 @@ def business_reservation_edit(id, reservation_id):
 
 
 # Business Calendar -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/calendar')
+@backend.route('/businesses/<int:id>/calendar', methods=['GET', 'POST'])
 @is_staff_authorized
 def business_calendar(id):
     business = Business.query.get(id)
+    form_data = {
+        "street": business.address.street,
+        "city": business.address.city,
+        "state": business.address.state,
+        "zipcode": business.address.zipcode,
+        "district": business.address.district,
+        "country": business.address.country,
+    }
+
+    form = BusinessForm(obj=business, **form_data)
+
+    if form.validate_on_submit():
+        flash(_('Reservation has been created successfully.'), 'success')
+        return redirect(url_for('backend.business_calendar', id=id))
+
+    return render_template('backend/business/calendar.jinja2', form=form, business=business)
+
+    '''
+    business = Business.query.get(id)
     return render_template('backend/business/calendar.jinja2', business=business)
+    '''

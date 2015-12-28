@@ -22,6 +22,105 @@
                             <h4 class="modal-title">Create Appointment</h4>
                         </div>
                         <div class="modal-body">
+
+                            {% set endpoint = 'backend.business_calendar' %}
+                            {% set form_kwargs = {'id': business.id} %}
+                            {% set legend = 'Create a new Reservation' %}
+                            {% set button = _('Create') %}
+
+                            {% call f.form_tag(endpoint, **form_kwargs) %}
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-plus"></i> {{ legend }} 
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal col-md-offset-1">
+
+                                        <div class="form-body">
+                                            <h3 class="form-section">Create a Reservation</h3>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                            {% call f.form_group(form.name, css_class='sm-margin-bottom') %}
+                                                            {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                          {% call f.form_group(form.name, css_class='sm-margin-bottom') %}
+                                                          {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                          {% call f.form_group(form.email, css_class='sm-margin-bottom') %}
+                                                          {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                            {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
+                                                            {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-6 col-md-12">
+
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <button type="submit" class="btn green">
+                                                                      {{ button }}
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="visible-xs visible-sm sm-margin-top"></div>
+                                                                    <a href="{{ url_for('backend.businesses') }}"
+                                                                       class="btn red btn-block">
+                                                                      {{ _('Cancel') }}
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"> </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                            {% endcall %}
+
+
+
+
                             <form id="createAppointmentForm" class="form-horizontal">
                                 <div class="control-group">
                                     <label class="control-label" for="inputPatient">Customer Name:</label>
@@ -38,6 +137,7 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
