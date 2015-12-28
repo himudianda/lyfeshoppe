@@ -622,3 +622,11 @@ def business_reservation_edit(id, reservation_id):
         return redirect(url_for('backend.business_reservations', id=id))
 
     return render_template('backend/reservation/edit.jinja2', form=form, business=business, reservation=reservation)
+
+
+# Business Calendar -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>/calendar')
+@is_staff_authorized
+def business_calendar(id):
+    business = Business.query.get(id)
+    return render_template('backend/business/calendar.jinja2', business=business)
