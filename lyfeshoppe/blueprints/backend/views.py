@@ -79,14 +79,16 @@ def shop_booking(id):
 # Account -------------------------------------------------------------------
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
-    form_data = {
-        "street": current_user.address.street,
-        "city": current_user.address.city,
-        "state": current_user.address.state,
-        "zipcode": current_user.address.zipcode,
-        "district": current_user.address.district,
-        "country": current_user.address.country,
-    }
+    form_data = {}
+    if current_user.address:
+        form_data.update({
+            "street": current_user.address.street,
+            "city": current_user.address.city,
+            "state": current_user.address.state,
+            "zipcode": current_user.address.zipcode,
+            "district": current_user.address.district,
+            "country": current_user.address.country,
+        })
 
     form = UserAccountForm(obj=current_user, **form_data)
     password_reset_form = PasswordResetForm()
