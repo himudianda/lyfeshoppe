@@ -48,6 +48,7 @@ def shops_list(page):
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
                            business_types=Business.TYPE,
+                           business_type_images=Business.BUSINESS_TYPE_IMAGES,
                            businesses=paginated_businesses)
 
 

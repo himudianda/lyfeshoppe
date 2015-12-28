@@ -41,7 +41,7 @@
                             </div>
                             {% for key, value in business_types.iteritems() %}
 
-                            <div data-filter=".{{ key }}" class="cbp-filter-item btn dark btn-outline uppercase"> {{ value['name'] }}
+                            <div data-filter=".{{ key }}" class="cbp-filter-item btn dark btn-outline uppercase"> {{ value }}
                                 <div class="cbp-filter-counter"></div>
                             </div>
 
@@ -60,7 +60,7 @@
                     <div class="cbp-item {{ business.type }}">
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">
-                                <img src="{{ url_for('static', filename=business_types[business.type]['image']) }}" alt=""> </div>
+                                <img src="{{ url_for('static', filename=business_type_images[business.type]) }}" alt=""> </div>
                             <div class="cbp-caption-activeWrap">
                                 <div class="cbp-l-caption-alignCenter">
                                     <div class="cbp-l-caption-body">
