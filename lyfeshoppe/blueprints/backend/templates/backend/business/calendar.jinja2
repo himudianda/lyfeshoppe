@@ -45,12 +45,12 @@
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class=" icon-layers font-green"></i>
-                                <span class="caption-subject font-green sbold uppercase">Calendar for: </span>
+                                <i class=" icon-layers font-green"></i>&nbsp;
+                                <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
                                 <select class="bs-select input-large" data-style="green">
-                                    <option>Mustard</option>
-                                    <option>Ketchup</option>
-                                    <option>Relish</option>
+                                {% for employee in business.employees %}
+                                    <option>{{employee.user.name}}</option>
+                                {% endfor %}
                                 </select>
                             </div>
                         </div>
