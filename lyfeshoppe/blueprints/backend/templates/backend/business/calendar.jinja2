@@ -190,6 +190,17 @@
                         selectable: true,
                         select: function(start, end, allDay) {
                             var mywhen = start.format("ddd, MMM Do, h:mm a") + ' - ' + end.format("h:mm a");
+
+                            // NOTE: start & end are moment objects. The below code
+                            // converts the start/end moment objects into string format while preserving
+                            // the timezone information.
+                            // local() = helps preserve the timezone info
+                            // format() = writes moment to string format
+                            // COnverting moment to String is required coz we are assigning it to an
+                            // html tag below & retrieving it again later
+                            start = start.local().format()
+                            end = end.local().format()
+
                             $('#createEventModal #apptStartTime').val(start);
                             $('#createEventModal #apptEndTime').val(end);
                             $('#createEventModal #apptAllDay').val(allDay);
