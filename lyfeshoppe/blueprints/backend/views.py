@@ -302,6 +302,7 @@ def business_edit(id):
 
     if form.validate_on_submit():
         form.populate_obj(business)
+        form.populate_obj(business.address)
 
         if business.name == '':
             business.business = None
