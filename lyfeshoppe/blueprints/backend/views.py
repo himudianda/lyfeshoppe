@@ -635,7 +635,7 @@ def business_calendar(id):
 
     form = BookingForm(obj=business, **form_data)
 
-    if form.validate_on_submit():
+    if form.is_submitted() and form.validate_on_submit():
         flash(_('Reservation has been created successfully.'), 'success')
         return redirect(url_for('backend.business_calendar', id=id))
 

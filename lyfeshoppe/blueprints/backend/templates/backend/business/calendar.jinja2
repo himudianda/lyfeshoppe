@@ -53,7 +53,7 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-9" id="products-select">
                                                           {% call f.form_group(form.products, css_class='sm-margin-bottom') %}
                                                           {% endcall %}
                                                         </div>
@@ -72,9 +72,11 @@
                                                     </div>
                                                 </div>
                                                 <!--/span-->
+                                                <input type="hidden" id="apptStartTime"/>
+                                                <input type="hidden" id="apptEndTime"/>
+                                                <input type="hidden" id="apptAllDay" />
                                             </div>
                                         </div>
-
 
                                         <div class="form-actions">
                                             <div class="row">
@@ -84,19 +86,18 @@
 
                                                             <div class="row">
                                                                 <div class="col-md-3">
-                                                                    <button type="submit" class="btn green">
+                                                                    <button id="submitButton" type="submit" class="btn green">
                                                                       {{ button }}
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                                    <a href="{{ url_for('backend.businesses') }}"
+                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id) }}"
                                                                        class="btn red btn-block">
                                                                       {{ _('Cancel') }}
                                                                     </a>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,30 +110,8 @@
                             </div>
                             {% endcall %}
 
-
-
-
-                            <form id="createAppointmentForm" class="form-horizontal">
-                                <div class="control-group">
-                                    <label class="control-label" for="inputPatient">Customer Name:</label>
-                                    <div class="controls">
-                                        <input type="text" name="patientName" id="patientName" tyle="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]">
-                                          <input type="hidden" id="apptStartTime"/>
-                                          <input type="hidden" id="apptEndTime"/>
-                                          <input type="hidden" id="apptAllDay" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="when">When:</label>
-                                    <div class="controls controls-row" id="when" style="margin-top:5px;">
-                                    </div>
-                                </div>
-                            </form>
-
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                            <button id="submitButton" type="button" class="btn green">Save changes</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
