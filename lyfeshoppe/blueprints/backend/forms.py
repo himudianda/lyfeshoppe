@@ -121,3 +121,12 @@ class BookingForm(Form):
     zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
     district = StringField(_('District/County'), [Optional(), Length(1, 30)])
     country = StringField(_('Country'), [Optional(), Length(1, 30)])
+
+    products = SelectField(_('Products'), [DataRequired()],
+                           choices=[('massage', 'Massage'), ('spa', 'Spa'), ('tanning', 'Tanning')])
+
+    def __init__(self, formdata=None, obj=None, prefix='', **kwargs):
+       kwargs.setdefault('products', None)
+
+       Form.__init__(self, formdata, obj, prefix, **kwargs)
+       self.products.choices = [('massage', 'Massage'), ('spa', 'Spa'), ('tanning', 'Tanning'), ('hair', 'Hair')]

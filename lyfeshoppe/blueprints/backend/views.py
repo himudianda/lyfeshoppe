@@ -635,7 +635,7 @@ def business_calendar(id):
         "state": business.address.state,
         "zipcode": business.address.zipcode,
         "district": business.address.district,
-        "country": business.address.country,
+        "country": business.address.country
     }
 
     form = BookingForm(obj=business, **form_data)
