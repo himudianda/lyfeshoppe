@@ -4,6 +4,7 @@ from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
 import pytz
+import json
 
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
@@ -651,4 +652,17 @@ def business_calendar(id):
         else:
             flash(_('Reservation create failed.'), 'error')
 
-    return render_template('backend/business/calendar.jinja2', form=form, business=business)
+    events = []
+    for reservation in business.reservations:
+        # Note: isoformat() function below tells the browser javascript that the time is in UTC.
+        # Else; It is taken as Local timezone.
+        events.append({
+            "title": reservation.product.name,
+            "start": reservation.start_time.isoformat(),
+            "end": reservation.end_time.isoformat(),
+            "allDay": False,
+        })
+
+    return render_template('backend/business/calendar.jinja2',
+                           form=form, business=business, events=json.dumps({"all": events})
+                           )

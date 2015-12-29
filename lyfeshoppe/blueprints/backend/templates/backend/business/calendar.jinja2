@@ -314,6 +314,19 @@
                     addEvent("My Event 5");
                     addEvent("My Event 6");
 
+                    var events = {{ events|safe }}
+                    //console.log(events.all);
+                    var events_all = events.all
+                    for (var i = 0; i < events_all.length; i++) {
+                        console.log(events_all[i].start);
+
+                        // Must convert to Javascript Date object for proper display
+                        events_all[i].start = new Date(events_all[i].start);
+                        events_all[i].end = new Date(events_all[i].end);
+                        console.log(events_all[i].start);
+                    }
+
+
                     $('#calendar').fullCalendar('destroy'); // destroy the calendar
                     $('#calendar').fullCalendar({ //re-initialize the calendar
                         header: h,
@@ -381,52 +394,9 @@
                                 $(this).remove();
                             }
                         },
-                        events: [{
-                            title: 'All Day Event',
-                            start: new Date(y, m, 1),
-                            backgroundColor: App.getBrandColor('yellow')
-                        }, {
-                            title: 'Long Event',
-                            start: new Date(y, m, d - 5),
-                            end: new Date(y, m, d - 2),
-                            backgroundColor: App.getBrandColor('green')
-                        }, {
-                            title: 'Repeating Event',
-                            start: new Date(y, m, d - 3, 16, 0),
-                            allDay: false,
-                            backgroundColor: App.getBrandColor('red')
-                        }, {
-                            title: 'Repeating Event',
-                            start: new Date(y, m, d + 4, 16, 0),
-                            allDay: false,
-                            backgroundColor: App.getBrandColor('green')
-                        }, {
-                            title: 'Meeting',
-                            start: new Date(y, m, d, 10, 30),
-                            allDay: false,
-                        }, {
-                            title: 'Lunch',
-                            start: new Date(y, m, d, 12, 0),
-                            end: new Date(y, m, d, 14, 0),
-                            backgroundColor: App.getBrandColor('grey'),
-                            allDay: false,
-                        }, {
-                            title: 'Birthday Party',
-                            start: new Date(y, m, d + 1, 19, 0),
-                            end: new Date(y, m, d + 1, 22, 30),
-                            backgroundColor: App.getBrandColor('purple'),
-                            allDay: false,
-                        }, {
-                            title: 'Click for Google',
-                            start: new Date(y, m, 28),
-                            end: new Date(y, m, 29),
-                            backgroundColor: App.getBrandColor('yellow'),
-                            url: 'http://google.com/',
-                        }]
+                        events: events_all
                     });
-
                 }
-
             };
         }();
 
@@ -474,10 +444,9 @@
             console.log("You selected: " + x);
             //document.getElementById("demo").innerHTML = "You selected: " + x;
         }
-
         
         jQuery(document).ready(function() {    
-           AppCalendar.init(); 
+           AppCalendar.init();
         });
     </script>
 {% endblock %}
