@@ -342,13 +342,7 @@
                         // Note: Time is displayed on Calendar in Local timezone
                         events_all[i].start = new Date(events_all[i].start);
                         events_all[i].end = new Date(events_all[i].end);
-
-                        events_all[i].backgroundColor = App.getBrandColor('green');
-                        if (events_all[i].status == "cancelled"){
-                            events_all[i].backgroundColor = App.getBrandColor('red');
-                        } else if (events_all[i].status == "executed"){
-                            events_all[i].backgroundColor = App.getBrandColor('blue');
-                        }
+                        events_all[i].backgroundColor = App.getBrandColor(events_all[i].backgroundColor);
                     }
 
                     $('#calendar').fullCalendar('destroy'); // destroy the calendar
