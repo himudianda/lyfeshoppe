@@ -85,6 +85,12 @@
                                                 <input type="hidden" id="apptStartTime"/>
                                                 <input type="hidden" id="apptEndTime"/>
                                                 <input type="hidden" id="apptAllDay" />
+
+
+                                                <input type="hidden" id="form-customer-id"/>
+                                                <input type="hidden" id="form-product-id"/>
+                                                <input type="hidden" id="form-employee-id" />
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9">
@@ -152,7 +158,7 @@
                                 <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
                                 <select id="employee-select" class="bs-select input-large" data-style="green">
                                 {% for employee in business.employees %}
-                                    <option>{{employee.user.name}}</option>
+                                    <option value="{{employee.id | string}}">{{employee.user.name}}</option>
                                 {% endfor %}
                                 </select>
                             </div>
@@ -302,6 +308,12 @@
                             $('#createEventModal #apptAllDay').val(allDay);
                             $('#createEventModal #when').text(mywhen);
 
+
+                            $('#createEventModal #form-customer-id').val( $('#customer-select').val() );
+                            $('#createEventModal #form-product-id').val( $('#product-select').val() );
+                            $('#createEventModal #form-employee-id').val( $('#employee-select').val() );
+
+
                             $('#createEventModal').modal('show');
                         },
                         droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -389,6 +401,12 @@
             console.log($('#apptStartTime').val());
             console.log($('#apptEndTime').val());
             console.log($('#apptAllDay').val());
+
+            console.log( $('#createEventModal #form-customer-id').val() );
+            console.log( $('#createEventModal #form-product-id').val() );
+            console.log( $('#createEventModal #form-employee-id').val() );
+
+
             alert("form submitted");
 
             $("#calendar").fullCalendar('renderEvent',
