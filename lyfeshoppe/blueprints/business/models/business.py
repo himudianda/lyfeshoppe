@@ -13,10 +13,10 @@ class Reservation(ResourceMixin, db.Model):
     __tablename__ = 'reservations'
 
     STATUS = OrderedDict([
-        ('new', 'New reservation. Yet to be confirmed'),
-        ('confirmed', 'Reservation Confirmed.'),
-        ('cancelled', 'Reservation Cancelled.'),
-        ('executed', 'Service was provided.')
+        ('new', 'Unconfirmed reservation.'),
+        ('confirmed', 'Confirmed reservation.'),
+        ('cancelled', 'Cancelled reservation.'),
+        ('executed', 'Completed reservation.')
     ])
 
     STATUS_COLORS = OrderedDict([

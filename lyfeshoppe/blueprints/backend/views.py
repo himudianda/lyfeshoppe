@@ -10,7 +10,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm, BookingForm
+    EmployeeForm, ProductForm, ReservationForm, BookingForm, BookingEditForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
@@ -631,13 +631,14 @@ def business_reservation_edit(id, reservation_id):
 def business_calendar(id):
     business = Business.query.get(id)
     form = BookingForm()
+    edit_form = BookingEditForm()
 
     if form.is_submitted() and form.validate_on_submit():
         reservation = Reservation()
         form.populate_obj(reservation)
 
         params = {
-            'status': 'new',
+            'status': 'confirmed',  # Since this reservation was made my employee - mark as confirmed
             'employee_id': request.form.get('employee_id'),
             'customer_id': request.form.get('customer_id'),
             'product_id': request.form.get('product_id'),
@@ -675,5 +676,6 @@ def business_calendar(id):
         })
 
     return render_template('backend/business/calendar.jinja2',
-                           form=form, business=business, events=json.dumps(events)
+                           form=form, edit_form=edit_form,
+                           business=business, events=json.dumps(events)
                            )

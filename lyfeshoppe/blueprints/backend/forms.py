@@ -110,3 +110,11 @@ class BookingForm(ModelForm):
 
     start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+
+
+class BookingEditForm(ModelForm):
+    start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    status = SelectField(_('Reservation Status'), [DataRequired()],
+                         choices=choices_from_dict(Reservation.STATUS,
+                         prepend_blank=False))
