@@ -652,11 +652,15 @@ def business_calendar(id):
         else:
             flash(_('Reservation create failed.'), 'error')
 
-    events = []
+    events = dict()
     for reservation in business.reservations:
         # Note: isoformat() function below tells the browser javascript that the time is in UTC.
         # Else; It is taken as Local timezone.
-        events.append({
+        employee_id = str(reservation.employee.id)
+        if employee_id not in events:
+            events[employee_id] = []
+
+        events[employee_id].append({
             "title": reservation.product.name,
             "start": reservation.start_time.isoformat(),
             "end": reservation.end_time.isoformat(),
@@ -665,5 +669,5 @@ def business_calendar(id):
         })
 
     return render_template('backend/business/calendar.jinja2',
-                           form=form, business=business, events=json.dumps({"all": events})
+                           form=form, business=business, events=json.dumps(events)
                            )

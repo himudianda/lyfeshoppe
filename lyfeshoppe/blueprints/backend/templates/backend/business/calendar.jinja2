@@ -310,8 +310,9 @@
                     addEvent("My Event 5");
                     addEvent("My Event 6");
 
+                    var emp_id = $('#employee-select').val();
                     var events = {{ events|safe }}
-                    var events_all = events.all
+                    var events_all = events[emp_id]
                     for (var i = 0; i < events_all.length; i++) {
                         // Must convert to Javascript Date object for proper display
                         // Note: Time is displayed on Calendar in Local timezone
