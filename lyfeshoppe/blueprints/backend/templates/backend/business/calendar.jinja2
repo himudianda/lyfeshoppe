@@ -172,6 +172,96 @@
                 <!-- /.modal-dialog -->
             </div>
 
+
+
+
+
+
+            <div class="modal fade bs-modal-lg" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Reservation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Bootstrap Modal that opens for viewing a Booking -->
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-plus"></i> Viewing Reservation
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal col-md-offset-1">
+                                        <div class="form-body">
+                                            <h3 class="form-section">Viewing Reservation</h3>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-employee-name">
+                                                            <h5><strong>Employee:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-customer-name">
+                                                            <h5><strong>Customer:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-booking-times">
+                                                            <h5><strong>When:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-product-name">
+                                                            <h5><strong>Product:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                        </div>
+
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+
+
+
+
+
+
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
@@ -288,7 +378,16 @@
 
                             $('#createEventModal').modal('show');
                         },
-                        events: events_all
+                        events: events_all,
+                        eventClick: function(event, jsEvent, view){
+                            var mywhen = event.start.format("ddd, MMM Do, h:mm a") + ' - ' + event.end.format("h:mm a");
+                            $('#view-employee-name p').text($('#employee-select option:selected').text());
+                            $('#view-customer-name p').text($('#customer-select option:selected').text());
+                            $('#view-product-name p').text($('#product-select option:selected').text());
+                            $('#view-booking-times p').text(mywhen);
+
+                            $('#viewEventModal').modal('show');
+                        }
                     });
                 }
             };
