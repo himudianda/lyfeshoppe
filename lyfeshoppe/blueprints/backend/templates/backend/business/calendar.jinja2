@@ -349,6 +349,10 @@
                             $('#createEventModal #product_id').val( $('#product-select').val() );
                             $('#createEventModal #employee_id').val( $('#employee-select').val() );
 
+                            console.log($('#createEventModal #product_id').val());
+                            console.log($('#createEventModal #customer_id').val());
+                            console.log($('#createEventModal #employee_id').val());
+
                             $('#createEventModal #start_time').val( start.format('YYYY-MM-DD HH:mm:ss') );
                             $('#createEventModal #end_time').val( end.format('YYYY-MM-DD HH:mm:ss') );
 
@@ -436,12 +440,14 @@
         function productSelect() {
             var x = document.getElementById("product-select").value;
             console.log("You selected: " + x);
+            $('#createEventModal #product_id').val( $('#product-select').val() );
             //document.getElementById("demo").innerHTML = "You selected: " + x;
         }
 
         function customerSelect() {
             var x = document.getElementById("customer-select").value;
             console.log("You selected: " + x);
+            $('#createEventModal #customer_id').val( $('#customer-select').val() );
             //document.getElementById("demo").innerHTML = "You selected: " + x;
         }
         
