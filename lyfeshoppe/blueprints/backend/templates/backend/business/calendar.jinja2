@@ -54,8 +54,11 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="product-select">
-                                                          {% call f.form_group(form.product, css_class='sm-margin-bottom') %}
-                                                          {% endcall %}
+                                                            <select id="customer-select" class="bs-select">
+                                                                {% for product in business.products %}
+                                                                    <option>{{product.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
