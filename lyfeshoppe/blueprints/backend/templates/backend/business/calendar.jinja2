@@ -96,6 +96,29 @@
                                                 </div>
                                                 <!--/span-->
                                             </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                          {% call f.form_group(form.start_time, css_class='sm-margin-bottom') %}
+                                                          {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <div class="col-md-9">
+                                                              {% call f.form_group(form.end_time, css_class='sm-margin-bottom') %}
+                                                              {% endcall %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
 
                                             <div class="row">
                                                 <input type="hidden" id="apptStartTime"/>
@@ -304,6 +327,13 @@
                             $('#employee-name p').text($('#employee-select option:selected').text());
                             $('#booking-times p').text(mywhen);
 
+                            $('#createEventModal #customer_id').val( $('#customer-select').val() );
+                            $('#createEventModal #product_id').val( $('#product-select').val() );
+                            $('#createEventModal #employee_id').val( $('#employee-select').val() );
+
+                            $('#createEventModal #start_time').val( start.format('YYYY-MM-DD HH:mm:ss') );
+                            $('#createEventModal #end_time').val( end.format('YYYY-MM-DD HH:mm:ss') );
+
                             // NOTE: start & end are moment objects. The below code
                             // converts the start/end moment objects into string format while preserving
                             // the timezone information.
@@ -319,10 +349,6 @@
                             $('#createEventModal #apptAllDay').val(allDay);
                             $('#createEventModal #when').text(mywhen);
 
-
-                            $('#createEventModal #customer_id').val( $('#customer-select').val() );
-                            $('#createEventModal #product_id').val( $('#product-select').val() );
-                            $('#createEventModal #employee_id').val( $('#employee-select').val() );
 
 
                             $('#createEventModal').modal('show');

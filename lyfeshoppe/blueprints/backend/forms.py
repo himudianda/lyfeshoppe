@@ -107,3 +107,6 @@ class BookingForm(ModelForm):
     employee_id = HiddenField()
     customer_id = HiddenField()
     product_id = HiddenField()
+
+    start_time = DateTimeField(_('Reservation Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    end_time = DateTimeField(_('Reservation End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')

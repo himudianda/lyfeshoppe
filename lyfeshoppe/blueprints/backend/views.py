@@ -642,8 +642,19 @@ def business_calendar(id):
             'product_id': request.form.get('product_id'),
             'business_id': id
         }
+
+        if reservation.start_time:
+            reservation.start_time = reservation.start_time.replace(
+                tzinfo=pytz.UTC)
+
+        if reservation.end_time:
+            reservation.end_time = reservation.end_time.replace(
+                tzinfo=pytz.UTC)
+
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
             return redirect(url_for('backend.business_calendar', id=id))
+        else:
+            flash(_('Reservation create failed.'), 'error')
 
     return render_template('backend/business/calendar.jinja2', form=form, business=business)
