@@ -105,12 +105,9 @@ class ReservationForm(ModelForm):
 
 class BookingForm(Form):
     product = SelectField(_('Product'), [DataRequired()], choices=[])
-    customer = SelectField(_('Customer'), [DataRequired()], choices=[])
 
     def __init__(self, formdata=None, obj=None, prefix='', **kwargs):
         kwargs.setdefault('product', None)
-        kwargs.setdefault('customer', None)
 
         Form.__init__(self, formdata, obj, prefix, **kwargs)
         self.product.choices = kwargs.get('services', [])
-        self.customer.choices = kwargs.get('customers', [])

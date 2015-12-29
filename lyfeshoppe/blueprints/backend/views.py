@@ -630,8 +630,7 @@ def business_reservation_edit(id, reservation_id):
 def business_calendar(id):
     business = Business.query.get(id)
     form_data = {
-        "services": [(str(product.id), product.name) for product in business.products],
-        "customers": [(str(customer.id), customer.user.name) for customer in business.customers],
+        "services": [(str(product.id), product.name) for product in business.products]
     }
 
     form = BookingForm(**form_data)

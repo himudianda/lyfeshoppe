@@ -77,10 +77,15 @@
                                                 <input type="hidden" id="apptAllDay" />
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9" id="customer-select">
-                                                            {% call f.form_group(form.customer, css_class='sm-margin-bottom') %}
-                                                            {% endcall %}
-                                                                {{_('New Customer?')}}
+                                                        <div class="col-md-9">
+                                                            <select id="customer-select" class="bs-select">
+                                                                {% for customer in business.customers %}
+                                                                    <option>{{customer.user.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+
+                                                            </br>
+                                                            {{_('New Customer?')}}
                                                             <a href="{{ url_for('backend.business_employees_new', id=business.id) }}"
                                                                 class="green">
                                                                     {{ _(' First Register here.') }}
