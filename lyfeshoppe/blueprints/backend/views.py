@@ -640,21 +640,10 @@ def business_calendar(id):
             'employee_id': request.form.get('employee_id'),
             'customer_id': request.form.get('customer_id'),
             'product_id': request.form.get('product_id'),
-            'business_id': id
-        }
-
-        if reservation.start_time:
-            reservation.start_time = reservation.start_time.replace(
-                tzinfo=pytz.UTC)
-
-        if reservation.end_time:
-            reservation.end_time = reservation.end_time.replace(
-                tzinfo=pytz.UTC)
-
-        params.update({
+            'business_id': id,
             'start_time': reservation.start_time,
             'end_time': reservation.end_time
-        })
+        }
 
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
