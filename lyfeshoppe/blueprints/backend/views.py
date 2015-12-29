@@ -653,13 +653,18 @@ def business_calendar(id):
             flash(_('Reservation create failed.'), 'error')
 
     events = dict()
+
+    # Note: A new employee may have no reservations & on the frontend
+    # we want to have his calendar displayed. Hence this step
+    for employee in business.employees:
+        employee_id = str(employee.id)
+        if employee_id not in events:
+            events[employee_id] = []
+
     for reservation in business.reservations:
         # Note: isoformat() function below tells the browser javascript that the time is in UTC.
         # Else; It is taken as Local timezone.
         employee_id = str(reservation.employee.id)
-        if employee_id not in events:
-            events[employee_id] = []
-
         events[employee_id].append({
             "title": reservation.product.name,
             "start": reservation.start_time.isoformat(),
