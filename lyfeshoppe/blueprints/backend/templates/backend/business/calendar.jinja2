@@ -82,15 +82,6 @@
                                                     </div>
                                                 </div>
                                                 <!--/span-->
-                                                <input type="hidden" id="apptStartTime"/>
-                                                <input type="hidden" id="apptEndTime"/>
-                                                <input type="hidden" id="apptAllDay" />
-
-
-                                                <input type="hidden" id="form-customer-id"/>
-                                                <input type="hidden" id="form-product-id"/>
-                                                <input type="hidden" id="form-employee-id" />
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9">
@@ -105,6 +96,29 @@
                                                 </div>
                                                 <!--/span-->
                                             </div>
+
+                                            <div class="row">
+                                                <input type="hidden" id="apptStartTime"/>
+                                                <input type="hidden" id="apptEndTime"/>
+                                                <input type="hidden" id="apptAllDay" />
+
+                                                <div id="form-employee-id">
+                                                    {% call f.form_group(form.employee_id, css_class='sm-margin-bottom') %}
+                                                    {% endcall %}
+                                                </div>
+
+                                                <div id="form-product-id">
+                                                    {% call f.form_group(form.product_id, css_class='sm-margin-bottom') %}
+                                                    {% endcall %}
+                                                </div>
+
+                                                <div id="form-customer-id">
+                                                    {% call f.form_group(form.customer_id, css_class='sm-margin-bottom') %}
+                                                    {% endcall %}
+                                                </div>
+                                            </div>
+
+
                                         </div>
 
                                         <div class="form-actions">
@@ -309,9 +323,9 @@
                             $('#createEventModal #when').text(mywhen);
 
 
-                            $('#createEventModal #form-customer-id').val( $('#customer-select').val() );
-                            $('#createEventModal #form-product-id').val( $('#product-select').val() );
-                            $('#createEventModal #form-employee-id').val( $('#employee-select').val() );
+                            $('#createEventModal #form-customer-id input').val( $('#customer-select').val() );
+                            $('#createEventModal #form-product-id input').val( $('#product-select').val() );
+                            $('#createEventModal #form-employee-id input').val( $('#employee-select').val() );
 
 
                             $('#createEventModal').modal('show');
@@ -402,9 +416,9 @@
             console.log($('#apptEndTime').val());
             console.log($('#apptAllDay').val());
 
-            console.log( $('#createEventModal #form-customer-id').val() );
-            console.log( $('#createEventModal #form-product-id').val() );
-            console.log( $('#createEventModal #form-employee-id').val() );
+            console.log( $('#createEventModal #form-customer-id input').val() );
+            console.log( $('#createEventModal #form-product-id input').val() );
+            console.log( $('#createEventModal #form-employee-id input').val() );
 
 
             alert("form submitted");
