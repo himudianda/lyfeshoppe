@@ -3,7 +3,7 @@
 {% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% block title %}
-    Businesses / List | LyfeShoppe | Social Shop with huge discounts.
+    Calendar | LyfeShoppe | Social Shop with huge discounts.
 {% endblock %}
 
 {% block content %}
@@ -25,20 +25,19 @@
 
                             {% set endpoint = 'backend.business_calendar' %}
                             {% set form_kwargs = {'id': business.id} %}
-                            {% set legend = 'Create a new Reservation' %}
                             {% set button = _('Create') %}
 
+                            <!-- Bootstrap Modal that opens for creating a Booking -->
                             {% call f.form_tag(endpoint, **form_kwargs) %}
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-plus"></i> {{ legend }} 
+                                        <i class="fa fa-plus"></i> Create a new Reservation
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
                                     <form action="#" class="form-horizontal col-md-offset-1">
-
                                         <div class="form-body">
                                             <h3 class="form-section">Create a Reservation</h3>
                                             <div class="row">
@@ -119,7 +118,6 @@
                                                 </div>
                                                 <!--/span-->
                                             </div>
-
                                             <div class="row">
                                                 <div>
                                                     {{ form.employee_id() }}
@@ -133,8 +131,6 @@
                                                     {{ form.customer_id() }}
                                                 </div>
                                             </div>
-
-
                                         </div>
 
                                         <div class="form-actions">
@@ -142,7 +138,6 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-offset-6 col-md-12">
-
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <button id="submitButton" type="submit" class="btn green">
@@ -168,7 +163,6 @@
                                 </div>
                             </div>
                             {% endcall %}
-
                         </div>
                         <div class="modal-footer">
                         </div>
@@ -177,7 +171,6 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-
 
             <div class="row">
                 <div class="col-md-12">
@@ -235,80 +228,21 @@
 
                     var h = {};
 
-                    if (App.isRTL()) {
-                        if ($('#calendar').parents(".portlet").width() <= 720) {
-                            $('#calendar').addClass("mobile");
-                            h = {
-                                right: 'title, prev, next',
-                                center: '',
-                                left: 'agendaDay, agendaWeek, month, today'
-                            };
-                        } else {
-                            $('#calendar').removeClass("mobile");
-                            h = {
-                                right: 'title',
-                                center: '',
-                                left: 'agendaDay, agendaWeek, month, today, prev,next'
-                            };
-                        }
-                    } else {
-                        if ($('#calendar').parents(".portlet").width() <= 720) {
-                            $('#calendar').addClass("mobile");
-                            h = {
-                                left: 'title, prev, next',
-                                center: '',
-                                right: 'today,month,agendaWeek,agendaDay'
-                            };
-                        } else {
-                            $('#calendar').removeClass("mobile");
-                            h = {
-                                left: 'title',
-                                center: '',
-                                right: 'prev,next,today,month,agendaWeek,agendaDay'
-                            };
-                        }
-                    }
-
-                    var initDrag = function(el) {
-                        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-                        // it doesn't need to have a start or end
-                        var eventObject = {
-                            title: $.trim(el.text()) // use the element's text as the event title
+                    if ($('#calendar').parents(".portlet").width() <= 720) {
+                        $('#calendar').addClass("mobile");
+                        h = {
+                            left: 'title, prev, next',
+                            center: '',
+                            right: 'today,month,agendaWeek,agendaDay'
                         };
-                        // store the Event Object in the DOM element so we can get to it later
-                        el.data('eventObject', eventObject);
-                        // make the event draggable using jQuery UI
-                        el.draggable({
-                            zIndex: 999,
-                            revert: true, // will cause the event to go back to its
-                            revertDuration: 0 //  original position after the drag
-                        });
-                    };
-
-                    var addEvent = function(title) {
-                        title = title.length === 0 ? "Untitled Event" : title;
-                        var html = $('<div class="external-event label label-default">' + title + '</div>');
-                        jQuery('#event_box').append(html);
-                        initDrag(html);
-                    };
-
-                    $('#external-events div.external-event').each(function() {
-                        initDrag($(this));
-                    });
-
-                    $('#event_add').unbind('click').click(function() {
-                        var title = $('#event_title').val();
-                        addEvent(title);
-                    });
-
-                    //predefined events
-                    $('#event_box').html("");
-                    addEvent("My Event 1");
-                    addEvent("My Event 2");
-                    addEvent("My Event 3");
-                    addEvent("My Event 4");
-                    addEvent("My Event 5");
-                    addEvent("My Event 6");
+                    } else {
+                        $('#calendar').removeClass("mobile");
+                        h = {
+                            left: 'title',
+                            center: '',
+                            right: 'prev,next,today,month,agendaWeek,agendaDay'
+                        };
+                    }
 
                     var emp_id = $('#employee-select').val();
                     var events = {{ events|safe }}
@@ -327,11 +261,10 @@
                         }
                     }
 
-
                     $('#calendar').fullCalendar('destroy'); // destroy the calendar
                     $('#calendar').fullCalendar({ //re-initialize the calendar
                         header: h,
-                        defaultView: 'agendaWeek', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
+                        defaultView: 'agendaWeek', // options: http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
                         slotMinutes: 15,
                         editable: false,
                         selectable: true,
