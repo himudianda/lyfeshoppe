@@ -16,7 +16,7 @@ class Reservation(ResourceMixin, db.Model):
         ('new', 'New reservation'),
         ('processing', 'Reservation being currently processed'),
         ('confirmed', 'Reservation Confirmed'),
-        ('cancalled', 'Reservation Cancelled'),
+        ('cancelled', 'Reservation Cancelled'),
         ('executed', 'Product/Service was provided')
     ])
 

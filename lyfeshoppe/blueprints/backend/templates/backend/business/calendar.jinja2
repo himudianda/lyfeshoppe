@@ -318,12 +318,20 @@
                     //console.log(events.all);
                     var events_all = events.all
                     for (var i = 0; i < events_all.length; i++) {
-                        console.log(events_all[i].start);
+                        //console.log(events_all[i].start);
 
                         // Must convert to Javascript Date object for proper display
                         events_all[i].start = new Date(events_all[i].start);
                         events_all[i].end = new Date(events_all[i].end);
-                        console.log(events_all[i].start);
+                        events_all[i].backgroundColor = App.getBrandColor('green');
+
+                        console.log(events_all[i].status);
+                        if (events_all[i].status == "cancelled"){
+                            events_all[i].backgroundColor = App.getBrandColor('red');
+                        } else if (events_all[i].status == "executed"){
+                            events_all[i].backgroundColor = App.getBrandColor('blue');
+                        }
+                        //console.log(events_all[i].start);
                     }
 
 

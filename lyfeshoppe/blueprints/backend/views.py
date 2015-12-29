@@ -661,6 +661,7 @@ def business_calendar(id):
             "start": reservation.start_time.isoformat(),
             "end": reservation.end_time.isoformat(),
             "allDay": False,
+            "status": reservation.status
         })
 
     return render_template('backend/business/calendar.jinja2',
