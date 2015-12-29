@@ -179,7 +179,7 @@
                             <div class="caption">
                                 <i class=" icon-layers font-green"></i>&nbsp;
                                 <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
-                                <select id="employee-select" class="bs-select input-large" data-style="green">
+                                <select id="employee-select" class="bs-select input-large" data-style="green" onchange="employeeSelect()">
                                 {% for employee in business.employees %}
                                     <option value="{{employee.id | string}}">{{employee.user.name}}</option>
                                 {% endfor %}
@@ -300,6 +300,11 @@
 
         function customerSelect() {
             $('#createEventModal #customer_id').val($('#customer-select').val());
+        }
+
+        function employeeSelect() {
+            $('#createEventModal #employee_id').val($('#employee-select').val());
+            AppCalendar.init();
         }
         
         jQuery(document).ready(function() {    
