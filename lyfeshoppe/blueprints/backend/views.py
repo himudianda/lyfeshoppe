@@ -651,6 +651,11 @@ def business_calendar(id):
             reservation.end_time = reservation.end_time.replace(
                 tzinfo=pytz.UTC)
 
+        params.update({
+            'start_time': reservation.start_time,
+            'end_time': reservation.end_time
+        })
+
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
             return redirect(url_for('backend.business_calendar', id=id))
