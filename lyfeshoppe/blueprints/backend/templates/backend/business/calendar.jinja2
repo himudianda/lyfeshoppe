@@ -102,19 +102,16 @@
                                                 <input type="hidden" id="apptEndTime"/>
                                                 <input type="hidden" id="apptAllDay" />
 
-                                                <div id="form-employee-id">
-                                                    {% call f.form_group(form.employee_id, css_class='sm-margin-bottom') %}
-                                                    {% endcall %}
+                                                <div>
+                                                    {{ form.employee_id() }}
                                                 </div>
 
-                                                <div id="form-product-id">
-                                                    {% call f.form_group(form.product_id, css_class='sm-margin-bottom') %}
-                                                    {% endcall %}
+                                                <div>
+                                                    {{ form.product_id() }}
                                                 </div>
 
-                                                <div id="form-customer-id">
-                                                    {% call f.form_group(form.customer_id, css_class='sm-margin-bottom') %}
-                                                    {% endcall %}
+                                                <div>
+                                                    {{ form.customer_id() }}
                                                 </div>
                                             </div>
 
@@ -323,9 +320,9 @@
                             $('#createEventModal #when').text(mywhen);
 
 
-                            $('#createEventModal #form-customer-id input').val( $('#customer-select').val() );
-                            $('#createEventModal #form-product-id input').val( $('#product-select').val() );
-                            $('#createEventModal #form-employee-id input').val( $('#employee-select').val() );
+                            $('#createEventModal #customer_id').val( $('#customer-select').val() );
+                            $('#createEventModal #product_id').val( $('#product-select').val() );
+                            $('#createEventModal #employee_id').val( $('#employee-select').val() );
 
 
                             $('#createEventModal').modal('show');
@@ -402,7 +399,7 @@
             };
         }();
 
-
+        /*
         $('#submitButton').on('click', function(e){
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
@@ -416,9 +413,9 @@
             console.log($('#apptEndTime').val());
             console.log($('#apptAllDay').val());
 
-            console.log( $('#createEventModal #form-customer-id input').val() );
-            console.log( $('#createEventModal #form-product-id input').val() );
-            console.log( $('#createEventModal #form-employee-id input').val() );
+            console.log( $('#createEventModal #customer_id').val() );
+            console.log( $('#createEventModal #product_id').val() );
+            console.log( $('#createEventModal #employee_id').val() );
 
 
             alert("form submitted");
@@ -432,6 +429,7 @@
                 },
             true);
         }
+        */
 
 
         function productSelect() {

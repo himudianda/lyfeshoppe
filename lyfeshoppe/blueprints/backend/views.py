@@ -632,7 +632,18 @@ def business_calendar(id):
     form = BookingForm()
 
     if form.is_submitted() and form.validate_on_submit():
-        flash(_('Reservation has been created successfully.'), 'success')
-        return redirect(url_for('backend.business_calendar', id=id))
+        reservation = Reservation()
+        form.populate_obj(reservation)
+
+        params = {
+            'status': 'new',
+            'employee_id': request.form.get('employee_id'),
+            'customer_id': request.form.get('customer_id'),
+            'product_id': request.form.get('product_id'),
+            'business_id': id
+        }
+        if Reservation.create(params):
+            flash(_('Reservation has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_calendar', id=id))
 
     return render_template('backend/business/calendar.jinja2', form=form, business=business)

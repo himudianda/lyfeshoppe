@@ -103,7 +103,7 @@ class ReservationForm(ModelForm):
     end_time = DateTimeField(_('Reservation End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
 
-class BookingForm(Form):
+class BookingForm(ModelForm):
     employee_id = HiddenField()
     customer_id = HiddenField()
     product_id = HiddenField()
