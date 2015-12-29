@@ -324,6 +324,11 @@
                         select: function(start, end, allDay) {
                             var mywhen = start.format("ddd, MMM Do, h:mm a") + ' - ' + end.format("h:mm a");
 
+                            start.local().utc() // Convets start to UTC for formatting
+                            end.local().utc() // Convets end to UTC for formatting
+                            // start.utc().local() // Convets start to local for formatting
+                            // end.utc().local() // Convets end to local for formatting
+
                             $('#employee-name p').text($('#employee-select option:selected').text());
                             $('#booking-times p').text(mywhen);
 
@@ -341,8 +346,8 @@
                             // format() = writes moment to string format
                             // COnverting moment to String is required coz we are assigning it to an
                             // html tag below & retrieving it again later
-                            start = start.local().format()
-                            end = end.local().format()
+                            //start = start.local().format()
+                            //end = end.local().format()
 
                             $('#createEventModal #apptStartTime').val(start);
                             $('#createEventModal #apptEndTime').val(end);
