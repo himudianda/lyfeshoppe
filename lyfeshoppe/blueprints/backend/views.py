@@ -100,7 +100,7 @@ def shop_booking(id, product_id):
             "start": reservation.start_time.isoformat(),
             "end": reservation.end_time.isoformat(),
             "allDay": False,
-            "status": reservation.status,
+            "status": Reservation.STATUS[reservation.status],
             "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
             "reservation_id": str(reservation.id)
         })

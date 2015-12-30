@@ -144,7 +144,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="view-employee-name">
-                                                            <h5><strong>Employee:</strong></h5>
+                                                            <h5><strong>Staff providing Service:</strong></h5>
                                                             <p></p>
                                                         </div>
                                                     </div>
@@ -153,7 +153,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="view-product-name">
-                                                            <h5><strong>Product:</strong></h5>
+                                                            <h5><strong>Service Name:</strong></h5>
                                                             <p>{{product.name}}</p>
                                                         </div>
                                                     </div>
@@ -173,7 +173,7 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9" id="booking-times">
+                                                        <div class="col-md-9" id="view-booking-times">
                                                             <h5><strong>When:</strong></h5>
                                                             <p></p>
                                                         </div>
@@ -306,8 +306,9 @@
                         events: events_all,
                         eventClick: function(event, jsEvent, view){
                             var mywhen = event.start.format("ddd, MMM Do, h:mm a") + ' - ' + event.end.format("h:mm a");
-                            $('#viewEventModal #reservation_id').val( event.reservation_id );
-                            $('#view-employee-name p').text($('#employee-select option:selected').text());
+                            $('#viewEventModal #view-reservation-status p').text( event.status );
+                            $('#viewEventModal #view-employee-name p').text($('#employee-select option:selected').text());
+                            $('#viewEventModal #view-booking-times p').text(mywhen);
                             $('#viewEventModal').modal('show');
                         }
                     });
