@@ -27,7 +27,7 @@
                             {% set form_kwargs = {'id': business.id, 'call': 'add'} %}
                             {% set button = _('Create') %}
 
-                            <!-- Bootstrap Modal that opens for creating a Booking -->
+                            <!-- Bootstrap Modal that opens for creating a Reservation -->
                             {% call f.form_tag(endpoint, **form_kwargs) %}
                             <div class="portlet box green">
                                 <div class="portlet-title">
@@ -74,7 +74,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9" id="booking-times">
+                                                        <div class="col-md-9" id="reservation-times">
                                                             <h5><strong>When:</strong></h5>
                                                             <p></p>
                                                         </div>
@@ -184,9 +184,9 @@
 
                             {% set endpoint = 'backend.business_calendar' %}
                             {% set form_kwargs = {'id': business.id, 'call': 'edit'} %}
-                            {% set button = _('Edit') %}
+                            {% set button = _('Save') %}
 
-                            <!-- Bootstrap Modal that opens for creating a Booking -->
+                            <!-- Bootstrap Modal that opens for modifying a Reservation -->
                             {% call f.form_tag(endpoint, **form_kwargs) %}
                             <div class="portlet box green">
                                 <div class="portlet-title">
@@ -408,7 +408,7 @@
                             // end.utc().local() // Convets end to local for formatting
 
                             $('#employee-name p').text($('#employee-select option:selected').text());
-                            $('#booking-times p').text(mywhen);
+                            $('#reservation-times p').text(mywhen);
 
                             $('#createEventModal #customer_id').val( $('#customer-select').val() );
                             $('#createEventModal #product_id').val( $('#product-select').val() );

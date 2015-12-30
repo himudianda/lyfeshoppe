@@ -94,7 +94,7 @@ class ProductForm(ModelForm):
     active = BooleanField(_('Yes, Product is active'))
 
 
-class BookingForm(ModelForm):
+class ReservationForm(ModelForm):
     employee_id = HiddenField()
     customer_id = HiddenField()
     product_id = HiddenField()
@@ -103,7 +103,7 @@ class BookingForm(ModelForm):
     end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
 
-class BookingEditForm(ModelForm):
+class ReservationEditForm(ModelForm):
     reservation_id = HiddenField()
     start_time = DateTimeField(_('Start time (in GMT timezone)'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('End time (in GMT timezone)'), [Optional()], format='%Y-%m-%d %H:%M:%S')
