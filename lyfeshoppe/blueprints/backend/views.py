@@ -72,10 +72,11 @@ def shop_details(id):
     return render_template('backend/shop/details.jinja2', business=business, employees=employees)
 
 
-@backend.route('/shops/<string:id>/booking')
-def shop_booking(id):
+@backend.route('/shops/<string:id>/product/<string:product_id>/booking')
+def shop_booking(id, product_id):
     business = Business.query.get(id)
-    return render_template('backend/shop/booking.jinja2', business=business)
+    product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
+    return render_template('backend/shop/booking.jinja2', business=business, product=product)
 
 
 # Account -------------------------------------------------------------------
