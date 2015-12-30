@@ -14,6 +14,7 @@ from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, User
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.common.models import Address
 
 backend = Blueprint('backend', __name__, template_folder='templates')
 
@@ -133,6 +134,8 @@ def account_settings():
     # only triggered if this form was submitted
     if form.is_submitted() and form.validate_on_submit():
         form.populate_obj(current_user)
+        if not current_user.address:
+            current_user.address = Address()
         form.populate_obj(current_user.address)
         current_user.save()
         flash(_('User Account has been saved successfully.'), 'success')
