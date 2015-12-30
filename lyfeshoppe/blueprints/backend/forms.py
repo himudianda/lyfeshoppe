@@ -98,7 +98,6 @@ class ReservationForm(ModelForm):
     employee_id = HiddenField()
     customer_id = HiddenField()
     product_id = HiddenField()
-
     start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 
@@ -110,3 +109,9 @@ class ReservationEditForm(ModelForm):
     status = SelectField(_('Reservation Status'), [DataRequired()],
                          choices=choices_from_dict(Reservation.STATUS,
                          prepend_blank=False))
+
+
+class BookingForm(ModelForm):
+    employee_id = HiddenField()
+    start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')

@@ -10,7 +10,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm
+    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
@@ -76,7 +76,40 @@ def shop_details(id):
 def shop_booking(id, product_id):
     business = Business.query.get(id)
     product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
-    return render_template('backend/shop/booking.jinja2', business=business, product=product)
+
+    form = BookingForm()
+    if form.is_submitted() and form.validate_on_submit():
+        flash(_('Booking has been created successfully.'), 'success')
+        return redirect(url_for('backend.shop_details', id=id))
+
+    events = dict()
+
+    # Note: A new employee may have no reservations & on the frontend
+    # we want to have his calendar displayed. Hence this step
+    for employee in business.employees:
+        employee_id = str(employee.id)
+        if employee_id not in events:
+            events[employee_id] = []
+
+    for reservation in business.reservations:
+        # Note: isoformat() function below tells the browser javascript that the time is in UTC.
+        # Else; It is taken as Local timezone.
+        employee_id = str(reservation.employee.id)
+        events[employee_id].append({
+            "title": reservation.product.name,
+            "start": reservation.start_time.isoformat(),
+            "end": reservation.end_time.isoformat(),
+            "allDay": False,
+            "status": reservation.status,
+            "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
+            "reservation_id": str(reservation.id)
+        })
+
+    return render_template('backend/shop/booking.jinja2',
+                           form=form,
+                           business=business, product=product,
+                           events=json.dumps(events)
+                           )
 
 
 # Account -------------------------------------------------------------------

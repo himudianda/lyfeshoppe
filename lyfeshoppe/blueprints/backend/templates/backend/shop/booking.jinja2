@@ -1,32 +1,223 @@
 {% extends 'dashboard/layouts/app.jinja2' %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% block title %}
-    Shop | LyfeShoppe | Social Shop with huge discounts.
+    {{business.name}} | LyfeShoppe | Social Shop with huge discounts.
 {% endblock %}
 
+
+
 {% block content %}
+    {% set form_kwargs = {} %}
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
+
+            <div class="modal fade bs-modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Create Booking</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            {% set endpoint = 'backend.shop_booking' %}
+                            {% set form_kwargs = {'id': business.id, 'product_id': product.id} %}
+                            {% set button = _('Create') %}
+
+                            <!-- Bootstrap Modal that opens for creating a Reservation -->
+                            {% call f.form_tag(endpoint, **form_kwargs) %}
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-plus"></i> Create a new Booking
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal col-md-offset-1">
+                                        <div class="form-body">
+                                            <h3 class="form-section">Create a Booking</h3>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="employee-name">
+                                                            <h5><strong>Employee:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="service-name">
+                                                            <h5><strong>Service:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="booking-times">
+                                                            <h5><strong>When:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <div class="row">
+                                                <div>
+                                                    {{ form.employee_id() }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-6 col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <button id="submitButton" type="submit" class="btn green">
+                                                                      {{ button }}
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="visible-xs visible-sm sm-margin-top"></div>
+                                                                    <a href="{{ url_for('backend.shop_details', id=business.id) }}"
+                                                                       class="btn red btn-block">
+                                                                      {{ _('Cancel') }}
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"> </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                            {% endcall %}
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+
+            <div class="modal fade bs-modal-lg" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">View Bookings</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!-- Bootstrap Modal that opens for viewing a Booking -->
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-plus"></i> View Booking
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal col-md-offset-1">
+                                        <div class="form-body">
+                                            <h3 class="form-section">View Booking</h3>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-employee-name">
+                                                            <h5><strong>Employee:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-product-name">
+                                                            <h5><strong>Product:</strong></h5>
+                                                            <p>{{product.name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="view-reservation-status">
+                                                            <h5><strong>Status:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9" id="booking-times">
+                                                            <h5><strong>When:</strong></h5>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class=" icon-layers font-green"></i>
-                                <span class="caption-subject font-green sbold uppercase">{{ business.name }}</span>
+                                <i class=" icon-layers font-green"></i>&nbsp;
+                                <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
+                                <select id="employee-select" class="bs-select input-large" data-style="green" onchange="employeeSelect()">
+                                {% for employee in business.employees %}
+                                    <option value="{{employee.id | string}}">{{employee.user.name}}</option>
+                                {% endfor %}
+                                </select>
                             </div>
                         </div>
                         <div class="portlet-body">
                             <div class="row">
-                                <div class="col-md-3 col-sm-12">
-                                    <h4><strong>Staff:</strong> Daymond James</h4>
-                                    <br/><hr/>
-                                    <h4><strong>Service:</strong> Thai Massage</h4>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                     <div id="calendar" class="has-toolbar"> </div>
                                 </div>
                             </div>
@@ -34,16 +225,18 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
-
 {% endblock %}
 
 {% block footer_scripts %}
     <script type="text/javascript">
+
         var AppCalendar = function() {
+
             return {
                 //main function to initiate the module
                 init: function() {
@@ -61,38 +254,8 @@
                     var m = date.getMonth();
                     var y = date.getFullYear();
 
-                    var day_start = new Date(y, m, d);
-                    var day_end = new Date(y, m, d, 23, 59, 59);
-                    var open_time = new Date('{{ business.open_time }}');
-                    var close_time = new Date('{{ business.close_time }}');
+                    var h = {};
 
-                    //console.log(day_start);
-                    //console.log(day_end);
-                    //console.log(open_time);
-                    //console.log(close_time);
-
-                    var events = [{
-                        title: 'Store Closed',
-                        start: day_start,
-                        end: open_time,
-                        dow: [ 1, 2, 3, 4, 5 ],
-                        backgroundColor: App.getBrandColor('grey')
-                    }, {
-                        title: 'Store Closed',
-                        start: close_time,
-                        end: day_end,
-                        dow: [ 1, 2, 3, 4, 5 ],
-                        backgroundColor: App.getBrandColor('grey')
-                    },{
-                        // Closed on weekends
-                        title: 'Store Closed',
-                        start: day_start,
-                        end: day_end,
-                        dow: [ 6, 0 ],
-                        backgroundColor: App.getBrandColor('grey')
-                    }];
-                    
-                    // Some code for responsive calendar design
                     if ($('#calendar').parents(".portlet").width() <= 720) {
                         $('#calendar').addClass("mobile");
                         h = {
@@ -109,40 +272,58 @@
                         };
                     }
 
+                    var emp_id = $('#employee-select').val();
+                    var events = {{ events|safe }}
+                    var events_all = events[emp_id]
+                    for (var i = 0; i < events_all.length; i++) {
+                        // Must convert to Javascript Date object for proper display
+                        // Note: Time is displayed on Calendar in Local timezone
+                        events_all[i].start = new Date(events_all[i].start);
+                        events_all[i].end = new Date(events_all[i].end);
+                        events_all[i].backgroundColor = App.getBrandColor(events_all[i].backgroundColor);
+                    }
+
                     $('#calendar').fullCalendar('destroy'); // destroy the calendar
                     $('#calendar').fullCalendar({ //re-initialize the calendar
                         header: h,
-                        defaultView: 'agendaWeek', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
+                        defaultView: 'agendaWeek', // options: http://arshaw.com/fullcalendar/docs/views/Available_Views/ 
                         slotMinutes: 15,
-                        editable: true,
+                        editable: false,
                         selectable: true,
-                        events: events,
-                        eventClick: function(calEvent, jsEvent, view) {
-                            if (calEvent.title == "Store Closed") {
-                                alert(calEvent.title + ". Select another time");
-                            } else {
-                                alert('Not Available. Select another time');
-                            }
+                        select: function(start, end, allDay) {
+                            var mywhen = start.format("ddd, MMM Do, h:mm a") + ' - ' + end.format("h:mm a");
+
+                            start.local().utc() // Convets start to UTC for formatting
+                            end.local().utc() // Convets end to UTC for formatting
+                            // start.utc().local() // Convets start to local for formatting
+                            // end.utc().local() // Convets end to local for formatting
+
+                            $('#employee-name p').text($('#employee-select option:selected').text());
+                            $('#booking-times p').text(mywhen);
+                            $('#createEventModal #employee_id').val( $('#employee-select').val() );
+                            $('#createEventModal').modal('show');
                         },
-                        dayClick: function(start, allDay, jsEvent, view) {
-                            var title = prompt('Event Title:');
-                            //console.log(start);
-                            if (title) {
-                                var newEvent = {
-                                    title: title,
-                                    start: start,
-                                    end: moment(start).add(30, 'minutes')
-                                };
-                                $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick');
-                            }
+                        events: events_all,
+                        eventClick: function(event, jsEvent, view){
+                            var mywhen = event.start.format("ddd, MMM Do, h:mm a") + ' - ' + event.end.format("h:mm a");
+                            $('#viewEventModal #reservation_id').val( event.reservation_id );
+                            $('#view-employee-name p').text($('#employee-select option:selected').text());
+                            $('#viewEventModal').modal('show');
                         }
                     });
                 }
             };
         }();
 
+        function employeeSelect() {
+            $('#createEventModal #employee_id').val($('#employee-select').val());
+            AppCalendar.init();
+        }
+        
         jQuery(document).ready(function() {    
-           AppCalendar.init(); 
+           AppCalendar.init();
         });
+
+
     </script>
 {% endblock %}

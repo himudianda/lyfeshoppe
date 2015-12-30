@@ -55,6 +55,7 @@
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+      <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
   {% endif %}
   {% if request.endpoint in ('backend.business_dashboard') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
@@ -91,7 +92,6 @@
       <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/moment.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
-      <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
   {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
@@ -107,6 +107,10 @@
   {% if request.endpoint in ('backend.shop_details') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/portfolio-1.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/maps-google.min.js') }}" type="text/javascript"></script>
+  {% endif %}
+  {% if request.endpoint in ('backend.shop_booking') %}
+      <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-modals.min.js') }}" type="text/javascript"></script>
+      <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-bootstrap-select.min.js') }}" type="text/javascript"></script>
   {% endif %}
   {% if request.endpoint in ('backend.business_dashboard') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
