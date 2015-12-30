@@ -626,14 +626,14 @@ def business_reservation_edit(id, reservation_id):
 
 
 # Business Calendar -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/calendar', methods=['GET', 'POST'])
+@backend.route('/businesses/<int:id>/calendar/<string:call>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_calendar(id):
+def business_calendar(id, call):
     business = Business.query.get(id)
     form = BookingForm()
     edit_form = BookingEditForm()
 
-    if form.is_submitted() and form.validate_on_submit():
+    if call == "add" and form.is_submitted() and form.validate_on_submit():
         reservation = Reservation()
         form.populate_obj(reservation)
 
@@ -649,9 +649,27 @@ def business_calendar(id):
 
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_calendar', id=id))
+            return redirect(url_for('backend.business_calendar', id=id, call="view"))
         else:
             flash(_('Reservation create failed.'), 'error')
+
+    if call == "edit" and edit_form.is_submitted() and edit_form.validate_on_submit():
+        reservation_id = request.form.get('reservation_id'),
+        reservation = Reservation.query.get_or_404(reservation_id)
+
+        reservation.status = request.form.get('status')
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+
+        if start_time:
+            reservation.start_time = start_time
+
+        if end_time:
+            reservation.end_time = end_time
+
+        reservation.save()
+        flash(_('Reservation has been saved modified.'), 'success')
+        return redirect(url_for('backend.business_calendar', id=id, call="view"))
 
     events = dict()
 
@@ -672,7 +690,8 @@ def business_calendar(id):
             "end": reservation.end_time.isoformat(),
             "allDay": False,
             "status": reservation.status,
-            "backgroundColor": Reservation.STATUS_COLORS[reservation.status]
+            "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
+            "reservation_id": str(reservation.id)
         })
 
     return render_template('backend/business/calendar.jinja2',

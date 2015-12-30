@@ -48,9 +48,9 @@ class Address(db.Model):
     # Details
     id = db.Column(db.Integer, primary_key=True)
 
-    street = db.Column(db.String(128))
-    city = db.Column(db.String(30))
-    state = db.Column(db.String(30))
-    zipcode = db.Column(db.String(10))
-    district = db.Column(db.String(30))  # or county name
-    country = db.Column(db.String(30))
+    street = db.Column(db.String(256))
+    city = db.Column(db.String(50))
+    state = db.Column(db.String(50))
+    zipcode = db.Column(db.String(20))
+    district = db.Column(db.String(50))  # or county name
+    country = db.Column(db.String(50))

@@ -24,7 +24,7 @@
                         <div class="modal-body">
 
                             {% set endpoint = 'backend.business_calendar' %}
-                            {% set form_kwargs = {'id': business.id} %}
+                            {% set form_kwargs = {'id': business.id, 'call': 'add'} %}
                             {% set button = _('Create') %}
 
                             <!-- Bootstrap Modal that opens for creating a Booking -->
@@ -146,7 +146,7 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id) }}"
+                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id, call=view) }}"
                                                                        class="btn red btn-block">
                                                                       {{ _('Cancel') }}
                                                                     </a>
@@ -183,7 +183,7 @@
                         <div class="modal-body">
 
                             {% set endpoint = 'backend.business_calendar' %}
-                            {% set form_kwargs = {'id': business.id} %}
+                            {% set form_kwargs = {'id': business.id, 'call': 'edit'} %}
                             {% set button = _('Edit') %}
 
                             <!-- Bootstrap Modal that opens for creating a Booking -->
@@ -262,6 +262,9 @@
                                                     </div>
                                                 </div>
                                                 <!--/span-->
+                                                <div>
+                                                    {{ edit_form.reservation_id() }}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -278,7 +281,7 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id) }}"
+                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id, call=view) }}"
                                                                        class="btn red btn-block">
                                                                       {{ _('Cancel') }}
                                                                     </a>
@@ -418,12 +421,15 @@
                         events: events_all,
                         eventClick: function(event, jsEvent, view){
                             var mywhen = event.start.format("ddd, MMM Do, h:mm a") + ' - ' + event.end.format("h:mm a");
+                            $('#editEventModal #reservation_id').val( event.reservation_id );
                             $('#edit-employee-name p').text($('#employee-select option:selected').text());
                             $('#edit-customer-name p').text($('#customer-select option:selected').text());
                             $('#edit-product-name p').text($('#product-select option:selected').text());
 
-                            $('#edit-start-time #start_time').val(event.start.format("ddd, MMM Do, h:mm a"));
-                            $('#edit-end-time #end_time').val(event.end.format("ddd, MMM Do, h:mm a"));
+                            event.start.local().utc() // Convets start to UTC for formatting
+                            event.end.local().utc() // Convets end to UTC for formatting
+                            $('#edit-start-time #start_time').val(event.start.format('YYYY-MM-DD HH:mm:ss'));
+                            $('#edit-end-time #end_time').val(event.end.format('YYYY-MM-DD HH:mm:ss'));
 
                             $('#editEventModal').modal('show');
                         }
