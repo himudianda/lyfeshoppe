@@ -249,19 +249,19 @@ def is_staff_authorized(func):
 
         # For API editing product data
         if kwargs.get('product_id', None):
-            emp = Product.query.filter(
+            product = Product.query.filter(
                         (Product.id == kwargs['product_id']) & (Product.business_id == business.id)
                     ).first()
-            if not emp:
+            if not product:
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(url_for('backend.business_products', id=id))
 
         # For API editing reservation data
         if kwargs.get('reservation_id', None):
-            emp = Reservation.query.filter(
+            reservation = Reservation.query.filter(
                         (Reservation.id == kwargs['reservation_id']) & (Reservation.business_id == business.id)
                     ).first()
-            if not emp:
+            if not reservation:
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(url_for('backend.business_reservations', id=id))
 
