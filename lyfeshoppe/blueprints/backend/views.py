@@ -73,7 +73,7 @@ def shop_details(id):
     return render_template('backend/shop/details.jinja2', business=business, employees=employees)
 
 
-@backend.route('/shops/<string:id>/product/<string:product_id>/booking')
+@backend.route('/shops/<string:id>/product/<string:product_id>/booking', methods=['GET', 'POST'])
 def shop_booking(id, product_id):
     business = Business.query.get(id)
     product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
