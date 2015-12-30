@@ -94,15 +94,6 @@ class ProductForm(ModelForm):
     active = BooleanField(_('Yes, Product is active'))
 
 
-class ReservationForm(ModelForm):
-
-    status = SelectField(_('Reservation Status'), [DataRequired()],
-                         choices=choices_from_dict(Reservation.STATUS,
-                         prepend_blank=False))
-    start_time = DateTimeField(_('Reservation Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
-    end_time = DateTimeField(_('Reservation End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
-
-
 class BookingForm(ModelForm):
     employee_id = HiddenField()
     customer_id = HiddenField()
