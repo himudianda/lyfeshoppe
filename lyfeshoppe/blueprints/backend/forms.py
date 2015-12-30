@@ -96,8 +96,8 @@ class ProductForm(ModelForm):
 
 class ReservationForm(ModelForm):
     employee_id = HiddenField()
-    customer_id = HiddenField()
     product_id = HiddenField()
+    customer_email = EmailField(_("Email Address"), [DataRequired(), Length(3, 254)])
     start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
 

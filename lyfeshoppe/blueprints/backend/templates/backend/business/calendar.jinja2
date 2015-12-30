@@ -55,7 +55,7 @@
                                                             <h5><strong>Customer:</strong></h5>
                                                             <select id="customer-select" class="bs-select" onchange="customerSelect()">
                                                                 {% for customer in business.customers %}
-                                                                    <option value="{{customer.id | string}}">{{customer.user.name}}</option>
+                                                                    <option value="{{customer.user.email | string}}">{{customer.user.name}}</option>
                                                                 {% endfor %}
                                                             </select>
                                                             </br>
@@ -126,8 +126,8 @@
                                                     {{ form.product_id() }}
                                                 </div>
 
-                                                <div>
-                                                    {{ form.customer_id() }}
+                                                <div style="display: none;">
+                                                    {{ form.customer_email() }}
                                                 </div>
                                             </div>
                                         </div>
@@ -409,7 +409,7 @@
                             $('#employee-name p').text($('#employee-select option:selected').text());
                             $('#reservation-times p').text(mywhen);
 
-                            $('#createEventModal #customer_id').val( $('#customer-select').val() );
+                            $('#createEventModal #customer_email').val( "nerdo.harry@gmail.com" );
                             $('#createEventModal #product_id').val( $('#product-select').val() );
                             $('#createEventModal #employee_id').val( $('#employee-select').val() );
 

@@ -67,11 +67,14 @@ class Reservation(ResourceMixin, db.Model):
                 params['end_time'] = params.get('end_time').replace(
                     tzinfo=pytz.UTC)
 
+        business_id = params['business_id']
+        customer_email = params.pop("customer_email", None)
+
+        customer = Customer.get_or_create(business_id, customer_email)
+        params['customer_id'] = str(customer.id)
+
         reservation = cls(**params)
-
-        db.session.add(reservation)
-        db.session.commit()
-
+        reservation.save()
         return True
 
 
@@ -99,6 +102,24 @@ class Customer(ResourceMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Customer, self).__init__(**kwargs)
+
+    @classmethod
+    def get_or_create(cls, business_id, customer_email):
+        user = User.find_by_identity(customer_email)
+        if not user:
+            user = User.create({"email": customer_email})
+
+        customers = cls.query.filter(cls.business_id == business_id)
+        for customer in customers:
+            if customer.user.email == customer_email:
+                return customer
+
+        customer_params = {
+            "business_id": business_id,
+            "user_id": user.id
+        }
+        customer = Customer(**customer_params)
+        return customer.save()
 
 
 employee_product_relations = db.Table(

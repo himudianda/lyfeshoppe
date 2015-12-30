@@ -82,10 +82,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         :return: bool
         """
         user = cls(**params)
-        db.session.add(user)
-        db.session.commit()
-
-        return True
+        return user.save()
 
     @classmethod
     def search(cls, query):
