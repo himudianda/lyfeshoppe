@@ -256,15 +256,6 @@ def is_staff_authorized(func):
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(url_for('backend.business_products', id=id))
 
-        # For API editing reservation data
-        if kwargs.get('reservation_id', None):
-            reservation = Reservation.query.filter(
-                        (Reservation.id == kwargs['reservation_id']) & (Reservation.business_id == business.id)
-                    ).first()
-            if not reservation:
-                flash(_('You do not have permission to do that.'), 'error')
-                return redirect(url_for('backend.business_reservations', id=id))
-
         return func(id, **kwargs)
     return func_wrapper
 
@@ -541,89 +532,6 @@ def business_product_edit(id, product_id):
         return redirect(url_for('backend.business_products', id=id))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
-
-
-# Business Reservations -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/reservations', defaults={'page': 1})
-@backend.route('/businesses/<int:id>/reservations/page/<int:page>')
-@is_staff_authorized
-def business_reservations(id, page):
-    business = Business.query.get(id)
-    search_form = SearchForm()
-    bulk_form = BulkDeleteForm()
-
-    sort_by = Reservation.sort_by(request.args.get('created_on', 'status'),
-                                  request.args.get('direction', 'asc'))
-    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
-
-    paginated_reservations = Reservation.query \
-        .filter(Reservation.business == business) \
-        .order_by(Reservation.status.desc(), text(order_values)) \
-        .paginate(page, 20, True)
-
-    return render_template('backend/reservation/index.jinja2',
-                           form=search_form, bulk_form=bulk_form,
-                           reservations=paginated_reservations,
-                           business=business)
-
-
-@backend.route('/businesses/<int:id>/reservations/new', methods=['GET', 'POST'])
-@is_staff_authorized
-def business_reservations_new(id):
-
-    business = Business.query.get(id)
-
-    reservation = Reservation()
-    form = ReservationForm(obj=reservation)
-
-    if form.validate_on_submit():
-        form.populate_obj(reservation)
-
-        params = {
-            'status': reservation.status,
-            'start_time': reservation.start_time,
-            'end_time': reservation.end_time,
-            'business_id': id
-        }
-
-        if Reservation.create(params):
-            flash(_('Reservation has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_reservations', id=id))
-
-    return render_template('backend/reservation/new.jinja2', form=form, reservation=reservation, business=business)
-
-
-@backend.route('/businesses/<int:id>/reservations/edit/<int:reservation_id>', methods=['GET', 'POST'])
-@is_staff_authorized
-def business_reservation_edit(id, reservation_id):
-    business = Business.query.get(id)
-    reservation = Reservation.query.get(reservation_id)
-
-    form_data = {
-        "status": reservation.status,
-        "start_time": reservation.start_time,
-        "end_time": reservation.end_time,
-    }
-
-    form = ReservationForm(**form_data)
-
-    if form.validate_on_submit():
-        form.populate_obj(reservation)
-
-        if reservation.start_time:
-            reservation.start_time = reservation.start_time.replace(
-                tzinfo=pytz.UTC)
-
-        if reservation.end_time:
-            reservation.end_time = reservation.end_time.replace(
-                tzinfo=pytz.UTC)
-
-        reservation.save()
-
-        flash(_('Reservation has been saved successfully.'), 'success')
-        return redirect(url_for('backend.business_reservations', id=id))
-
-    return render_template('backend/reservation/edit.jinja2', form=form, business=business, reservation=reservation)
 
 
 # Business Calendar -------------------------------------------------------------------
