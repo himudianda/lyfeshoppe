@@ -582,11 +582,27 @@ def business_calendar(id, call):
         reservation = Reservation()
         form.populate_obj(reservation)
 
+        customer_id = request.form.get('customer_id')
+        employee_id = request.form.get('employee_id')
+        product_id = request.form.get('product_id')
+
+        if not customer_id:
+            flash(_('Reservation create failed. Customer not provided'), 'error')
+            return redirect(url_for('backend.business_calendar', id=id, call="view"))
+
+        if not employee_id:
+            flash(_('Reservation create failed. Employee not provided'), 'error')
+            return redirect(url_for('backend.business_calendar', id=id, call="view"))
+
+        if not product_id:
+            flash(_('Reservation create failed. Product not provided'), 'error')
+            return redirect(url_for('backend.business_calendar', id=id, call="view"))
+
         params = {
             'status': 'confirmed',  # Since this reservation was made my employee - mark as confirmed
-            'employee_id': request.form.get('employee_id'),
-            'customer_id': request.form.get('customer_id'),
-            'product_id': request.form.get('product_id'),
+            'employee_id': employee_id,
+            'customer_id': customer_id,
+            'product_id': product_id,
             'business_id': id,
             'start_time': reservation.start_time,
             'end_time': reservation.end_time
@@ -597,6 +613,7 @@ def business_calendar(id, call):
             return redirect(url_for('backend.business_calendar', id=id, call="view"))
         else:
             flash(_('Reservation create failed.'), 'error')
+            return redirect(url_for('backend.business_calendar', id=id, call="view"))
 
     if call == "edit" and edit_form.is_submitted() and edit_form.validate_on_submit():
         reservation_id = request.form.get('reservation_id'),
