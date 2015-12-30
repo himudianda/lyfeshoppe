@@ -207,8 +207,8 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class=" icon-layers font-green"></i>&nbsp;
-                                <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
-                                <select id="employee-select" class="bs-select input-large" data-style="green" onchange="employeeSelect()">
+                                <span class="caption-subject font-green sbold uppercase">Select  a  Staff:  </span>
+                                <select id="employee-select" class="bs-select input-large" data-style="yellow" onchange="employeeSelect()">
                                 {% for employee in business.employees %}
                                     <option value="{{employee.id | string}}">{{employee.user.name}}</option>
                                 {% endfor %}
