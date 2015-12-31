@@ -92,7 +92,13 @@ class User(UserMixin, ResourceMixin, db.Model):
         })
 
         user = cls(**params)
-        return user.save()
+        user = user.save()
+
+        # This prevents circular imports.
+        from lyfeshoppe.blueprints.user.tasks import deliver_new_user_email
+        deliver_new_user_email.delay(user.id, pwd)
+
+        return user
 
     @classmethod
     def search(cls, query):
@@ -170,7 +176,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         # This prevents circular imports.
         from lyfeshoppe.blueprints.user.tasks import deliver_password_reset_email
 
-        deliver_password_reset_email.delay(cls, u.id, reset_token)
+        deliver_password_reset_email.delay(u.id, reset_token)
 
         return u
 

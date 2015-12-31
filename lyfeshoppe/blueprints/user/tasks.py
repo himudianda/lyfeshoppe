@@ -2,12 +2,13 @@ from flask_babel import lazy_gettext as _
 
 from lyfeshoppe.lib.flask_mailplus import send_template_message
 from lyfeshoppe.app import create_celery_app
+from lyfeshoppe.blueprints.user.models import User
 
 celery = create_celery_app()
 
 
 @celery.task()
-def deliver_password_reset_email(cls, user_id, reset_token):
+def deliver_password_reset_email(user_id, reset_token):
     """
     Send a reset password e-mail to a user.
 
@@ -17,7 +18,7 @@ def deliver_password_reset_email(cls, user_id, reset_token):
     :type reset_token: str
     :return: None if a user was not found
     """
-    user = cls.query.get(user_id)
+    user = User.query.get(user_id)
 
     if user is None:
         return
@@ -27,5 +28,30 @@ def deliver_password_reset_email(cls, user_id, reset_token):
     send_template_message(subject=_('Password reset from LyfeShoppe'),
                           recipients=[user.email],
                           template='user/mail/password_reset', ctx=ctx)
+
+    return None
+
+
+@celery.task()
+def deliver_new_user_email(user_id, password):
+    """
+    Send a new user e-mail to a user.
+
+    :param user_id: The user id
+    :type user_id: int
+    :param password: The password
+    :type password: str
+    :return: None if a user was not found
+    """
+    user = User.query.get(user_id)
+
+    if user is None:
+        return
+
+    ctx = {'user': user, 'password': password}
+
+    send_template_message(subject=_('New User email from LyfeShoppe'),
+                          recipients=[user.email],
+                          template='user/mail/new_user', ctx=ctx)
 
     return None
