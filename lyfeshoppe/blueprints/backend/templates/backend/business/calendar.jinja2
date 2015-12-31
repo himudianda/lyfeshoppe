@@ -308,6 +308,24 @@
             </div>
 
 
+            <div class="modal fade" id="errorEventModal" tabindex="-1" role="basic" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Error</h4>
+                        </div>
+                        <div class="modal-body" id="error-modal-body"> Modal body goes here </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
@@ -409,13 +427,28 @@
                             $('#employee-name p').text($('#employee-select option:selected').text());
                             $('#reservation-times p').text(mywhen);
 
-                            $('#createEventModal #customer_email').val( "nerdo.harry@gmail.com" );
+                            $('#createEventModal #customer_email').val( $('#customer-select').val() );
                             $('#createEventModal #product_id').val( $('#product-select').val() );
                             $('#createEventModal #employee_id').val( $('#employee-select').val() );
 
                             $('#createEventModal #start_time').val( start.format('YYYY-MM-DD HH:mm:ss') );
                             $('#createEventModal #end_time').val( end.format('YYYY-MM-DD HH:mm:ss') );
 
+                            if (!$('#createEventModal #customer_email').val() && !$('#createEventModal #product_id').val()){
+                                $('#errorEventModal #error-modal-body').text("Please create Products & Customers before making reservations");
+                                $('#errorEventModal').modal('show');
+                                return;
+                            }
+                            if (!$('#createEventModal #customer_email').val()){
+                                $('#errorEventModal #error-modal-body').text("Please create Customers before making reservations");
+                                $('#errorEventModal').modal('show');
+                                return;
+                            }
+                            if (!$('#createEventModal #product_id').val()){
+                                $('#errorEventModal #error-modal-body').text("Please create Products before making reservations");
+                                $('#errorEventModal').modal('show');
+                                return;
+                            }
                             $('#createEventModal').modal('show');
                         },
                         events: events_all,
@@ -443,7 +476,7 @@
         }
 
         function customerSelect() {
-            $('#createEventModal #customer_id').val($('#customer-select').val());
+            $('#createEventModal #customer_email').val($('#customer-select').val());
         }
 
         function employeeSelect() {
