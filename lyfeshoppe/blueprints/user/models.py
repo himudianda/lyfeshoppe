@@ -1,7 +1,8 @@
 import datetime
 from collections import OrderedDict
 from hashlib import md5
-
+import random
+import string
 import pytz
 from flask import current_app
 
@@ -81,6 +82,15 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         :return: bool
         """
+
+        # Generate a random password
+        pwd_size = 8
+        chars = string.ascii_uppercase + string.digits
+        pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
+        params.update({
+            "password": pwd
+        })
+
         user = cls(**params)
         return user.save()
 

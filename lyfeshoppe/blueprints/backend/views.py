@@ -316,19 +316,25 @@ def business_dashboard(id):
 @is_staff_authorized
 def business_edit(id):
     business = Business.query.get(id)
-    form_data = {
-        "street": business.address.street,
-        "city": business.address.city,
-        "state": business.address.state,
-        "zipcode": business.address.zipcode,
-        "district": business.address.district,
-        "country": business.address.country,
-    }
+
+    form_data = dict()
+    if business.address:
+        form_data = {
+            "street": business.address.street,
+            "city": business.address.city,
+            "state": business.address.state,
+            "zipcode": business.address.zipcode,
+            "district": business.address.district,
+            "country": business.address.country,
+        }
 
     form = BusinessForm(obj=business, **form_data)
 
     if form.validate_on_submit():
         form.populate_obj(business)
+
+        if not business.address:
+            business.address = Address()
         form.populate_obj(business.address)
 
         if business.name == '':
