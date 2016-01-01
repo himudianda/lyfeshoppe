@@ -2,13 +2,12 @@
 {% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% block title %}
-    {{business.name}} | LyfeShoppe | Social Shop with huge discounts.
+    Calendar | LyfeShoppe | Social Shop with huge discounts.
 {% endblock %}
-
-
 
 {% block content %}
     {% set form_kwargs = {} %}
+
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -52,9 +51,9 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <div class="col-md-9" id="service-name">
+                                                        <div class="col-md-9">
                                                             <h5><strong>Service:</strong></h5>
-                                                            <p></p>
+                                                            <p>{{product.name}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,11 +61,34 @@
                                             </div>
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="booking-times">
                                                             <h5><strong>When:</strong></h5>
                                                             <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row" style="display: none;">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-9">
+                                                          {% call f.form_group(form.start_time, css_class='sm-margin-bottom') %}
+                                                          {% endcall %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <div class="col-md-9">
+                                                              {% call f.form_group(form.end_time, css_class='sm-margin-bottom') %}
+                                                              {% endcall %}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -119,80 +141,16 @@
             </div>
 
 
-            <div class="modal fade bs-modal-lg" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+            <div class="modal fade" id="errorEventModal" tabindex="-1" role="basic" aria-hidden="true">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">View Bookings</h4>
+                            <h4 class="modal-title">Error</h4>
                         </div>
-                        <div class="modal-body">
-
-                            <!-- Bootstrap Modal that opens for viewing a Booking -->
-                            <div class="portlet box green">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-plus"></i> View Booking
-                                    </div>
-                                </div>
-                                <div class="portlet-body form">
-                                    <!-- BEGIN FORM-->
-                                    <form action="#" class="form-horizontal col-md-offset-1">
-                                        <div class="form-body">
-                                            <h3 class="form-section">View Booking</h3>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-9" id="view-employee-name">
-                                                            <h5><strong>Staff providing Service:</strong></h5>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-9" id="view-product-name">
-                                                            <h5><strong>Service Name:</strong></h5>
-                                                            <p>{{product.name}}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                            <!--/row-->
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-9" id="view-reservation-status">
-                                                            <h5><strong>Status:</strong></h5>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-9" id="view-booking-times">
-                                                            <h5><strong>When:</strong></h5>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                        </div>
-
-                                    </form>
-                                    <!-- END FORM-->
-                                </div>
-                            </div>
-                        </div>
+                        <div class="modal-body" id="error-modal-body"> Modal body goes here </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -207,8 +165,8 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class=" icon-layers font-green"></i>&nbsp;
-                                <span class="caption-subject font-green sbold uppercase">Select  a  Staff:  </span>
-                                <select id="employee-select" class="bs-select input-large" data-style="yellow" onchange="employeeSelect()">
+                                <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
+                                <select id="employee-select" class="bs-select input-large" data-style="green" onchange="employeeSelect()">
                                 {% for employee in business.employees %}
                                     <option value="{{employee.id | string}}">{{employee.user.name}}</option>
                                 {% endfor %}
@@ -231,6 +189,7 @@
     </div>
     <!-- END CONTENT -->
 {% endblock %}
+
 
 {% block footer_scripts %}
     <script type="text/javascript">
@@ -300,21 +259,24 @@
 
                             $('#employee-name p').text($('#employee-select option:selected').text());
                             $('#booking-times p').text(mywhen);
+
                             $('#createEventModal #employee_id').val( $('#employee-select').val() );
+
+                            $('#createEventModal #start_time').val( start.format('YYYY-MM-DD HH:mm:ss') );
+                            $('#createEventModal #end_time').val( end.format('YYYY-MM-DD HH:mm:ss') );
+
                             $('#createEventModal').modal('show');
                         },
                         events: events_all,
                         eventClick: function(event, jsEvent, view){
-                            var mywhen = event.start.format("ddd, MMM Do, h:mm a") + ' - ' + event.end.format("h:mm a");
-                            $('#viewEventModal #view-reservation-status p').text( event.status );
-                            $('#viewEventModal #view-employee-name p').text($('#employee-select option:selected').text());
-                            $('#viewEventModal #view-booking-times p').text(mywhen);
-                            $('#viewEventModal').modal('show');
+                            $('#errorEventModal #error-modal-body').text("Time not available. Please choose a different time.");
+                            $('#errorEventModal').modal('show');
                         }
                     });
                 }
             };
         }();
+
 
         function employeeSelect() {
             $('#createEventModal #employee_id').val($('#employee-select').val());
@@ -324,7 +286,5 @@
         jQuery(document).ready(function() {    
            AppCalendar.init();
         });
-
-
     </script>
 {% endblock %}

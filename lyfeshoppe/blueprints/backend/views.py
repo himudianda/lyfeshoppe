@@ -73,46 +73,6 @@ def shop_details(id):
     return render_template('backend/shop/details.jinja2', business=business, employees=employees)
 
 
-@backend.route('/shops/<string:id>/product/<string:product_id>/booking', methods=['GET', 'POST'])
-def shop_booking(id, product_id):
-    business = Business.query.get(id)
-    product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
-
-    form = BookingForm()
-    if form.is_submitted() and form.validate_on_submit():
-        flash(_('Booking has been created successfully.'), 'success')
-        return redirect(url_for('backend.shop_details', id=id))
-
-    events = dict()
-
-    # Note: A new employee may have no reservations & on the frontend
-    # we want to have his calendar displayed. Hence this step
-    for employee in business.employees:
-        employee_id = str(employee.id)
-        if employee_id not in events:
-            events[employee_id] = []
-
-    for reservation in business.reservations:
-        # Note: isoformat() function below tells the browser javascript that the time is in UTC.
-        # Else; It is taken as Local timezone.
-        employee_id = str(reservation.employee.id)
-        events[employee_id].append({
-            "title": reservation.product.name,
-            "start": reservation.start_time.isoformat(),
-            "end": reservation.end_time.isoformat(),
-            "allDay": False,
-            "status": Reservation.STATUS[reservation.status],
-            "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
-            "reservation_id": str(reservation.id)
-        })
-
-    return render_template('backend/shop/booking.jinja2',
-                           form=form,
-                           business=business, product=product,
-                           events=json.dumps(events)
-                           )
-
-
 # Account -------------------------------------------------------------------
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
@@ -574,6 +534,68 @@ def business_product_edit(id, product_id):
         return redirect(url_for('backend.business_products', id=id))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
+
+
+
+@backend.route('/shops/<string:id>/product/<string:product_id>/booking', methods=['GET', 'POST'])
+def shop_booking(id, product_id):
+    business = Business.query.get(id)
+    product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
+
+    form = BookingForm()
+    if form.is_submitted() and form.validate_on_submit():
+        #flash(_('Booking has been created successfully.'), 'success')
+        #return redirect(url_for('backend.shop_details', id=id))
+
+        reservation = Reservation()
+        form.populate_obj(reservation)
+
+        params = {
+            'status': 'new',  # Since this reservation was made by customer - mark as new
+            'customer_email': current_user.email,
+            'employee_id': request.form.get('employee_id'),
+            'product_id': product_id,
+            'business_id': id,
+            'start_time': reservation.start_time,
+            'end_time': reservation.end_time
+        }
+
+        if Reservation.create(params):
+            flash(_('Reservation has been created successfully.'), 'success')
+            return redirect(url_for('backend.shop_details', id=id))
+        else:
+            flash(_('Reservation create failed.'), 'error')
+            return redirect(url_for('backend.shop_details', id=id))
+
+    events = dict()
+
+    # Note: A new employee may have no reservations & on the frontend
+    # we want to have his calendar displayed. Hence this step
+    for employee in business.employees:
+        employee_id = str(employee.id)
+        if employee_id not in events:
+            events[employee_id] = []
+
+    for reservation in business.reservations:
+        # Note: isoformat() function below tells the browser javascript that the time is in UTC.
+        # Else; It is taken as Local timezone.
+        employee_id = str(reservation.employee.id)
+        events[employee_id].append({
+            "title": reservation.product.name,
+            "start": reservation.start_time.isoformat(),
+            "end": reservation.end_time.isoformat(),
+            "allDay": False,
+            "status": Reservation.STATUS[reservation.status],
+            "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
+            "reservation_id": str(reservation.id)
+        })
+
+    return render_template('backend/shop/booking.jinja2',
+                           form=form,
+                           business=business, product=product,
+                           events=json.dumps(events)
+                           )
+
 
 
 # Business Calendar -------------------------------------------------------------------
