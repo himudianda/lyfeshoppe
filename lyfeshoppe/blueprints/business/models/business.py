@@ -282,15 +282,28 @@ class Product(ResourceMixin, db.Model):
         return or_(*search_chain)
 
     @classmethod
-    def create(cls, params):
+    def create_from_form(cls, business_id, form):
         """
         Return whether or not the product was created successfully.
 
         :return: bool
         """
-        product = cls(**params)
-        db.session.add(product)
-        db.session.commit()
+
+        product = cls()
+        form.populate_obj(product)
+        product.business_id = business_id
+        product.save()
+        return True
+
+    def modify_from_form(self, form):
+        """
+        Return whether or not the product was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+        self.save()
 
         return True
 

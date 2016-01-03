@@ -401,24 +401,11 @@ def business_products_bulk_deactivate(id):
 @is_staff_authorized
 def business_products_new(id):
     business = Business.query.get(id)
-
     product = Product()
     form = ProductForm(obj=product)
 
     if form.validate_on_submit():
-        form.populate_obj(product)
-
-        params = {
-            'name': product.name,
-            'description': product.description,
-            'capacity': product.capacity,
-            'price_cents': product.price_cents,
-            'duration_mins': product.duration_mins,
-            'active': '1',
-            'business_id': id
-        }
-
-        if Product.create(params):
+        if Product.create_from_form(business_id=id, form=form):
             flash(_('Product has been created successfully.'), 'success')
             return redirect(url_for('backend.business_products', id=id))
 
@@ -430,31 +417,14 @@ def business_products_new(id):
 def business_product_edit(id, product_id):
     business = Business.query.get(id)
     product = Product.query.get(product_id)
+    form = ProductForm(obj=product)
 
-    form_data = {
-        "name": product.name,
-        "description": product.description,
-        "capacity": product.capacity,
-        "price_cents": product.price_cents,
-        "duration_mins": product.duration_mins,
-        "active": product.active
-    }
-
-    form = ProductForm(**form_data)
-
-    if form.validate_on_submit():
-        form.populate_obj(product)
-
-        if product.name == '':
-            product.name = None
-
-        product.save()
-
-        flash(_('Product has been saved successfully.'), 'success')
-        return redirect(url_for('backend.business_products', id=id))
+    if form.is_submitted() and form.validate_on_submit():
+        if product.modify_from_form(form):
+            flash(_('Product has been modified successfully.'), 'success')
+            return redirect(url_for('backend.business_products', id=id))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
-
 
 
 @backend.route('/shops/<string:id>/product/<string:product_id>/booking', methods=['GET', 'POST'])
@@ -464,8 +434,6 @@ def shop_booking(id, product_id):
 
     form = BookingForm()
     if form.is_submitted() and form.validate_on_submit():
-        #flash(_('Booking has been created successfully.'), 'success')
-        #return redirect(url_for('backend.shop_details', id=id))
 
         reservation = Reservation()
         form.populate_obj(reservation)
