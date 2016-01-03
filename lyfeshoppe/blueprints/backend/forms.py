@@ -40,7 +40,7 @@ class BulkDeleteForm(Form):
 
 class UserAccountForm(ModelForm):
 
-    name = StringField(_('Name'), [Optional(), Length(1, 255)])
+    name = StringField(_('Name'), [DataRequired(), Length(1, 255)])
     email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
     phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])

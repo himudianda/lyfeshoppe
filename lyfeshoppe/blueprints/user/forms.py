@@ -46,6 +46,7 @@ class PasswordResetForm(Form):
 
 
 class SignupForm(ModelForm):
+    name = StringField(_('Full Name'), [DataRequired()])
     email = EmailField(validators=[
         DataRequired(),
         Email(),
