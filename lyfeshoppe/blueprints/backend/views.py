@@ -192,19 +192,7 @@ def businesses_new():
     form = BusinessForm(obj=business)
 
     if form.validate_on_submit():
-        form.populate_obj(business)
-
-        params = {
-            'name': business.name,
-            'email': business.email,
-            'type': business.type,
-            'open_time': business.open_time,
-            'close_time': business.close_time,
-            'phone': business.phone,
-            'active': business.active
-        }
-
-        if Business.create(params):
+        if Business.create_from_form(form):
             flash(_('Business has been created successfully.'), 'success')
             return redirect(url_for('backend.businesses'))
 

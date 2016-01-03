@@ -349,34 +349,24 @@ class Business(ResourceMixin, db.Model):
         return or_(*search_chain)
 
     @classmethod
-    def create(cls, params):
+    def create_from_form(cls, form):
         """
         Return whether or not the business was created successfully.
 
         :return: bool
         """
 
-        if 'open_time' in params:
-            if params.get('open_time') is not None:
-                params['open_time'] = params.get('open_time').replace(
-                    tzinfo=pytz.UTC)
+        business = cls()
+        form.populate_obj(business)
 
-        if 'close_time' in params:
-            if params.get('close_time') is not None:
-                params['close_time'] = params.get('close_time').replace(
-                    tzinfo=pytz.UTC)
+        business.open_time = business.open_time.replace(tzinfo=pytz.UTC)
+        business.close_time = business.close_time.replace(tzinfo=pytz.UTC)
+        business.opening_time = business.opening_time.replace(tzinfo=pytz.UTC)
+        business.closing_time = business.closing_time.replace(tzinfo=pytz.UTC)
 
-        if 'opening_time' in params:
-            if params.get('opening_time') is not None:
-                params['opening_time'] = params.get('opening_time').replace(
-                    tzinfo=pytz.UTC)
-
-        if 'closing_time' in params:
-            if params.get('closing_time') is not None:
-                params['closing_time'] = params.get('closing_time').replace(
-                    tzinfo=pytz.UTC)
-
-        business = Business(**params)
+        # Create Business Address
+        business.address = Address()
+        form.populate_obj(business.address)
 
         db.session.add(business)
         db.session.commit()
