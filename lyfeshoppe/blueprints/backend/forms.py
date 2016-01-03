@@ -54,23 +54,22 @@ class UserAccountForm(ModelForm):
 
 class BusinessForm(ModelForm):
 
-    name = StringField(_('Business name'), [Optional(), Length(1, 255)])
-    email = EmailField(_("Email Address"),
-                       [DataRequired(), Length(3, 254)])
+    name = StringField(_('Business name'), [DataRequired(), Length(1, 255)])
+    email = EmailField(_("Email Address"), [DataRequired(), Length(3, 255)])
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
-    open_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
-    close_time = DateTimeField(_('Business Open time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+    open_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
+    close_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
 
-    phone = StringField(_('Business Phone number'), [Optional(), Length(1, 12)])
+    phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
     active = BooleanField(_('Yes, Business is active'))
 
-    street = StringField(_('Street Address'), [Optional(), Length(1, 255)])
-    city = StringField(_('City'), [Optional(), Length(1, 30)])
-    state = StringField(_('State'), [Optional(), Length(1, 30)])
-    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+    street = StringField(_('Street Address'), [DataRequired(), Length(1, 255)])
+    city = StringField(_('City'), [DataRequired(), Length(1, 30)])
+    state = StringField(_('State'), [DataRequired(), Length(1, 30)])
+    zipcode = StringField(_('Zipcode'), [DataRequired(), Length(1, 30)])
     district = StringField(_('District/County'), [Optional(), Length(1, 30)])
-    country = StringField(_('Country'), [Optional(), Length(1, 30)])
+    country = StringField(_('Country'), [DataRequired(), Length(1, 30)])
 
 
 class EmployeeForm(ModelForm):
