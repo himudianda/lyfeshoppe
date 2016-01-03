@@ -85,13 +85,9 @@ def account_settings():
     # form.is_submitted() ensures that this block of code is
     # only triggered if this form was submitted
     if form.is_submitted() and form.validate_on_submit():
-        form.populate_obj(current_user)
-        if not current_user.address:
-            current_user.address = Address()
-        form.populate_obj(current_user.address)
-        current_user.save()
-        flash(_('User Account has been saved successfully.'), 'success')
-        return redirect(url_for('backend.account_settings'))
+        if current_user.modify_from_form(form):
+            flash(_('User Account has been modified successfully.'), 'success')
+            return redirect(url_for('backend.account_settings'))
 
     if password_reset_form.is_submitted() and password_reset_form.validate_on_submit():
         password_reset_form.populate_obj(current_user)

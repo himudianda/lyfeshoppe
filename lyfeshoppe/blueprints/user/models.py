@@ -100,6 +100,23 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         return user
 
+    def modify_from_form(self, form):
+        """
+        Return whether or not the user was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+        # Create User Address if it dint exist previously
+        if not self.address:
+            self.address = Address()
+        form.populate_obj(self.address)
+
+        self.save()
+
+        return True
+
     @classmethod
     def search(cls, query):
         """
