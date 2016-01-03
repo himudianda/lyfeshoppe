@@ -78,7 +78,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     @classmethod
     def create(cls, params=None, from_form=False, form=None):
         """
-        Return whether or not the employee was created successfully.
+        Return whether or not the user was created successfully.
 
         :return: bool
         """

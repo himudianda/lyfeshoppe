@@ -235,19 +235,23 @@ class Employee(ResourceMixin, db.Model):
         super(Employee, self).__init__(**kwargs)
 
     @classmethod
-    def create_from_form(cls, business_id, form):
+    def create(cls, business_id, params=None, from_form=False, form=None):
         """
         Return whether or not the employee was created successfully.
 
         :return: bool
         """
 
-        employee = cls()
-        form.populate_obj(employee)
-        employee.business_id = business_id
-        employee.user = User.create(params=None, from_form=True, form=form)
+        if from_form:
+            employee = cls()
+            form.populate_obj(employee)
+            employee.user = User.create(params=None, from_form=True, form=form)
+        else:
+            employee = cls(**params)
 
-        employee.save()
+        employee.business_id = business_id
+        employee = employee.save()
+
         return True
 
     def modify_from_form(self, form):
@@ -463,12 +467,9 @@ class Business(ResourceMixin, db.Model):
 
         # Create the first Admin employee for this newly created business
         admin_employee_params = {
-            'role': 'admin',
-            'user_id': current_user.id,
-            'business_id': business.id,
-            'user': current_user
+            'user_id': current_user.id
         }
-        Employee.create(admin_employee_params)
+        Employee.create(business_id=business.id, params=admin_employee_params, from_form=False, form=None)
 
         return True
 

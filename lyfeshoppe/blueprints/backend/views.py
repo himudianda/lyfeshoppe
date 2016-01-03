@@ -322,7 +322,7 @@ def business_employees_new(id):
     form = EmployeeForm(obj=employee)
 
     if form.validate_on_submit():
-        if Employee.create_from_form(business_id=id, form=form):
+        if Employee.create(business_id=id, params=None, from_form=True, form=form):
             flash(_('Employee has been created successfully.'), 'success')
             return redirect(url_for('backend.business_employees', id=id))
 
