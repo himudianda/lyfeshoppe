@@ -4,7 +4,6 @@
 
   {{ PAGE_LEVEL_PLUGINS() }}
 
-
   {{ THEME_GLOBAL_SCRIPTS() }}
 
   {{ PAGE_LEVEL_SCRIPTS() }}
@@ -129,4 +128,7 @@
 
 
 {%- macro situational() -%}
+  {% if request.endpoint in ('backend.businesses') %}
+      {{ javascript_tag('vendor_js', 'app_js') | safe }}
+  {% endif %}
 {%- endmacro -%}
