@@ -13,102 +13,122 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-
-            <!-- BEGIN PAGE HEADER-->
-            <h3 class="page-title"> Products. </h3>
-            <!-- END PAGE HEADER-->
-
             <div class="row">
-                <div class="col-md-6">
-                  {{ f.search('backend.business_products', form_kwargs) }}
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url_for('backend.business_products_new', **form_kwargs) }}"
-                       class="btn btn-primary pull-right">
-                        Add Product
-                    </a>
-                </div>
-            </div>
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                    <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building"></i>Products</div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  {{ f.search('backend.business_products', form_kwargs) }}
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ url_for('backend.business_products_new', **form_kwargs) }}"
+                                       class="btn sbold green pull-right">
+                                        <i class="fa fa-plus"></i> Add Product
+                                    </a>
+                                </div>
+                            </div>
 
-            <div class="row">
-                {% if products.total == 0 %}
-                    <h3>No results found</h3>
-                    {% if request.args.get('q') %}
-                        <p>Try limiting or removing your search terms.</p>
-                    {% else %}
-                        <p>There are no products present.</p>
-                    {% endif %}
-                {% else %}
-                    {% call f.form_tag('backend.business_products_bulk_deactivate', **form_kwargs) %}
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <label for="select_all"></label>
-                                    <input id="select_all" name="select_all" type="checkbox">
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('name', 'Name') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('description', 'Description') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('capacity', 'Capacity') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('price_cents', 'Price (cents)') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('duration_mins', 'Duration (mins)') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('active') }}
-                                </th>
-                                <th id="bulk_actions" colspan="5">
-                                    <div class="form-inline">
-                                        {{ f.field(bulk_form.scope, inline=True) }}
-                                        <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Product </button>
+                            <div class="row">
+                                {% if products.total == 0 %}
+                                    <h3>No results found</h3>
+                                    {% if request.args.get('q') %}
+                                        <p>Try limiting or removing your search terms.</p>
+                                    {% else %}
+                                        <p>There are no products present.</p>
+                                    {% endif %}
+                                {% else %}
+                                    {% call f.form_tag('backend.business_products_bulk_deactivate', **form_kwargs) %}
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label for="select_all"></label>
+                                                        <input id="select_all" name="select_all" type="checkbox">
+                                                    </th>
+                                                    <th class="col-header">
+                                                        Edit Product
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('name', 'Name') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('description', 'Description') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('capacity', 'Capacity') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('price_cents', 'Price (cents)') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('duration_mins', 'Duration (mins)') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('active') }}
+                                                    </th>
+                                                    <th id="bulk_actions" colspan="5">
+                                                        <div class="form-inline">
+                                                            {{ f.field(bulk_form.scope, inline=True) }}
+                                                            <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Product </button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for product in products.items %}
+                                                    <tr>
+                                                        <td>
+                                                            <label for="bulk_ids"></label>
+                                                            <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ product.id }}">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ url_for('backend.business_product_edit', id=business.id, product_id=product.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                <i class="fa fa-edit"></i> Edit
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            {{ product.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ product.description }}
+                                                        </td>
+                                                        <td>
+                                                            {{ product.capacity }}
+                                                        </td>
+                                                        <td>
+                                                            {{ product.price_cents }}
+                                                        </td>
+                                                        <td>
+                                                            {{ product.duration_mins }}
+                                                        </td>
+                                                        <td>
+                                                            {% if product.active %}
+                                                                {% set data = "label label-md label-success label" %}
+                                                            {% else %}
+                                                                {% set data = "label label-md label-warning label" %}
+                                                            {% endif %}
+                                                            <span class="{{ data }}"> {{ product.active }} </span>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for product in products.items %}
-                                <tr>
-                                    <td>
-                                        <label for="bulk_ids"></label>
-                                        <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ product.id }}">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <a href="{{ url_for('backend.business_product_edit', id=business.id, product_id=product.id) }}">
-                                                {{ product.name }}
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{ product.description }}
-                                    </td>
-                                    <td>
-                                        {{ product.capacity }}
-                                    </td>
-                                    <td>
-                                        {{ product.price_cents }}
-                                    </td>
-                                    <td>
-                                        {{ product.duration_mins }}
-                                    </td>
-                                    <td>
-                                        {{ product.active }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% endcall %}
-                    {{ items.paginate(products, form_kwargs) }}
-                {% endif %}
+                                    {% endcall %}
+                                    {{ items.paginate(products, form_kwargs) }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE TABLE PORTLET-->
+                </div>
             </div>
         </div>
         <!-- END CONTENT BODY -->
