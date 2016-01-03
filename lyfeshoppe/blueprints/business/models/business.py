@@ -235,12 +235,25 @@ class Employee(ResourceMixin, db.Model):
         super(Employee, self).__init__(**kwargs)
 
     @classmethod
-    def create(cls, business_id, params=None, from_form=False, form=None):
+    def get_or_create(cls, business_id, params=None, from_form=False, form=None):
         """
         Return whether or not the employee was created successfully.
 
         :return: bool
         """
+
+        if from_form:
+            new_employee = cls()
+            form.populate_obj(new_employee)
+            user = User.find_by_identity(new_employee.email)
+        else:
+            user = User.query.get(params.get('user_id', None))
+
+        employee = Employee.query.filter(
+                        Employee.user == user, Employee.business_id == business_id
+                    ).first()
+        if employee:
+            return (employee, False)  # Employee exists & wasnt created
 
         if from_form:
             employee = cls()
@@ -252,7 +265,7 @@ class Employee(ResourceMixin, db.Model):
         employee.business_id = business_id
         employee = employee.save()
 
-        return True
+        return (employee, True)  # New Employee was created
 
     def modify_from_form(self, form):
         """
@@ -469,7 +482,7 @@ class Business(ResourceMixin, db.Model):
         admin_employee_params = {
             'user_id': current_user.id
         }
-        Employee.create(business_id=business.id, params=admin_employee_params, from_form=False, form=None)
+        Employee.get_or_create(business_id=business.id, params=admin_employee_params, from_form=False, form=None)
 
         return True
 

@@ -322,8 +322,12 @@ def business_employees_new(id):
     form = EmployeeForm(obj=employee)
 
     if form.validate_on_submit():
-        if Employee.create(business_id=id, params=None, from_form=True, form=form):
+        employee, created = Employee.get_or_create(business_id=id, params=None, from_form=True, form=form)
+        if created:
             flash(_('Employee has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_employees', id=id))
+        else:
+            flash(_('Employee already exists.'), 'success')
             return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business)
