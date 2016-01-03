@@ -13,7 +13,6 @@ from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, User
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.common.models import Address
 
 backend = Blueprint('backend', __name__, template_folder='templates')
 
