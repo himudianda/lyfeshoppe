@@ -298,12 +298,17 @@ def businesses():
         close_time = datetime.utcfromtimestamp(
             float(close_time)).strftime('%Y-%m-%d %H:%M:%S')
 
+        opening_time = datetime.strptime('08:00:00', '%H:%M:%S').time()
+        closing_time = datetime.strptime('18:30:00', '%H:%M:%S').time()
+
         params = {
             'name': fake.company(),
             'email': fake.company_email(),
             'type': random.choice(Business.TYPE.keys()),
             'open_time': open_time,
             'close_time': close_time,
+            'opening_time': opening_time,
+            'closing_time': closing_time,
             'phone': fake.phone_number(),
             'active': "1",
             'address_id': (random.choice(addresses)).id

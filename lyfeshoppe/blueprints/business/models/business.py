@@ -361,8 +361,6 @@ class Business(ResourceMixin, db.Model):
 
         business.open_time = business.open_time.replace(tzinfo=pytz.UTC)
         business.close_time = business.close_time.replace(tzinfo=pytz.UTC)
-        business.opening_time = business.opening_time.replace(tzinfo=pytz.UTC)
-        business.closing_time = business.closing_time.replace(tzinfo=pytz.UTC)
 
         # Create Business Address
         business.address = Address()
@@ -393,8 +391,6 @@ class Business(ResourceMixin, db.Model):
 
         self.open_time = self.open_time.replace(tzinfo=pytz.UTC)
         self.close_time = self.close_time.replace(tzinfo=pytz.UTC)
-        self.opening_time = self.opening_time.replace(tzinfo=pytz.UTC)
-        self.closing_time = self.closing_time.replace(tzinfo=pytz.UTC)
 
         # Create Business Address if it dint exist previously
         if not self.address:
