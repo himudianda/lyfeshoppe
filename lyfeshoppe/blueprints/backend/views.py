@@ -355,25 +355,15 @@ def business_employee_edit(id, employee_id):
     business = Business.query.get(id)
     employee = Employee.query.get(employee_id)
 
-    form_data = {
-        "name": employee.user.name,
-        "email": employee.user.email,
-        "role": employee.role,
-        "active": employee.active
-    }
+    form_data = dict()
+    form_data.update(employee.user.__dict__)
+    form_data.update(employee.user.address.__dict__)
+    form = EmployeeForm(obj=employee, **form_data)
 
-    form = EmployeeForm(**form_data)
-
-    if form.validate_on_submit():
-        form.populate_obj(employee)
-
-        if employee.name == '':
-            employee.name = None
-
-        employee.save()
-
-        flash(_('Employee has been saved successfully.'), 'success')
-        return redirect(url_for('backend.business_employees', id=id))
+    if form.is_submitted() and form.validate_on_submit():
+        if employee.modify_from_form(form):
+            flash(_('Employee has been modified successfully.'), 'success')
+            return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
 

@@ -185,6 +185,24 @@ class Employee(ResourceMixin, db.Model):
 
         return True
 
+    def modify_from_form(self, form):
+        """
+        Return whether or not the employee was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+        form.populate_obj(self.user)
+        # Create Business Address if it dint exist previously
+        if not self.user.address:
+            self.user.address = Address()
+        form.populate_obj(self.user.address)
+
+        self.save()
+
+        return True
+
     @classmethod
     def search(cls, query):
         """
