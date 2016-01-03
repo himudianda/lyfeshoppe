@@ -138,24 +138,6 @@ class Customer(ResourceMixin, db.Model):
         customer.save()
         return True
 
-    def modify_from_form(self, form):
-        """
-        Return whether or not the customer was modified successfully.
-
-        :return: bool
-        """
-
-        form.populate_obj(self)
-        form.populate_obj(self.user)
-        # Create Business Address if it dint exist previously
-        if not self.user.address:
-            self.user.address = Address()
-        form.populate_obj(self.user.address)
-
-        self.save()
-
-        return True
-
     @classmethod
     def get_or_create(cls, business_id, customer_email):
         user = User.find_by_identity(customer_email)
@@ -173,6 +155,24 @@ class Customer(ResourceMixin, db.Model):
         }
         customer = Customer(**customer_params)
         return customer.save()
+
+    def modify_from_form(self, form):
+        """
+        Return whether or not the customer was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+        form.populate_obj(self.user)
+        # Create Business Address if it dint exist previously
+        if not self.user.address:
+            self.user.address = Address()
+        form.populate_obj(self.user.address)
+
+        self.save()
+
+        return True
 
     @property
     def num_of_reservations(self):
