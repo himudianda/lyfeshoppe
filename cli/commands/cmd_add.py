@@ -295,6 +295,7 @@ def businesses():
             'closing_time': datetime.strptime('18:30:00', '%H:%M:%S').time(),
             'phone': fake.phone_number(),
             'active': "1",
+            'weekends_open': random.choice(['0', '1']),
             'address_id': (random.choice(addresses)).id
         }
 

@@ -309,6 +309,8 @@ class Business(ResourceMixin, db.Model):
 
     opening_time = db.Column(db.Time())
     closing_time = db.Column(db.Time())
+    weekends_open = db.Column('is_open_weekends', db.Boolean(), server_default='0')
+
     phone = db.Column(db.String(20), index=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
