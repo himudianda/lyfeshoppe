@@ -133,7 +133,7 @@ class Customer(ResourceMixin, db.Model):
         customer = cls()
         form.populate_obj(customer)
         customer.business_id = business_id
-        customer.user = User.create(params=None, from_form=True, form=form)
+        customer.user = User.get_or_create(params=None, from_form=True, form=form)
 
         customer.save()
         return True
@@ -142,7 +142,7 @@ class Customer(ResourceMixin, db.Model):
     def get_or_create(cls, business_id, customer_email):
         user = User.find_by_identity(customer_email)
         if not user:
-            user = User.create(params={"email": customer_email})
+            user = User.get_or_create(params={"email": customer_email})
 
         customers = cls.query.filter(cls.business_id == business_id)
         for customer in customers:
@@ -245,7 +245,7 @@ class Employee(ResourceMixin, db.Model):
         if from_form:
             employee = cls()
             form.populate_obj(employee)
-            employee.user = User.create(params=None, from_form=True, form=form)
+            employee.user = User.get_or_create(params=None, from_form=True, form=form)
         else:
             employee = cls(**params)
 
