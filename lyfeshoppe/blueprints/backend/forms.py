@@ -59,7 +59,7 @@ class BusinessForm(ModelForm):
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
     opening_time = TimeField(_('Business Open time'), [DataRequired()])
-    closing_time = TimeField(_('Business Open time'), [DataRequired()])
+    closing_time = TimeField(_('Business Close time'), [DataRequired()])
 
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
     active = BooleanField(_('Yes, Business is active'))
