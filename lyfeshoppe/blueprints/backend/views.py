@@ -269,36 +269,11 @@ def business_edit(id):
         address_dict = business.address.__dict__
 
     form = BusinessForm(obj=business, **address_dict)
+
     if form.validate_on_submit():
-        form.populate_obj(business)
-
-        if not business.address:
-            business.address = Address()
-        form.populate_obj(business.address)
-
-        if business.name == '':
-            business.business = None
-
-        if business.open_time:
-            business.open_time = business.open_time.replace(
-                tzinfo=pytz.UTC)
-
-        if business.close_time:
-            business.close_time = business.close_time.replace(
-                tzinfo=pytz.UTC)
-
-        if business.opening_time:
-            business.opening_time = business.opening_time.replace(
-                tzinfo=pytz.UTC)
-
-        if business.closing_time:
-            business.closing_time = business.closing_time.replace(
-                tzinfo=pytz.UTC)
-
-        business.save()
-
-        flash(_('Business has been saved successfully.'), 'success')
-        return redirect(url_for('backend.businesses'))
+        if business.modify_from_form(form):
+            flash(_('Business has been modified successfully.'), 'success')
+            return redirect(url_for('backend.businesses'))
 
     return render_template('backend/business/edit.jinja2', form=form, business=business)
 

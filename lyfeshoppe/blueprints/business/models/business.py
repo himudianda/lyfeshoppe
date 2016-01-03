@@ -381,3 +381,26 @@ class Business(ResourceMixin, db.Model):
         Employee.create(admin_employee_params)
 
         return True
+
+    def modify_from_form(self, form):
+        """
+        Return whether or not the business was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+
+        self.open_time = self.open_time.replace(tzinfo=pytz.UTC)
+        self.close_time = self.close_time.replace(tzinfo=pytz.UTC)
+        self.opening_time = self.opening_time.replace(tzinfo=pytz.UTC)
+        self.closing_time = self.closing_time.replace(tzinfo=pytz.UTC)
+
+        # Create Business Address if it dint exist previously
+        if not self.address:
+            self.address = Address()
+        form.populate_obj(self.address)
+
+        self.save()
+
+        return True
