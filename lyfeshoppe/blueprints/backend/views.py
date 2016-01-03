@@ -264,20 +264,11 @@ def business_dashboard(id):
 @is_staff_authorized
 def business_edit(id):
     business = Business.query.get(id)
-
-    form_data = dict()
+    address_dict = dict()
     if business.address:
-        form_data = {
-            "street": business.address.street,
-            "city": business.address.city,
-            "state": business.address.state,
-            "zipcode": business.address.zipcode,
-            "district": business.address.district,
-            "country": business.address.country,
-        }
+        address_dict = business.address.__dict__
 
-    form = BusinessForm(obj=business, **form_data)
-
+    form = BusinessForm(obj=business, **address_dict)
     if form.validate_on_submit():
         form.populate_obj(business)
 
