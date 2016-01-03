@@ -137,4 +137,7 @@
   {% if request.endpoint in ('backend.business_products') %}
       {{ javascript_tag('vendor_js', 'app_js') | safe }}
   {% endif %}
+  {% if request.endpoint in ('backend.business_customers') %}
+      {{ javascript_tag('vendor_js', 'app_js') | safe }}
+  {% endif %}
 {%- endmacro -%}
