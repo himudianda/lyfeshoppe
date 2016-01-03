@@ -123,20 +123,29 @@ class Customer(ResourceMixin, db.Model):
         return search_chain
 
     @classmethod
-    def create_from_form(cls, business_id, form):
+    def get_or_create_from_form(cls, business_id, form):
         """
         Return whether or not the customer was created successfully.
 
         :return: bool
         """
+        new_customer = cls()
+        form.populate_obj(new_customer)
+
+        user = User.find_by_identity(new_customer.email)
+        customer = Customer.query.filter(
+                        Customer.user == user, Customer.business_id == business_id
+                    ).first()
+        if customer:
+            return (customer, False)  # Customer exists & wasnt created
 
         customer = cls()
         form.populate_obj(customer)
         customer.business_id = business_id
         customer.user = User.get_or_create(params=None, from_form=True, form=form)
 
-        customer.save()
-        return True
+        customer = customer.save()
+        return (customer, True)  # New customer was created
 
     @classmethod
     def get_or_create(cls, business_id, customer_email):

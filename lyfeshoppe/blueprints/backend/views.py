@@ -410,8 +410,12 @@ def business_customers_new(id):
     form = CustomerForm(obj=customer)
 
     if form.validate_on_submit():
-        if Customer.create_from_form(business_id=id, form=form):
+        customer, created = Customer.get_or_create_from_form(business_id=id, form=form)
+        if created:
             flash(_('Customer has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_customers', id=id))
+        else:
+            flash(_('Customer already exists.'), 'success')
             return redirect(url_for('backend.business_customers', id=id))
 
     return render_template('backend/customer/new.jinja2', form=form, customer=customer, business=business)
