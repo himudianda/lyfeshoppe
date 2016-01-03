@@ -58,8 +58,6 @@ class BusinessForm(ModelForm):
     email = EmailField(_("Email Address"), [DataRequired(), Length(3, 255)])
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
-    open_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
-    close_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
     opening_time = TimeField(_('Business Open time'), [DataRequired()])
     closing_time = TimeField(_('Business Open time'), [DataRequired()])
 

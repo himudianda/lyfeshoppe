@@ -287,28 +287,12 @@ def businesses():
     addresses = db.session.query(Address).all()
 
     for i in range(0, NUM_OF_FAKE_BUSINESSES):
-
-        open_time = fake.date_time_between(
-            start_date='now', end_date='+1d').strftime('%s')
-        close_time = fake.date_time_between(
-            start_date=open_time, end_date='+1d').strftime('%s')
-
-        open_time = datetime.utcfromtimestamp(
-            float(open_time)).strftime('%Y-%m-%d %H:%M:%S')
-        close_time = datetime.utcfromtimestamp(
-            float(close_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-        opening_time = datetime.strptime('08:00:00', '%H:%M:%S').time()
-        closing_time = datetime.strptime('18:30:00', '%H:%M:%S').time()
-
         params = {
             'name': fake.company(),
             'email': fake.company_email(),
             'type': random.choice(Business.TYPE.keys()),
-            'open_time': open_time,
-            'close_time': close_time,
-            'opening_time': opening_time,
-            'closing_time': closing_time,
+            'opening_time': datetime.strptime('08:00:00', '%H:%M:%S').time(),
+            'closing_time': datetime.strptime('18:30:00', '%H:%M:%S').time(),
             'phone': fake.phone_number(),
             'active': "1",
             'address_id': (random.choice(addresses)).id

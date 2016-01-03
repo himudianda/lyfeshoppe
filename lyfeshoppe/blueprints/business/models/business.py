@@ -307,8 +307,6 @@ class Business(ResourceMixin, db.Model):
     email = db.Column(db.String(255), index=True)
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default='massage')
 
-    open_time = db.Column(AwareDateTime())
-    close_time = db.Column(AwareDateTime())
     opening_time = db.Column(db.Time())
     closing_time = db.Column(db.Time())
     phone = db.Column(db.String(20), index=True)
@@ -359,9 +357,6 @@ class Business(ResourceMixin, db.Model):
         business = cls()
         form.populate_obj(business)
 
-        business.open_time = business.open_time.replace(tzinfo=pytz.UTC)
-        business.close_time = business.close_time.replace(tzinfo=pytz.UTC)
-
         # Create Business Address
         business.address = Address()
         form.populate_obj(business.address)
@@ -388,10 +383,6 @@ class Business(ResourceMixin, db.Model):
         """
 
         form.populate_obj(self)
-
-        self.open_time = self.open_time.replace(tzinfo=pytz.UTC)
-        self.close_time = self.close_time.replace(tzinfo=pytz.UTC)
-
         # Create Business Address if it dint exist previously
         if not self.address:
             self.address = Address()
