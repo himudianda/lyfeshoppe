@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
-import pytz
 import json
 
 from lyfeshoppe.extensions import db
@@ -76,18 +75,11 @@ def shop_details(id):
 # Account -------------------------------------------------------------------
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
-    form_data = {}
+    address_dict = {}
     if current_user.address:
-        form_data.update({
-            "street": current_user.address.street,
-            "city": current_user.address.city,
-            "state": current_user.address.state,
-            "zipcode": current_user.address.zipcode,
-            "district": current_user.address.district,
-            "country": current_user.address.country,
-        })
+        address_dict = current_user.address.__dict__
 
-    form = UserAccountForm(obj=current_user, **form_data)
+    form = UserAccountForm(obj=current_user, **address_dict)
     password_reset_form = PasswordResetForm()
 
     # form.is_submitted() ensures that this block of code is
