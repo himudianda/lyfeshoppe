@@ -308,6 +308,14 @@ def business_edit(id):
             business.close_time = business.close_time.replace(
                 tzinfo=pytz.UTC)
 
+        if business.opening_time:
+            business.opening_time = business.opening_time.replace(
+                tzinfo=pytz.UTC)
+
+        if business.closing_time:
+            business.closing_time = business.closing_time.replace(
+                tzinfo=pytz.UTC)
+
         business.save()
 
         flash(_('Business has been saved successfully.'), 'success')

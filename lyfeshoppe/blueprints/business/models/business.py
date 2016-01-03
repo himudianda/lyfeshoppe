@@ -309,6 +309,8 @@ class Business(ResourceMixin, db.Model):
 
     open_time = db.Column(AwareDateTime())
     close_time = db.Column(AwareDateTime())
+    opening_time = db.Column(db.Time())
+    closing_time = db.Column(db.Time())
     phone = db.Column(db.String(20), index=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
@@ -362,6 +364,16 @@ class Business(ResourceMixin, db.Model):
         if 'close_time' in params:
             if params.get('close_time') is not None:
                 params['close_time'] = params.get('close_time').replace(
+                    tzinfo=pytz.UTC)
+
+        if 'opening_time' in params:
+            if params.get('opening_time') is not None:
+                params['opening_time'] = params.get('opening_time').replace(
+                    tzinfo=pytz.UTC)
+
+        if 'closing_time' in params:
+            if params.get('closing_time') is not None:
+                params['closing_time'] = params.get('closing_time').replace(
                     tzinfo=pytz.UTC)
 
         business = Business(**params)

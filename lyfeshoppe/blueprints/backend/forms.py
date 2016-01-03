@@ -4,7 +4,7 @@ from lyfeshoppe.lib.util_wtforms import ModelForm
 
 from flask_wtf import Form
 from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField
-from wtforms_components import EmailField, IntegerField
+from wtforms_components import EmailField, IntegerField, TimeField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Reservation
@@ -60,6 +60,8 @@ class BusinessForm(ModelForm):
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
     open_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
     close_time = DateTimeField(_('Business Open time'), [DataRequired()], format='%Y-%m-%d %H:%M:%S')
+    opening_time = TimeField(_('Business Open time'), [DataRequired()])
+    closing_time = TimeField(_('Business Open time'), [DataRequired()])
 
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
     active = BooleanField(_('Yes, Business is active'))
