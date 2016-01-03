@@ -68,7 +68,7 @@
                             <div class="btn-group-img btn-group">
 
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <span class="username username-hide-on-mobile"> {{ current_user.email }} </span>
+                                    <span class="username username-hide-on-mobile"> {{ current_user.name if current_user.name else current_user.email }} </span>
                                 </button>
 
                                 <ul class="dropdown-menu-v2" role="menu">
