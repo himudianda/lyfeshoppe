@@ -14,133 +14,147 @@
 
 
 {% call f.form_tag(endpoint, **form_kwargs) %}
-<form action="#" class="form-horizontal col-md-offset-1">
-    <div class="form-body">
-        <h3 class="form-section">Personal Details</h3>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        {% call f.form_group(form.name, css_class='sm-margin-bottom') %}
-                        {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-plus"></i> {{ legend }} 
         </div>
-        <!--/row-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                      {% call f.form_group(form.email, css_class='sm-margin-bottom') %}
-                      {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
-                        {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-        </div>
-        <h3 class="form-section">Address</h3>
-        <!--/row-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                      {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
-                      {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
-                        {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-        </div>
-        <!--/row-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                      {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
-                      {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        {% call f.form_group(form.zipcode, css_class='sm-margin-bottom') %}
-                        {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-        </div>
-        <!--/row-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                      {% call f.form_group(form.district, css_class='sm-margin-bottom') %}
-                      {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
-                        {% endcall %}
-                    </div>
-                </div>
-            </div>
-            <!--/span-->
-        </div>
-        <!--/row-->
     </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
 
-    <div class="form-actions">
-        <div class="row">
-            <div class="col-md-6">
+            <div class="form-body">
+                <h3 class="form-section">Personal Details</h3>
                 <div class="row">
-                    <div class="col-md-offset-6 col-md-12">
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <button type="submit" class="btn green">
-                                  {{ button }}
-                                </button>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="visible-xs visible-sm sm-margin-top"></div>
-                                <a href="{{ url_for('backend.business_employees', **form_kwargs) }}"
-                                   class="btn red btn-block">
-                                  {{ _('Cancel') }}
-                                </a>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.name, css_class='sm-margin-bottom') %}
+                                {% endcall %}
                             </div>
                         </div>
                     </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.email, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <h3 class="form-section">Address</h3>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.zipcode, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.district, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-6 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn green">
+                                          {{ button }}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="visible-xs visible-sm sm-margin-top"></div>
+                                        <a href="{{ url_for('backend.business_employees', **form_kwargs) }}"
+                                           class="btn red btn-block">
+                                          {{ _('Cancel') }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6"> </div>
                 </div>
             </div>
-            <div class="col-md-6"> </div>
-        </div>
+
+
+        </form>
+        <!-- END FORM-->
     </div>
-</form>
+</div>
 {% endcall %}
