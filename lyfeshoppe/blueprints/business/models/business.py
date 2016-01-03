@@ -104,6 +104,59 @@ class Customer(ResourceMixin, db.Model):
         super(Customer, self).__init__(**kwargs)
 
     @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
+        user_ids = [user.id for user in users]
+
+        search_chain = (cls.user_id.in_(user_ids))
+        return search_chain
+
+    @classmethod
+    def create_from_form(cls, business_id, form):
+        """
+        Return whether or not the customer was created successfully.
+
+        :return: bool
+        """
+
+        customer = cls()
+        form.populate_obj(customer)
+        customer.business_id = business_id
+        customer.user = User.create(params=None, from_form=True, form=form)
+
+        customer.save()
+        return True
+
+    def modify_from_form(self, form):
+        """
+        Return whether or not the customer was modified successfully.
+
+        :return: bool
+        """
+
+        form.populate_obj(self)
+        form.populate_obj(self.user)
+        # Create Business Address if it dint exist previously
+        if not self.user.address:
+            self.user.address = Address()
+        form.populate_obj(self.user.address)
+
+        self.save()
+
+        return True
+
+    @classmethod
     def get_or_create(cls, business_id, customer_email):
         user = User.find_by_identity(customer_email)
         if not user:
@@ -120,6 +173,15 @@ class Customer(ResourceMixin, db.Model):
         }
         customer = Customer(**customer_params)
         return customer.save()
+
+    @property
+    def num_of_reservations(self):
+        # Refer notes under Using EXISTS topic under link
+        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
+        return Reservation.query.filter(Reservation.customer_id == self.id).count()
+        # NOTE: below is an example of using any() & it also works. But the above statment
+        # is easier to use & understand
+        # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
 
 
 employee_product_relations = db.Table(

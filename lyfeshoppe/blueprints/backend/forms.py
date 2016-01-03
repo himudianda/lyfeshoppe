@@ -87,6 +87,20 @@ class EmployeeForm(ModelForm):
     active = BooleanField(_('Yes, Employee is active'))
 
 
+class CustomerForm(ModelForm):
+    name = StringField(_('Name'), [DataRequired(), Length(1, 255)])
+    email = EmailField(_("Email Address"),
+                       [DataRequired(), Length(3, 254)])
+    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+    street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
+    city = StringField(_('City'), [Optional(), Length(1, 30)])
+    state = StringField(_('State'), [Optional(), Length(1, 30)])
+    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
+    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
+    country = StringField(_('Country'), [Optional(), Length(1, 30)])
+    active = BooleanField(_('Yes, Employee is active'))
+
+
 class ProductForm(ModelForm):
 
     name = StringField(_('Product name'), [DataRequired(), Length(1, 255)])

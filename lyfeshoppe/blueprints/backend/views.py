@@ -9,7 +9,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm
+    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
 from lyfeshoppe.blueprints.user.models import User
@@ -346,6 +346,89 @@ def business_employee_edit(id, employee_id):
             return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
+
+
+# Business Customers -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>/customers', defaults={'page': 1})
+@backend.route('/businesses/<int:id>/customers/page/<int:page>')
+@is_staff_authorized
+def business_customers(id, page):
+    business = Business.query.get(id)
+    search_form = SearchForm()
+    bulk_form = BulkDeleteForm()
+
+    sort_by = Customer.sort_by(request.args.get('sort', 'role'),
+                               request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_customers = Customer.query \
+        .filter(Customer.search(request.args.get('q', ''))) \
+        .filter(Customer.business == business) \
+        .order_by(text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/customer/index.jinja2',
+                           form=search_form, bulk_form=bulk_form,
+                           customers=paginated_customers,
+                           business=business)
+
+
+@backend.route('/businesses/<int:id>/customers/bulk_deactivate', methods=['POST'])
+@is_staff_authorized
+def business_customers_bulk_deactivate(id):
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Customer.get_bulk_action_ids(request.form.get('scope'),
+                                           request.form.getlist('bulk_ids'),
+                                           query=request.args.get('q', ''))
+
+        for customer_id in ids:
+            customer = Customer.query.get(customer_id)
+            customer.active = not customer.active
+        db.session.commit()
+
+        flash(_n('%(num)d customer was deactivated.',
+                 '%(num)d customer were deactivated.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No customers were deactivated, something went wrong.'), 'error')
+
+    return redirect(url_for('backend.business_customers', id=id))
+
+
+@backend.route('/businesses/<int:id>/customers/new', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_customers_new(id):
+    business = Business.query.get(id)
+    customer = Customer()
+    form = CustomerForm(obj=customer)
+
+    if form.validate_on_submit():
+        if Customer.create_from_form(business_id=id, form=form):
+            flash(_('Customer has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_customers', id=id))
+
+    return render_template('backend/customer/new.jinja2', form=form, customer=customer, business=business)
+
+
+@backend.route('/businesses/<int:id>/customers/edit/<int:customer_id>', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_customer_edit(id, customer_id):
+    business = Business.query.get(id)
+    customer = Customer.query.get(customer_id)
+
+    form_data = dict()
+    form_data.update(customer.user.__dict__)
+    form_data.update(customer.user.address.__dict__)
+    form = CustomerForm(obj=customer, **form_data)
+
+    if form.is_submitted() and form.validate_on_submit():
+        if customer.modify_from_form(form):
+            flash(_('Customer has been modified successfully.'), 'success')
+            return redirect(url_for('backend.business_customers', id=id))
+
+    return render_template('backend/customer/edit.jinja2', form=form, business=business, customer=customer)
 
 
 # Business Products -------------------------------------------------------------------
