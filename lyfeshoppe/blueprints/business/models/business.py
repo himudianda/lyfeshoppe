@@ -107,7 +107,7 @@ class Customer(ResourceMixin, db.Model):
     def get_or_create(cls, business_id, customer_email):
         user = User.find_by_identity(customer_email)
         if not user:
-            user = User.create({"email": customer_email})
+            user = User.create(params={"email": customer_email})
 
         customers = cls.query.filter(cls.business_id == business_id)
         for customer in customers:
@@ -173,16 +173,19 @@ class Employee(ResourceMixin, db.Model):
         super(Employee, self).__init__(**kwargs)
 
     @classmethod
-    def create(cls, params):
+    def create_from_form(cls, business_id, form):
         """
         Return whether or not the employee was created successfully.
 
         :return: bool
         """
-        employee = cls(**params)
-        db.session.add(employee)
-        db.session.commit()
 
+        employee = cls()
+        form.populate_obj(employee)
+        employee.business_id = business_id
+        employee.user = User.create(params=None, from_form=True, form=form)
+
+        employee.save()
         return True
 
     def modify_from_form(self, form):
@@ -381,8 +384,7 @@ class Business(ResourceMixin, db.Model):
         business.address = Address()
         form.populate_obj(business.address)
 
-        db.session.add(business)
-        db.session.commit()
+        business.save()
 
         # Create the first Admin employee for this newly created business
         admin_employee_params = {

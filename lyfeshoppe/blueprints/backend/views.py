@@ -319,32 +319,13 @@ def business_employees_bulk_deactivate(id):
 @is_staff_authorized
 def business_employees_new(id):
     business = Business.query.get(id)
-
     employee = Employee()
     form = EmployeeForm(obj=employee)
 
     if form.validate_on_submit():
-        form.populate_obj(employee)
-
-        user_params = {
-            'name': employee.name,
-            'email': employee.email,
-            'password': "password",
-            'role': 'member',
-            'active': '1'
-        }
-
-        if User.create(user_params):
-
-            employee_params = {
-                'role': employee.role,
-                'business_id': id,
-                'user_id': (User.query.filter(User.email == employee.email).first()).id
-            }
-
-            if Employee.create(employee_params):
-                flash(_('Employee has been created successfully.'), 'success')
-                return redirect(url_for('backend.business_employees', id=id))
+        if Employee.create_from_form(business_id=id, form=form):
+            flash(_('Employee has been created successfully.'), 'success')
+            return redirect(url_for('backend.business_employees', id=id))
 
     return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business)
 

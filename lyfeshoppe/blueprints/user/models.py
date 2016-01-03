@@ -76,7 +76,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         self.password = User.encrypt_password(kwargs.get('password', ''))
 
     @classmethod
-    def create(cls, params):
+    def create(cls, params=None, from_form=False, form=None):
         """
         Return whether or not the employee was created successfully.
 
@@ -87,11 +87,18 @@ class User(UserMixin, ResourceMixin, db.Model):
         pwd_size = 8
         chars = string.ascii_uppercase + string.digits
         pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
-        params.update({
-            "password": pwd
-        })
 
-        user = cls(**params)
+        if from_form:
+            user = cls()
+            form.populate_obj(user)
+
+            # Create Business Address
+            user.address = Address()
+            form.populate_obj(user.address)
+        else:
+            user = cls(**params)
+
+        user.password = pwd
         user = user.save()
 
         # This prevents circular imports.
