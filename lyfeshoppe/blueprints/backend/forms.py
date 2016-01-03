@@ -74,12 +74,8 @@ class BusinessForm(ModelForm):
 
 
 class EmployeeForm(ModelForm):
-
     name = StringField(_('Employee name'), [DataRequired(), Length(1, 255)])
     email = EmailField(_("Employee e-mail address?"), [DataRequired(), Length(3, 254)])
-    role = SelectField(_('Employee Role'), [DataRequired()],
-                       choices=choices_from_dict(Employee.ROLE,
-                                                 prepend_blank=False))
     active = BooleanField(_('Yes, Employee is active'))
 
 
