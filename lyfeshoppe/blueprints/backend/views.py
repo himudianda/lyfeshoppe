@@ -337,7 +337,8 @@ def business_employee_edit(id, employee_id):
 
     form_data = dict()
     form_data.update(employee.user.__dict__)
-    form_data.update(employee.user.address.__dict__)
+    if employee.user.address:
+        form_data.update(employee.user.address.__dict__)
     form = EmployeeForm(obj=employee, **form_data)
 
     if form.is_submitted() and form.validate_on_submit():
@@ -420,7 +421,8 @@ def business_customer_edit(id, customer_id):
 
     form_data = dict()
     form_data.update(customer.user.__dict__)
-    form_data.update(customer.user.address.__dict__)
+    if customer.user.address:
+        form_data.update(customer.user.address.__dict__)
     form = CustomerForm(obj=customer, **form_data)
 
     if form.is_submitted() and form.validate_on_submit():
