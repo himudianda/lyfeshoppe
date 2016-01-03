@@ -13,98 +13,116 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-
-            <!-- BEGIN PAGE HEADER-->
-            <h3 class="page-title"> Employees. </h3>
-            <!-- END PAGE HEADER-->
-
             <div class="row">
-                <div class="col-md-6">
-                  {{ f.search('backend.business_employees', form_kwargs) }}
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url_for('backend.business_employees_new', **form_kwargs) }}"
-                       class="btn btn-primary pull-right">
-                        Add Employee
-                    </a>
-                </div>
-            </div>
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                    <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building"></i>Employees</div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  {{ f.search('backend.business_employees', form_kwargs) }}
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ url_for('backend.business_employees_new', **form_kwargs) }}"
+                                       class="btn sbold green pull-right">
+                                        <i class="fa fa-plus"></i> Add Employee
+                                    </a>
+                                </div>
+                            </div>
 
-            <div class="row">
-                {% if employees.total == 0 %}
-                    <h3>No results found</h3>
-                    {% if request.args.get('q') %}
-                        <p>Try limiting or removing your search terms.</p>
-                    {% else %}
-                        <p>There are no employees present.</p>
-                    {% endif %}
-                {% else %}
-                    {% call f.form_tag('backend.business_employees_bulk_deactivate', **form_kwargs) %}
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <label for="select_all"></label>
-                                    <input id="select_all" name="select_all" type="checkbox">
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('user.name', 'Name') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('user.email', 'Email') }}
-                                </th>
-                                <th class="col-header">
-                                    Num of Products
-                                </th>
-                                <th class="col-header">
-                                    Num of Reservations
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('active') }}
-                                </th>
-                                <th id="bulk_actions" colspan="5">
-                                    <div class="form-inline">
-                                        {{ f.field(bulk_form.scope, inline=True) }}
-                                        <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Employee </button>
+                            <div class="row">
+                                {% if employees.total == 0 %}
+                                    <h3>No results found</h3>
+                                    {% if request.args.get('q') %}
+                                        <p>Try limiting or removing your search terms.</p>
+                                    {% else %}
+                                        <p>There are no employees present.</p>
+                                    {% endif %}
+                                {% else %}
+                                    {% call f.form_tag('backend.business_employees_bulk_deactivate', **form_kwargs) %}
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label for="select_all"></label>
+                                                        <input id="select_all" name="select_all" type="checkbox">
+                                                    </th>
+                                                    <th class="col-header">
+                                                        Edit Employee
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('user.name', 'Name') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('user.email', 'Email') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        Num of Products
+                                                    </th>
+                                                    <th class="col-header">
+                                                        Num of Reservations
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('active') }}
+                                                    </th>
+                                                    <th id="bulk_actions" colspan="5">
+                                                        <div class="form-inline">
+                                                            {{ f.field(bulk_form.scope, inline=True) }}
+                                                            <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Employee </button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for employee in employees.items %}
+                                                    <tr>
+                                                        <td>
+                                                            <label for="bulk_ids"></label>
+                                                            <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ employee.id }}">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ url_for('backend.business_employee_edit', id=business.id, employee_id=employee.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                <i class="fa fa-edit"></i> Edit
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            {{ employee.user.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ employee.user.email }}
+                                                        </td>
+                                                        <td>
+                                                            {{ employee.num_of_products }}
+                                                        </td>
+                                                        <td>
+                                                            {{ employee.num_of_reservations }}
+                                                        </td>
+                                                        <td>
+                                                            {% if employee.active %}
+                                                                {% set data = "label label-md label-success label" %}
+                                                            {% else %}
+                                                                {% set data = "label label-md label-warning label" %}
+                                                            {% endif %}
+                                                            <span class="{{ data }}"> {{ employee.active }} </span>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for employee in employees.items %}
-                                <tr>
-                                    <td>
-                                        <label for="bulk_ids"></label>
-                                        <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ employee.id }}">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {{ employee.user.name }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <a href="{{ url_for('backend.business_employee_edit', id=business.id, employee_id=employee.id) }}">
-                                                {{ employee.user.email }}
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{ employee.num_of_products }}
-                                    </td>
-                                    <td>
-                                        {{ employee.num_of_reservations }}
-                                    </td>
-                                    <td>
-                                        {{ employee.active }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% endcall %}
-                    {{ items.paginate(employees, form_kwargs) }}
-                {% endif %}
+                                    {% endcall %}
+                                    {{ items.paginate(employees, form_kwargs) }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE TABLE PORTLET-->
+                </div>
             </div>
         </div>
         <!-- END CONTENT BODY -->
