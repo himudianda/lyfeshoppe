@@ -40,3 +40,37 @@
         </a>
     {% endif %}
 </li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bulb"></i>
+        <span class="title">Pages</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="{{ url_for('page.faq') }}" class="nav-link ">
+                <span class="title">FAQs</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="{{ url_for('issue.support') }}" class="nav-link ">
+                <span class="title">Support</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="{{ url_for('page.investors') }}" class="nav-link ">
+                <span class="title">Investors</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="{{ url_for('page.privacy') }}" class="nav-link ">
+                <span class="title">Privacy Policy</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="{{ url_for('page.terms') }}" class="nav-link ">
+                <span class="title">Terms & Conditions</span>
+            </a>
+        </li>
+    </ul>
+</li>
