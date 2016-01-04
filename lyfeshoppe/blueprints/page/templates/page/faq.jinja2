@@ -1,11 +1,11 @@
 {% extends 'frontend/layouts/app.jinja2' %}
 
 {% block title %}
-	LyfeShoppe | Social Shop with huge discounts.
+    FAQs | LyfeShoppe | Social Shop with huge discounts.
 {% endblock %}
 
 {% block meta_description %}
-	We bring huge discounts from the best businesses around you.
+    We bring huge discounts from the best businesses around you.
 {% endblock %}
 
 {% block hero %}
@@ -14,93 +14,110 @@
 
 {% block body %}
 
-		<!-- Content
-		============================================= -->
-		<section id="content">
+        <!-- Content
+        ============================================= -->
+        <section id="content">
 
-			<div class="content-wrap">
+            <div class="content-wrap">
 
-				<div class="container clearfix">
+                <div class="container clearfix">
 
-					<h3>FAQs:</h3>
+                    <h3>FAQs:</h3>
 
-					<p>LyfeShoppe is a social ecommerce platform built to benefit small businesses as well as consumers.</p>
+                    <p>LyfeShoppe is a social ecommerce platform built to benefit small businesses as well as consumers.</p>
 
-					<div class="divider"><i class="icon-circle"></i></div>
+                    <div class="divider"><i class="icon-circle"></i></div>
 
-					<div class="col_half nobottommargin">
+                    <div class="col_half nobottommargin">
 
-						<h4>Business Partners <small>(3)</small></h4>
+                        <h4>General Questions <small>(3)</small></h4>
 
-						<div class="accordion accordion-border clearfix" data-state="closed">
+                        <div class="accordion accordion-border clearfix" data-state="closed">
 
-							<div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>How do I put my business on LyfeShoppe?</div>
-							<div class="acc_content clearfix">
-								You must first <a href="{{ url_for('user.signup') }}">register here</a>. Once registered; you can add all your businesses on LyfeShoppe.
-							</div>
+                            <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>Is LyfeShoppe free ?</div>
+                            <div class="acc_content clearfix">
+                                Yes. LyfeShoppe is completely free to use for everyone.
+                            </div>
 
-							<div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i class="acc-open icon-comments-alt"></i>How does lyfeshoppe help businesses</div>
-							<div class="acc_content clearfix">
-								LyfeShoppe is currently free to use for an indefinite period of time. You can add all the products/services and all your staff members on your Business' LyfeShoppe page. Once added; you can create bookings, manage every employees calendar, send automated emails to your customers &amp; also manage your customers online.
-								LyfeShoppe can also get you new customers &amp; help boost your revenues !
-							</div>
+                            <div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i class="acc-open icon-comments-alt"></i>Can I request for new features to be added on LyfeShoppe ?</div>
+                            <div class="acc_content clearfix">
+                                Yes ! Send us an email at <a href="mailto:lyfeshoppe@gmail.com">lyfeshoppe@gmail.com</a> OR send your request on: <a href="{{url_for('issue.support')}}">Support Requests</a>
+                            </div>
 
-							<div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-lock3"></i>How much revenue lift can my business expect ?</div>
-							<div class="acc_content clearfix">
-								LyfeShoppe is a new platform now &amp; is built to help you manage your business effectively. Once the platform matures; you can expect to receive upto 300% boost (estimated) in sales.
-							</div>
+                            <div class="acctitle"><i class="acc-closed icon-money"></i><i class="acc-open icon-money"></i>I love LyfeShoppe. How do I support/help it ?</div>
+                            <div class="acc_content clearfix">
+                                Consider donating to us - you can opt for monthly donations too when you make your donations =)
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		                        <input type="hidden" name="cmd" value="_s-xclick">
+		                        <input type="hidden" name="hosted_button_id" value="CFFXWKXAJU6NE">
+		                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		                        </form>
+                            </div>
 
-						</div>
+                        </div>
 
-						<h4 class="topmargin">Consumers <small>(2)</small></h4>
+                        <h4 class="topmargin">Questions by Consumers <small>(2)</small></h4>
 
-						<div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
+                        <div class="accordion accordion-border clearfix" data-state="closed">
 
-							<div class="acctitle"><i class="acc-closed icon-download-alt"></i><i class="acc-open icon-download-alt"></i>Can any one signup ?</div>
-							<div class="acc_content clearfix">Yes ! You may <a href="{{ url_for('user.signup') }}">register here</a>.</div>
+                            <div class="acctitle"><i class="acc-closed icon-picture"></i><i class="acc-open icon-picture"></i>How can my profile be created on LyfeShoppe ?</div>
+                            <div class="acc_content clearfix">
+                            	When a business registers you as an employee or customer &amp; your profile will be automatically created.
+                            	If this happens, you will receive an email with your password.
+                            	If your profile doesnt exist; you may <a href="{{ url_for('user.signup') }}">register here</a>.
+                            </div>
 
-							<div class="acctitle"><i class="acc-closed icon-credit"></i><i class="acc-open icon-credit"></i>Can I bring in more friends to this platform ?</div>
-							<div class="acc_content clearfix">Yes! Please do. We are a small platform dedicated to making small businesses work efficiently. As our platform matures; it would help millions of businesses around the world. Your referrals help everyone on this platform</div>
+                            <div class="acctitle"><i class="acc-closed icon-file3"></i><i class="acc-open icon-file3"></i>How is LyfeShoppe useful for consumers ?</div>
+                            <div class="acc_content clearfix">All your bookings can now be found in one place. You may also search for new lifestyle services on LyfeShoppe &amp; book an appointment in a few steps.</div>
 
-						</div>
+                        </div>
 
-					</div>
+                    </div>
 
-					<div class="col_half nobottommargin col_last">
+                    <div class="col_half nobottommargin col_last">
 
-						<h4>Referrals <small>(3)</small></h4>
+                    	<h4>Questions by Business Owners <small>(3)</small></h4>
 
-						<div class="accordion accordion-border clearfix" data-state="closed">
+                        <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
 
-							<div class="acctitle"><i class="acc-closed icon-picture"></i><i class="acc-open icon-picture"></i>How does LyfeShoppe pay for referrals ?</div>
-							<div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
+                        <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-lock3"></i>How do i list my business on LyfeShoppe ?</div>
+                            <div class="acc_content clearfix">
+                        		You must first <a href="{{ url_for('user.signup') }}">register here</a>. Once registered; you can add all your businesses on LyfeShoppe.
+                            </div>
 
-							<div class="acctitle"><i class="acc-closed icon-file3"></i><i class="acc-open icon-file3"></i>How is referrals different for businesses v/s consumers ?</div>
-							<div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
+                        	<div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i class="acc-open icon-comments-alt"></i>How does lyfeshoppe help businesses ?</div>
+                            <div class="acc_content clearfix">
+                            	LyfeShoppe is a free service that helps your business manage bookings/reservations for all your clients.
+                            	You can add 100's of products, multiple employees &amp; manage all their bookings from one place.
+                            	It also helps your manage your client list, send them automated emails/reminders &amp; discover new customers for your business.
+                                Our experiments say that; with effective use; you can expect upto 300% increase in sales as our platform matures.
+                            </div>
 
-							<div class="acctitle"><i class="acc-closed icon-phone3"></i><i class="acc-open icon-phone3"></i>How can LyfeShoppe afford to give such huge referral rewards ?</div>
-							<div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
+                            <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-lock3"></i>How much revenue lift can my business expect ?</div>
+                            <div class="acc_content clearfix">
+                                Once the platform matures; you can expect to receive upto 300% boost (estimated) in sales.
+                            </div>
 
-						</div>
+                        </div>
+                        
 
-						<h4 class="topmargin">Platform <small>(2)</small></h4>
+                        <h4 class="topmargin">Platform <small>(1)</small></h4>
 
-						<div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
+                        <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
 
-							<div class="acctitle"><i class="acc-closed icon-money"></i><i class="acc-open icon-money"></i>How does ecommerce and social aspects work together ?</div>
-							<div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
+                            <div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i class="acc-open icon-comments-alt"></i>Is LyfeShoppe stable for use ?</div>
+                            <div class="acc_content clearfix">
+                            	LyfeShoppe is currently in Alpha release - if you find issues please report it under: <a href="{{url_for('issue.support')}}">Support Requests</a>
+                            </div>
+                        </div>
 
-							<div class="acctitle"><i class="acc-closed icon-bar-chart"></i><i class="acc-open icon-bar-chart"></i>Partnering with individuals and businesses to make money ?</div>
-							<div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
+                    </div>
 
-						</div>
+                </div>
 
-					</div>
+            </div>
 
-				</div>
-
-			</div>
-
-		</section><!-- #content end -->
+        </section><!-- #content end -->
 
 {% endblock %}
