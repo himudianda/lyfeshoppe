@@ -186,7 +186,7 @@ def exception_handler(app):
     # This will not execute when debug is set to True.
     mail_handler = SMTPHandler((app.config.get('MAIL_SERVER'),
                                 app.config.get('MAIL_PORT')),
-                               'bugs-noreply@lyfeshoppe.com',
+                               'lyfeshoppe@gmail.com',
                                [app.config.get('MAIL_USERNAME')],
                                '[Exception handler] A 5xx was thrown',
                                (app.config.get('MAIL_USERNAME'),

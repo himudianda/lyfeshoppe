@@ -83,7 +83,7 @@ CELERYBEAT_SCHEDULE = {
 REMEMBER_COOKIE_DURATION = timedelta(days=90)
 
 # Mail settings.
-MAIL_DEFAULT_SENDER = 'support@lyfeshoppe.com'
+MAIL_DEFAULT_SENDER = 'lyfeshoppe@gmail.com'
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True
