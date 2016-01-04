@@ -105,7 +105,7 @@ def password_reset():
 
         if login_user(u):
             flash(_('Your password has been reset.'), 'success')
-            return redirect(url_for('user.settings'))
+            return redirect(url_for('backend.launchpad'))
 
     return render_template('user/password_reset.jinja2', form=form)
 
