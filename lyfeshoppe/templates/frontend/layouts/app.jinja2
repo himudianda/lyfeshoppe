@@ -26,7 +26,6 @@
               <li {% if request.endpoint in ('page.faq') %} class="current"{% endif %}><a href="{{ url_for('page.faq') }}">FAQ</a></li>
               <li {% if request.endpoint in ('issue.support') %} class="current"{% endif %}><a href="{{ url_for('issue.support') }}">Support</a></li>
               <li {% if request.endpoint in ('page.investors') %} class="current"{% endif %}><a href="{{ url_for('page.investors') }}">Investors</a></li>
-              <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}">Businesses</a></li>
               {% if current_user.is_authenticated() %}
                 <li>
                     {% call role_urls.dashboard_url() %}
