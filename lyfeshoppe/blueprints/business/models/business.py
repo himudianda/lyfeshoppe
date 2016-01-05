@@ -648,7 +648,9 @@ class Business(ResourceMixin, db.Model):
 
     @property
     def active_employees(self):
-        return Employee.query.filter(
-                    Employee.id.in_([employee.id for employee in self.employees]),
-                    Employee.active
-                )
+        return list(
+                    Employee.query.filter(
+                        Employee.id.in_([employee.id for employee in self.employees]),
+                        Employee.active
+                    )
+            )

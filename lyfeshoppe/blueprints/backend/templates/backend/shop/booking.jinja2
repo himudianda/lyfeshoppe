@@ -167,7 +167,7 @@
                                 <i class=" icon-layers font-green"></i>&nbsp;
                                 <span class="caption-subject font-green sbold uppercase">Calendar  for  Employee:  </span>
                                 <select id="employee-select" class="bs-select input-large" data-style="green" onchange="employeeSelect()">
-                                {% for employee in business.employees %}
+                                {% for employee in business.active_employees %}
                                     <option value="{{employee.id | string}}">{{employee.user.name}}</option>
                                 {% endfor %}
                                 </select>

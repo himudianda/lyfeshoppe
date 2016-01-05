@@ -66,7 +66,7 @@ def shops_list(page, type):
 def shop_details(id):
     business = Business.query.get(id)
     employees = list()
-    for employee in business.employees:
+    for employee in business.active_employees:
         user = User.query.get(employee.user_id)
         item = {
             'name': user.name,
@@ -116,7 +116,7 @@ def shop_booking(id, product_id):
 
     # Note: A new employee may have no reservations & on the frontend
     # we want to have his calendar displayed. Hence this step
-    for employee in business.employees:
+    for employee in business.active_employees:
         employee_id = str(employee.id)
         if employee_id not in events:
             events[employee_id] = []
@@ -125,15 +125,16 @@ def shop_booking(id, product_id):
         # Note: isoformat() function below tells the browser javascript that the time is in UTC.
         # Else; It is taken as Local timezone.
         employee_id = str(reservation.employee.id)
-        events[employee_id].append({
-            "title": reservation.product.name,
-            "start": reservation.start_time.isoformat(),
-            "end": reservation.end_time.isoformat(),
-            "allDay": False,
-            "status": Reservation.STATUS[reservation.status],
-            "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
-            "reservation_id": str(reservation.id)
-        })
+        if employee_id in events:  # Inactive employee ID may not exist in events - so this check is required
+            events[employee_id].append({
+                "title": reservation.product.name,
+                "start": reservation.start_time.isoformat(),
+                "end": reservation.end_time.isoformat(),
+                "allDay": False,
+                "status": Reservation.STATUS[reservation.status],
+                "backgroundColor": Reservation.STATUS_COLORS[reservation.status],
+                "reservation_id": str(reservation.id)
+            })
 
     return render_template('backend/shop/booking.jinja2',
                            form=form,
