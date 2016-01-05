@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+    <!-- type is passed in from backend.shops_list API -->
+    {% set form_kwargs = {'type': type} %}
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -77,7 +79,7 @@
                 </div>
 
                 <div id="js-loadMore-juicy-projects" class="cbp-l-loadMore-button">
-                    {{ items.paginate(businesses) }}
+                    {{ items.paginate(businesses, form_kwargs) }}
                 </div>
 
             </div>

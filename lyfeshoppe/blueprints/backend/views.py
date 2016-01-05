@@ -39,9 +39,10 @@ def launchpad():
 
 
 # Shop -------------------------------------------------------------------
-@backend.route('/shops', defaults={'page': 1})
-@backend.route('/shops/page/<int:page>')
-def shops_list(page):
+@backend.route('/shops', defaults={'type': "all", 'page': 1})
+@backend.route('/shops/type/<string:type>', defaults={'page': 1})
+@backend.route('/shops/type/<string:type>/page/<int:page>')
+def shops_list(page, type):
     search_form = SearchForm()
     sort_by = Business.sort_by(request.args.get('sort', 'name'),
                                request.args.get('direction', 'asc'))
@@ -55,6 +56,7 @@ def shops_list(page):
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
                            businesses=paginated_businesses,
+                           type=type,
                            **business_categories)
 
 
