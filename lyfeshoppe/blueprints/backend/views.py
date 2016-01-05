@@ -39,7 +39,7 @@ def launchpad():
 
 
 # Shop -------------------------------------------------------------------
-@backend.route('/shops', defaults={'type': "all", 'page': 1})
+@backend.route('/shops', defaults={'type': "makeup", 'page': 1})
 @backend.route('/shops/type/<string:type>', defaults={'page': 1})
 @backend.route('/shops/type/<string:type>/page/<int:page>')
 def shops_list(page, type):
@@ -49,7 +49,7 @@ def shops_list(page, type):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_businesses = Business.query \
-        .filter(Business.search(request.args.get('q', ''))) \
+        .filter(Business.search(request.args.get('q', '')), Business.type == type) \
         .order_by(text(order_values)) \
         .paginate(page, 20, True)
 
