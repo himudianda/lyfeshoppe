@@ -636,3 +636,17 @@ class Business(ResourceMixin, db.Model):
         self.save()
 
         return True
+
+    @property
+    def active_products(self):
+        return Product.query.filter(
+                    Product.id.in_([product.id for product in self.products]),
+                    Product.active
+                )
+
+    @property
+    def active_employees(self):
+        return Employee.query.filter(
+                    Employee.id.in_([employee.id for employee in self.employees]),
+                    Employee.active
+                )

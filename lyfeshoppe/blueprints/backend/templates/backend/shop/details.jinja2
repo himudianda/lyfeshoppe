@@ -68,34 +68,32 @@
                                                                     <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-1-2" aria-expanded="false">
                                                                         <div class="list-toggle done uppercase bg-blue-steel">
                                                                             <div class="list-toggle-title bold">Massage</div>
-                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.products | length }}</div>
+                                                                            <div class="badge badge-default pull-right bg-white font-dark bold">{{ business.active_products | length }}</div>
                                                                         </div>
                                                                     </a>
                                                                     <div class="task-list panel-collapse collapse in" id="task-1-2">
                                                                         <ul>
-                                                                        {% for product in business.products %}
-                                                                            {% if product.active %}
-                                                                                <li class="task-list-item done">
-                                                                                    <div class="task-content">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-9">
-                                                                                                    <h5 class="uppercase bold">
-                                                                                                        {{ product.name }}
-                                                                                                    </h5>
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    <h5 class="uppercase bold">
-                                                                                                        ${{ product.price_cents/100 }}+
-                                                                                                    </h5>
-                                                                                                </div>
-                                                                                                <div class="col-md-1">
-                                                                                                    <a class="btn btn-default" href="{{ url_for('backend.shop_booking', id=business.id, product_id=product.id) }}">Book</a>
-                                                                                                </div>
+                                                                        {% for product in business.active_products %}
+                                                                            <li class="task-list-item done">
+                                                                                <div class="task-content">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-9">
+                                                                                                <h5 class="uppercase bold">
+                                                                                                    {{ product.name }}
+                                                                                                </h5>
                                                                                             </div>
-                                                                                        <p> {{ product.description }} </p>
-                                                                                    </div>
-                                                                                </li>
-                                                                            {% endif %}
+                                                                                            <div class="col-md-2">
+                                                                                                <h5 class="uppercase bold">
+                                                                                                    ${{ product.price_cents/100 }}+
+                                                                                                </h5>
+                                                                                            </div>
+                                                                                            <div class="col-md-1">
+                                                                                                <a class="btn btn-default" href="{{ url_for('backend.shop_booking', id=business.id, product_id=product.id) }}">Book</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <p> {{ product.description }} </p>
+                                                                                </div>
+                                                                            </li>
                                                                         {% endfor %}
                                                                         </ul>
                                                                     </div>
