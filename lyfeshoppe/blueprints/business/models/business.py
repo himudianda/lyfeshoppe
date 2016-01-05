@@ -421,8 +421,8 @@ class Business(ResourceMixin, db.Model):
             'art_lessons', 'music_lessons', 'stem_lessons', 'fitness_lessons',
             'beauty_lessons', 'miscellaneous_lessons'
         ],
-        "home": ['interior_decor', 'electrical', 'plumbing', 'landscaping', 'buy_sell'],
-        "auto": ['cleaning', 'mechanic', 'buy_sell'],
+        "home": ['interior_decor', 'electrical', 'plumbing', 'landscaping', 'buy_sell_home'],
+        "auto": ['cleaning', 'mechanic', 'buy_sell_auto'],
         'personal': ['dating', 'matrimonial', 'personality_dev'],
         'medical': ['dentist', 'nurse', 'doctor', 'acupuncture', 'chiropractor', 'physio']
     }
@@ -463,11 +463,11 @@ class Business(ResourceMixin, db.Model):
         ('electrical', 'Electrical'),
         ('plumbing', 'Plumbing'),
         ('landscaping', 'Landscaping'),
-        ('buy_sell', 'Buy/Sell Home, Financing'),
+        ('buy_sell_home', 'Buy/Sell Home, Financing'),
 
         ('cleaning', 'Auto Cleaning & Detailing'),
         ('mechanic', 'Auto Mechanic'),
-        ('buy_sell', 'Buy/Sell Auto, Financing'),
+        ('buy_sell_auto', 'Buy/Sell Auto, Financing'),
 
         ('dating', 'Dating Services'),
         ('matrimonial', 'Matrimonial Services'),
@@ -482,22 +482,64 @@ class Business(ResourceMixin, db.Model):
     ])
 
     BUSINESS_TYPE_IMAGES = OrderedDict([
-        ('acupuncture', 'dashboard/global/img/portfolio/600x600/013.jpg'),
-        ('barber', 'dashboard/global/img/portfolio/600x600/05.jpg'),
-        ('massage', 'dashboard/global/img/portfolio/600x600/16.jpg'),
-        ('makeup', 'dashboard/global/img/portfolio/600x600/33.jpg'),
-        ('pets_salon', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('spa', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('tattoo', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('tanning', 'dashboard/global/img/portfolio/600x600/62.jpg'),
-        ('photo_studio', 'dashboard/global/img/portfolio/600x600/81.jpg')
+        ('makeup', 'dashboard/global/img/portfolio/600x600/16.jpg'),
+        ('hair', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('tanning', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('tattoo', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('fashion', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('nail', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+
+        ('spa', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('gym', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('cardio', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+
+        ('magic', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('comedy', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('drama', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('music', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+
+        ('tennis', 'dashboard/global/img/portfolio/600x600/013.jpg'),
+        ('skating', 'dashboard/global/img/portfolio/600x600/05.jpg'),
+        ('surfing_sailing', 'dashboard/global/img/portfolio/600x600/16.jpg'),
+        ('scuba', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('football', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('soccer', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('baseball', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+
+        ('art_lessons', 'dashboard/global/img/portfolio/600x600/16.jpg'),
+        ('music_lessons', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('stem_lessons', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('fitness_lessons', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('beauty_lessons', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('miscellaneous_lessons', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+
+        ('interior_decor', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('electrical', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('plumbing', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('landscaping', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+        ('buy_sell_home', 'dashboard/global/img/portfolio/600x600/81.jpg'),
+
+        ('cleaning', 'dashboard/global/img/portfolio/600x600/05.jpg'),
+        ('mechanic', 'dashboard/global/img/portfolio/600x600/16.jpg'),
+        ('buy_sell_auto', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+
+        ('dating', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('matrimonial', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('personality_dev', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+
+        ('dentist', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('nurse', 'dashboard/global/img/portfolio/600x600/38.jpg'),
+        ('doctor', 'dashboard/global/img/portfolio/600x600/88.jpg'),
+        ('acupuncture', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('chiropractor', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+        ('physio', 'dashboard/global/img/portfolio/600x600/81.jpg')
     ])
 
     # Details
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     email = db.Column(db.String(255), index=True)
-    type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default='massage')
+    type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default=TYPE.keys()[0])
 
     opening_time = db.Column(db.Time())
     closing_time = db.Column(db.Time())
