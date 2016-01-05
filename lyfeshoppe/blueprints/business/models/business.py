@@ -417,7 +417,10 @@ class Business(ResourceMixin, db.Model):
         "health": ['spa', 'gym', 'cardio'],
         "entertainment": ['magic', 'comedy', 'drama', 'music'],
         "sport": ['tennis', 'skating', 'surfing', 'sailing', 'scuba', 'football', 'soccer', 'baseball'],
-        "lessons": ['art_lessons', 'music_lessons', 'stem_lessons', 'fitness_lessons', 'beauty_lessons', 'miscellaneous_lessons'],
+        "lessons": [
+            'art_lessons', 'music_lessons', 'stem_lessons', 'fitness_lessons',
+            'beauty_lessons', 'miscellaneous_lessons'
+        ],
         "home": ['interior_decor', 'electrical', 'plumbing', 'landscaping', 'buy_sell'],
         "auto": ['cleaning', 'mechanic', 'buy_sell'],
         'personal': ['dating', 'matrimonial', 'personality_dev'],
