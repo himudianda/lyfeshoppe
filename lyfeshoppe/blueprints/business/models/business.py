@@ -416,7 +416,7 @@ class Business(ResourceMixin, db.Model):
         "beauty": ['makeup', 'hair', 'tanning', 'tattoo', 'fashion', 'nail'],
         "health": ['spa', 'gym', 'cardio'],
         "entertainment": ['magic', 'comedy', 'drama', 'music'],
-        "sport": ['tennis', 'skating', 'surfing', 'sailing', 'scuba', 'football', 'soccer', 'baseball'],
+        "sport": ['tennis', 'skating', 'surfing_sailing', 'scuba', 'football', 'soccer', 'baseball'],
         "lessons": [
             'art_lessons', 'music_lessons', 'stem_lessons', 'fitness_lessons',
             'beauty_lessons', 'miscellaneous_lessons'
