@@ -639,10 +639,12 @@ class Business(ResourceMixin, db.Model):
 
     @property
     def active_products(self):
-        return Product.query.filter(
-                    Product.id.in_([product.id for product in self.products]),
-                    Product.active
-                )
+        return list(
+                    Product.query.filter(
+                        Product.id.in_([product.id for product in self.products]),
+                        Product.active
+                    )
+            )
 
     @property
     def active_employees(self):
