@@ -24,7 +24,7 @@
                             <div data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase"> All
                                 <div class="cbp-filter-counter"></div>
                             </div>
-                            {% for key, value in business_types.iteritems() %}
+                            {% for key, value in metros.iteritems() %}
 
                             <div data-filter=".{{ key }}" class="cbp-filter-item btn dark btn-outline uppercase"> {{ value }}
                                 <div class="cbp-filter-counter"></div>
@@ -40,7 +40,7 @@
                 <div id="js-grid-juicy-projects" class="cbp">
 
                 {% for business in businesses.items %}
-                    <div class="cbp-item {{ business.type }}">
+                    <div class="cbp-item {{ business.metro }}">
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">
                                 <img src="{{ url_for('static', filename=business_type_images[business.type]) }}" alt=""> </div>

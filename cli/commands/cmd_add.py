@@ -296,7 +296,8 @@ def businesses():
             'phone': fake.phone_number(),
             'active': "1",
             'weekends_open': random.choice(['0', '1']),
-            'address_id': (random.choice(addresses)).id
+            'address_id': (random.choice(addresses)).id,
+            'metro': random.choice(Business.METRO.keys())
         }
 
         data.append(params)

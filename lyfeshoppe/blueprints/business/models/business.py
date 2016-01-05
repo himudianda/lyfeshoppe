@@ -535,6 +535,17 @@ class Business(ResourceMixin, db.Model):
         ('physio', 'dashboard/global/img/portfolio/600x600/81.jpg')
     ])
 
+    METRO = OrderedDict([
+        ('sf', 'San Francisco Bay Area'),
+        ('ny', 'New York'),
+        ('chicago', 'Chicago'),
+        ('boston', 'Boston'),
+        ('atlanta', 'Atlanta'),
+        ('la', 'Los Angeles'),
+        ('sd', 'San Diego'),
+        ('miami', 'Miami')
+    ])
+
     # Details
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
@@ -553,6 +564,8 @@ class Business(ResourceMixin, db.Model):
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
     address = db.relationship(Address)
+    metro = db.Column(db.Enum(*METRO, name='metro'), index=True, nullable=False, server_default=METRO.keys()[0])
+
     # One to Many relationship: One business can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="business")
     products = db.relationship(Product, backref='business', passive_deletes=True)

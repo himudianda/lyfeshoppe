@@ -56,6 +56,7 @@ def shops_list(page, type):
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
                            businesses=paginated_businesses,
+                           metros=Business.METRO,
                            type=type,
                            **business_categories)
 
