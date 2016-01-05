@@ -399,16 +399,83 @@ class Product(ResourceMixin, db.Model):
 class Business(ResourceMixin, db.Model):
     __tablename__ = 'businesses'
 
+    SERVICES = OrderedDict([
+        ('beauty', 'Beauty'),
+        ('health', 'Health & Fitness'),
+        ('entertainment', 'Entertainment'),
+        ('sport', 'Sports'),
+        ('lessons', 'Educational'),
+        ('home', 'Home'),
+        ('auto', 'Auto'),
+        ('personal', 'Personal Development'),
+        ('medical', 'Medical Services'),
+        ('miscellaneous', 'Miscellaneous')
+    ])
+
+    SERVICE_TYPES = {
+        "beauty": ['makeup', 'hair', 'tanning', 'tattoo', 'fashion', 'nail'],
+        "health": ['spa', 'gym', 'cardio'],
+        "entertainment": ['magic', 'comedy', 'drama', 'music'],
+        "sport": ['tennis', 'skating', 'surfing', 'sailing', 'scuba', 'football', 'soccer', 'baseball'],
+        "lessons": ['art_lessons', 'music_lessons', 'stem_lessons', 'fitness_lessons', 'beauty_lessons', 'miscellaneous_lessons'],
+        "home": ['interior_decor', 'electrical', 'plumbing', 'landscaping', 'buy_sell'],
+        "auto": ['cleaning', 'mechanic', 'buy_sell'],
+        'personal': ['dating', 'matrimonial', 'personality_dev'],
+        'medical': ['dentist', 'nurse', 'doctor', 'acupuncture', 'chiropractor', 'physio']
+    }
+
     TYPE = OrderedDict([
-        ('acupuncture', 'Acupuncture'),
-        ('barber', 'Barber'),
-        ('massage', 'Massage'),
-        ('makeup', 'Makeup'),
-        ('pets_salon', 'Pets Salon'),
-        ('spa', 'Spa'),
-        ('tattoo', 'Tattoo'),
-        ('tanning', 'Tanning'),
-        ('photo_studio', 'Photo Studio')
+        ('makeup', 'Makeup Studio'),
+        ('hair', 'Hair Studio'),
+        ('tanning', 'Tanning Services'),
+        ('tattoo', 'Tattoo & Piercings'),
+        ('fashion', 'Fashion Services'),
+        ('nail', 'Nail Salon'),
+
+        ('spa', 'Massage & Spa Salon'),
+        ('gym', 'Gym, Strength & Crossfit'),
+        ('cardio', 'Zumba, Yoga, Pilates, Aerobics'),
+
+        ('magic', 'Magic, Hypnotism & Illusions'),
+        ('comedy', 'Comedy Shows'),
+        ('drama', 'Drama'),
+        ('music', 'DJ, Music & Orchestra'),
+
+        ('tennis', 'Tennis Training'),
+        ('skating', 'Skating & Skiing'),
+        ('surfing_sailing', 'Surfing & Sailing'),
+        ('scuba', 'Diving, Snorkel & Scuba'),
+        ('football', 'American Football'),
+        ('soccer', 'Soccer Training'),
+        ('baseball', 'Baseball Training'),
+
+        ('art_lessons', 'Design, Animation, Graphics Lessons'),
+        ('music_lessons', 'Music Lessons'),
+        ('stem_lessons', 'Science, Tech, Engineering & Math Lessons'),
+        ('fitness_lessons', 'Fitness & Health Lessons'),
+        ('beauty_lessons', 'Beauty Lessons'),
+        ('miscellaneous_lessons', 'Other Lessons & Training'),
+
+        ('interior_decor', 'Home Interior Decor'),
+        ('electrical', 'Electrical'),
+        ('plumbing', 'Plumbing'),
+        ('landscaping', 'Landscaping'),
+        ('buy_sell', 'Buy/Sell Home, Financing'),
+
+        ('cleaning', 'Auto Cleaning & Detailing'),
+        ('mechanic', 'Auto Mechanic'),
+        ('buy_sell', 'Buy/Sell Auto, Financing'),
+
+        ('dating', 'Dating Services'),
+        ('matrimonial', 'Matrimonial Services'),
+        ('personality_dev', 'Personality Development - Speaking, Mannerisma'),
+
+        ('dentist', 'Dental Services'),
+        ('nurse', 'Nurse'),
+        ('doctor', 'Doctor'),
+        ('acupuncture', 'Acu-Puncture'),
+        ('chiropractor', 'Chiropractic Services'),
+        ('physio', 'Physiotherapy')
     ])
 
     BUSINESS_TYPE_IMAGES = OrderedDict([
