@@ -34,6 +34,8 @@ SERVER_NAME = 'localhost:8000'
 # Public build path. Files in this path will be accessible to the internet.
 PUBLIC_BUILD_PATH = path.join(APP_ROOT, 'build', 'public')
 
+STATIC_FILES_PATH = path.join(APP_ROOT, 'lyfeshoppe', 'static')
+
 # Flask-Webpack (assets) settings.
 WEBPACK_MANIFEST_PATH = path.join(APP_ROOT, 'build', 'manifest.json')
 

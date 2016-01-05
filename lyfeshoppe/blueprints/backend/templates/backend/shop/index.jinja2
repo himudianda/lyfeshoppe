@@ -42,8 +42,9 @@
                 {% for business in businesses.items %}
                     <div class="cbp-item {{ business.metro }}">
                         <div class="cbp-caption">
+                            {% set front_image = type_images|random %}
                             <div class="cbp-caption-defaultWrap">
-                                <img src="{{ url_for('static', filename=business_type_images[business.type]) }}" alt=""> </div>
+                                <img src="{{ url_for('static', filename=front_image) }}" alt=""> </div>
                             <div class="cbp-caption-activeWrap">
                                 <div class="cbp-l-caption-alignCenter">
                                     <div class="cbp-l-caption-body">

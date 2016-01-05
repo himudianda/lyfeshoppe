@@ -535,6 +535,8 @@ class Business(ResourceMixin, db.Model):
         ('physio', 'dashboard/global/img/portfolio/600x600/81.jpg')
     ])
 
+    TYPE_IMAGE_DIR = 'dashboard/global/img/portfolio/600x600/'
+
     METRO = OrderedDict([
         ('sf', 'SF Bay Area'),
         ('ny', 'New York'),
