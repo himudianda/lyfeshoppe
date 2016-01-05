@@ -16,6 +16,13 @@ from lyfeshoppe.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates')
 
+business_categories = dict(
+    business_services=Business.SERVICES,
+    business_types=Business.TYPE,
+    business_service_types=Business.SERVICE_TYPES,
+    business_type_images=Business.BUSINESS_TYPE_IMAGES
+)
+
 
 @backend.before_request
 @login_required
@@ -47,9 +54,8 @@ def shops_list(page):
 
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
-                           business_types=Business.TYPE,
-                           business_type_images=Business.BUSINESS_TYPE_IMAGES,
-                           businesses=paginated_businesses)
+                           businesses=paginated_businesses,
+                           **business_categories)
 
 
 @backend.route('/shops/<string:id>')
@@ -68,7 +74,10 @@ def shop_details(id):
             'num_of_services': len(employee.products),
         }
         employees.append(item)
-    return render_template('backend/shop/details.jinja2', business=business, employees=employees)
+    return render_template(
+                'backend/shop/details.jinja2',
+                business=business, employees=employees,
+                **business_categories)
 
 
 # Account -------------------------------------------------------------------
@@ -96,7 +105,10 @@ def account_settings():
         flash(_('Your password has been reset.'), 'success')
         return redirect(url_for('backend.account_settings'))
 
-    return render_template('backend/account/settings.jinja2', form=form, password_reset_form=password_reset_form)
+    return render_template(
+                'backend/account/settings.jinja2',
+                form=form, password_reset_form=password_reset_form,
+                **business_categories)
 
 
 # Purchases -------------------------------------------------------------------
@@ -117,7 +129,8 @@ def purchases(page):
 
     return render_template('backend/purchase/index.jinja2',
                            form=search_form,
-                           purchases=paginated_reservations)
+                           purchases=paginated_reservations,
+                           **business_categories)
 
 
 # Businesses -----------------------------------------------------------------------
@@ -140,7 +153,8 @@ def businesses(page):
 
     return render_template('backend/business/index.jinja2',
                            form=search_form, bulk_form=bulk_form,
-                           businesses=paginated_businesses)
+                           businesses=paginated_businesses,
+                           **business_categories)
 
 
 @backend.route('/businesses/bulk_deactivate', methods=['POST'])
@@ -183,7 +197,7 @@ def businesses_new():
             flash(_('Business has been created successfully.'), 'success')
             return redirect(url_for('backend.businesses'))
 
-    return render_template('backend/business/new.jinja2', form=form, business=business)
+    return render_template('backend/business/new.jinja2', form=form, business=business, **business_categories)
 
 
 # Business Dashboard -------------------------------------------------------------------

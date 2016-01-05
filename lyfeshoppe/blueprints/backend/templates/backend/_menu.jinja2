@@ -1,9 +1,18 @@
-<li class="nav-item start">
-    <a href="{{ url_for('backend.shops_list') }}" class="nav-link nav-toggle">
-        <i class="icon-home"></i>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bulb"></i>
         <span class="title">LyfeShoppe</span>
         <span class="arrow"></span>
     </a>
+    <ul class="sub-menu">
+        {% for service, service_name in business_services.iteritems() %}
+            <li class="nav-item  ">
+                <a href="{{ url_for('backend.shops_list') }}" class="nav-link ">
+                    <span class="title">{{service_name}}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 </li>
 <li class="nav-item">
     <a href="{{ url_for('backend.purchases') }}" class="nav-link nav-toggle">
