@@ -331,6 +331,12 @@ class Employee(ResourceMixin, db.Model):
         # is easier to use & understand
         # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
 
+    @property
+    def total_sales(self):
+        total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
+        total_sales = total_sales_in_cents/100
+        return total_sales
+
 
 class Product(ResourceMixin, db.Model):
     __tablename__ = 'products'
