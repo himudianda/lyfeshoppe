@@ -399,6 +399,7 @@ def products():
         for i in range(0, random.randint(1, 10)):
             params = {
                 'name': fake.text(max_nb_chars=48),
+                'category': random.choice(['Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing']),
                 'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),

@@ -105,7 +105,8 @@ class CustomerForm(ModelForm):
 
 class ProductForm(ModelForm):
 
-    name = StringField(_('Product name'), [DataRequired(), Length(1, 255)])
+    name = StringField(_('Product name'), [DataRequired(), Length(1, 128)])
+    category = StringField(_('Product Category'), [DataRequired(), Length(1, 32)])
     description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
     capacity = IntegerField(_('Service Capacity'), [Optional(), NumberRange(min=1, max=1000)])
     price_cents = IntegerField(_('Price in cents'), [Optional(), NumberRange(min=1, max=1000000)])
