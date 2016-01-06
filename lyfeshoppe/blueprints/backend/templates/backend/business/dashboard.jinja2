@@ -200,222 +200,93 @@
                     <div class="portlet light ">
                         <div class="portlet-title">
                             <div class="caption font-green">
-                                <span class="caption-subject bold uppercase">Product Performance</span>
+                                <span class="caption-subject bold uppercase">Quick Stats</span>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <div id="dashboard_amchart_4" class="CSSAnimationChart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption font-green">
-                                <span class="caption-subject bold uppercase">Revenue</span>
-                                <span class="caption-helper">distance stats...</span>
-                            </div>
-                            <div class="actions">
-                                <a class="btn btn-circle btn-icon-only btn-default" href="#">
-                                    <i class="icon-cloud-upload"></i>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <a href="{{ url_for('backend.business_employees', **form_kwargs) }}">
+                                    Employees
                                 </a>
-                                <a class="btn btn-circle btn-icon-only btn-default" href="#">
-                                    <i class="icon-wrench"></i>
-                                </a>
-                                <a class="btn btn-circle btn-icon-only btn-default" href="#">
-                                    <i class="icon-trash"></i>
-                                </a>
-                                <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"> </a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="dashboard_amchart_1" class="CSSAnimationChart"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption font-red">
-                                <span class="caption-subject bold uppercase">Finance</span>
-                                <span class="caption-helper">distance stats...</span>
-                            </div>
-                            <div class="actions">
-                                <a href="#" class="btn btn-circle green btn-outline btn-sm">
-                                    <i class="fa fa-pencil"></i> Export </a>
-                                <a href="#" class="btn btn-circle green btn-outline btn-sm">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="dashboard_amchart_3" class="CSSAnimationChart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <!-- BEGIN REGIONAL STATS PORTLET-->
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="icon-share font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Regional Stats</span>
-                            </div>
-                            <div class="actions">
-                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                    <i class="icon-cloud-upload"></i>
-                                </a>
-                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                    <i class="icon-wrench"></i>
-                                </a>
-                                <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
-                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                    <i class="icon-trash"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="region_statistics_loading">
-                                <img src="{{ url_for('static', filename='dashboard/global/img/loading.gif') }}" alt="loading" /> </div>
-                            <div id="region_statistics_content" class="display-none">
-                                <div class="btn-toolbar margin-bottom-10">
-                                    <div class="btn-group btn-group-circle" data-toggle="buttons">
-                                        <a href="" class="btn grey-salsa btn-sm active"> Users </a>
-                                        <a href="" class="btn grey-salsa btn-sm"> Orders </a>
+                                <span class="pull-right text-muted">
+                                  {{ group_and_count_employees.total }}
+                                </span>
+                              </div>
+                              <div class="panel-body">
+                                {% for item in group_and_count_employees.query %}
+                                  {% set percent = ((item[0] / group_and_count_employees.total) * 100) | round %}
+                                  <h5>
+                                    {{ item[1] | title }}
+                                    <span class="text-muted">({{ item[0] }})</span>
+                                  </h5>
+                                  <div class="progress progress-striped active">
+                                    <div class="progress-bar" role="progressbar"
+                                         aria-valuenow="{{ percent }}" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: {{ percent }}%;">
+                                      {{ percent }}%
                                     </div>
-                                    <div class="btn-group pull-right">
-                                        <a href="" class="btn btn-circle grey-salsa btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Select Region
-                                            <span class="fa fa-angle-down"> </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <a href="javascript:;" id="regional_stat_world"> World </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" id="regional_stat_usa"> USA </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" id="regional_stat_europe"> Europe </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" id="regional_stat_russia"> Russia </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" id="regional_stat_germany"> Germany </a>
-                                            </li>
-                                        </ul>
+                                  </div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <a href="{{ url_for('backend.business_products', **form_kwargs) }}">
+                                    Products
+                                </a>
+                                <span class="pull-right text-muted">
+                                  {{ group_and_count_products.total }}
+                                </span>
+                              </div>
+                              <div class="panel-body">
+                                {% for item in group_and_count_products.query %}
+                                  {% set percent = ((item[0] / group_and_count_products.total) * 100) | round %}
+                                  <h5>
+                                    {{ item[1] | title }}
+                                    <span class="text-muted">({{ item[0] }})</span>
+                                  </h5>
+                                  <div class="progress progress-striped active">
+                                    <div class="progress-bar" role="progressbar"
+                                         aria-valuenow="{{ percent }}" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: {{ percent }}%;">
+                                      {{ percent }}%
                                     </div>
-                                </div>
-                                <div id="vmap_world" class="vmaps display-none"> </div>
-                                <div id="vmap_usa" class="vmaps display-none"> </div>
-                                <div id="vmap_europe" class="vmaps display-none"> </div>
-                                <div id="vmap_russia" class="vmaps display-none"> </div>
-                                <div id="vmap_germany" class="vmaps display-none"> </div>
+                                  </div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                {% set form_kwargs = {'id': business.id, 'call':"view"} %}
+                                <a href="{{ url_for('backend.business_calendar', **form_kwargs) }}">
+                                    Reservations
+                                </a>
+                                <span class="pull-right text-muted">
+                                  {{ group_and_count_reservations.total }}
+                                </span>
+                              </div>
+                              <div class="panel-body">
+                                {% for item in group_and_count_reservations.query %}
+                                  {% set percent = ((item[0] / group_and_count_reservations.total) * 100) | round %}
+                                  <h5>
+                                    {{ item[1] | title }}
+                                    <span class="text-muted">({{ item[0] }})</span>
+                                  </h5>
+                                  <div class="progress progress-striped active">
+                                    <div class="progress-bar" role="progressbar"
+                                         aria-valuenow="{{ percent }}" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: {{ percent }}%;">
+                                      {{ percent }}%
+                                    </div>
+                                  </div>
+                                {% endfor %}
+                              </div>
                             </div>
                         </div>
                     </div>
-                    <!-- END REGIONAL STATS PORTLET-->
                 </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-3">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-
-                    <a href="{{ url_for('backend.business_employees', **form_kwargs) }}">
-                        Employees
-                    </a>
-
-                    <span class="pull-right text-muted">
-                      {{ group_and_count_employees.total }}
-                    </span>
-                  </div>
-                  <div class="panel-body">
-                    {% for item in group_and_count_employees.query %}
-                      {% set percent = ((item[0] / group_and_count_employees.total) * 100) | round %}
-                      <h5>
-                        {{ item[1] | title }}
-                        <span class="text-muted">({{ item[0] }})</span>
-                      </h5>
-                      <div class="progress progress-striped active">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="{{ percent }}" aria-valuemin="0"
-                             aria-valuemax="100" style="width: {{ percent }}%;">
-                          {{ percent }}%
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-              <div class="col-md-3">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <a href="{{ url_for('backend.business_products', **form_kwargs) }}">
-                        Products
-                    </a>
-                    <span class="pull-right text-muted">
-                      {{ group_and_count_products.total }}
-                    </span>
-                  </div>
-                  <div class="panel-body">
-                    {% for item in group_and_count_products.query %}
-                      {% set percent = ((item[0] / group_and_count_products.total) * 100) | round %}
-                      <h5>
-                        {{ item[1] | title }}
-                        <span class="text-muted">({{ item[0] }})</span>
-                      </h5>
-                      <div class="progress progress-striped active">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="{{ percent }}" aria-valuemin="0"
-                             aria-valuemax="100" style="width: {{ percent }}%;">
-                          {{ percent }}%
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-              <div class="col-md-3">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    {% set form_kwargs = {'id': business.id, 'call':"view"} %}
-                    <a href="{{ url_for('backend.business_calendar', **form_kwargs) }}">
-                        Reservations
-                    </a>
-                    <span class="pull-right text-muted">
-                      {{ group_and_count_reservations.total }}
-                    </span>
-                  </div>
-                  <div class="panel-body">
-                    {% for item in group_and_count_reservations.query %}
-                      {% set percent = ((item[0] / group_and_count_reservations.total) * 100) | round %}
-                      <h5>
-                        {{ item[1] | title }}
-                        <span class="text-muted">({{ item[0] }})</span>
-                      </h5>
-                      <div class="progress progress-striped active">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="{{ percent }}" aria-valuemin="0"
-                             aria-valuemax="100" style="width: {{ percent }}%;">
-                          {{ percent }}%
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-
         </div>
         <!-- END CONTENT BODY -->
     </div>

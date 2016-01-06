@@ -63,7 +63,7 @@ class BusinessDashboard(object):
 
         :return: dict
         """
-        return cls._group_and_count(business, Product, Product.duration_mins)
+        return cls._group_and_count(business, Product, Product.category)
 
     @classmethod
     def group_and_count_reservations(cls, business):
