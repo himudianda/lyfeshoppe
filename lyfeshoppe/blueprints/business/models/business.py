@@ -678,3 +678,14 @@ class Business(ResourceMixin, db.Model):
         total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
         total_sales = total_sales_in_cents/100
         return total_sales
+
+    @property
+    def reservation_statuses_count(self):
+        statuses = dict()
+        for status in Reservation.STATUS.keys():
+            statuses[status] = 0
+
+        for reservation in self.reservations:
+            statuses[reservation.status] += 1
+
+        return statuses
