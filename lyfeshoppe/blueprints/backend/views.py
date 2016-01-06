@@ -21,8 +21,7 @@ backend = Blueprint('backend', __name__, template_folder='templates')
 business_categories = dict(
     business_services=Business.SERVICES,
     business_types=Business.TYPE,
-    business_service_types=Business.SERVICE_TYPES,
-    business_type_images=Business.BUSINESS_TYPE_IMAGES
+    business_service_types=Business.SERVICE_TYPES
 )
 
 
@@ -57,8 +56,8 @@ def shops_list(page, type):
         .paginate(page, 20, True)
 
     type_images = []
-    for img_file in os.listdir(os.path.join(STATIC_FILES_PATH, Business.TYPE_IMAGE_DIR)):
-        type_images.append(os.path.join(Business.TYPE_IMAGE_DIR, img_file))
+    for img_file in os.listdir(os.path.join(STATIC_FILES_PATH, Business.TYPE_IMAGE_DIR[type])):
+        type_images.append(os.path.join(Business.TYPE_IMAGE_DIR[type], img_file))
 
     return render_template('backend/shop/index.jinja2',
                            form=search_form,

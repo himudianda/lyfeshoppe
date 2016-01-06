@@ -481,61 +481,59 @@ class Business(ResourceMixin, db.Model):
         ('physio', 'Physiotherapy')
     ])
 
-    BUSINESS_TYPE_IMAGES = OrderedDict([
-        ('makeup', 'dashboard/global/img/portfolio/600x600/16.jpg'),
-        ('hair', 'dashboard/global/img/portfolio/600x600/33.jpg'),
-        ('tanning', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('tattoo', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('fashion', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('nail', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+    TYPE_IMAGE_DIR = OrderedDict([
+        ('makeup', 'dashboard/global/img/portfolio/Beauty/Makeup'),
+        ('hair', 'dashboard/global/img/portfolio/Beauty/Hair'),
+        ('tanning', 'dashboard/global/img/portfolio/Beauty/Tanning'),
+        ('tattoo', 'dashboard/global/img/portfolio/Beauty/Tattoo'),
+        ('fashion', 'dashboard/global/img/portfolio/Beauty/Fashion'),
+        ('nail', 'dashboard/global/img/portfolio/Beauty/Nail'),
 
-        ('spa', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('gym', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('cardio', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('spa', 'dashboard/global/img/portfolio/Health/Spa'),
+        ('gym', 'dashboard/global/img/portfolio/Health/Gym'),
+        ('cardio', 'dashboard/global/img/portfolio/Health/Cardio'),
 
-        ('magic', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('comedy', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('drama', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('music', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+        ('magic', 'dashboard/global/img/portfolio/test'),
+        ('comedy', 'dashboard/global/img/portfolio/test'),
+        ('drama', 'dashboard/global/img/portfolio/test'),
+        ('music', 'dashboard/global/img/portfolio/test'),
 
-        ('tennis', 'dashboard/global/img/portfolio/600x600/013.jpg'),
-        ('skating', 'dashboard/global/img/portfolio/600x600/05.jpg'),
-        ('surfing_sailing', 'dashboard/global/img/portfolio/600x600/16.jpg'),
-        ('scuba', 'dashboard/global/img/portfolio/600x600/33.jpg'),
-        ('football', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('soccer', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('baseball', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('tennis', 'dashboard/global/img/portfolio/test'),
+        ('skating', 'dashboard/global/img/portfolio/test'),
+        ('surfing_sailing', 'dashboard/global/img/portfolio/test'),
+        ('scuba', 'dashboard/global/img/portfolio/test'),
+        ('football', 'dashboard/global/img/portfolio'),
+        ('soccer', 'dashboard/global/img/portfolio/test'),
+        ('baseball', 'dashboard/global/img/portfolio/test'),
 
-        ('art_lessons', 'dashboard/global/img/portfolio/600x600/16.jpg'),
-        ('music_lessons', 'dashboard/global/img/portfolio/600x600/33.jpg'),
-        ('stem_lessons', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('fitness_lessons', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('beauty_lessons', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('miscellaneous_lessons', 'dashboard/global/img/portfolio/600x600/62.jpg'),
+        ('art_lessons', 'dashboard/global/img/portfolio/test'),
+        ('music_lessons', 'dashboard/global/img/portfolio/test'),
+        ('stem_lessons', 'dashboard/global/img/portfolio/test'),
+        ('fitness_lessons', 'dashboard/global/img/portfolio/test'),
+        ('beauty_lessons', 'dashboard/global/img/portfolio/test'),
+        ('miscellaneous_lessons', 'dashboard/global/img/portfolio/test'),
 
-        ('interior_decor', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('electrical', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('plumbing', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('landscaping', 'dashboard/global/img/portfolio/600x600/62.jpg'),
-        ('buy_sell_home', 'dashboard/global/img/portfolio/600x600/81.jpg'),
+        ('interior_decor', 'dashboard/global/img/portfolio/test'),
+        ('electrical', 'dashboard/global/img/portfolio/test'),
+        ('plumbing', 'dashboard/global/img/portfolio/test'),
+        ('landscaping', 'dashboard/global/img/portfolio/test'),
+        ('buy_sell_home', 'dashboard/global/img/portfolio/test'),
 
-        ('cleaning', 'dashboard/global/img/portfolio/600x600/05.jpg'),
-        ('mechanic', 'dashboard/global/img/portfolio/600x600/16.jpg'),
-        ('buy_sell_auto', 'dashboard/global/img/portfolio/600x600/33.jpg'),
+        ('cleaning', 'dashboard/global/img/portfolio/test'),
+        ('mechanic', 'dashboard/global/img/portfolio/test'),
+        ('buy_sell_auto', 'dashboard/global/img/portfolio/test'),
 
-        ('dating', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('matrimonial', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('personality_dev', 'dashboard/global/img/portfolio/600x600/02.jpg'),
+        ('dating', 'dashboard/global/img/portfolio/test'),
+        ('matrimonial', 'dashboard/global/img/portfolio/test'),
+        ('personality_dev', 'dashboard/global/img/portfolio/test'),
 
-        ('dentist', 'dashboard/global/img/portfolio/600x600/33.jpg'),
-        ('nurse', 'dashboard/global/img/portfolio/600x600/38.jpg'),
-        ('doctor', 'dashboard/global/img/portfolio/600x600/88.jpg'),
-        ('acupuncture', 'dashboard/global/img/portfolio/600x600/02.jpg'),
-        ('chiropractor', 'dashboard/global/img/portfolio/600x600/62.jpg'),
-        ('physio', 'dashboard/global/img/portfolio/600x600/81.jpg')
+        ('dentist', 'dashboard/global/img/portfolio/test'),
+        ('nurse', 'dashboard/global/img/portfolio/test'),
+        ('doctor', 'dashboard/global/img/portfolio/test'),
+        ('acupuncture', 'dashboard/global/img/portfolio/test'),
+        ('chiropractor', 'dashboard/global/img/portfolio/test'),
+        ('physio', 'dashboard/global/img/portfolio/test')
     ])
-
-    TYPE_IMAGE_DIR = 'dashboard/global/img/portfolio/600x600/'
 
     METRO = OrderedDict([
         ('sf', 'SF Bay Area'),
