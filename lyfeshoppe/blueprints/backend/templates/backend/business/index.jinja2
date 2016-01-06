@@ -70,6 +70,9 @@
                                                     <th class="col-header">
                                                         Visit Dashboard
                                                     </th>
+                                                    <th class="col-header">
+                                                        Visit Shop Profile
+                                                    </th>
                                                     <th id="bulk_actions" colspan="5">
                                                         <div class="form-inline">
                                                             {{ f.field(bulk_form.scope, inline=True) }}
@@ -114,6 +117,12 @@
                                                         <td>
                                                             <a href="{{ url_for('backend.business_dashboard', id=business.id) }}" class="btn btn-outline btn-circle red btn-sm blue">
                                                                 <i class="fa fa-share"></i> Dashboard
+                                                            </a>
+
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ url_for('backend.shop_details', id=business.id) }}" class="btn btn-outline btn-circle yellow btn-sm blue">
+                                                                <i class="fa fa-share"></i> Shop Profile
                                                             </a>
 
                                                         </td>
