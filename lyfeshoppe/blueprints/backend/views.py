@@ -83,9 +83,17 @@ def shop_details(id):
             'num_of_services': len(employee.products),
         }
         employees.append(item)
+
+    products = dict()
+    for product in business.products:
+        if product.category not in products:
+            products[product.category] = []
+        products[product.category].append(product)
+
     return render_template(
                 'backend/shop/details.jinja2',
                 business=business, employees=employees,
+                products=products,
                 **business_categories)
 
 
