@@ -65,6 +65,8 @@ class BusinessForm(ModelForm):
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
     active = BooleanField(_('Yes, Business is active'))
 
+    metro = SelectField(_('Metro'), [DataRequired()],
+                        choices=choices_from_dict(Business.METRO, prepend_blank=False))
     street = StringField(_('Street Address'), [DataRequired(), Length(1, 255)])
     city = StringField(_('City'), [DataRequired(), Length(1, 30)])
     state = StringField(_('State'), [DataRequired(), Length(1, 30)])
