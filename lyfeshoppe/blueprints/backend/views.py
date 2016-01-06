@@ -51,7 +51,7 @@ def shops_list(page, type):
         .filter(Business.search(request.args.get('q', '')), Business.type == type) \
         .filter(Business.active) \
         .order_by(text(order_values)) \
-        .paginate(page, 20, True)
+        .paginate(page, 1000, True)
 
     type_images = Business.type_images(type)
 
