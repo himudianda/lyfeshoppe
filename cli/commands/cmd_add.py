@@ -298,7 +298,12 @@ def businesses():
             'active': "1",
             'weekends_open': random.choice(['0', '1']),
             'address_id': (random.choice(addresses)).id,
-            'metro': random.choice(Business.METRO.keys())
+            'metro': random.choice(Business.METRO.keys()),
+            'website': 'https://lyfeshoppe.com',
+            'twitter': 'https://twitter.com/TwitterSmallBiz',
+            'facebook': 'https://www.facebook.com/LyfeShoppe-220689458262111',
+            'youtube': 'https://www.youtube.com/channel/UCFv2NRs9s0vlgMdjCcWU9pQ',
+            'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
         }
 
         data.append(params)

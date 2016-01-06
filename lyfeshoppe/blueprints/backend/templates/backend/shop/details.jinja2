@@ -186,20 +186,35 @@
                                                         <div class="col-md-8 profile-info">
                                                             <h1 class="font-green sbold uppercase">{{ business.name }}</h1>
                                                             <p>{{ business.about }}</p>
-                                                            <p><a href="{{ business.website }}">{{ business.website }}</a></p>
+
+                                                            {% if business.website %}
+                                                                <p><a href="{{ business.website }}">{{ business.website }}</a></p>
+                                                            {% endif %}
                                                             <ul class="list-inline">
-                                                                <li>
-                                                                    <a href="{{ business.twitter }}"><i class="fa fa-twitter"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ business.facebook }}"><i class="fa fa-facebook"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ business.youtube }}"><i class="fa fa-youtube-play"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ business.linkedin }}"><i class="fa fa-linkedin"></i></a>
-                                                                </li>
+                                                                {% if business.twitter %}
+                                                                    <li>
+                                                                        <a href="{{ business.twitter }}"><i class="fa fa-twitter"></i></a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                {% if business.facebook %}
+                                                                    <li>
+                                                                        <a href="{{ business.facebook }}"><i class="fa fa-facebook"></i></a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                {% if business.youtube %}
+                                                                    <li>
+                                                                        <a href="{{ business.youtube }}"><i class="fa fa-youtube-play"></i></a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                {% if business.linkedin %}
+                                                                    <li>
+                                                                        <a href="{{ business.linkedin }}"><i class="fa fa-linkedin"></i></a>
+                                                                    </li>
+                                                                {% endif %}
+
                                                             </ul>
                                                             <ul class="list-inline">
                                                                 <li>
