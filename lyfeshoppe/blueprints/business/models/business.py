@@ -672,3 +672,9 @@ class Business(ResourceMixin, db.Model):
         for img_file in os.listdir(os.path.join(STATIC_FILES_PATH, cls.TYPE_IMAGE_DIR[type])):
             type_images.append(os.path.join(cls.TYPE_IMAGE_DIR[type], img_file))
         return type_images
+
+    @property
+    def total_sales(self):
+        total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
+        total_sales = total_sales_in_cents/100
+        return total_sales

@@ -610,7 +610,6 @@ def business_product_edit(id, product_id):
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
 
 
-
 # Business Calendar -------------------------------------------------------------------
 @backend.route('/businesses/<int:id>/calendar/<string:call>', methods=['GET', 'POST'])
 @is_staff_authorized

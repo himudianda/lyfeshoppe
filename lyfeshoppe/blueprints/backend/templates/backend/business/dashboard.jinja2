@@ -25,11 +25,11 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                <span data-counter="counterup" data-value="1349">0</span>
+                                <span data-counter="counterup" data-value="{{ business.reservations|length }}"></span>
                             </div>
-                            <div class="desc"> Reviews/Recommendations </div>
+                            <div class="desc"> Total Reservations </div>
                         </div>
-                        <a class="more" href="javascript:;"> View more
+                        <a class="more" href="{{ url_for('backend.business_calendar', id=business.id, call='view') }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -41,10 +41,10 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                <span data-counter="counterup" data-value="12,5">0</span>M$ </div>
-                            <div class="desc"> Total Profit </div>
+                                $<span data-counter="counterup" data-value="{{ business.total_sales }}">0</span> </div>
+                            <div class="desc"> Total Sales </div>
                         </div>
-                        <a class="more" href="javascript:;"> View more
+                        <a class="more" href="{{ url_for('backend.business_calendar', id=business.id, call='view') }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
