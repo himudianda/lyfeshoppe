@@ -1,8 +1,10 @@
 from collections import OrderedDict
 from sqlalchemy import or_, UniqueConstraint
 import pytz
-from flask_login import current_user
+import os
 
+from config.settings import STATIC_FILES_PATH
+from flask_login import current_user
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from lyfeshoppe.blueprints.common.models import Address, Occupancy, Availability
 from lyfeshoppe.blueprints.user.models import User
@@ -663,3 +665,10 @@ class Business(ResourceMixin, db.Model):
                         Employee.active
                     )
             )
+
+    @classmethod
+    def type_images(cls, type):
+        type_images = []
+        for img_file in os.listdir(os.path.join(STATIC_FILES_PATH, cls.TYPE_IMAGE_DIR[type])):
+            type_images.append(os.path.join(cls.TYPE_IMAGE_DIR[type], img_file))
+        return type_images

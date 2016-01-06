@@ -4,9 +4,7 @@ from sqlalchemy import text
 from flask_babel import ngettext as _n
 from flask_babel import gettext as _
 import json
-import os
 
-from config.settings import STATIC_FILES_PATH
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
@@ -55,9 +53,7 @@ def shops_list(page, type):
         .order_by(text(order_values)) \
         .paginate(page, 20, True)
 
-    type_images = []
-    for img_file in os.listdir(os.path.join(STATIC_FILES_PATH, Business.TYPE_IMAGE_DIR[type])):
-        type_images.append(os.path.join(Business.TYPE_IMAGE_DIR[type], img_file))
+    type_images = Business.type_images(type)
 
     return render_template('backend/shop/index.jinja2',
                            form=search_form,
@@ -91,10 +87,13 @@ def shop_details(id):
             products[product.category] = []
         products[product.category].append(product)
 
+    type_images = Business.type_images(business.type)
+
     return render_template(
                 'backend/shop/details.jinja2',
                 business=business, employees=employees,
                 products=products,
+                type_images=type_images,
                 **business_categories)
 
 
