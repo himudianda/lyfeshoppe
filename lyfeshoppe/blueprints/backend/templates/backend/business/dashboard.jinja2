@@ -56,11 +56,11 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                <span data-counter="counterup" data-value="549">0</span>
+                                <span data-counter="counterup" data-value="{{business.customers|length}}">0</span>
                             </div>
-                            <div class="desc"> New Reservations </div>
+                            <div class="desc"> Number of Customers </div>
                         </div>
-                        <a class="more" href="javascript:;"> View more
+                        <a class="more" href="{{ url_for('backend.business_customers', id=business.id) }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -72,10 +72,10 @@
                         </div>
                         <div class="details">
                             <div class="number"> +
-                                <span data-counter="counterup" data-value="89"></span>% </div>
-                            <div class="desc"> Brand Popularity </div>
+                                $<span data-counter="counterup" data-value="{{ business.total_sales/business.reservations|length }}"></span> </div>
+                            <div class="desc"> Avg. Transaction Size </div>
                         </div>
-                        <a class="more" href="javascript:;"> View more
+                        <a class="more" href="{{ url_for('backend.business_products', id=business.id) }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
