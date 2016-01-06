@@ -71,8 +71,14 @@
                             <i class="fa fa-globe"></i>
                         </div>
                         <div class="details">
-                            <div class="number"> +
-                                $<span data-counter="counterup" data-value="{{ business.total_sales/business.reservations|length }}"></span> </div>
+                            <div class="number">
+                                {% if business.reservations|length %}
+                                    $<span data-counter="counterup" data-value="{{ business.total_sales/business.reservations|length }}"></span>
+                                {% else %}
+                                    $<span data-counter="counterup" data-value="0"></span>
+                                {% endif %}
+                            </div>
+                                }
                             <div class="desc"> Avg. Transaction Size </div>
                         </div>
                         <a class="more" href="{{ url_for('backend.business_products', id=business.id) }}"> View more
