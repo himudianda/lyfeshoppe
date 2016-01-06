@@ -79,7 +79,6 @@ def shop_details(id):
             'email': user.email,
             'city': user.address.city if user.address else "Unknown",
             'phone': user.phone,
-            'services': ','.join([str(product.id) for product in employee.products]),
             'total_reservations': len(employee.reservations),
             'num_of_services': len(employee.products),
         }
