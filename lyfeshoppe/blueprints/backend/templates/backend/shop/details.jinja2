@@ -186,19 +186,19 @@
                                                         <div class="col-md-8 profile-info">
                                                             <h1 class="font-green sbold uppercase">{{ business.name }}</h1>
                                                             <p>{{ business.about }}</p>
-                                                            <p><a href="#">www.website.com</a></p>
+                                                            <p><a href="{{ business.website }}">{{ business.website }}</a></p>
                                                             <ul class="list-inline">
                                                                 <li>
-                                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                                    <a href="{{ business.twitter }}"><i class="fa fa-twitter"></i></a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                                    <a href="{{ business.facebook }}"><i class="fa fa-facebook"></i></a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                                                    <a href="{{ business.youtube }}"><i class="fa fa-youtube-play"></i></a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                                    <a href="{{ business.linkedin }}"><i class="fa fa-linkedin"></i></a>
                                                                 </li>
                                                             </ul>
                                                             <ul class="list-inline">

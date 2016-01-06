@@ -64,6 +64,12 @@ class BusinessForm(ModelForm):
     weekends_open = BooleanField(_('Yes, Open on weekends'))
 
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
+    website = StringField(_('Website'), [Optional(), Length(0, 32)])
+    twitter = StringField(_('Twitter Profile'), [Optional(), Length(0, 64)])
+    facebook = StringField(_('Facebook Profile'), [Optional(), Length(0, 64)])
+    youtube = StringField(_('Youtube Profile'), [Optional(), Length(0, 64)])
+    linkedin = StringField(_('LinkedIn Profile'), [Optional(), Length(0, 64)])
+
     active = BooleanField(_('Yes, Business is active'))
 
     metro = SelectField(_('Metro'), [DataRequired()],

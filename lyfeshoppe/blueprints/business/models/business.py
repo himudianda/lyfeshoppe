@@ -561,6 +561,11 @@ class Business(ResourceMixin, db.Model):
     weekends_open = db.Column('is_open_weekends', db.Boolean(), server_default='0')
 
     phone = db.Column(db.String(20), index=True)
+    website = db.Column(db.String(32))
+    twitter = db.Column(db.String(64))
+    facebook = db.Column(db.String(64))
+    youtube = db.Column(db.String(64))
+    linkedin = db.Column(db.String(64))
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     # Relationships.
