@@ -220,6 +220,7 @@ class Employee(ResourceMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.Enum(*ROLE, name='employee_roles'), index=True, nullable=False, server_default='member')
+    about = db.Column(db.Text())
 
     # Relationships.
     # Many to One relationship: Many employees can have same user
@@ -553,6 +554,7 @@ class Business(ResourceMixin, db.Model):
     name = db.Column(db.String(255))
     email = db.Column(db.String(255), index=True)
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default=TYPE.keys()[0])
+    about = db.Column(db.Text())
 
     opening_time = db.Column(db.Time())
     closing_time = db.Column(db.Time())

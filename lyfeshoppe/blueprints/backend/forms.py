@@ -58,6 +58,7 @@ class BusinessForm(ModelForm):
     email = EmailField(_("Email Address"), [DataRequired(), Length(3, 255)])
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
+    about = TextAreaField(_("About the Business"), [Optional(), Length(3, 2048)])
     opening_time = TimeField(_('Business Open time'), [DataRequired()])
     closing_time = TimeField(_('Business Close time'), [DataRequired()])
     weekends_open = BooleanField(_('Yes, Open on weekends'))
@@ -80,6 +81,7 @@ class EmployeeForm(ModelForm):
     email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
     phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+    about = TextAreaField(_("About the Employee"), [Optional(), Length(3, 2048)])
     street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
     city = StringField(_('City'), [Optional(), Length(1, 30)])
     state = StringField(_('State'), [Optional(), Length(1, 30)])

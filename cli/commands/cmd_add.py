@@ -291,6 +291,7 @@ def businesses():
             'name': fake.company(),
             'email': fake.company_email(),
             'type': random.choice(Business.TYPE.keys()),
+            'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
             'opening_time': datetime.strptime('08:00:00', '%H:%M:%S').time(),
             'closing_time': datetime.strptime('18:30:00', '%H:%M:%S').time(),
             'phone': fake.phone_number(),
@@ -438,6 +439,7 @@ def employees():
                 'business_id': business.id,
                 'user_id': admin_employee.id,
                 'products': Product.query.filter(Product.business_id == business.id).all(),
+                'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'active': '1'
             }
             data.append(params)
@@ -452,6 +454,7 @@ def employees():
                 'business_id': business.id,
                 'user_id': member_employee.id,
                 'products': Product.query.filter(Product.business_id == business.id).all(),
+                'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'active': '1'
             }
             data.append(params)

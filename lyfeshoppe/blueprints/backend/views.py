@@ -77,6 +77,7 @@ def shop_details(id):
         item = {
             'name': user.name,
             'email': user.email,
+            'about': employee.about,
             'city': user.address.city if user.address else "Unknown",
             'phone': user.phone,
             'total_reservations': len(employee.reservations),
