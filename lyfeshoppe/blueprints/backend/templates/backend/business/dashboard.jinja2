@@ -73,7 +73,7 @@
                         <div class="details">
                             <div class="number">
                                 {% if business.reservations|length %}
-                                    $<span data-counter="counterup" data-value="{{ business.total_sales/business.reservations|length }}"></span>
+                                    $<span data-counter="counterup" data-value="{{ '%0.2f'| format( (business.total_sales/business.reservations|length)|float) }}"></span>
                                 {% else %}
                                     $<span data-counter="counterup" data-value="0"></span>
                                 {% endif %}
@@ -104,7 +104,7 @@
                                 <div class="col-md-4">
                                     <div class="easy-pie-chart">
                                         <div class="number transactions" data-percent="55">
-                                            <span> {{ business.reservation_statuses_count['new'] / business.reservations|length * 100 }}</span>% </div>
+                                            <span> {{ '%0.1f'| format( business.reservation_statuses_count['new'] / business.reservations|length * 100 ) }}</span>% </div>
                                         <a class="title" href="javascript:;"> New Bookings
                                         </a>
                                     </div>
@@ -113,7 +113,7 @@
                                 <div class="col-md-4">
                                     <div class="easy-pie-chart">
                                         <div class="number visits" data-percent="85">
-                                            <span> {{ business.reservation_statuses_count['executed'] / business.reservations|length * 100 }}</span>% </div>
+                                            <span> {{ '%0.1f'| format( business.reservation_statuses_count['executed'] / business.reservations|length * 100 ) }}</span>% </div>
                                         <a class="title" href="javascript:;"> Executed Bookings
                                         </a>
                                     </div>
@@ -122,7 +122,7 @@
                                 <div class="col-md-4">
                                     <div class="easy-pie-chart">
                                         <div class="number bounce" data-percent="46">
-                                            <span> {{ business.reservation_statuses_count['cancelled'] / business.reservations|length * 100 }}</span>% </div>
+                                            <span> {{ '%0.1f'| format( business.reservation_statuses_count['cancelled'] / business.reservations|length * 100 ) }}</span>% </div>
                                         <a class="title" href="javascript:;"> Cancelled Bookings
                                         </a>
                                     </div>
@@ -187,7 +187,7 @@
                                             <td> {{employee.reservations|length}} </td>
                                             <td> {{employee.products|length}} </td>
                                             <td>
-                                                <span class="bold theme-font">{{(employee.reservations|length / business.reservations|length)*100}}%</span>
+                                                <span class="bold theme-font">{{'%0.1f'| format( (employee.reservations|length / business.reservations|length)*100 )}}%</span>
                                             </td>
                                         </tr>
                                     {% endfor %}
