@@ -36,7 +36,7 @@ class DateTimePickerWidget(object):
     Date Time picker from Eonasdan GitHub
     """
     data_template = (
-                     "<div class='input-group date' id='datetimepicker1'>"
+                     "<div class='input-group date' id='datetimepicker'>"
                      "<input type='text' class='form-control' />"
                      "<span class='input-group-addon'>"
                      "<span class='glyphicon glyphicon-calendar'></span>"
