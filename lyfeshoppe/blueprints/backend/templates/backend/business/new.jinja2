@@ -34,35 +34,19 @@
                 });
 
             $("#opening_time_datetimepicker").on("dp.change", function (e) {
-                console.log(e.date);
-
                 var moment_date = e.date;
-                var time = moment(moment_date).format("h:mm A");
-
-                console.log(time);
-
-                $("#opening_time_datetimepicker input").val(time);
-                $("#opening_time_datetimepicker input").text(time);
-
-                console.log($("#opening_time_datetimepicker input").val());
-                console.log($("#opening_time_datetimepicker input").text());
-
+                //var time = moment(moment_date).format("h:mm A");
+                var time = moment(moment_date).format("HH:mm:ss");
+                $("#opening_time").val(time);
+                $("#opening_time").text(time);
             });
 
             $("#closing_time_datetimepicker").on("dp.change", function (e) {
-                console.log(e.date);
-
                 var moment_date = e.date;
-                var time = moment(moment_date).format("h:mm A");
-
-                console.log(time);
-
-                $("#closing_time_datetimepicker input").val(time);
-                $("#closing_time_datetimepicker input").text(time);
-
-                console.log($("#closing_time_datetimepicker input").val());
-                console.log($("#closing_time_datetimepicker input").text());
-
+                //var time = moment(moment_date).format("hh:mm A");
+                var time = moment(moment_date).format("HH:mm:ss");
+                $("#closing_time").val(time);
+                $("#closing_time").text(time);
             });
 
         });

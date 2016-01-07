@@ -38,13 +38,11 @@ class DateTimePickerWidget(object):
     """
     Date Time picker from Eonasdan GitHub
     """
-    data_template = (
-                     "<div class='input-group date' %(id_text)s>"
-                     "<input type='text' class='form-control' />"
-                     "<span class='input-group-addon'>"
-                     "<span class='glyphicon glyphicon-calendar'></span>"
-                     "</span>"
-                     "</div>"
+    data_template = ('<div class="input-group date" %(id_text)s>'
+                     '<span class="input-group-addon"><i class="fa fa-calendar cursor-hand"></i>'
+                     '</span>'
+                     '<input class="form-control" %(text)s/>'
+                     '</div>'
                      )
 
     def __call__(self, field, **kwargs):
