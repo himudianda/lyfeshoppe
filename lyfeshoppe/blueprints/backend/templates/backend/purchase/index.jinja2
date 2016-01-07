@@ -14,89 +14,101 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
 
-            <!-- BEGIN PAGE HEADER-->
-            <h3 class="page-title"> Purchases. </h3>
-            <!-- END PAGE HEADER-->
-
             <div class="row">
-                <div class="col-md-6">
-                  {{ f.search('backend.purchases', form_kwargs) }}
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                    <div class="portlet box red">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building"></i>Purchases</div>
+                        </div>
+                        <div class="portlet-body">
+
+
+
+                            <div class="row">
+                                {% if purchases.total == 0 %}
+                                    <h3>No results found</h3>
+                                    {% if request.args.get('q') %}
+                                        <p>Try limiting or removing your search terms.</p>
+                                    {% else %}
+                                        <p>There are no purchases present.</p>
+                                    {% endif %}
+                                {% else %}
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-header">
+                                                    {{ items.sort('product.name', 'Service Name') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('business.name', 'Business Name') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('employee.user.name', 'Staff Name') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('status', 'Status') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('start_time', 'Starts in') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('start_time', 'Start time') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('end_time', 'End time') }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for purchase in purchases.items %}
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            {{ purchase.product.name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            {{ purchase.business.name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            {{ purchase.employee.user.name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{ purchase.status }}
+                                                    </td>
+                                                    <!-- Trick from: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times -->
+                                                    <!-- # Under section: Integrating moment.js -->
+                                                    <td>
+                                                        {{ momentjs(purchase.start_time).fromNow() }}
+                                                    </td>
+                                                    <td>
+                                                        {{ momentjs(purchase.start_time).format("MMM Do YYYY, h:mm a") }}
+                                                    </td>
+                                                    <td>
+                                                        {{ momentjs(purchase.end_time).format("MMM Do YYYY, h:mm a") }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {{ items.paginate(purchases, form_kwargs) }}
+                                {% endif %}
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <!-- END SAMPLE TABLE PORTLET-->
                 </div>
-            </div>
-
-            <div class="row">
-                {% if purchases.total == 0 %}
-                    <h3>No results found</h3>
-                    {% if request.args.get('q') %}
-                        <p>Try limiting or removing your search terms.</p>
-                    {% else %}
-                        <p>There are no purchases present.</p>
-                    {% endif %}
-                {% else %}
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="col-header">
-                                    {{ items.sort('product.name', 'Service Name') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('business.name', 'Business Name') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('employee.user.name', 'Staff Name') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('status', 'Status') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('start_time', 'Starts in') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('start_time', 'Start time') }}
-                                </th>
-                                <th class="col-header">
-                                    {{ items.sort('end_time', 'End time') }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for purchase in purchases.items %}
-                                <tr>
-                                    <td>
-                                        <div>
-                                            {{ purchase.product.name }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {{ purchase.business.name }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {{ purchase.employee.user.name }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{ purchase.status }}
-                                    </td>
-                                    <!-- Trick from: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times -->
-                                    <!-- # Under section: Integrating moment.js -->
-                                    <td>
-                                        {{ momentjs(purchase.start_time).fromNow() }}
-                                    </td>
-                                    <td>
-                                        {{ momentjs(purchase.start_time).format("MMM Do YYYY, h:mm a") }}
-                                    </td>
-                                    <td>
-                                        {{ momentjs(purchase.end_time).format("MMM Do YYYY, h:mm a") }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {{ items.paginate(purchases, form_kwargs) }}
-                {% endif %}
             </div>
         </div>
         <!-- END CONTENT BODY -->
