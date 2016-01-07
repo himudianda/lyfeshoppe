@@ -7,7 +7,7 @@ from wtforms import HiddenField, SelectField, StringField, DateTimeField, Boolea
 from wtforms_components import EmailField, IntegerField, TimeField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Reservation
+from lyfeshoppe.blueprints.business.models.business import Business, Reservation
 
 try:
     from instance import settings
