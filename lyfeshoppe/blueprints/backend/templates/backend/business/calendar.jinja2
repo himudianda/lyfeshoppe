@@ -244,8 +244,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="col-md-9" id="edit-start-time">
-                                                          {% call f.form_group(edit_form.start_time, css_class='sm-margin-bottom') %}
-                                                          {% endcall %}
+                                                            <h5><strong>Start Time:</strong></h5>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,13 +254,12 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <div class="col-md-9" id="edit-end-time">
-                                                              {% call f.form_group(edit_form.end_time, css_class='sm-margin-bottom') %}
-                                                              {% endcall %}
+                                                              <h5><strong>End Time:</strong></h5>
+                                                                <p></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <strong>NOTE:</strong> These times are in GMT (may not be your local timezone)
                                                 <!--/span-->
                                                 <div>
                                                     {{ edit_form.reservation_id() }}
@@ -459,10 +458,10 @@
                             $('#edit-customer-name p').text($('#customer-select option:selected').text());
                             $('#edit-product-name p').text($('#product-select option:selected').text());
 
-                            event.start.local().utc() // Convets start to UTC for formatting
-                            event.end.local().utc() // Convets end to UTC for formatting
-                            $('#edit-start-time #start_time').val(event.start.format('YYYY-MM-DD HH:mm:ss'));
-                            $('#edit-end-time #end_time').val(event.end.format('YYYY-MM-DD HH:mm:ss'));
+                            //event.start.local().utc() // Convets start to UTC for formatting
+                            //event.end.local().utc() // Convets end to UTC for formatting
+                            $('#edit-start-time p').text(event.start.format('MMM Do YYYY, h:mm a'));
+                            $('#edit-end-time p').text(event.end.format('MMM Do YYYY, h:mm a'));
 
                             $('#editEventModal').modal('show');
                         }

@@ -133,8 +133,6 @@ class ReservationForm(ModelForm):
 
 class ReservationEditForm(ModelForm):
     reservation_id = HiddenField()
-    start_time = DateTimeField(_('Start time (in GMT timezone)'), [Optional()], format='%Y-%m-%d %H:%M:%S')
-    end_time = DateTimeField(_('End time (in GMT timezone)'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     status = SelectField(_('Reservation Status'), [DataRequired()],
                          choices=choices_from_dict(Reservation.STATUS,
                          prepend_blank=False))

@@ -644,14 +644,6 @@ def business_calendar(id, call):
         reservation = Reservation.query.get_or_404(reservation_id)
 
         reservation.status = request.form.get('status')
-        start_time = request.form.get('start_time')
-        end_time = request.form.get('end_time')
-
-        if start_time:
-            reservation.start_time = start_time
-
-        if end_time:
-            reservation.end_time = end_time
 
         reservation.save()
         flash(_('Reservation has been saved modified.'), 'success')
