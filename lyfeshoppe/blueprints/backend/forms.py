@@ -60,8 +60,8 @@ class BusinessForm(ModelForm):
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
     about = TextAreaField(_("About the Business"), [Optional(), Length(3, 2048)])
-    opening_time = TimeField(_('Opening time'), [wtforms.validators.required()], widget=DateTimePickerWidget())
-    closing_time = TimeField(_('Closing time'), [wtforms.validators.required()], widget=DateTimePickerWidget())
+    opening_time = TimeField(_('Opening time'), [DataRequired()], widget=DateTimePickerWidget())
+    closing_time = TimeField(_('Closing time'), [DataRequired()], widget=DateTimePickerWidget())
     weekends_open = BooleanField(_('Yes, Open on weekends'))
 
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
