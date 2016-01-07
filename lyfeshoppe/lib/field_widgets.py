@@ -39,7 +39,7 @@ class DateTimePickerWidget(object):
     Date Time picker from Eonasdan GitHub
     """
     data_template = (
-                     "<div class='input-group date' id='datetimepicker'>"
+                     "<div class='input-group date' %(id_text)s>"
                      "<input type='text' class='form-control' />"
                      "<span class='input-group-addon'>"
                      "<span class='glyphicon glyphicon-calendar'></span>"
@@ -59,7 +59,10 @@ class DateTimePickerWidget(object):
                     'text': html_params(
                         type='text',
                         value=field.data,
-                        **kwargs)
+                        **kwargs),
+                    # Example: id will be "opening_time_datetimepicker" for the
+                    # opening_time field in BusinessForm
+                    'id_text': html_params(id=field.id+'_datetimepicker')
                     }
                 )
 
