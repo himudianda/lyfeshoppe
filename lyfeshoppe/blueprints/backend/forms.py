@@ -3,7 +3,7 @@ from collections import OrderedDict
 from lyfeshoppe.lib.util_wtforms import ModelForm
 import wtforms
 from flask_wtf import Form
-from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField, DateField
+from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField
 from wtforms_components import EmailField, IntegerField, TimeField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
@@ -22,7 +22,7 @@ except AttributeError:
     LANGUAGES = settings.LANGUAGES
 
 from lyfeshoppe.lib.util_wtforms import choices_from_dict
-from lyfeshoppe.lib.field_widgets import DatePickerWidget
+from lyfeshoppe.lib.field_widgets import DateTimePickerWidget
 
 
 class SearchForm(Form):
@@ -60,8 +60,8 @@ class BusinessForm(ModelForm):
     type = SelectField(_('Business Type'), [DataRequired()],
                        choices=choices_from_dict(Business.TYPE, prepend_blank=False))
     about = TextAreaField(_("About the Business"), [Optional(), Length(3, 2048)])
-    opening_time = DateField('Start at', [wtforms.validators.required()], widget=DatePickerWidget())
-    closing_time = TimeField(_('Business Close time'), [DataRequired()])
+    opening_time = TimeField(_('Opening time'), [wtforms.validators.required()], widget=DateTimePickerWidget())
+    closing_time = TimeField(_('Closing time'), [wtforms.validators.required()], widget=DateTimePickerWidget())
     weekends_open = BooleanField(_('Yes, Open on weekends'))
 
     phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])

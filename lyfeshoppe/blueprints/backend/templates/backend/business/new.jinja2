@@ -25,7 +25,13 @@
     <script type="text/javascript">
 
         $(function () {
-            $('#opening_time_datepicker').datetimepicker();
+
+            $('#opening_time_datetimepicker').datetimepicker({
+                    format: 'LT'
+                });
+            $('#closing_time_datetimepicker').datetimepicker({
+                    format: 'LT'
+                });
         });
 
     </script>
