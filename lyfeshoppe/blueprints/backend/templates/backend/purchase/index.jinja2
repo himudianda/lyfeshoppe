@@ -78,10 +78,10 @@
                                         {{ purchase.status }}
                                     </td>
                                     <td>
-                                        {{ purchase.start_time }}
+                                        {{ purchase.start_time | datetime}}
                                     </td>
                                     <td>
-                                        {{ purchase.end_time }}
+                                        {{ purchase.end_time | datetime }}
                                     </td>
                                 </tr>
                             {% endfor %}
