@@ -31,6 +31,7 @@ from lyfeshoppe.extensions import (
 )
 from lyfeshoppe.blueprints.billing.template_processors import format_currency
 from lyfeshoppe.blueprints.backend.template_processors import format_datetime
+from lyfeshoppe.lib.momentjs import momentjs
 
 FLASK_BLUEPRINTS = [
     admin,
@@ -127,6 +128,8 @@ def template_processors(app):
     app.jinja_env.add_extension('jinja2.ext.do')
     app.jinja_env.filters['format_currency'] = format_currency
     app.jinja_env.filters['datetime'] = format_datetime
+
+    app.jinja_env.globals['momentjs'] = momentjs
 
     return app.jinja_env
 

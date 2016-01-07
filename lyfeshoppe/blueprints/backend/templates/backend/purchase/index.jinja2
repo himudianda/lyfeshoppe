@@ -49,10 +49,13 @@
                                     {{ items.sort('status', 'Status') }}
                                 </th>
                                 <th class="col-header">
-                                    {{ items.sort('start_time', 'Start time (Pacific Time)') }}
+                                    {{ items.sort('start_time', 'Starts in') }}
                                 </th>
                                 <th class="col-header">
-                                    {{ items.sort('end_time', 'End time (Pacific Time)') }}
+                                    {{ items.sort('start_time', 'Start time') }}
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('end_time', 'End time') }}
                                 </th>
                             </tr>
                         </thead>
@@ -77,11 +80,16 @@
                                     <td>
                                         {{ purchase.status }}
                                     </td>
+                                    <!-- Trick from: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times -->
+                                    <!-- # Under section: Integrating moment.js -->
                                     <td>
-                                        {{ purchase.start_time | datetime}}
+                                        {{ momentjs(purchase.start_time).fromNow() }}
                                     </td>
                                     <td>
-                                        {{ purchase.end_time | datetime }}
+                                        {{ momentjs(purchase.start_time).format("MMM Do YYYY, h:mm a") }}
+                                    </td>
+                                    <td>
+                                        {{ momentjs(purchase.end_time).format("MMM Do YYYY, h:mm a") }}
                                     </td>
                                 </tr>
                             {% endfor %}
