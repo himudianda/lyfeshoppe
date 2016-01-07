@@ -11,7 +11,7 @@ class DatePickerWidget(object):
     """
     Date Time picker from Eonasdan GitHub
     """
-    data_template = ('<div class="input-group date" id="datepicker">'
+    data_template = ('<div class="input-group date" %(id_text)s>'
                      '<span class="input-group-addon"><i class="fa fa-calendar cursor-hand"></i>'
                      '</span>'
                      '<input class="form-control" data-format="yyyy-MM-dd" %(text)s/>'
@@ -27,7 +27,10 @@ class DatePickerWidget(object):
 
         return HTMLString(template % {'text': html_params(type='text',
                                       value=field.data,
-                                      **kwargs)
+                                      **kwargs),
+                                      # Example: id will be "opening_time_datepicker" for the
+                                      # opening_time field in BusinessForm
+                                      'id_text': html_params(id=field.id+'_datepicker')
                                       })
 
 
