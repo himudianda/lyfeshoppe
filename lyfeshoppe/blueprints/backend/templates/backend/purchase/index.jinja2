@@ -70,9 +70,10 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div>
-                                                            {{ purchase.business.name }}
-                                                        </div>
+
+                                                    <a href="{{ url_for('backend.shop_details', id=purchase.business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <i class="fa fa-share"></i> {{ purchase.business.name }}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <div>
@@ -80,8 +81,18 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {{ purchase.status }}
+                                                        {% if purchase.status == 'new' %}
+                                                            {% set data = "label label-md label-warning label" %}
+                                                        {% elif purchase.status == 'confirmed' %}
+                                                            {% set data = "label label-md label-success label" %}
+                                                        {% elif purchase.status == 'executed' %}
+                                                            {% set data = "label label-md label-info label" %}
+                                                        {% elif purchase.status == 'cancelled' %}
+                                                            {% set data = "label label-md label-danger label" %}
+                                                        {% endif %}
+                                                        <span class="{{ data }}"> {{ purchase.status }} </span>
                                                     </td>
+
                                                     <!-- Trick from: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times -->
                                                     <!-- # Under section: Integrating moment.js -->
                                                     <td>
@@ -100,10 +111,6 @@
                                     {{ items.paginate(purchases, form_kwargs) }}
                                 {% endif %}
                             </div>
-
-
-
-
 
                         </div>
                     </div>
