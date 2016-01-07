@@ -37,7 +37,13 @@
                         <thead>
                             <tr>
                                 <th class="col-header">
-                                    {{ items.sort('id', 'Id') }}
+                                    {{ items.sort('product.name', 'Service Name') }}
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('business.name', 'Business Name') }}
+                                </th>
+                                <th class="col-header">
+                                    {{ items.sort('employee.user.name', 'Staff Name') }}
                                 </th>
                                 <th class="col-header">
                                     {{ items.sort('status', 'Status') }}
@@ -55,7 +61,17 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            {{ purchase.id }}
+                                            {{ purchase.product.name }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {{ purchase.business.name }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {{ purchase.employee.user.name }}
                                         </div>
                                     </td>
                                     <td>
