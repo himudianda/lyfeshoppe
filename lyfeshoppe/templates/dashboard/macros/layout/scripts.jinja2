@@ -109,9 +109,6 @@
   {% if request.endpoint in ('backend.business_dashboard') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
   {% endif %}
-  {% if request.endpoint in ('backend.businesses_new', 'backend.businesses_edit') %}
-      <script src="{{ url_for('static', filename='dashboard/pages/scripts/form-samples.min.js') }}" type="text/javascript"></script>
-  {% endif %}
   {% if request.endpoint in ('backend.business_calendar') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-modals.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-bootstrap-select.min.js') }}" type="text/javascript"></script>
