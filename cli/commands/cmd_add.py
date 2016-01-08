@@ -7,7 +7,6 @@ from faker import Faker
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.common.models import Availability, Occupancy
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
 
 SEED_ADMIN_EMAIL = None
@@ -257,41 +256,6 @@ def employee_product_relations():
 
 
 @click.command()
-def availabilities():
-    """
-    Create random product availabilities.
-    """
-    data = []
-
-    products = db.session.query(Product).all()
-    for product in products:
-        for i in range(0, random.randint(1, 12)):
-
-            # Create a fake unix timestamp in the future.
-            start_time = fake.date_time_between(
-                start_date='now', end_date='+1d').strftime('%s')
-            end_time = fake.date_time_between(
-                start_date=start_time, end_date='+2d').strftime('%s')
-
-            start_time = datetime.utcfromtimestamp(
-                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-            end_time = datetime.utcfromtimestamp(
-                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-            params = {
-                'type': 'product',
-                'start_time': start_time,
-                'end_time': end_time,
-                'product_id': product.id,
-                'active': '1'
-            }
-
-            data.append(params)
-
-    return _bulk_insert(Availability, data, 'availabilities')
-
-
-@click.command()
 def reservations():
     """
     Create random reservations.
@@ -344,7 +308,6 @@ def all(ctx):
     ctx.invoke(employees)
     ctx.invoke(products)
     ctx.invoke(employee_product_relations)
-    ctx.invoke(availabilities)
     ctx.invoke(customers)
     ctx.invoke(reservations)
     return None
@@ -355,7 +318,6 @@ cli.add_command(businesses)
 cli.add_command(employees)
 cli.add_command(products)
 cli.add_command(employee_product_relations)
-cli.add_command(availabilities)
 cli.add_command(customers)
 cli.add_command(reservations)
 cli.add_command(all)
