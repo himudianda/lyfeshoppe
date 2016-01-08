@@ -88,10 +88,9 @@ class User(UserMixin, ResourceMixin, db.Model):
             form.populate_obj(new_user)
             customer_email = new_user.email
         else:
-            if 'email' in params:
-                customer_email = params.get('email', None)
+            customer_email = params.get('email', None)
 
-        user = User.find_by_identity(customer_email)
+        user = User.find_by_identity(customer_email) if customer_email else None
         if not user:
             if from_form:
                 user = cls()
