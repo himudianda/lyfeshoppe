@@ -288,19 +288,22 @@ def reservations():
 
             # Create a fake unix timestamp in the future.
             duration = product.duration_mins
-            start_time = fake.date_time_this_month()
+            start_time = random.choice([
+                                    fake.date_time_this_month(before_now=True, after_now=False),
+                                    fake.date_time_this_month(before_now=False, after_now=True)
+                                ])
             end_time = start_time + timedelta(minutes=duration)
 
-            start_time = start_time.replace(tzinfo=pytz.utc)
-            end_time = end_time.replace(tzinfo=pytz.utc)
-
-            if end_time < datetime.now().replace(tzinfo=pytz.utc):
+            if end_time < datetime.now():
                 status = "executed"
             else:
                 import copy
                 statuses = copy.deepcopy(Reservation.STATUS)
                 del statuses['executed']
                 status = random.choice(statuses.keys())
+
+            start_time = start_time.replace(tzinfo=pytz.utc)
+            end_time = end_time.replace(tzinfo=pytz.utc)
 
             params = {
                 'status': status,
