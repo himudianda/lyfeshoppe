@@ -110,7 +110,7 @@ class User(UserMixin, ResourceMixin, db.Model):
             user.password = pwd
             user = user.save()
 
-            if from_form:
+            if not from_form:
                 # Only send email if user created as part of Employeee OR customer creation
                 # Using a form.
                 from lyfeshoppe.blueprints.user.tasks import deliver_new_user_email
