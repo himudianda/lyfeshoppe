@@ -203,11 +203,12 @@ def products():
     """
     Create random products.
     """
-    data = []
     businesses = db.session.query(Business).all()
 
     for business in businesses:
         num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
+
+        employees = db.session.query(Employee).filter(Employee.business_id == business.id)
         for i in range(0, num_of_products):
             params = {
                 'name': fake.text(max_nb_chars=48),
@@ -216,12 +217,14 @@ def products():
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),
                 'duration_mins': random.randint(10, 180),
-                'business_id': business.id
+                'business_id': business.id,
+                'employees': list(employees)
             }
 
-            data.append(params)
+            product = Product(**params)
+            product.save()
 
-    return _bulk_insert(Product, data, 'products')
+    _log_status(Product.query.count(), "products")
 
 
 @click.command()
@@ -308,6 +311,7 @@ def all(ctx):
     ctx.invoke(issues)
     ctx.invoke(businesses)
     ctx.invoke(employees)
+    ctx.invoke(products)
     return None
 
 
@@ -315,4 +319,5 @@ cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(businesses)
 cli.add_command(employees)
+cli.add_command(products)
 cli.add_command(all)
