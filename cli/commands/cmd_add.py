@@ -270,7 +270,9 @@ def reservations():
 
         customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
         employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
-        products = db.session.query(Product).filter(Product.business_id == business.id).all()
+        products = db.session.query(Product).filter(
+                                                Product.business_id == business.id
+                                            ).all()
 
         if not customers or not products or not employees:
             continue
@@ -291,7 +293,8 @@ def reservations():
             if end_time < datetime.now().replace(tzinfo=pytz.utc):
                 status = "executed"
             else:
-                statuses = Reservation.STATUS
+                import copy
+                statuses = copy.deepcopy(Reservation.STATUS)
                 del statuses['executed']
                 status = random.choice(statuses.keys())
 
