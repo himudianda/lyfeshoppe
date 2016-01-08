@@ -98,27 +98,44 @@ def users():
     """
     Create random users.
     """
+<<<<<<< HEAD
     for i in range(0, NUM_OF_FAKE_USERS):
         user_params = {
             'email': fake.email(),
             'password': User.encrypt_password('fakepassword'),
+=======
+    data = []
+
+    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
+    random_emails = [fake.email() for i in range(0, NUM_OF_FAKE_USERS-1)]
+    random_emails.append(SEED_ADMIN_EMAIL)
+    random_emails = list(set(random_emails))
+    addresses = db.session.query(Address).all()
+
+    for email in random_emails:
+        params = {
+            'role': 'member',
+            'email': email,
+            'password': User.encrypt_password('password'),
+>>>>>>> parent of 1d6dd10... changed test data password
             'name': fake.name(),
-            'locale': random.choice(ACCEPT_LANGUAGES),
-            'address': address
+            'locale': random.choice(ACCEPT_LANGUAGES)
         }
 
-        User.get_or_create(user_params)
+        u = User(**user_params)
+        u.save()
 
     admin_user_params = {
-        'email': SEED_ADMIN_EMAIL,
+        'email': "dev@localhost.com",
         'password': User.encrypt_password('fakepassword'),
         'name': "Harshit Imudianda",
         'locale': 'en',
-        'role': 'admin',
-        'address': address
+        'role': 'admin'
     }
 
-    User.get_or_create(admin_user_params)
+    u = User(**admin_user_params)
+    u.save()
+
     _log_status(User.query.count(), 'users')
 
 
