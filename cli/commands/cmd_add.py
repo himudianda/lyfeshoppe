@@ -158,8 +158,8 @@ def customers():
     """
     data = []
 
-    user_ids = db.session.query(User.id).distinct()
-    business_ids = db.session.query(Business.id).distinct()
+    user_ids = list(db.session.query(User.id).distinct())
+    business_ids = list(db.session.query(Business.id).distinct())
 
     for business_id in business_ids:
         num_of_customers = random.randint(0, MAX_CUSTOMERS_PER_BUSINESS)
@@ -182,7 +182,7 @@ def products():
     Create random products.
     """
     data = []
-    business_ids = db.session.query(Business.id).distinct()
+    business_ids = list(db.session.query(Business.id).distinct())
 
     for business_id in business_ids:
         num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
