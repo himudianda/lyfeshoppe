@@ -175,7 +175,6 @@ def employees():
     """
     Create random employees.
     """
-    data = []
     users = db.session.query(User).all()
     businesses = db.session.query(Business).all()
 
@@ -193,9 +192,10 @@ def employees():
                 'active': '1'
             }
 
-            data.append(params)
+            employee = Employee(**params)
+            employee.save()
 
-    return _bulk_insert(Employee, data, 'employees')
+    _log_status(Employee.query.count(), "employees")
 
 
 @click.command()
@@ -209,6 +209,10 @@ def products():
         num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
 
         employees = db.session.query(Employee).filter(Employee.business_id == business.id)
+        employees_list = list(employees)
+        if not employees_list:
+            continue
+
         for i in range(0, num_of_products):
             params = {
                 'name': fake.text(max_nb_chars=48),
@@ -218,9 +222,8 @@ def products():
                 'price_cents': random.randint(100, 100000),
                 'duration_mins': random.randint(10, 180),
                 'business_id': business.id,
-                'employees': list(employees)
+                'employees': random.sample(employees_list, random.randint(1, len(employees_list)))
             }
-
             product = Product(**params)
             product.save()
 
