@@ -637,38 +637,6 @@ class Business(ResourceMixin, db.Model):
 
         return True
 
-    @classmethod
-    def get_or_create(cls, params=None, from_form=False, form=None):
-        """
-        Return whether or not the business was created successfully.
-
-        :return: bool
-        """
-
-        if from_form:
-            business = cls()
-            form.populate_obj(business)
-            business_id = business.id
-        else:
-            business_id = params.get('id', None)
-
-        business = Business.query.get(business_id) if business_id else None
-        if not business:
-            if from_form:
-                business = cls()
-                form.populate_obj(business)
-
-                # Create Business Address
-                business.address = Address()
-                form.populate_obj(business.address)
-            else:
-                business = cls(**params)
-                business.address = Address(**params.get('address', {}))
-
-            business = business.save()
-
-        return business
-
     def modify_from_form(self, form):
         """
         Return whether or not the business was modified successfully.

@@ -88,9 +88,10 @@ class User(UserMixin, ResourceMixin, db.Model):
             form.populate_obj(new_user)
             customer_email = new_user.email
         else:
-            customer_email = params.get('email', None)
+            if 'email' in params:
+                customer_email = params.get('email', None)
 
-        user = User.find_by_identity(customer_email) if customer_email else None
+        user = User.find_by_identity(customer_email)
         if not user:
             if from_form:
                 user = cls()
@@ -101,7 +102,6 @@ class User(UserMixin, ResourceMixin, db.Model):
                 form.populate_obj(user.address)
             else:
                 user = cls(**params)
-                user.address = Address(**params.get('address', {}))
 
             # Generate a random password
             pwd_size = 8

@@ -6,7 +6,12 @@ from faker import Faker
 
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
+from lyfeshoppe.blueprints.issue.models import Issue
 from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.common.models import Address, Availability, Occupancy
+from lyfeshoppe.blueprints.billing.models.invoice import Invoice
+from lyfeshoppe.blueprints.billing.models.coupon import Coupon
+from lyfeshoppe.blueprints.billing.gateways.stripecom import Coupon as PaymentCoupon
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
 
 SEED_ADMIN_EMAIL = None
@@ -33,11 +38,12 @@ fake = Faker()
 app = create_app()
 db.app = app
 
+NUM_OF_FAKE_ADDRESSES = 25
 NUM_OF_FAKE_USERS = 50
+NUM_OF_FAKE_ISSUES = 50
+NUM_OF_FAKE_COUPONS = 5
 NUM_OF_FAKE_BUSINESSES = 200
-MAX_CUSTOMERS_PER_BUSINESS = 50
-MAX_PRODUCTS_PER_BUSINESS = 30
-MAX_EMPLOYEES_PER_BUSINESS = 10
+NUM_OF_FAKE_RESERVATIONS = 10000
 
 
 def _log_status(count, model_label):
@@ -83,14 +89,25 @@ def cli():
     pass
 
 
-address = {
-    'street': fake.street_address(),
-    'city': fake.city(),
-    'state': fake.state(),
-    'zipcode': fake.zipcode(),
-    'district': fake.city(),
-    'country': fake.country()
-}
+@click.command()
+def addresses():
+    """
+        Create random addresses
+    """
+    data = []
+    for i in range(0, NUM_OF_FAKE_ADDRESSES):
+        params = {
+            'street': fake.street_address(),
+            'city': fake.city(),
+            'state': fake.state(),
+            'zipcode': fake.zipcode(),
+            'district': fake.city(),
+            'country': fake.country()
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Address, data, 'addresses')
 
 
 @click.command()
@@ -98,12 +115,6 @@ def users():
     """
     Create random users.
     """
-<<<<<<< HEAD
-    for i in range(0, NUM_OF_FAKE_USERS):
-        user_params = {
-            'email': fake.email(),
-            'password': User.encrypt_password('fakepassword'),
-=======
     data = []
 
     # Ensure we get about 50 unique random emails, +1 due to the seeded email.
@@ -117,26 +128,152 @@ def users():
             'role': 'member',
             'email': email,
             'password': User.encrypt_password('password'),
->>>>>>> parent of 1d6dd10... changed test data password
             'name': fake.name(),
-            'locale': random.choice(ACCEPT_LANGUAGES)
+            'locale': random.choice(ACCEPT_LANGUAGES),
+            'address_id': (random.choice(addresses)).id
         }
 
-        u = User(**user_params)
-        u.save()
+        # Ensure the seeded admin is always an admin.
+        if email == SEED_ADMIN_EMAIL:
+            params['role'] = 'admin'
+            params['locale'] = 'en'
 
-    admin_user_params = {
-        'email': "dev@localhost.com",
-        'password': User.encrypt_password('fakepassword'),
-        'name': "Harshit Imudianda",
-        'locale': 'en',
-        'role': 'admin'
-    }
+        data.append(params)
 
-    u = User(**admin_user_params)
-    u.save()
+    return _bulk_insert(User, data, 'users')
 
-    _log_status(User.query.count(), 'users')
+
+@click.command()
+def issues():
+    """
+    Create random issues.
+    """
+    data = []
+
+    for i in range(0, NUM_OF_FAKE_ISSUES):
+        params = {
+            'status': random.choice(Issue.STATUS.keys()),
+            'label': random.choice(Issue.LABEL.keys()),
+            'email': fake.email(),
+            'question': fake.paragraph()
+        }
+
+        data.append(params)
+
+    return _bulk_insert(Issue, data, 'issues')
+
+
+@click.command()
+def coupons():
+    """
+    Create random coupons.
+    """
+    data = []
+
+    for i in range(0, NUM_OF_FAKE_COUPONS):
+        random_pct = random.random()
+        duration = random.choice(Coupon.DURATION.keys())
+
+        # Create a fake unix timestamp in the future.
+        redeem_by = fake.date_time_between(start_date='now',
+                                           end_date='+1y').strftime('%s')
+
+        # Bulk inserts need the same columns, so let's setup a few nulls.
+        params = {
+            'code': Coupon.random_coupon_code(),
+            'duration': duration,
+            'percent_off': None,
+            'amount_off': None,
+            'currency': None,
+            'redeem_by': None,
+            'max_redemptions': None,
+            'duration_in_months': None,
+        }
+
+        if random_pct >= 0.5:
+            params['percent_off'] = random.randint(1, 100)
+            params['max_redemptions'] = random.randint(15, 50)
+        else:
+            params['amount_off'] = random.randint(1, 1337)
+            params['currency'] = 'usd'
+
+        if random_pct >= 0.75:
+            params['redeem_by'] = redeem_by
+
+        if duration == 'repeating':
+            duration_in_months = random.randint(1, 12)
+            params['duration_in_months'] = duration_in_months
+
+        PaymentCoupon.create(**params)
+
+        # Our database requires a Date object, not a unix timestamp.
+        if redeem_by:
+            params['redeem_by'] = datetime.utcfromtimestamp(float(redeem_by)) \
+                .strftime('%Y-%m-%dT%H:%M:%S Z')
+
+        if 'id' in params:
+            params['code'] = params.get('id')
+            del params['id']
+
+        data.append(params)
+
+    return _bulk_insert(Coupon, data, 'coupons')
+
+
+@click.command()
+def invoices():
+    """
+    Create random invoices.
+    """
+    data = []
+
+    users = db.session.query(User).all()
+
+    for user in users:
+        for i in range(0, random.randint(1, 12)):
+            # Create a fake unix timestamp in the future.
+            created_on = fake.date_time_between(
+                start_date='-1y', end_date='now').strftime('%s')
+            period_start_on = fake.date_time_between(
+                start_date='now', end_date='+1y').strftime('%s')
+            period_end_on = fake.date_time_between(
+                start_date=period_start_on, end_date='+14d').strftime('%s')
+            exp_date = fake.date_time_between(
+                start_date='now', end_date='+2y').strftime('%s')
+
+            created_on = datetime.utcfromtimestamp(
+                float(created_on)).strftime('%Y-%m-%dT%H:%M:%S Z')
+            period_start_on = datetime.utcfromtimestamp(
+                float(period_start_on)).strftime('%Y-%m-%d')
+            period_end_on = datetime.utcfromtimestamp(
+                float(period_end_on)).strftime('%Y-%m-%d')
+            exp_date = datetime.utcfromtimestamp(
+                float(exp_date)).strftime('%Y-%m-%d')
+
+            plans = ['BRONZE', 'GOLD', 'PLATINUM']
+            cards = ['Visa', 'Mastercard', 'AMEX',
+                     'J.C.B', "Diner's Club"]
+
+            params = {
+                'created_on': created_on,
+                'updated_on': created_on,
+                'user_id': user.id,
+                'receipt_number': fake.md5(),
+                'description': '{0} MONTHLY'.format(random.choice(plans)),
+                'period_start_on': period_start_on,
+                'period_end_on': period_end_on,
+                'currency': 'usd',
+                'tax': random.random() * 100,
+                'tax_percent': random.random() * 10,
+                'total': random.random() * 1000,
+                'brand': random.choice(cards),
+                'last4': random.randint(1000, 9000),
+                'exp_date': exp_date
+            }
+
+            data.append(params)
+
+    return _bulk_insert(Invoice, data, 'invoices')
 
 
 @click.command()
@@ -144,6 +281,11 @@ def businesses():
     """
     Create random businesses.
     """
+    data = []
+
+    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
+    addresses = db.session.query(Address).all()
+
     for i in range(0, NUM_OF_FAKE_BUSINESSES):
         params = {
             'name': fake.company(),
@@ -155,7 +297,7 @@ def businesses():
             'phone': fake.phone_number(),
             'active': "1",
             'weekends_open': random.choice(['0', '1']),
-            'address': address,
+            'address_id': (random.choice(addresses)).id,
             'metro': random.choice(Business.METRO.keys()),
             'website': 'https://lyfeshoppe.com',
             'twitter': 'https://twitter.com/TwitterSmallBiz',
@@ -164,8 +306,71 @@ def businesses():
             'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
         }
 
-        Business.get_or_create(params)
-    _log_status(Business.query.count(), 'businesses')
+        data.append(params)
+
+    return _bulk_insert(Business, data, 'businesses')
+
+
+@click.command()
+def occupancies():
+    """
+    Create random business occupanices.
+    """
+    data = []
+
+    users = db.session.query(User).all()
+    for user in users:
+        for i in range(0, random.randint(1, 12)):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+            params = {
+                'type': 'user',
+                'start_time': start_time,
+                'end_time': end_time,
+                'user_id': user.id,
+                'business_id': None,
+                'active': '1'
+            }
+
+            data.append(params)
+
+    businesses = db.session.query(Business).all()
+    for business in businesses:
+        for i in range(0, random.randint(1, 12)):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+            params = {
+                'type': 'business',
+                'start_time': start_time,
+                'end_time': end_time,
+                'user_id': None,
+                'business_id': business.id,
+                'active': '1'
+            }
+
+            data.append(params)
+
+    return _bulk_insert(Occupancy, data, 'occupancies')
 
 
 @click.command()
@@ -174,21 +379,16 @@ def customers():
     Create random customers.
     """
     data = []
+    users = db.session.query(User).all()
+    businesses = db.session.query(Business).all()
 
-    user_ids = list(db.session.query(User.id).distinct())
-    business_ids = list(db.session.query(Business.id).distinct())
-
-    for business_id in business_ids:
-        num_of_customers = random.randint(0, MAX_CUSTOMERS_PER_BUSINESS)
-        to_be_customers = random.sample(user_ids, num_of_customers)
-
-        for user_id in to_be_customers:
-            params = {
-                'business_id': business_id,
-                'user_id': user_id,
-                'active': '1'
-            }
-            data.append(params)
+    for business in businesses:
+        params = {
+            'business_id': business.id,
+            'user_id': (random.choice(users)).id,
+            'active': '1'
+        }
+        data.append(params)
 
     return _bulk_insert(Customer, data, 'customers')
 
@@ -199,12 +399,10 @@ def products():
     Create random products.
     """
     data = []
-    business_ids = list(db.session.query(Business.id).distinct())
+    businesses = db.session.query(Business).all()
 
-    for business_id in business_ids:
-        num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
-
-        for i in range(0, num_of_products):
+    for business in businesses:
+        for i in range(0, random.randint(1, 10)):
             params = {
                 'name': fake.text(max_nb_chars=48),
                 'category': random.choice(['Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing']),
@@ -212,7 +410,7 @@ def products():
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),
                 'duration_mins': random.randint(10, 180),
-                'business_id': business_id
+                'business_id': business.id
             }
 
             data.append(params)
@@ -226,21 +424,41 @@ def employees():
     Create random employees.
     """
     data = []
-    user_ids = list(db.session.query(User.id).distinct())
-    business_ids = list(db.session.query(Business.id).distinct())
+    businesses = db.session.query(Business).all()
 
-    for business_id in business_ids:
-        products = Product.query.filter(Product.business_id == business_id).all()
+    for business in businesses:
+        employees_list = []
+        for i in range(0, random.randint(12, 20)):
 
-        num_of_employees = random.randint(0, MAX_EMPLOYEES_PER_BUSINESS)
-        to_be_employees = random.sample(user_ids, num_of_employees)
-
-        for user_id in to_be_employees:
-            num_of_products_per_employee = random.randint(0, len(products))
+            if len(employees_list):
+                admin_employee = random.choice(
+                    db.session.query(User).filter(~User.id.in_(employees_list)).all()
+                )
+            else:
+                admin_employee = random.choice(
+                    db.session.query(User).all()
+                )
+            employees_list.append(admin_employee.id)
             params = {
-                'business_id': business_id,
-                'user_id': user_id,
-                'products': random.sample(list(products), num_of_products_per_employee),
+                'role': 'admin',
+                'business_id': business.id,
+                'user_id': admin_employee.id,
+                'products': Product.query.filter(Product.business_id == business.id).all(),
+                'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
+                'active': '1'
+            }
+            data.append(params)
+
+            # Ensure that the member employee isnt the same as the admin employee
+            member_employee = random.choice(
+                db.session.query(User).filter(~User.id.in_(employees_list)).all()
+            )
+            employees_list.append(member_employee.id)
+            params = {
+                'role': 'member',
+                'business_id': business.id,
+                'user_id': member_employee.id,
+                'products': Product.query.filter(Product.business_id == business.id).all(),
                 'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'active': '1'
             }
@@ -250,36 +468,86 @@ def employees():
 
 
 @click.command()
+def employee_product_relations():
+    """
+    Create random employee_product_relations.
+    """
+    products = db.session.query(Product).all()
+
+    for product in products:
+        product.employees.extend(Employee.query.filter(Employee.business_id == product.business_id).all())
+        product.save()
+
+
+@click.command()
+def availabilities():
+    """
+    Create random product availabilities.
+    """
+    data = []
+
+    products = db.session.query(Product).all()
+    for product in products:
+        for i in range(0, random.randint(1, 12)):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+            params = {
+                'type': 'product',
+                'start_time': start_time,
+                'end_time': end_time,
+                'product_id': product.id,
+                'active': '1'
+            }
+
+            data.append(params)
+
+    return _bulk_insert(Availability, data, 'availabilities')
+
+
+@click.command()
 def reservations():
     """
     Create random reservations.
     """
     data = []
-    business_ids = db.session.query(Business.id).distinct()
 
-    MAX_RESERVATIONS_PER_BUSINESS = 200
+    for business in db.session.query(Business).all():
+        customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
+        employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
+        products = db.session.query(Product).filter(Product.business_id == business.id).all()
 
-    for business_id in business_ids:
-        business_id = business_id[0]
+        # Create a fake unix timestamp in the future.
+        start_time = fake.date_time_between(
+            start_date='now', end_date='+1d').strftime('%s')
+        end_time = fake.date_time_between(
+            start_date=start_time, end_date='+2d').strftime('%s')
 
-        num_of_reservations = random.randint(0, MAX_RESERVATIONS_PER_BUSINESS)
-        if not num_of_reservations:
-            continue
+        start_time = datetime.utcfromtimestamp(
+            float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+        end_time = datetime.utcfromtimestamp(
+            float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
 
-        customer_ids = db.session.query(Customer.id).filter(Customer.business_id == business_id).distinct()
-        employee_ids = db.session.query(Employee.id).filter(Employee.business_id == business_id).distinct()
-        product_ids = db.session.query(Product.id).filter(Product.business_id == business_id).distinct()
-
-        if not customer_ids.count() or not employee_ids.count() or not product_ids.count():
-            continue
-
-        for i in range(0, num_of_reservations):
+        for i in range(0, 20):
             params = {
-                'business_id': business_id,
-                'customer_id': random.choice(list(customer_ids))[0],
-                'product_id': random.choice(list(product_ids))[0],
-                'employee_id': random.choice(list(employee_ids))[0]
+                'status': random.choice(Reservation.STATUS.keys()),
+                'start_time': start_time,
+                'end_time': end_time,
+                'business_id': business.id,
+                'customer_id': (random.choice(customers)).id,
+                'employee_id': (random.choice(employees)).id,
+                'product_id': (random.choice(products)).id
             }
+
             data.append(params)
 
     return _bulk_insert(Reservation, data, 'reservations')
@@ -294,19 +562,33 @@ def all(ctx):
     :param ctx:
     :return: None
     """
+    ctx.invoke(addresses)
     ctx.invoke(users)
+    ctx.invoke(issues)
+    #ctx.invoke(coupons)
+    ctx.invoke(invoices)
     ctx.invoke(businesses)
-    ctx.invoke(products)
+    ctx.invoke(occupancies)
     ctx.invoke(employees)
+    ctx.invoke(products)
+    ctx.invoke(employee_product_relations)
+    ctx.invoke(availabilities)
     ctx.invoke(customers)
     ctx.invoke(reservations)
     return None
 
 
+cli.add_command(addresses)
 cli.add_command(users)
+cli.add_command(issues)
+#cli.add_command(coupons)
+cli.add_command(invoices)
 cli.add_command(businesses)
-cli.add_command(products)
+cli.add_command(occupancies)
 cli.add_command(employees)
+cli.add_command(products)
+cli.add_command(employee_product_relations)
+cli.add_command(availabilities)
 cli.add_command(customers)
 cli.add_command(reservations)
 cli.add_command(all)

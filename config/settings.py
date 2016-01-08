@@ -48,7 +48,7 @@ LANGUAGES = {
 BABEL_DEFAULT_LOCALE = 'en'
 
 # Seed settings.
-SEED_ADMIN_EMAIL = 'harshit.imudianda@gmail.com'
+SEED_ADMIN_EMAIL = 'dev@localhost.com'
 
 # Database settings,
 # The username and password must match what's in docker-compose.yml for dev.
