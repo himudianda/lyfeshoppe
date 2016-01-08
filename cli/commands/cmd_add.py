@@ -39,6 +39,7 @@ NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_ISSUES = 50
 NUM_OF_FAKE_BUSINESSES = 200
 MAX_EMPLOYEES_PER_BUSINESS = 10
+MAX_CUSTOMERS_PER_BUSINESS = 30
 MAX_PRODUCTS_PER_BUSINESS = 25
 NUM_OF_FAKE_RESERVATIONS = 10000
 
@@ -235,19 +236,26 @@ def customers():
     """
     Create random customers.
     """
-    data = []
     users = db.session.query(User).all()
     businesses = db.session.query(Business).all()
 
     for business in businesses:
-        params = {
-            'business_id': business.id,
-            'user_id': (random.choice(users)).id,
-            'active': '1'
-        }
-        data.append(params)
+        num_of_customers = random.randint(0, MAX_CUSTOMERS_PER_BUSINESS)
 
-    return _bulk_insert(Customer, data, 'customers')
+        users_list = list(users)
+        to_be_customers = random.sample(users_list, num_of_customers)
+
+        for user in to_be_customers:
+            params = {
+                'business_id': business.id,
+                'user_id': user.id,
+                'active': '1'
+            }
+
+            customer = Customer(**params)
+            customer.save()
+
+    _log_status(Customer.query.count(), "customers")
 
 
 @click.command()
@@ -303,6 +311,7 @@ def all(ctx):
     ctx.invoke(businesses)
     ctx.invoke(employees)
     ctx.invoke(products)
+    ctx.invoke(customers)
     return None
 
 
@@ -311,4 +320,5 @@ cli.add_command(issues)
 cli.add_command(businesses)
 cli.add_command(employees)
 cli.add_command(products)
+cli.add_command(customers)
 cli.add_command(all)
