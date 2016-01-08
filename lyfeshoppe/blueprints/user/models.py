@@ -110,9 +110,11 @@ class User(UserMixin, ResourceMixin, db.Model):
             user.password = pwd
             user = user.save()
 
-            # This prevents circular imports.
-            from lyfeshoppe.blueprints.user.tasks import deliver_new_user_email
-            deliver_new_user_email.delay(user.id, pwd)
+            if from_form:
+                # Only send email if user created as part of Employeee OR customer creation
+                # Using a form.
+                from lyfeshoppe.blueprints.user.tasks import deliver_new_user_email
+                deliver_new_user_email.delay(user.id, pwd)
 
         return user
 
