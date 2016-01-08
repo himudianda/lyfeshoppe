@@ -179,7 +179,7 @@ def employees():
     businesses = db.session.query(Business).all()
 
     for business in businesses:
-        num_of_employees = random.randint(0, MAX_EMPLOYEES_PER_BUSINESS)
+        num_of_employees = random.randint(1, MAX_EMPLOYEES_PER_BUSINESS)
 
         users_list = list(users)
         to_be_employees = random.sample(users_list, num_of_employees)
