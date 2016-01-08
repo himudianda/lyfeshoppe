@@ -82,26 +82,28 @@ def cli():
     pass
 
 
+address = {
+    'street': fake.street_address(),
+    'city': fake.city(),
+    'state': fake.state(),
+    'zipcode': fake.zipcode(),
+    'district': fake.city(),
+    'country': fake.country()
+}
+
+
 @click.command()
 def users():
     """
     Create random users.
     """
-
     for i in range(0, NUM_OF_FAKE_USERS):
         user_params = {
             'email': fake.email(),
             'password': User.encrypt_password('fakepassword'),
             'name': fake.name(),
             'locale': random.choice(ACCEPT_LANGUAGES),
-            'address': {
-                'street': fake.street_address(),
-                'city': fake.city(),
-                'state': fake.state(),
-                'zipcode': fake.zipcode(),
-                'district': fake.city(),
-                'country': fake.country()
-            }
+            'address': address
         }
 
         User.get_or_create(user_params)
@@ -112,14 +114,7 @@ def users():
         'name': "Harshit Imudianda",
         'locale': 'en',
         'role': 'admin',
-        'address': {
-            'street': fake.street_address(),
-            'city': fake.city(),
-            'state': fake.state(),
-            'zipcode': fake.zipcode(),
-            'district': fake.city(),
-            'country': fake.country()
-        }
+        'address': address
     }
 
     User.get_or_create(admin_user_params)
@@ -131,11 +126,6 @@ def businesses():
     """
     Create random businesses.
     """
-    data = []
-
-    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    #addresses = db.session.query(Address).all()
-
     for i in range(0, NUM_OF_FAKE_BUSINESSES):
         params = {
             'name': fake.company(),
@@ -147,7 +137,7 @@ def businesses():
             'phone': fake.phone_number(),
             'active': "1",
             'weekends_open': random.choice(['0', '1']),
-            #'address_id': (random.choice(addresses)).id,
+            'address': address,
             'metro': random.choice(Business.METRO.keys()),
             'website': 'https://lyfeshoppe.com',
             'twitter': 'https://twitter.com/TwitterSmallBiz',
@@ -156,9 +146,8 @@ def businesses():
             'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
         }
 
-        data.append(params)
-
-    return _bulk_insert(Business, data, 'businesses')
+        Business.get_or_create(params)
+    _log_status(Business.query.count(), 'businesses')
 
 
 @click.command()
