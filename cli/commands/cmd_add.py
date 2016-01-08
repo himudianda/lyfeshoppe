@@ -270,16 +270,16 @@ def reservations():
 
         customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
         employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
-        products = db.session.query(Product).filter(
-                                                Product.business_id == business.id
-                                            ).all()
-
-        if not customers or not products or not employees:
+        if not customers or not employees:
             continue
 
         for i in range(0, num_of_reservations):
-            product = random.choice(products)
             employee = random.choice(employees)
+
+            products = Product.query.join(Product.employees).filter(Employee.id.in_(e.id for e in [employee])).all()
+            if not products:
+                continue
+            product = random.choice(products)
             customer = random.choice(customers)
 
             # Create a fake unix timestamp in the future.
