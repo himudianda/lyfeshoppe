@@ -35,12 +35,23 @@ fake = Faker()
 app = create_app()
 db.app = app
 
-NUM_OF_FAKE_ADDRESSES = 25
 NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_ISSUES = 50
 NUM_OF_FAKE_COUPONS = 5
 NUM_OF_FAKE_BUSINESSES = 200
 NUM_OF_FAKE_RESERVATIONS = 10000
+
+
+def generate_address():
+    return Address(**{
+                'street': fake.street_address(),
+                'city': fake.city(),
+                'state': fake.state(),
+                'zipcode': fake.zipcode(),
+                'district': fake.city(),
+                'country': fake.country()
+            }
+        )
 
 
 def _log_status(count, model_label):
@@ -87,57 +98,55 @@ def cli():
 
 
 @click.command()
-def addresses():
-    """
-        Create random addresses
-    """
-    data = []
-    for i in range(0, NUM_OF_FAKE_ADDRESSES):
-        params = {
-            'street': fake.street_address(),
-            'city': fake.city(),
-            'state': fake.state(),
-            'zipcode': fake.zipcode(),
-            'district': fake.city(),
-            'country': fake.country()
-        }
-
-        data.append(params)
-
-    return _bulk_insert(Address, data, 'addresses')
-
-
-@click.command()
 def users():
     """
     Create random users.
     """
-    data = []
-
-    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    random_emails = [fake.email() for i in range(0, NUM_OF_FAKE_USERS-1)]
-    random_emails.append(SEED_ADMIN_EMAIL)
-    random_emails = list(set(random_emails))
-    addresses = db.session.query(Address).all()
-
-    for email in random_emails:
+    for i in xrange(0, NUM_OF_FAKE_USERS):
         params = {
-            'role': 'member',
-            'email': email,
-            'password': User.encrypt_password('password'),
+            'email': fake.email(),
+            'password': 'password',
             'name': fake.name(),
             'locale': random.choice(ACCEPT_LANGUAGES),
-            'address_id': (random.choice(addresses)).id
+            'address': generate_address()
         }
 
-        # Ensure the seeded admin is always an admin.
-        if email == SEED_ADMIN_EMAIL:
-            params['role'] = 'admin'
-            params['locale'] = 'en'
+        user = User(**params)
+        user.save()
 
-        data.append(params)
+    _log_status(User.query.count(), "users")
 
-    return _bulk_insert(User, data, 'users')
+
+@click.command()
+def businesses():
+    """
+    Create random businesses.
+    """
+
+    for i in range(0, NUM_OF_FAKE_BUSINESSES):
+        params = {
+            'name': fake.company(),
+            'email': fake.company_email(),
+            'type': random.choice(Business.TYPE.keys()),
+            'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
+            'opening_time': datetime.strptime('08:00:00', '%H:%M:%S').time(),
+            'closing_time': datetime.strptime('18:30:00', '%H:%M:%S').time(),
+            'phone': fake.phone_number(),
+            'active': "1",
+            'weekends_open': random.choice(['0', '1']),
+            'address': generate_address(),
+            'metro': random.choice(Business.METRO.keys()),
+            'website': 'https://lyfeshoppe.com',
+            'twitter': 'https://twitter.com/TwitterSmallBiz',
+            'facebook': 'https://www.facebook.com/LyfeShoppe-220689458262111',
+            'youtube': 'https://www.youtube.com/channel/UCFv2NRs9s0vlgMdjCcWU9pQ',
+            'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
+        }
+
+        business = Business(**params)
+        business.save()
+
+    _log_status(Business.query.count(), "businesses")
 
 
 @click.command()
@@ -158,41 +167,6 @@ def issues():
         data.append(params)
 
     return _bulk_insert(Issue, data, 'issues')
-
-
-@click.command()
-def businesses():
-    """
-    Create random businesses.
-    """
-    data = []
-
-    # Ensure we get about 50 unique random emails, +1 due to the seeded email.
-    addresses = db.session.query(Address).all()
-
-    for i in range(0, NUM_OF_FAKE_BUSINESSES):
-        params = {
-            'name': fake.company(),
-            'email': fake.company_email(),
-            'type': random.choice(Business.TYPE.keys()),
-            'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
-            'opening_time': datetime.strptime('08:00:00', '%H:%M:%S').time(),
-            'closing_time': datetime.strptime('18:30:00', '%H:%M:%S').time(),
-            'phone': fake.phone_number(),
-            'active': "1",
-            'weekends_open': random.choice(['0', '1']),
-            'address_id': (random.choice(addresses)).id,
-            'metro': random.choice(Business.METRO.keys()),
-            'website': 'https://lyfeshoppe.com',
-            'twitter': 'https://twitter.com/TwitterSmallBiz',
-            'facebook': 'https://www.facebook.com/LyfeShoppe-220689458262111',
-            'youtube': 'https://www.youtube.com/channel/UCFv2NRs9s0vlgMdjCcWU9pQ',
-            'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
-        }
-
-        data.append(params)
-
-    return _bulk_insert(Business, data, 'businesses')
 
 
 @click.command()
@@ -349,7 +323,6 @@ def all(ctx):
     :param ctx:
     :return: None
     """
-    ctx.invoke(addresses)
     ctx.invoke(users)
     ctx.invoke(issues)
     ctx.invoke(businesses)
@@ -361,7 +334,6 @@ def all(ctx):
     return None
 
 
-cli.add_command(addresses)
 cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(businesses)
