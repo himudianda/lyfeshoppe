@@ -276,6 +276,10 @@ def reservations():
         for i in range(0, num_of_reservations):
             employee = random.choice(employees)
 
+            # Solution from: http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
+            # Error hit: NotImplementedError: in_() not yet supported for relationships.
+            # For a simple many-to-one, use in_() against the set of foreign key values.
+            # Joins in SQLAlchemy is used
             products = Product.query.join(Product.employees).filter(Employee.id.in_(e.id for e in [employee])).all()
             if not products:
                 continue
