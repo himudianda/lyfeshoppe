@@ -288,7 +288,7 @@ def reservations():
             start_time = start_time.replace(tzinfo=pytz.utc)
             end_time = end_time.replace(tzinfo=pytz.utc)
 
-            if end_time < datetime.now():
+            if end_time < datetime.now().replace(tzinfo=pytz.utc):
                 status = "executed"
             else:
                 statuses = Reservation.STATUS
