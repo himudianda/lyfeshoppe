@@ -35,6 +35,7 @@ db.app = app
 
 NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_BUSINESSES = 200
+MAX_CUSTOMERS_PER_BUSINESS = 50
 NUM_OF_FAKE_RESERVATIONS = 10000
 
 
@@ -159,12 +160,16 @@ def customers():
     businesses = db.session.query(Business).all()
 
     for business in businesses:
-        params = {
-            'business_id': business.id,
-            'user_id': (random.choice(users)).id,
-            'active': '1'
-        }
-        data.append(params)
+        num_of_customers = random.randint(0, MAX_CUSTOMERS_PER_BUSINESS)
+        to_be_customers = random.sample(users, num_of_customers)
+
+        for person in to_be_customers:
+            params = {
+                'business_id': business.id,
+                'user_id': person.id,
+                'active': '1'
+            }
+            data.append(params)
 
     return _bulk_insert(Customer, data, 'customers')
 
