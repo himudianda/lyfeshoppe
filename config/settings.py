@@ -52,7 +52,7 @@ SEED_ADMIN_EMAIL = 'harshit.imudianda@gmail.com'
 
 # Database settings,
 # The username and password must match what's in docker-compose.yml for dev.
-db_uri = 'postgresql://lyfeshoppe:bestpassword@localhost:5432/{0}'
+db_uri = 'postgresql://lyfeshoppe:dbpassword@localhost:5432/{0}'
 SQLALCHEMY_DATABASE_URI = db_uri.format(APP_NAME)
 SQLALCHEMY_POOL_SIZE = 5
 
