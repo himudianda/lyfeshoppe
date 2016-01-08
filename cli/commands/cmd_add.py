@@ -157,17 +157,18 @@ def customers():
     Create random customers.
     """
     data = []
-    users = db.session.query(User).all()
-    businesses = db.session.query(Business).all()
 
-    for business in businesses:
+    user_ids = db.session.query(User.id).distinct()
+    business_ids = db.session.query(Business.id).distinct()
+
+    for business_id in business_ids:
         num_of_customers = random.randint(0, MAX_CUSTOMERS_PER_BUSINESS)
-        to_be_customers = random.sample(users, num_of_customers)
+        to_be_customers = random.sample(user_ids, num_of_customers)
 
-        for person in to_be_customers:
+        for user_id in to_be_customers:
             params = {
-                'business_id': business.id,
-                'user_id': person.id,
+                'business_id': business_id,
+                'user_id': user_id,
                 'active': '1'
             }
             data.append(params)
@@ -181,9 +182,9 @@ def products():
     Create random products.
     """
     data = []
-    businesses = db.session.query(Business).all()
+    business_ids = db.session.query(Business.id).distinct()
 
-    for business in businesses:
+    for business_id in business_ids:
         num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
 
         for i in range(0, num_of_products):
@@ -194,7 +195,7 @@ def products():
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),
                 'duration_mins': random.randint(10, 180),
-                'business_id': business.id
+                'business_id': business_id
             }
 
             data.append(params)
