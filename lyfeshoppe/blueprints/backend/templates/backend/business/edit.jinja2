@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
@@ -14,4 +15,40 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
+{% endblock %}
+
+{% block footer_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#opening_time_datetimepicker').datetimepicker({
+                    format: 'LT'
+                });
+            $('#closing_time_datetimepicker').datetimepicker({
+                    format: 'LT'
+                });
+
+            $("#opening_time_datetimepicker").on("dp.change", function (e) {
+                var moment_date = e.date;
+                //var time = moment(moment_date).format("h:mm A");
+                var time = moment(moment_date).format("HH:mm:ss");
+                $("#opening_time").val(time);
+                $("#opening_time").text(time);
+            });
+
+            $("#closing_time_datetimepicker").on("dp.change", function (e) {
+                var moment_date = e.date;
+                //var time = moment(moment_date).format("hh:mm A");
+                var time = moment(moment_date).format("HH:mm:ss");
+                $("#closing_time").val(time);
+                $("#closing_time").text(time);
+            });
+
+        });
+
+    </script>
 {% endblock %}
