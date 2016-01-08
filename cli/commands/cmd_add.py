@@ -1,8 +1,9 @@
 import logging
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 import click
 from faker import Faker
+import pytz
 
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
@@ -221,7 +222,7 @@ def products():
                 'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'capacity': random.randint(1, 100),
                 'price_cents': random.randint(100, 100000),
-                'duration_mins': random.randint(10, 180),
+                'duration_mins': random.choice(['30', '60', '90', '120', '150', '180']),
                 'business_id': business.id,
                 'employees': random.sample(employees_list, random.randint(1, len(employees_list)))
             }
@@ -275,26 +276,26 @@ def reservations():
             continue
 
         for i in range(0, num_of_reservations):
+            product = random.choice(products)
+            employee = random.choice(employees)
+            customer = random.choice(customers)
 
             # Create a fake unix timestamp in the future.
-            start_time = fake.date_time_between(
-                start_date='now', end_date='+1d').strftime('%s')
-            end_time = fake.date_time_between(
-                start_date=start_time, end_date='+2d').strftime('%s')
+            duration = product.duration_mins
+            start_time = fake.date_time_this_month()
+            end_time = start_time + timedelta(minutes=duration)
 
-            start_time = datetime.utcfromtimestamp(
-                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-            end_time = datetime.utcfromtimestamp(
-                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+            start_time = start_time.replace(tzinfo=pytz.utc)
+            end_time = end_time.replace(tzinfo=pytz.utc)
 
             params = {
                 'status': random.choice(Reservation.STATUS.keys()),
                 'start_time': start_time,
                 'end_time': end_time,
                 'business_id': business.id,
-                'customer_id': (random.choice(customers)).id,
-                'employee_id': (random.choice(employees)).id,
-                'product_id': (random.choice(products)).id
+                'customer_id': customer.id,
+                'employee_id': employee.id,
+                'product_id': product.id
             }
 
             reservation = Reservation(**params)
