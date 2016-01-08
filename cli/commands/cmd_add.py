@@ -7,7 +7,7 @@ from faker import Faker
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -37,7 +37,6 @@ NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_BUSINESSES = 200
 MAX_CUSTOMERS_PER_BUSINESS = 50
 MAX_PRODUCTS_PER_BUSINESS = 30
-NUM_OF_FAKE_RESERVATIONS = 10000
 
 
 def _log_status(count, model_label):
@@ -209,98 +208,27 @@ def employees():
     Create random employees.
     """
     data = []
-    businesses = db.session.query(Business).all()
+    user_ids = list(db.session.query(User.id).distinct())
+    business_ids = list(db.session.query(Business.id).distinct())
 
-    for business in businesses:
-        employees_list = []
-        for i in range(0, random.randint(12, 20)):
+    for business_id in business_ids:
+        products = Product.query.filter(Product.business_id == business_id).all()
 
-            if len(employees_list):
-                admin_employee = random.choice(
-                    db.session.query(User).filter(~User.id.in_(employees_list)).all()
-                )
-            else:
-                admin_employee = random.choice(
-                    db.session.query(User).all()
-                )
-            employees_list.append(admin_employee.id)
+        num_of_employees = random.randint(0, MAX_EMPLOYEES_PER_BUSINESS)
+        to_be_employees = random.sample(user_ids, num_of_employees)
+
+        for user_id in to_be_employees:
+            num_of_products_per_employee = random.randint(0, len(products))
             params = {
-                'role': 'admin',
-                'business_id': business.id,
-                'user_id': admin_employee.id,
-                'products': Product.query.filter(Product.business_id == business.id).all(),
-                'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
-                'active': '1'
-            }
-            data.append(params)
-
-            # Ensure that the member employee isnt the same as the admin employee
-            member_employee = random.choice(
-                db.session.query(User).filter(~User.id.in_(employees_list)).all()
-            )
-            employees_list.append(member_employee.id)
-            params = {
-                'role': 'member',
-                'business_id': business.id,
-                'user_id': member_employee.id,
-                'products': Product.query.filter(Product.business_id == business.id).all(),
+                'business_id': business_id,
+                'user_id': user_id,
+                'products': random.sample(list(products), num_of_products_per_employee),
                 'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
                 'active': '1'
             }
             data.append(params)
 
     return _bulk_insert(Employee, data, 'employees')
-
-
-@click.command()
-def employee_product_relations():
-    """
-    Create random employee_product_relations.
-    """
-    products = db.session.query(Product).all()
-
-    for product in products:
-        product.employees.extend(Employee.query.filter(Employee.business_id == product.business_id).all())
-        product.save()
-
-
-@click.command()
-def reservations():
-    """
-    Create random reservations.
-    """
-    data = []
-
-    for business in db.session.query(Business).all():
-        customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
-        employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
-        products = db.session.query(Product).filter(Product.business_id == business.id).all()
-
-        # Create a fake unix timestamp in the future.
-        start_time = fake.date_time_between(
-            start_date='now', end_date='+1d').strftime('%s')
-        end_time = fake.date_time_between(
-            start_date=start_time, end_date='+2d').strftime('%s')
-
-        start_time = datetime.utcfromtimestamp(
-            float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-        end_time = datetime.utcfromtimestamp(
-            float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-        for i in range(0, 20):
-            params = {
-                'status': random.choice(Reservation.STATUS.keys()),
-                'start_time': start_time,
-                'end_time': end_time,
-                'business_id': business.id,
-                'customer_id': (random.choice(customers)).id,
-                'employee_id': (random.choice(employees)).id,
-                'product_id': (random.choice(products)).id
-            }
-
-            data.append(params)
-
-    return _bulk_insert(Reservation, data, 'reservations')
 
 
 @click.command()
@@ -314,19 +242,15 @@ def all(ctx):
     """
     ctx.invoke(users)
     ctx.invoke(businesses)
-    ctx.invoke(employees)
     ctx.invoke(products)
-    ctx.invoke(employee_product_relations)
+    ctx.invoke(employees)
     ctx.invoke(customers)
-    ctx.invoke(reservations)
     return None
 
 
 cli.add_command(users)
 cli.add_command(businesses)
-cli.add_command(employees)
 cli.add_command(products)
-cli.add_command(employee_product_relations)
+cli.add_command(employees)
 cli.add_command(customers)
-cli.add_command(reservations)
 cli.add_command(all)
