@@ -36,6 +36,7 @@ db.app = app
 NUM_OF_FAKE_USERS = 50
 NUM_OF_FAKE_BUSINESSES = 200
 MAX_CUSTOMERS_PER_BUSINESS = 50
+MAX_PRODUCTS_PER_BUSINESS = 30
 NUM_OF_FAKE_RESERVATIONS = 10000
 
 
@@ -183,7 +184,9 @@ def products():
     businesses = db.session.query(Business).all()
 
     for business in businesses:
-        for i in range(0, random.randint(1, 10)):
+        num_of_products = random.randint(0, MAX_PRODUCTS_PER_BUSINESS)
+
+        for i in range(0, num_of_products):
             params = {
                 'name': fake.text(max_nb_chars=48),
                 'category': random.choice(['Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing']),
