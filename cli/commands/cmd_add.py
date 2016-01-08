@@ -127,7 +127,7 @@ def users():
         params = {
             'role': 'member',
             'email': email,
-            'password': User.encrypt_password('password'),
+            'password': User.encrypt_password('fakepassword'),
             'name': fake.name(),
             'locale': random.choice(ACCEPT_LANGUAGES),
             'address_id': (random.choice(addresses)).id
