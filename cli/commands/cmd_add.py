@@ -251,18 +251,6 @@ def customers():
 
 
 @click.command()
-def employee_product_relations():
-    """
-    Create random employee_product_relations.
-    """
-    products = db.session.query(Product).all()
-
-    for product in products:
-        product.employees.extend(Employee.query.filter(Employee.business_id == product.business_id).all())
-        product.save()
-
-
-@click.command()
 def reservations():
     """
     Create random reservations.
