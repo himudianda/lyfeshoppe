@@ -274,18 +274,19 @@ def reservations():
         if not customers or not products or not employees:
             continue
 
-        # Create a fake unix timestamp in the future.
-        start_time = fake.date_time_between(
-            start_date='now', end_date='+1d').strftime('%s')
-        end_time = fake.date_time_between(
-            start_date=start_time, end_date='+2d').strftime('%s')
-
-        start_time = datetime.utcfromtimestamp(
-            float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-        end_time = datetime.utcfromtimestamp(
-            float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
         for i in range(0, num_of_reservations):
+
+            # Create a fake unix timestamp in the future.
+            start_time = fake.date_time_between(
+                start_date='now', end_date='+1d').strftime('%s')
+            end_time = fake.date_time_between(
+                start_date=start_time, end_date='+2d').strftime('%s')
+
+            start_time = datetime.utcfromtimestamp(
+                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.utcfromtimestamp(
+                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
+
             params = {
                 'status': random.choice(Reservation.STATUS.keys()),
                 'start_time': start_time,
