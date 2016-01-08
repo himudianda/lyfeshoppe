@@ -151,68 +151,6 @@ def businesses():
 
 
 @click.command()
-def occupancies():
-    """
-    Create random business occupanices.
-    """
-    data = []
-
-    users = db.session.query(User).all()
-    for user in users:
-        for i in range(0, random.randint(1, 12)):
-
-            # Create a fake unix timestamp in the future.
-            start_time = fake.date_time_between(
-                start_date='now', end_date='+1d').strftime('%s')
-            end_time = fake.date_time_between(
-                start_date=start_time, end_date='+2d').strftime('%s')
-
-            start_time = datetime.utcfromtimestamp(
-                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-            end_time = datetime.utcfromtimestamp(
-                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-            params = {
-                'type': 'user',
-                'start_time': start_time,
-                'end_time': end_time,
-                'user_id': user.id,
-                'business_id': None,
-                'active': '1'
-            }
-
-            data.append(params)
-
-    businesses = db.session.query(Business).all()
-    for business in businesses:
-        for i in range(0, random.randint(1, 12)):
-
-            # Create a fake unix timestamp in the future.
-            start_time = fake.date_time_between(
-                start_date='now', end_date='+1d').strftime('%s')
-            end_time = fake.date_time_between(
-                start_date=start_time, end_date='+2d').strftime('%s')
-
-            start_time = datetime.utcfromtimestamp(
-                float(start_time)).strftime('%Y-%m-%d %H:%M:%S')
-            end_time = datetime.utcfromtimestamp(
-                float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
-
-            params = {
-                'type': 'business',
-                'start_time': start_time,
-                'end_time': end_time,
-                'user_id': None,
-                'business_id': business.id,
-                'active': '1'
-            }
-
-            data.append(params)
-
-    return _bulk_insert(Occupancy, data, 'occupancies')
-
-
-@click.command()
 def customers():
     """
     Create random customers.
@@ -403,7 +341,6 @@ def all(ctx):
     """
     ctx.invoke(users)
     ctx.invoke(businesses)
-    ctx.invoke(occupancies)
     ctx.invoke(employees)
     ctx.invoke(products)
     ctx.invoke(employee_product_relations)
@@ -415,7 +352,6 @@ def all(ctx):
 
 cli.add_command(users)
 cli.add_command(businesses)
-cli.add_command(occupancies)
 cli.add_command(employees)
 cli.add_command(products)
 cli.add_command(employee_product_relations)
