@@ -285,34 +285,116 @@
 		<section id="content">
 			<div class="content-wrap">
 				<div class="container clearfix">
-
-
-					{% if current_user.is_authenticated() %}
-
-					{% else %}
-
-						<div class="col-md-8 nopadding">
-							<div class="col-md-6 noleftpadding bottommargin-sm">
-								<a href="{{ url_for('user.signup') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/Teach.jpg') }}" alt="Image"></a>
-							</div>
-							<div class="col-md-6 noleftpadding bottommargin-sm">
-								<a href="{{ url_for('user.signup') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/Health_Fitness.jpg') }}" alt="Image"></a>
-							</div>
-
-							<div class="clear"></div>
-
-							<div class="col-md-12 noleftpadding">
-								<a href="{{ url_for('user.signup') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/Services.jpg') }}" alt="Image"></a>
+					<div>
+						<div class="col_one_third">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-screen i-alt"></i></a>
+								</div>
+								<h3>Gain New Customers</h3>
+								<p>Your shop will be presented to 1000's of local users thus helping you get new customers.</p>
 							</div>
 						</div>
 
-						<div class="col-md-4 nopadding">
-							<a href="{{ url_for('user.signup') }}"><img src="{{ url_for('static', filename='frontend/images/shop/banners/Beauty.jpg') }}" alt="Image"></a>
+						<div class="col_one_third">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-eye i-alt"></i></a>
+								</div>
+								<h3>Bookings Made Easy</h3>
+									<div class="col-md-12">
+									<ul>
+										<li>
+											Unlimited Staff/Service bookings
+										</li>
+										<li>
+											Automatic Invoices &amp; notifications
+										</li>
+										<li>
+											Bookings for Group as well as single sessions
+										</li>
+									</ul>
+									</div>
+							</div>
+						</div>
+
+						<div class="col_one_third col_last">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-beaker i-alt"></i></a>
+								</div>
+								<h3>Non-peak hours solved !</h3>
+								<p>LyfeShoppe helps fill in unused spots in your business calendar. Get more bookings &amp; say yes to more revenues !</p>
+							</div>
 						</div>
 
 						<div class="clear"></div>
 
-					{% endif %}
+						<div class="col_one_third nobottommargin">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-stack i-alt"></i></a>
+								</div>
+								<h3>Premium Sliders Included</h3>
+								<p>Cheermonk included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</p>
+							</div>
+						</div>
+
+						<div class="col_one_third nobottommargin">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-tint i-alt"></i></a>
+								</div>
+								<h3>Unlimited Color Options</h3>
+								<p>Change the color scheme of the Theme in a flash just by changing the 6-digit HEX code in the colors.php file.</p>
+							</div>
+						</div>
+
+						<div class="col_one_third nobottommargin col_last">
+							<div class="feature-box fbox-border fbox-effect">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-text-width i-alt"></i></a>
+								</div>
+								<h3>CUSTOMIZABLE FONTS</h3>
+								<p>Use any Font you like from Google Web Fonts, Typekit or other Web Fonts. They will blend in perfectly.</p>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+
+					<div class="section notopborder topmargin-sm bottommargin-sm noborder nobg">
+					<h1 style="text-align:center">Benefits to you:</h1>
+					</br></br>
+						<div class="container clearfix">
+
+							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn">
+								<i class="i-plain i-xlarge divcenter nobottommargin icon-calendar"></i>
+								<div class="counter counter-lined"></span>Unlimited</div>
+								<h5>Num of Bookings</h5>
+							</div>
+
+							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="200">
+								<i class="i-plain i-xlarge divcenter nobottommargin icon-magic"></i>
+								<div class="counter counter-lined"><span data-from="20" data-to="300" data-refresh-interval="100" data-speed="2500"></span>%</div>
+								<h5>Avg. Lift in Revenues (Estimated)</h5>
+							</div>
+
+							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="400">
+								<i class="i-plain i-xlarge divcenter nobottommargin icon-file-text"></i>
+								<div class="counter counter-lined">$<span data-from="1000" data-to="0" data-refresh-interval="250" data-speed="2500"></span></div>
+								<h5>Cost to you</h5>
+							</div>
+
+							<div class="col_one_fourth nobottommargin center col_last" data-animate="bounceIn" data-delay="600">
+								<i class="i-plain i-xlarge divcenter nobottommargin icon-time"></i>
+								<div class="counter counter-lined"><span data-from="10" data-to="1000" data-refresh-interval="50" data-speed="2700"></span>'s</div>
+								<h5>New Customers</h5>
+							</div>
+
+						</div>
+
+					</div>
 
 
 					{% if current_user.is_authenticated() %}
