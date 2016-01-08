@@ -7,7 +7,7 @@ from faker import Faker
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -233,6 +233,42 @@ def employees():
 
 
 @click.command()
+def reservations():
+    """
+    Create random reservations.
+    """
+    data = []
+    business_ids = db.session.query(Business.id).distinct()
+
+    MAX_RESERVATIONS_PER_BUSINESS = 200
+
+    for business_id in business_ids:
+        business_id = business_id[0]
+
+        num_of_reservations = random.randint(0, MAX_RESERVATIONS_PER_BUSINESS)
+        if not num_of_reservations:
+            continue
+
+        customer_ids = db.session.query(Customer.id).filter(Customer.business_id == business_id).distinct()
+        employee_ids = db.session.query(Employee.id).filter(Employee.business_id == business_id).distinct()
+        product_ids = db.session.query(Product.id).filter(Product.business_id == business_id).distinct()
+
+        if not customer_ids.count() or not employee_ids.count() or not product_ids.count():
+            continue
+
+        for i in range(0, num_of_reservations):
+            params = {
+                'business_id': business_id,
+                'customer_id': random.choice(list(customer_ids))[0],
+                'product_id': random.choice(list(product_ids))[0],
+                'employee_id': random.choice(list(employee_ids))[0]
+            }
+            data.append(params)
+
+    return _bulk_insert(Reservation, data, 'reservations')
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -246,6 +282,7 @@ def all(ctx):
     ctx.invoke(products)
     ctx.invoke(employees)
     ctx.invoke(customers)
+    ctx.invoke(reservations)
     return None
 
 
@@ -254,4 +291,5 @@ cli.add_command(businesses)
 cli.add_command(products)
 cli.add_command(employees)
 cli.add_command(customers)
+cli.add_command(reservations)
 cli.add_command(all)
