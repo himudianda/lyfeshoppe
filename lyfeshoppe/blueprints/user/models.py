@@ -102,6 +102,7 @@ class User(UserMixin, ResourceMixin, db.Model):
                 form.populate_obj(user.address)
             else:
                 user = cls(**params)
+                user.address = Address(**params)
 
             # Generate a random password
             pwd_size = 8
