@@ -35,13 +35,13 @@ fake = Faker()
 app = create_app()
 db.app = app
 
-NUM_OF_FAKE_USERS = 50
-NUM_OF_FAKE_ISSUES = 50
-NUM_OF_FAKE_BUSINESSES = 200
-MAX_EMPLOYEES_PER_BUSINESS = 10
-MAX_CUSTOMERS_PER_BUSINESS = 30
-MAX_PRODUCTS_PER_BUSINESS = 25
-NUM_OF_FAKE_RESERVATIONS = 10000
+NUM_OF_FAKE_USERS = 5
+NUM_OF_FAKE_ISSUES = 5
+NUM_OF_FAKE_BUSINESSES = 20
+MAX_EMPLOYEES_PER_BUSINESS = 2
+MAX_CUSTOMERS_PER_BUSINESS = 3
+MAX_PRODUCTS_PER_BUSINESS = 6
+MAX_RESERVATIONS_PER_BUSINESS = 3
 
 
 def generate_address():
@@ -263,12 +263,16 @@ def reservations():
     """
     Create random reservations.
     """
-    data = []
+    businesses = db.session.query(Business).all()
+    for business in businesses:
+        num_of_reservations = random.randint(0, MAX_RESERVATIONS_PER_BUSINESS)
 
-    for business in db.session.query(Business).all():
         customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
         employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
         products = db.session.query(Product).filter(Product.business_id == business.id).all()
+
+        if not customers or not products or not employees:
+            continue
 
         # Create a fake unix timestamp in the future.
         start_time = fake.date_time_between(
@@ -281,7 +285,7 @@ def reservations():
         end_time = datetime.utcfromtimestamp(
             float(end_time)).strftime('%Y-%m-%d %H:%M:%S')
 
-        for i in range(0, 20):
+        for i in range(0, num_of_reservations):
             params = {
                 'status': random.choice(Reservation.STATUS.keys()),
                 'start_time': start_time,
@@ -292,9 +296,10 @@ def reservations():
                 'product_id': (random.choice(products)).id
             }
 
-            data.append(params)
+            reservation = Reservation(**params)
+            reservation.save()
 
-    return _bulk_insert(Reservation, data, 'reservations')
+    _log_status(Reservation.query.count(), "reservations")
 
 
 @click.command()
@@ -312,6 +317,7 @@ def all(ctx):
     ctx.invoke(employees)
     ctx.invoke(products)
     ctx.invoke(customers)
+    ctx.invoke(reservations)
     return None
 
 
@@ -321,4 +327,5 @@ cli.add_command(businesses)
 cli.add_command(employees)
 cli.add_command(products)
 cli.add_command(customers)
+cli.add_command(reservations)
 cli.add_command(all)
