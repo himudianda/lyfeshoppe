@@ -69,7 +69,11 @@
             <div class="container clearfix">
               <div class="col_half">
                 <div class="col_half">
-                  <span><img src="{{ url_for('static', filename='common/images/comodo_secure_100x85_transp.png') }}" alt="Comodo SSL Certificate"></span>
+                  <script language="JavaScript" type="text/javascript">
+                  TrustLogo("https://lyfeshoppe.com/static/common/images/comodo_secure_100x85_transp.png", "CL1", "none");
+                  </script>
+                  <a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>
+
                 </div>
                 <div class="col_half col_last tright">
                   {{ _('LyfeShoppe') }} &copy; 2016
@@ -93,11 +97,6 @@
     <!-- Footer Scripts
     ============================================= -->
     <script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
-
-    <script language="JavaScript" type="text/javascript">
-    TrustLogo("https://lyfeshoppe.com/static/common/images/comodo_secure_100x85_transp.png", "CL1", "none");
-    </script>
-    <a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>
 
   </body>
 </html>
