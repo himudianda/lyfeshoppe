@@ -6,11 +6,6 @@
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-  <script type="text/javascript"> //<![CDATA[ 
-  var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-  document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-  //]]>
-  </script>
   <head>
     <title>{% block title %}{% endblock %}</title>
     {{ meta_tags.render(csrf_token()) }}
@@ -44,11 +39,15 @@
 
     {{ assets.polyfills() }}
     {{ analytics.google_ua() }}
+
+    <script type="text/javascript">
+    //<![CDATA[ 
+    var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+    document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+    //]]>
+    </script>
   </head>
-  <script language="JavaScript" type="text/javascript">
-  TrustLogo("https://lyfeshoppe.com/static/common/images/comodo_secure_100x85_transp.png", "CL1", "none");
-  </script>
-  <a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>
+
   <body{{ ' data-locale="' + current_user.locale + '"' if current_user.is_authenticated() }} class="stretched">
 
     <!-- Document Wrapper
@@ -94,6 +93,11 @@
     <!-- Footer Scripts
     ============================================= -->
     <script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
+
+    <script language="JavaScript" type="text/javascript">
+    TrustLogo("https://lyfeshoppe.com/static/common/images/comodo_secure_100x85_transp.png", "CL1", "none");
+    </script>
+    <a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>
 
   </body>
 </html>
