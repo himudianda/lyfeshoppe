@@ -379,6 +379,45 @@ def large(ctx):
     return None
 
 
+def generate_very_large_samples():
+    global NUM_OF_FAKE_USERS
+    global NUM_OF_FAKE_ISSUES
+    global NUM_OF_FAKE_BUSINESSES
+    global MAX_EMPLOYEES_PER_BUSINESS
+    global MAX_CUSTOMERS_PER_BUSINESS
+    global MAX_PRODUCTS_PER_BUSINESS
+    global MAX_RESERVATIONS_PER_BUSINESS
+
+    NUM_OF_FAKE_USERS = 500
+    NUM_OF_FAKE_ISSUES = 50
+    NUM_OF_FAKE_BUSINESSES = 100
+    MAX_EMPLOYEES_PER_BUSINESS = 10
+    MAX_CUSTOMERS_PER_BUSINESS = 200
+    MAX_PRODUCTS_PER_BUSINESS = 20
+    MAX_RESERVATIONS_PER_BUSINESS = 400
+
+
+@click.command()
+@click.pass_context
+def very_large(ctx):
+    """
+    Populate everything at once.
+
+    :param ctx:
+    :return: None
+    """
+    generate_very_large_samples()
+
+    ctx.invoke(users)
+    ctx.invoke(issues)
+    ctx.invoke(businesses)
+    ctx.invoke(employees)
+    ctx.invoke(products)
+    ctx.invoke(customers)
+    ctx.invoke(reservations)
+    return None
+
+
 cli.add_command(users)
 cli.add_command(issues)
 cli.add_command(businesses)
@@ -388,3 +427,4 @@ cli.add_command(customers)
 cli.add_command(reservations)
 cli.add_command(all)
 cli.add_command(large)
+cli.add_command(very_large)
