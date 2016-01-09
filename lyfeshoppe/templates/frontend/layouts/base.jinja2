@@ -61,7 +61,12 @@
           <div id="copyrights">
             <div class="container clearfix">
               <div class="col_half">
-                {{ _('LyfeShoppe') }} &copy; 2016
+                <div class="col_half">
+                  <span><img src="{{ url_for('static', filename='common/images/comodo_secure_100x85_transp.png') }}" alt="Comodo SSL Certificate"></span>
+                </div>
+                <div class="col_half col_last tright">
+                  {{ _('LyfeShoppe') }} &copy; 2016
+                </div>
               </div>
               <div class="col_half col_last tright">
                 <ul class="list-inline">
