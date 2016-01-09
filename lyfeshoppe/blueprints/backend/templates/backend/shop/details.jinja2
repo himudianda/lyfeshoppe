@@ -250,9 +250,11 @@
                                                                         <div class="c-section">
                                                                             <div class="uppercase bg-blue">Business Hours</div>
                                                                             <p>
-                                                                                <strong>Open: </strong> {{ business.opening_time }}
+                                                                                <strong>Open: </strong> {{ business.opening_time | datetime("time-only") }}
                                                                                 <br/>
-                                                                                <strong>Close: </strong> {{ business.closing_time }}
+                                                                                <strong>Close: </strong> {{ business.closing_time | datetime("time-only") }}
+                                                                                <br/>
+                                                                                {% if business.weekends_open %}*We are open on weekends{% else %} *We are closed on weekends  {% endif %}
                                                                             </p>
                                                                         </div>
                                                                     </div>
