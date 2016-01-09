@@ -50,12 +50,14 @@
                                                         <ul>
                                                             {% for category, services in products.iteritems() %}
                                                                 <li class="mt-list-item">
-                                                                    <div class="list-todo-icon bg-white font-blue-steel">
-                                                                        <i class="fa fa-database"></i>
+                                                                    {% set color = ["bg-blue-steel", "bg-green-meadow", "bg-yellow-crusta", "bg-dark", "bg-red"]|random %}
+                                                                    {% set icon = ["fa-database", "fa-table", "fa-pencil", "fa-paint-brush", "fa-star-half-o"]|random %}
+                                                                    <div class="list-todo-icon bg-white">
+                                                                        <i class="fa {{icon}}"></i>
                                                                     </div>
-                                                                    <div class="list-todo-item item-1">
+                                                                    <div class="list-todo-item">
                                                                         <a class="list-toggle-container font-white" data-toggle="collapse" href="#task-1-2" aria-expanded="false">
-                                                                            <div class="list-toggle done uppercase bg-blue-steel">
+                                                                            <div class="list-toggle done uppercase {{color}}">
                                                                                 <div class="list-toggle-title bold">{{category}}</div>
                                                                                 <div class="badge badge-default pull-right bg-white font-dark bold">{{ services | length }}</div>
                                                                             </div>
