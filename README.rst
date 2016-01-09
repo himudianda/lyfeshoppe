@@ -77,7 +77,7 @@ Initialize everything and view the app
 - Type ``run stripe sync_plans`` to sync your ``STRIPE_PLANS`` to the gateway
 - Type ``run all`` to start everything
 - Visit http://localhost:8000 in your browser
-- If you wish to login, email: ``dev@localhost.com`` / password: ``password``
+- If you wish to login, email: ``nerdo.harry@gmail.com`` / password: ``password``
 
 Do I need to do the above steps all the time?
 '''''''''''''''''''''''''''''''''''''''''''''
