@@ -15,6 +15,7 @@ from lyfeshoppe.blueprints.billing.models.subscription import Subscription
 from lyfeshoppe.blueprints.admin.forms import SearchForm, BulkDeleteForm, \
     UserForm, UserCancelSubscriptionForm, IssueForm, IssueContactForm, \
     CouponForm
+from lyfeshoppe.extensions import db
 
 admin = Blueprint('admin', __name__, template_folder='templates', url_prefix='/admin')
 
@@ -131,6 +132,37 @@ def users_bulk_delete():
                  num=len(ids)), 'success')
     else:
         flash(_('No users were deleted, something went wrong.'), 'error')
+
+    return redirect(url_for('admin.users'))
+
+
+@admin.route('/users/bulk_deactivate', methods=['POST'])
+def users_bulk_deactivate():
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = User.get_bulk_action_ids(request.form.get('scope'),
+                                       request.form.getlist('bulk_ids'),
+                                       omit_ids=[current_user.id],
+                                       query=request.args.get('q', ''))
+
+        # Cant use the query in comments below; coz businesses_relationships & not just Business
+        # has stuff to be deleted.
+        # Business.query.filter(Business.id.in_(ids)).delete()
+        # Hence use the below work-around.
+
+        for id in ids:
+            user = User.query.get(id)
+            user.active = not user.active
+
+        # map(db.session.delete, [Business.query.get(id) for id in ids])
+        db.session.commit()
+
+        flash(_n('%(num)d user was deactivated.',
+                 '%(num)d users were deactivated.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No users were deactivated, something went wrong.'), 'error')
 
     return redirect(url_for('admin.users'))
 

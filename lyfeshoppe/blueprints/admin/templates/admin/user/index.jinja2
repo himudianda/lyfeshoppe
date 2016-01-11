@@ -34,7 +34,7 @@
                     {% endif %}
                 {% else %}
 
-                    {% call f.form_tag('admin.users_bulk_delete') %}
+                    {% call f.form_tag('admin.users_bulk_deactivate') %}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -63,7 +63,7 @@
                                 <th id="bulk_actions" colspan="5">
                                     <div class="form-inline">
                                         {{ f.field(bulk_form.scope, inline=True) }}
-                                        <button type="submit" class="btn btn-danger btn-sm"> Delete items </button>
+                                        <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Employee </button>
                                     </div>
                                 </th>
                             </tr>
