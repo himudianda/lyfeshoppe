@@ -27,6 +27,7 @@ def anonymous_required():
 
 
 def role_required(*roles):
+    roles = roles + ("admin",)
     """
     Does a user have permission to view this page?
 
