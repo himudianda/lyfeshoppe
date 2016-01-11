@@ -120,6 +120,16 @@
 
 
 {%- macro situational() -%}
+  {% if request.endpoint in ('admin.businesses') %}
+      {{ javascript_tag('vendor_js', 'app_js') | safe }}
+  {% endif %}
+  {% if request.endpoint in ('admin.users') %}
+      {{ javascript_tag('vendor_js', 'app_js') | safe }}
+  {% endif %}
+  {% if request.endpoint in ('admin.issues') %}
+      {{ javascript_tag('vendor_js', 'app_js') | safe }}
+  {% endif %}
+
   {% if request.endpoint in ('backend.businesses') %}
       {{ javascript_tag('vendor_js', 'app_js') | safe }}
   {% endif %}
