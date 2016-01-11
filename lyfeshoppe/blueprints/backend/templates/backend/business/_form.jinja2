@@ -164,17 +164,20 @@
                     <!--/span-->
                 </div>
                 <!--/row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-9">
-                                {% call f.form_group(form.active, css_class='sm-margin-bottom') %}
-                                {% endcall %}
+
+                {% if current_user.role == "admin" %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-9">
+                                    {% call f.form_group(form.active, css_class='sm-margin-bottom') %}
+                                    {% endcall %}
+                                </div>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
-                    <!--/span-->
-                </div>
+                {% endif %}
                 <h3 class="form-section">Business Address</h3>
                 <div class="row">
                     <div class="col-md-6">

@@ -574,7 +574,7 @@ class Business(ResourceMixin, db.Model):
     facebook = db.Column(db.String(64))
     youtube = db.Column(db.String(64))
     linkedin = db.Column(db.String(64))
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='0')
 
     # Relationships.
     # Many to One relationship: Many users can have same address

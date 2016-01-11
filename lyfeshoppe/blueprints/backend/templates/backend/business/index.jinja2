@@ -43,15 +43,10 @@
                                         <p>There are no businesses present.</p>
                                     {% endif %}
                                 {% else %}
-                                    {% call f.form_tag('backend.businesses_bulk_deactivate') %}
                                     <div class="table-scrollable">
                                         <table class="table table-hover table-light">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        <label for="select_all"></label>
-                                                        <input id="select_all" name="select_all" type="checkbox">
-                                                    </th>
                                                     <th class="col-header">
                                                         Edit Business
                                                     </th>
@@ -73,21 +68,11 @@
                                                     <th class="col-header">
                                                         Visit Shop Profile
                                                     </th>
-                                                    <th id="bulk_actions" colspan="5">
-                                                        <div class="form-inline">
-                                                            {{ f.field(bulk_form.scope, inline=True) }}
-                                                            <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Business </button>
-                                                        </div>
-                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {% for business in businesses.items %}
                                                     <tr>
-                                                        <td>
-                                                            <label for="bulk_ids"></label>
-                                                            <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ business.id }}">
-                                                        </td>
                                                         <td>
                                                             <a href="{{ url_for('backend.business_edit', id=business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                                 <i class="fa fa-edit"></i> Edit
@@ -131,7 +116,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    {% endcall %}
                                     {{ items.paginate(businesses) }}
                                 {% endif %}
                             </div>
