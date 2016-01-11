@@ -90,7 +90,13 @@
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         {% if current_user.role == 'admin' %}
-                            {% include 'admin/_menu.jinja2' %}
+                            {% if request.endpoint.startswith('admin.') %}
+                                {% include 'admin/_menu.jinja2' %}
+                            {% elif request.endpoint.startswith('backend.business_') %}
+                                {% include 'backend/_business_menu.jinja2' %}
+                            {% else %}
+                                {% include 'backend/_menu.jinja2' %}
+                            {% endif %}
                         {% elif current_user.role == 'member' %}
                             {% if request.endpoint.startswith('backend.business_') %}
                                 {% include 'backend/_business_menu.jinja2' %}

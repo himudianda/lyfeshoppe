@@ -284,8 +284,11 @@ def is_staff_authorized(func):
     def func_wrapper(id, **kwargs):
         business = Business.query.get(id)
         if not business:
-            flash(_('You do not have permission to do that.'), 'error')
+            flash(_('Invalid Business ID provided.'), 'error')
             return redirect(url_for('backend.businesses'))
+
+        if current_user.role == "admin":
+            return func(id, **kwargs)
 
         employee = Employee.query.filter(
                         (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
