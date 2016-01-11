@@ -66,6 +66,36 @@ def businesses(page):
                            businesses=paginated_businesses)
 
 
+@admin.route('/businesses/bulk_deactivate', methods=['POST'])
+def businesses_bulk_deactivate():
+    form = BulkDeleteForm()
+
+    if form.validate_on_submit():
+        ids = Business.get_bulk_action_ids(request.form.get('scope'),
+                                           request.form.getlist('bulk_ids'),
+                                           query=request.args.get('q', ''))
+
+        # Cant use the query in comments below; coz businesses_relationships & not just Business
+        # has stuff to be deleted.
+        # Business.query.filter(Business.id.in_(ids)).delete()
+        # Hence use the below work-around.
+
+        for id in ids:
+            business = Business.query.get(id)
+            business.active = not business.active
+
+        # map(db.session.delete, [Business.query.get(id) for id in ids])
+        db.session.commit()
+
+        flash(_n('%(num)d business was deactivated.',
+                 '%(num)d businesses were deactivated.',
+                 num=len(ids)), 'success')
+    else:
+        flash(_('No businesses were deactivated, something went wrong.'), 'error')
+
+    return redirect(url_for('admin.businesses'))
+
+
 # Users -----------------------------------------------------------------------
 @admin.route('/users', defaults={'page': 1})
 @admin.route('/users/page/<int:page>')
