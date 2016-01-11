@@ -353,6 +353,8 @@ def business_edit(id):
     if form.validate_on_submit():
         if business.modify_from_form(form):
             flash(_('Business has been modified successfully.'), 'success')
+            if current_user.role == "admin":
+                return redirect(url_for('admin.businesses'))
             return redirect(url_for('backend.businesses'))
 
     return render_template('backend/business/edit.jinja2', form=form, business=business)
