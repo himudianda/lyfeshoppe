@@ -50,6 +50,9 @@
                                                 <th class="col-header">
                                                     {{ items.sort('created_on', 'Created On') }}
                                                 </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('updated_on', 'Updated On') }}
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -84,6 +87,9 @@
                                                     <!-- # Under section: Integrating moment.js -->
                                                     <td>
                                                         {{ momentjs(review.created_on).format("MMM Do YYYY, h:mm a") }}
+                                                    </td>
+                                                    <td>
+                                                        {{ momentjs(review.updated_on).format("MMM Do YYYY, h:mm a") }}
                                                     </td>
                                                 </tr>
                                             {% endfor %}
