@@ -3,6 +3,7 @@ from flask_babel import lazy_gettext as _
 from lyfeshoppe.lib.flask_mailplus import send_template_message
 from lyfeshoppe.app import create_celery_app
 from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.business.models.business import Business
 
 celery = create_celery_app()
 
@@ -45,10 +46,13 @@ def deliver_new_user_email(user_id, password):
     """
     user = User.query.get(user_id)
 
+    business_id = 10
+    business = Business.query.get(business_id)
+
     if user is None:
         return
 
-    ctx = {'user': user, 'password': password}
+    ctx = {'user': user, 'password': password, 'business': business}
 
     send_template_message(subject=_('New User email from LyfeShoppe'),
                           recipients=[user.email],
