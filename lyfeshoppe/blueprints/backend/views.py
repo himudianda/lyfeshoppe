@@ -79,6 +79,7 @@ def shop_details(id):
             'phone': user.phone,
             'total_reservations': len(employee.reservations),
             'num_of_services': len(employee.products),
+            'reviews': employee.reviews
         }
         employees.append(item)
 

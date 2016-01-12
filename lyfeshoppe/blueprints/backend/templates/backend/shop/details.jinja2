@@ -107,6 +107,9 @@
                                                     <li class="active">
                                                         <a href="#tab_{{loop.index}}_1" data-toggle="tab"> Overview </a>
                                                     </li>
+                                                    <li>
+                                                        <a href="#tab_{{loop.index}}_2" data-toggle="tab"> Reviews </a>
+                                                    </li>
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="tab_{{loop.index}}_1">
@@ -170,6 +173,35 @@
                                                                     <!--end col-md-4-->
                                                                 </div>
                                                                 <!--end row-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--tab_1_2-->
+                                                    <div class="tab-pane" id="tab_{{loop.index}}_2">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="tab-content">
+                                                                    <div id="tab_1" class="tab-pane active">
+                                                                        <div id="accordion1" class="panel-group">
+                                                                            {% if not employee.reviews | length %}
+                                                                                No Reviews yet.
+                                                                            {% else %}
+                                                                                {% for review in employee.reviews %}
+                                                                                    <div class="panel panel-success">
+                                                                                        <div class="panel-heading">
+                                                                                            <h4 class="panel-title">
+                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}"> {{review.STATUS[review.status]}} </a>
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                        <div id="accordion_{{loop.index}}" class="panel-collapse collapse">
+                                                                                            <div class="panel-body"> {{review.description}} </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
