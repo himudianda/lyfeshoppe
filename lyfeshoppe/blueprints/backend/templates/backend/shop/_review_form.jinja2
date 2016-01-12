@@ -6,6 +6,9 @@
   {% set legend = 'Write a new Review' %}
   {% set button = _('Add') %}
 {% else %}
+  {% set endpoint = 'backend.review_edit' %}
+  {% set form_kwargs = {'id': review.id} %}
+  {% set button = _('Save') %}
 {% endif %}
 
 {% call f.form_tag(endpoint, **form_kwargs) %}

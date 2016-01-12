@@ -53,6 +53,9 @@
                                                 <th class="col-header">
                                                     {{ items.sort('updated_on', 'Updated On') }}
                                                 </th>
+                                                <th class="col-header">
+                                                    Edit
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -90,6 +93,11 @@
                                                     </td>
                                                     <td>
                                                         {{ momentjs(review.updated_on).format("MMM Do YYYY, h:mm a") }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ url_for('backend.review_edit', id=review.id) }}" class="btn btn-outline btn-circle btn-sm red">
+                                                            <i class="fa fa-edit"></i> Edit
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

@@ -259,6 +259,27 @@ def reviews(page):
                            **business_categories)
 
 
+@backend.route('/reviews/edit/<int:id>', methods=['GET', 'POST'])
+def review_edit(id):
+    review = Review.query.get(id)
+    if review.customer.user_id != current_user.id:
+        flash(_('You are not permitted to edit this review.'), 'error')
+        return redirect(url_for('backend.reviews'))
+
+    form = ReviewForm(obj=review)
+
+    if form.validate_on_submit():
+        if review.modify_from_form(form):
+            flash(_('Review has been modified successfully.'), 'success')
+            if current_user.role == "admin":
+                return redirect(url_for('admin.reviews'))
+            return redirect(url_for('backend.reviews'))
+
+    return render_template('backend/shop/review_edit.jinja2', form=form,
+                           review=review,
+                           **business_categories)
+
+
 # Businesses -----------------------------------------------------------------------
 @backend.route('/businesses', defaults={'page': 1})
 @backend.route('/businesses/page/<int:page>')
