@@ -237,6 +237,28 @@ def purchases(page):
                            **business_categories)
 
 
+# Shop Reviews -------------------------------------------------------------------
+@backend.route('/reviews', defaults={'page': 1})
+@backend.route('/reviews/page/<int:page>')
+def reviews(page):
+    search_form = SearchForm()
+
+    sort_by = Review.sort_by(request.args.get('created_on', 'status'),
+                             request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    user_customer_ids = [customer.id for customer in Customer.query.filter(Customer.user == current_user)]
+    paginated_reviews = Review.query \
+        .filter(Review.customer_id.in_(user_customer_ids)) \
+        .order_by(Review.status.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/shop/review_index.jinja2',
+                           form=search_form,
+                           reviews=paginated_reviews,
+                           **business_categories)
+
+
 # Businesses -----------------------------------------------------------------------
 @backend.route('/businesses', defaults={'page': 1})
 @backend.route('/businesses/page/<int:page>')

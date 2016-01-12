@@ -1,0 +1,105 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+{% import 'dashboard/macros/items.jinja2' as items %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
+
+{% block title %}
+    Reviews / List | LyfeShoppe | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+    {% set form_kwargs = {} %}
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                    <div class="portlet box red">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building"></i>Reviews</div>
+                        </div>
+                        <div class="portlet-body">
+
+
+
+                            <div class="row">
+                                {% if reviews.total == 0 %}
+                                    <h3>No results found</h3>
+                                    {% if request.args.get('q') %}
+                                        <p>Try limiting or removing your search terms.</p>
+                                    {% else %}
+                                        <p>There are no reviews present.</p>
+                                    {% endif %}
+                                {% else %}
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-header">
+                                                    {{ items.sort('business.name', 'Business Name') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('employee.user.name', 'Staff Name') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('status', 'Status') }}
+                                                </th>
+                                                <th class="col-header">
+                                                    {{ items.sort('created_on', 'Created On') }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for review in reviews.items %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="{{ url_for('backend.shop_details', id=purchase.business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <i class="fa fa-share"></i> {{ review.business.name }}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            {{ review.employee.user.name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {% if review.status == 'poor' %}
+                                                            {% set data = "label label-md label-warning label" %}
+                                                        {% elif review.status == 'expected_more' %}
+                                                            {% set data = "label label-md label-success label" %}
+                                                        {% elif review.status == 'average' %}
+                                                            {% set data = "label label-md label-info label" %}
+                                                        {% elif review.status == 'good' %}
+                                                            {% set data = "label label-md label-danger label" %}
+                                                        {% elif review.status == 'very_good' %}
+                                                            {% set data = "label label-md label-danger label" %}
+                                                        {% endif %}
+                                                        <span class="{{ data }}"> {{ review.status }} </span>
+                                                    </td>
+
+                                                    <!-- Trick from: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times -->
+                                                    <!-- # Under section: Integrating moment.js -->
+                                                    <td>
+                                                        {{ momentjs(purchase.created_on).format("MMM Do YYYY, h:mm a") }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {{ items.paginate(purchases, form_kwargs) }}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END SAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}
