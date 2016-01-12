@@ -1,0 +1,107 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+{% import 'dashboard/macros/items.jinja2' as items %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
+
+{% block title %}
+    Reviews / List | LyfeShoppe | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+    {% set form_kwargs = {'id': business.id} %}
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                    <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building"></i>Reviews</div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  {{ f.search('backend.business_reviews', form_kwargs) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {% if reviews.total == 0 %}
+                                    <h3>No results found</h3>
+                                    {% if request.args.get('q') %}
+                                        <p>Try limiting or removing your search terms.</p>
+                                    {% else %}
+                                        <p>There are no reviews present.</p>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-header">
+                                                        {{ items.sort('status', 'Status') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('description', 'Description') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('customer.name', 'Customer') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('employee.name', 'Employee') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('product.name', 'Product') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('active') }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for review in reviews.items %}
+                                                    <tr>
+                                                        <td>
+                                                            {{ review.status }}
+                                                        </td>
+                                                        <td>
+                                                            {{ review.description }}
+                                                        </td>
+                                                        <td>
+                                                            {{ review.customer.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ review.employee.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ review.product.name }}
+                                                        </td>
+                                                        <td>
+                                                            {% if review.active %}
+                                                                {% set data = "label label-md label-success label" %}
+                                                            {% else %}
+                                                                {% set data = "label label-md label-warning label" %}
+                                                            {% endif %}
+                                                            <span class="{{ data }}"> {{ review.active }} </span>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {{ items.paginate(reviews, form_kwargs) }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}

@@ -11,6 +11,59 @@ from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.extensions import db
 
 
+class Review(ResourceMixin, db.Model):
+    __tablename__ = 'reviews'
+
+    STATUS = OrderedDict([
+        ('poor', 'Poor.'),
+        ('expected_more', 'Expected More.'),
+        ('average', 'Average.'),
+        ('good', 'Good.'),
+        ('very_good', 'Very Good.')
+    ])
+
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(
+                db.Enum(*STATUS, name='review_statuses'), index=True, nullable=False, server_default='very_good')
+    description = db.Column(db.Text())
+
+    # Relationships
+    customer_id = db.Column(db.Integer, db.ForeignKey(
+                        'customers.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey(
+                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey(
+                        'employees.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=True)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+                        'products.id', onupdate='CASCADE', ondelete='CASCADE'
+                    ), index=True, nullable=True)
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Review, self).__init__(**kwargs)
+
+    @classmethod
+    def search(cls, query):
+        """
+        Search a resource by 1 or more fields.
+
+        :param query: Search query
+        :type query: str
+        :return: SQLAlchemy filter
+        """
+        if not query:
+            return ''
+
+        search_query = '%{0}%'.format(query)
+        search_chain = (cls.status.ilike(search_query),
+                        cls.description.ilike(search_query))
+
+        return or_(*search_chain)
+
+
 class Reservation(ResourceMixin, db.Model):
     __tablename__ = 'reservations'
 
@@ -96,6 +149,7 @@ class Customer(ResourceMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
     reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
+    reviews = db.relationship(Review, backref='customer', passive_deletes=True)
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
@@ -237,6 +291,7 @@ class Employee(ResourceMixin, db.Model):
 
     products = db.relationship('Product', secondary=employee_product_relations, backref='employees')
     reservations = db.relationship(Reservation, backref='employee', passive_deletes=True)
+    reviews = db.relationship(Review, backref='employee', passive_deletes=True)
 
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
@@ -355,6 +410,7 @@ class Product(ResourceMixin, db.Model):
                     ), index=True, nullable=False)
     availabilities = db.relationship(Availability, backref="product")
     reservations = db.relationship(Reservation, backref='product', passive_deletes=True)
+    reviews = db.relationship(Review, backref='product', passive_deletes=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     def __init__(self, **kwargs):
@@ -589,6 +645,8 @@ class Business(ResourceMixin, db.Model):
     employees = db.relationship(Employee, backref='business', passive_deletes=True)
     customers = db.relationship(Customer, backref='business', passive_deletes=True)
     reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
+    reviews = db.relationship(Review, backref='business', passive_deletes=True)
+
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

@@ -11,7 +11,7 @@ from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
     EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer, Review
 from lyfeshoppe.blueprints.user.models import User
 
 backend = Blueprint('backend', __name__, template_folder='templates')
@@ -583,6 +583,30 @@ def business_product_edit(id, product_id):
             return redirect(url_for('backend.business_products', id=id))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
+
+
+# Business Products -------------------------------------------------------------------
+@backend.route('/businesses/<int:id>/reviews', defaults={'page': 1})
+@backend.route('/businesses/<int:id>/reviews/page/<int:page>')
+@is_staff_authorized
+def business_reviews(id, page):
+    business = Business.query.get(id)
+    search_form = SearchForm()
+
+    sort_by = Review.sort_by(request.args.get('sort', 'status'),
+                             request.args.get('direction', 'asc'))
+    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+
+    paginated_reviews = Review.query \
+        .filter(Review.search(request.args.get('q', ''))) \
+        .filter(Review.business == business) \
+        .order_by(Review.product_id.desc(), text(order_values)) \
+        .paginate(page, 20, True)
+
+    return render_template('backend/review/index.jinja2',
+                           form=search_form,
+                           reviews=paginated_reviews,
+                           business=business)
 
 
 # Business Calendar -------------------------------------------------------------------
