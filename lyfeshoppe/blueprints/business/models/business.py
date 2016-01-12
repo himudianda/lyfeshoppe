@@ -268,6 +268,12 @@ class Customer(ResourceMixin, db.Model):
         # is easier to use & understand
         # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
 
+    def request_review(self, business_id):
+        """
+        Request a review
+        """
+        pass
+
 
 employee_product_relations = db.Table(
     'employee_product_relations',

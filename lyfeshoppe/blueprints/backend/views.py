@@ -579,6 +579,16 @@ def business_customer_edit(id, customer_id):
     return render_template('backend/customer/edit.jinja2', form=form, business=business, customer=customer)
 
 
+@backend.route('/businesses/<int:id>/customer/<int:customer_id>/request-review', methods=['GET', 'POST'])
+@is_staff_authorized
+def business_customer_request_review(id, customer_id):
+    customer = Customer.query.get(customer_id)
+    customer.request_review(id)
+
+    flash(_('Your request has been sent.'), 'success')
+    return redirect(url_for('backend.business_customers', id=id))
+
+
 # Business Products -------------------------------------------------------------------
 @backend.route('/businesses/<int:id>/products', defaults={'page': 1})
 @backend.route('/businesses/<int:id>/products/page/<int:page>')

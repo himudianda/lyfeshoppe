@@ -76,6 +76,9 @@
                                                             <button type="submit" class="btn btn-danger btn-sm"> Activate/Deactivate Customer </button>
                                                         </div>
                                                     </th>
+                                                    <th class="col-header">
+                                                        Customer Reviews
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -109,6 +112,11 @@
                                                                 {% set data = "label label-md label-warning label" %}
                                                             {% endif %}
                                                             <span class="{{ data }}"> {{ customer.active }} </span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ url_for('backend.business_customer_request_review', id=business.id, customer_id=customer.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                <i class="fa fa-smile-o"></i> Request
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
