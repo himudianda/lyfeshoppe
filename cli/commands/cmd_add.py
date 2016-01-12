@@ -10,7 +10,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.issue.models import Issue
 from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.blueprints.common.models import Address
-from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation
+from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation, Review
 
 SEED_ADMIN_EMAIL = None
 ACCEPT_LANGUAGES = None
@@ -43,6 +43,7 @@ MAX_EMPLOYEES_PER_BUSINESS = 5
 MAX_CUSTOMERS_PER_BUSINESS = 10
 MAX_PRODUCTS_PER_BUSINESS = 6
 MAX_RESERVATIONS_PER_BUSINESS = 20
+MAX_REVIEWS_PER_BUSINESS = 5
 
 
 def generate_address():
@@ -276,7 +277,8 @@ def reservations():
         for i in range(0, num_of_reservations):
             employee = random.choice(employees)
 
-            # Solution from: http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
+            # Solution from:
+            # http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
             # Error hit: NotImplementedError: in_() not yet supported for relationships.
             # For a simple many-to-one, use in_() against the set of foreign key values.
             # Joins in SQLAlchemy is used
@@ -322,6 +324,49 @@ def reservations():
 
 
 @click.command()
+def reviews():
+    """
+    Create random reviews.
+    """
+    businesses = db.session.query(Business).all()
+    for business in businesses:
+        num_of_reviews = random.randint(0, MAX_REVIEWS_PER_BUSINESS)
+
+        customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
+        employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
+        if not customers or not employees:
+            continue
+
+        for i in range(0, num_of_reviews):
+            employee = random.choice(employees)
+
+            # Solution from:
+            # http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
+            # Error hit: NotImplementedError: in_() not yet supported for relationships.
+            # For a simple many-to-one, use in_() against the set of foreign key values.
+            # Joins in SQLAlchemy is used
+            products = Product.query.join(Product.employees).filter(Employee.id.in_(e.id for e in [employee])).all()
+            if not products:
+                continue
+            product = random.choice(products)
+            customer = random.choice(customers)
+
+            params = {
+                'status': random.choice(Review.STATUS.keys()),
+                'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
+                'business_id': business.id,
+                'customer_id': customer.id,
+                'employee_id': employee.id,
+                'product_id': product.id
+            }
+
+            review = Review(**params)
+            review.save()
+
+    _log_status(Review.query.count(), "reviews")
+
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -337,6 +382,7 @@ def all(ctx):
     ctx.invoke(products)
     ctx.invoke(customers)
     ctx.invoke(reservations)
+    ctx.invoke(reviews)
     return None
 
 
@@ -348,6 +394,7 @@ def generate_large_samples():
     global MAX_CUSTOMERS_PER_BUSINESS
     global MAX_PRODUCTS_PER_BUSINESS
     global MAX_RESERVATIONS_PER_BUSINESS
+    global MAX_REVIEWS_PER_BUSINESS
 
     NUM_OF_FAKE_USERS = 200
     NUM_OF_FAKE_ISSUES = 5
@@ -356,6 +403,7 @@ def generate_large_samples():
     MAX_CUSTOMERS_PER_BUSINESS = 40
     MAX_PRODUCTS_PER_BUSINESS = 20
     MAX_RESERVATIONS_PER_BUSINESS = 60
+    MAX_REVIEWS_PER_BUSINESS = 25
 
 
 @click.command()
@@ -376,6 +424,7 @@ def large(ctx):
     ctx.invoke(products)
     ctx.invoke(customers)
     ctx.invoke(reservations)
+    ctx.invoke(reviews)
     return None
 
 
@@ -387,6 +436,7 @@ def generate_very_large_samples():
     global MAX_CUSTOMERS_PER_BUSINESS
     global MAX_PRODUCTS_PER_BUSINESS
     global MAX_RESERVATIONS_PER_BUSINESS
+    global MAX_REVIEWS_PER_BUSINESS
 
     NUM_OF_FAKE_USERS = 500
     NUM_OF_FAKE_ISSUES = 50
@@ -395,6 +445,7 @@ def generate_very_large_samples():
     MAX_CUSTOMERS_PER_BUSINESS = 200
     MAX_PRODUCTS_PER_BUSINESS = 20
     MAX_RESERVATIONS_PER_BUSINESS = 400
+    MAX_REVIEWS_PER_BUSINESS = 40
 
 
 @click.command()
@@ -415,6 +466,7 @@ def very_large(ctx):
     ctx.invoke(products)
     ctx.invoke(customers)
     ctx.invoke(reservations)
+    ctx.invoke(reviews)
     return None
 
 
@@ -425,6 +477,7 @@ cli.add_command(employees)
 cli.add_command(products)
 cli.add_command(customers)
 cli.add_command(reservations)
+cli.add_command(reviews)
 cli.add_command(all)
 cli.add_command(large)
 cli.add_command(very_large)

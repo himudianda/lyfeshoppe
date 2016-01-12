@@ -40,6 +40,7 @@ class Review(ResourceMixin, db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey(
                         'products.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
