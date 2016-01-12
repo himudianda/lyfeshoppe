@@ -161,6 +161,11 @@ def shop_booking(id, product_id):
 def shop_reviews_new(id, employee_id):
     business = Business.query.get(id)
     employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == id).first()
+    customer = Customer.query.filter(Customer.user_id == current_user.id, Customer.business_id == id).first()
+
+    if not customer:
+        flash(_('You must be a customer to write a review.'), 'error')
+        return redirect(url_for('backend.shop_details', id=id))
 
     form = ReviewForm()
     if form.is_submitted() and form.validate_on_submit():
@@ -170,10 +175,10 @@ def shop_reviews_new(id, employee_id):
 
         params = {
             'status': 'good',
-            'employee_id': 2,
-            'product_id': employee_id,
+            'employee_id': employee_id,
+            'product_id': 3,
             'business_id': id,
-            'customer_id': 4
+            'customer_id': customer.id
         }
 
         if Review.create(params):

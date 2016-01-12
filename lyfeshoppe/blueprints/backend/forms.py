@@ -1,10 +1,9 @@
 import logging
 from collections import OrderedDict
 from lyfeshoppe.lib.util_wtforms import ModelForm
-import wtforms
 from flask_wtf import Form
 from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField
-from wtforms_components import EmailField, IntegerField, TimeField
+from wtforms_components import EmailField, IntegerField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
 from lyfeshoppe.blueprints.business.models.business import Business, Reservation, Review
@@ -146,7 +145,6 @@ class BookingForm(ModelForm):
 
 
 class ReviewForm(ModelForm):
-    employee_id = HiddenField()
     product_id = HiddenField()
     status = SelectField(_('Status'), [DataRequired()],
                          choices=choices_from_dict(Review.STATUS,
