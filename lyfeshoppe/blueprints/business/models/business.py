@@ -59,10 +59,9 @@ class Review(ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        search_chain = (cls.status.ilike(search_query),
-                        cls.description.ilike(search_query))
+        search_chain = cls.description.ilike(search_query)
 
-        return or_(*search_chain)
+        return search_chain
 
 
 class Reservation(ResourceMixin, db.Model):
