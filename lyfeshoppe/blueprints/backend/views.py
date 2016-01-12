@@ -163,6 +163,10 @@ def shop_reviews_new(id, employee_id):
     employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == id).first()
     customer = Customer.query.filter(Customer.user_id == current_user.id, Customer.business_id == id).first()
 
+    if not business or not employee:
+        flash(_('Business or Employee does not exist.'), 'error')
+        return redirect(url_for('backend.shop_details', id=id))
+
     if not customer:
         flash(_('You must be a customer to write a review.'), 'error')
         return redirect(url_for('backend.shop_details', id=id))
