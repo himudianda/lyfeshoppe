@@ -63,6 +63,25 @@ class Review(ResourceMixin, db.Model):
 
         return search_chain
 
+    @classmethod
+    def create_from_form(cls, business_id, employee_id, customer_id, form):
+        """
+        Return whether or not the product was created successfully.
+
+        :return: bool
+        """
+
+        review = Review()
+        form.populate_obj(review)
+
+        if review.product_id == "":
+            review.product_id = None
+        review.business_id = business_id
+        review.employee_id = employee_id
+        review.customer_id = customer_id
+        review.save()
+        return True
+
 
 class Reservation(ResourceMixin, db.Model):
     __tablename__ = 'reservations'

@@ -174,22 +174,8 @@ def shop_reviews_new(id, employee_id):
     form = ReviewForm()
     if form.is_submitted() and form.validate_on_submit():
 
-        review = Review()
-        form.populate_obj(review)
-
-        params = {
-            'status': 'good',
-            'employee_id': employee_id,
-            'product_id': 3,
-            'business_id': id,
-            'customer_id': customer.id
-        }
-
-        if Review.create(params):
+        if Review.create_from_form(id, employee_id, customer.id, form):
             flash(_('Review has been created successfully.'), 'success')
-            return redirect(url_for('backend.shop_details', id=id))
-        else:
-            flash(_('Review create failed.'), 'error')
             return redirect(url_for('backend.shop_details', id=id))
 
     return render_template('backend/shop/review_add.jinja2',
