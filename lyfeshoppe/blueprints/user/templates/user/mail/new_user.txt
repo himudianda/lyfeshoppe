@@ -1,0 +1,15 @@
+Hi {{ user.email }},
+
+Your new user account has been created at LyfeShoppe. Your temporary password is {{password}}.
+
+To access your new account; visit :
+
+{{ url_for('user.login') }}
+
+and login using your credentials:
+Username: {{user.email}}
+Password: {{password}}
+
+
+Thanks,
+LyfeShoppe staff
