@@ -136,6 +136,20 @@
                                                                                 <i class="fa fa-mobile"></i> {{ employee['phone'] }} </li>
                                                                             <li>
                                                                         </ul>
+                                                                        <ul class="list-inline">
+                                                                            <li>
+                                                                                {% if employee['rating'] == 0 %}
+                                                                                    Not rated
+                                                                                {% else %}
+                                                                                    {% for i in range(employee['rating']) %}
+                                                                                        <i class="fa fa-star"></i>
+                                                                                    {% endfor %}
+                                                                                    {% for i in range(5-employee['rating']) %}
+                                                                                        <i class="fa fa-star-o"></i>
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            <li>
+                                                                        </ul>
                                                                     </div>
                                                                     <!--end col-md-8-->
                                                                     <div class="col-md-4">

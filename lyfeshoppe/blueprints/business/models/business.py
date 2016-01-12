@@ -2,6 +2,7 @@ from collections import OrderedDict
 from sqlalchemy import or_, UniqueConstraint
 import pytz
 import os
+import math
 
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
@@ -410,6 +411,15 @@ class Employee(ResourceMixin, db.Model):
         total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
         total_sales = total_sales_in_cents/100
         return total_sales
+
+    @property
+    def rating(self):
+        rating_num = 0.0  # This should be float & not int for correct results to be computed below
+        for review in self.reviews:
+            rating_num += (Review.STATUS.keys().index(review.status) + 1)
+        if rating_num == 0:
+            return rating_num
+        return int(math.ceil(rating_num/len(self.reviews)))
 
 
 class Product(ResourceMixin, db.Model):
