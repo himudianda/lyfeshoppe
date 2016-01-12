@@ -190,7 +190,9 @@
                                                                                     <div class="panel panel-success">
                                                                                         <div class="panel-heading">
                                                                                             <h4 class="panel-title">
-                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}"> {{review.STATUS[review.status]}} </a>
+                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}"> {{review.STATUS[review.status]}}
+                                                                                                - review by {{review.customer.user.name if review.customer.user.name else review.customer.user.email}}
+                                                                                                </a>
                                                                                             </h4>
                                                                                         </div>
                                                                                         <div id="accordion_{{loop.index}}" class="panel-collapse collapse">
