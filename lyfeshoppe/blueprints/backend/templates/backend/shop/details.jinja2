@@ -187,10 +187,20 @@
                                                                                 No Reviews yet.
                                                                             {% else %}
                                                                                 {% for review in employee.reviews %}
+                                                                                    {% set review_statuses = review.STATUS.keys() %}
+                                                                                    {% set num_of_review_statuses = review_statuses | length %}
                                                                                     <div class="panel panel-success">
                                                                                         <div class="panel-heading">
                                                                                             <h4 class="panel-title">
-                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}"> {{review.STATUS[review.status]}}
+                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}">
+                                                                                                <span>
+                                                                                                {% for i in range(1+review_statuses.index(review.status)) %}
+                                                                                                    <i class="fa fa-star"></i></span>
+                                                                                                {% endfor %}
+                                                                                                {% for i in range(num_of_review_statuses-1-review_statuses.index(review.status)) %}
+                                                                                                    <i class="fa fa-star-o"></i></span>
+                                                                                                {% endfor %}
+                                                                                                ({{review.STATUS[review.status]}})
                                                                                                 - review by {{review.customer.user.name if review.customer.user.name else review.customer.user.email}}
                                                                                                 </a>
                                                                                             </h4>
