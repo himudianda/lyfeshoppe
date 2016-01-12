@@ -219,7 +219,8 @@
                                                                                                     <i class="fa fa-star-o"></i></span>
                                                                                                 {% endfor %}
                                                                                                 ({{review.STATUS[review.status]}})
-                                                                                                - review by {{review.customer.user.name if review.customer.user.name else review.customer.user.email}}
+                                                                                                <span style="float:right;">- reviewed by <b>{{review.customer.user.name if review.customer.user.name else review.customer.user.email}}</b>
+                                                                                                </span>
                                                                                                 </a>
                                                                                             </h4>
                                                                                         </div>
