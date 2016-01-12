@@ -7,7 +7,7 @@ from wtforms import HiddenField, SelectField, StringField, DateTimeField, Boolea
 from wtforms_components import EmailField, IntegerField, TimeField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
-from lyfeshoppe.blueprints.business.models.business import Business, Reservation
+from lyfeshoppe.blueprints.business.models.business import Business, Reservation, Review
 
 try:
     from instance import settings
@@ -143,3 +143,12 @@ class BookingForm(ModelForm):
     employee_id = HiddenField()
     start_time = DateTimeField(_('Start time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
     end_time = DateTimeField(_('End time'), [Optional()], format='%Y-%m-%d %H:%M:%S')
+
+
+class ReviewForm(ModelForm):
+    employee_id = HiddenField()
+    product_id = HiddenField()
+    status = SelectField(_('Status'), [DataRequired()],
+                         choices=choices_from_dict(Review.STATUS,
+                         prepend_blank=False))
+    description = TextAreaField(_("description"), [DataRequired(), Length(3, 2048)])

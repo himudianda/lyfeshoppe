@@ -9,7 +9,7 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm
+    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm, ReviewForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer, Review
 from lyfeshoppe.blueprints.user.models import User
@@ -71,6 +71,7 @@ def shop_details(id):
     for employee in business.active_employees:
         user = User.query.get(employee.user_id)
         item = {
+            'id': employee.id,
             'name': user.name,
             'email': user.email,
             'about': employee.about,
@@ -153,6 +154,38 @@ def shop_booking(id, product_id):
                            form=form,
                            business=business, product=product,
                            events=json.dumps(events),
+                           **business_categories)
+
+
+@backend.route('/shops/<string:id>/employee/<string:employee_id>/review', methods=['GET', 'POST'])
+def shop_reviews_new(id, employee_id):
+    business = Business.query.get(id)
+    employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == id).first()
+
+    form = ReviewForm()
+    if form.is_submitted() and form.validate_on_submit():
+
+        review = Review()
+        form.populate_obj(review)
+
+        params = {
+            'status': 'good',
+            'employee_id': 2,
+            'product_id': employee_id,
+            'business_id': id,
+            'customer_id': 4
+        }
+
+        if Review.create(params):
+            flash(_('Review has been created successfully.'), 'success')
+            return redirect(url_for('backend.shop_details', id=id))
+        else:
+            flash(_('Review create failed.'), 'error')
+            return redirect(url_for('backend.shop_details', id=id))
+
+    return render_template('backend/shop/review_add.jinja2',
+                           form=form,
+                           business=business, employee=employee,
                            **business_categories)
 
 
