@@ -196,7 +196,8 @@
                                                             <div class="col-md-12">
                                                                 <div class="tab-content">
                                                                     <div id="tab_1" class="tab-pane active">
-                                                                        <div id="accordion1" class="panel-group">
+                                                                        <div id="accordion_{{loop.index}}" class="panel-group">
+                                                                        {% set review_accordian_number = loop.index %}
                                                                             {% if not employee.reviews | length %}
                                                                                 <div class="col-md-12">
                                                                                     No reviews exist for {{employee.name}}.
@@ -209,7 +210,7 @@
                                                                                     <div class="panel panel-success">
                                                                                         <div class="panel-heading">
                                                                                             <h4 class="panel-title">
-                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion_{{loop.index}}">
+                                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{review_accordian_number}}" href="#accordion_{{review_accordian_number}}_{{loop.index}}">
                                                                                                 <span>
                                                                                                 {% for i in range(1+review_statuses.index(review.status)) %}
                                                                                                     <i class="fa fa-star"></i></span>
@@ -222,7 +223,7 @@
                                                                                                 </a>
                                                                                             </h4>
                                                                                         </div>
-                                                                                        <div id="accordion_{{loop.index}}" class="panel-collapse collapse">
+                                                                                        <div id="accordion_{{review_accordian_number}}_{{loop.index}}" class="panel-collapse collapse">
                                                                                             <div class="panel-body"> {{review.description}} </div>
                                                                                         </div>
                                                                                     </div>
