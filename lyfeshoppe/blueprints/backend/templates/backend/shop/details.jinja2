@@ -198,7 +198,10 @@
                                                                     <div id="tab_1" class="tab-pane active">
                                                                         <div id="accordion1" class="panel-group">
                                                                             {% if not employee.reviews | length %}
-                                                                                No Reviews yet.
+                                                                                <div class="col-md-12">
+                                                                                    No reviews exist for {{employee.name}}.
+                                                                                    <span><a class="btn btn-outline btn-circle btn-sm red" href="{{ url_for('backend.shop_reviews_new', id=business.id, employee_id=employee.id) }}"><i class="fa fa-edit"></i>Write review now.</a></span>
+                                                                                </div>
                                                                             {% else %}
                                                                                 {% for review in employee.reviews %}
                                                                                     {% set review_statuses = review.STATUS.keys() %}
