@@ -1,0 +1,8 @@
+Hi {{ user.name if user.name else user.email }},
+
+{{business.name}} has requested a review from you.
+You may write a review for this business by visiting their page on LyfeShoppe.
+
+
+Thanks,
+LyfeShoppe staff

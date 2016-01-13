@@ -268,12 +268,6 @@ class Customer(ResourceMixin, db.Model):
         # is easier to use & understand
         # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
 
-    def request_review(self, business_id):
-        """
-        Request a review
-        """
-        pass
-
 
 employee_product_relations = db.Table(
     'employee_product_relations',
@@ -788,3 +782,11 @@ class Business(ResourceMixin, db.Model):
             statuses[reservation.status] += 1
 
         return statuses
+
+    @classmethod
+    def request_a_review(cls, business_id, customer_id):
+        """
+        Request a review
+        """
+        from lyfeshoppe.blueprints.business.tasks import request_customer_review
+        request_customer_review.delay(business_id, customer_id)

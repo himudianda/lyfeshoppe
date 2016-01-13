@@ -582,8 +582,7 @@ def business_customer_edit(id, customer_id):
 @backend.route('/businesses/<int:id>/customer/<int:customer_id>/request-review', methods=['GET', 'POST'])
 @is_staff_authorized
 def business_customer_request_review(id, customer_id):
-    customer = Customer.query.get(customer_id)
-    customer.request_review(id)
+    Business.request_a_review(id, customer_id)
 
     flash(_('Your request has been sent.'), 'success')
     return redirect(url_for('backend.business_customers', id=id))
