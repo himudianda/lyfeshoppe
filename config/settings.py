@@ -172,10 +172,6 @@ OAUTH_CREDENTIALS = {
     'facebook': {
         'id': None,
         'secret': None
-    },
-    'twitter': {
-        'id': None,
-        'secret': None
     }
 }
 
