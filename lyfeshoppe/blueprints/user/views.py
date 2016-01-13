@@ -49,7 +49,7 @@ def oauth_callback(provider):
         return redirect(url_for('user.signup'))
     user = User.query.filter_by(social_id=social_id).first()
     if not user:
-        user = User(social_id=social_id, nickname=username, email=email)
+        user = User(social_id=social_id, username=username, email=email)
         user.save()
     login_user(user, True)
     return redirect(get_dashboard_url())

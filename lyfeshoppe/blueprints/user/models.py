@@ -32,12 +32,22 @@ class User(UserMixin, ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # Details
-    username = db.Column(db.String(24), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, index=True)
     name = db.Column(db.String(128), index=True)
     phone = db.Column(db.String(20), index=True)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
-    social_id = db.Column(db.String(64), nullable=True, unique=True)
-    nickname = db.Column(db.String(64), nullable=True)
+
+    social_id = db.Column(db.String(64), unique=True)
+    fb_id = db.Column(db.String(64), unique=True)
+    fb_link = db.Column(db.String(128), unique=True)
+    fb_verified = db.Column('is_fb_verified', db.Boolean(), nullable=False, server_default='0')
+    fb_added = db.Column('is_fb_added', db.Boolean(), nullable=False, server_default='0')
+    first_name = db.Column(db.String(128), index=True)
+    last_name = db.Column(db.String(128), index=True)
+    age_range_min = db.Column(db.Integer)
+    age_range_max = db.Column(db.Integer)
+    gender = db.Column(db.String(32))
+    timezone = db.Column(db.Integer)
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
