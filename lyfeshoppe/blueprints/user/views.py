@@ -25,8 +25,34 @@ from lyfeshoppe.blueprints.user.forms import (
     WelcomeForm,
     UpdateCredentials,
     UpdateLocale)
+from lyfeshoppe.lib.oauth_providers import OAuthSignIn
 
 user = Blueprint('user', __name__, template_folder='templates')
+
+
+@user.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('user.signup'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+
+@user.route('/callback/<provider>')
+def oauth_callback(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('user.login'))
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, username, email = oauth.callback()
+    if social_id is None:
+        flash('Authentication failed.')
+        return redirect(url_for('user.signup'))
+    user = User.query.filter_by(social_id=social_id).first()
+    if not user:
+        user = User(social_id=social_id, nickname=username, email=email)
+        user.save()
+    login_user(user, True)
+    return redirect(get_dashboard_url())
 
 
 @user.route('/login', methods=['GET', 'POST'])

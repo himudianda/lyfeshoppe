@@ -35,7 +35,9 @@ class User(UserMixin, ResourceMixin, db.Model):
     username = db.Column(db.String(24), unique=True, index=True)
     name = db.Column(db.String(128), index=True)
     phone = db.Column(db.String(20), index=True)
-    email = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
+    email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
+    social_id = db.Column(db.String(64), nullable=True, unique=True)
+    nickname = db.Column(db.String(64), nullable=True)
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')

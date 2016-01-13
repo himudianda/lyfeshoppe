@@ -18,6 +18,7 @@ Flask-Login==0.2.11
 Flask-Bcrypt==0.6.2
 itsdangerous==0.24
 flask-bouncer==0.1.13
+rauth==0.7.2
 
 # Asset management
 Flask-Webpack==0.0.6

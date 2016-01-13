@@ -166,6 +166,19 @@ TWITTER_CONSUMER_SECRET = None
 TWITTER_ACCESS_TOKEN = None
 TWITTER_ACCESS_SECRET = None
 
+# Facebook settings.
+#
+OAUTH_CREDENTIALS = {
+    'facebook': {
+        'id': None,
+        'secret': None
+    },
+    'twitter': {
+        'id': None,
+        'secret': None
+    }
+}
+
 # Broadcast (websocket server) settings.
 #
 # NOTE: you should NOT supply the PUSH_TOKEN/BROADCAST_INTERNAL_URL here,
