@@ -45,7 +45,7 @@ class FacebookSignIn(OAuthSignIn):
 
     def authorize(self):
         return redirect(self.service.get_authorize_url(
-            scope='email',
+            scope='public_profile,email',
             response_type='code',
             redirect_uri=self.get_callback_url())
         )
@@ -58,7 +58,12 @@ class FacebookSignIn(OAuthSignIn):
                   'grant_type': 'authorization_code',
                   'redirect_uri': self.get_callback_url()}
         )
-        me = oauth_session.get('me?fields=id,email').json()
+
+        me = oauth_session.get(
+                'me?fields=id,name,first_name,last_name,age_range,link,gender,'
+                'locale,timezone,updated_time,verified,email'
+            ).json()
+
         return (
             'facebook$' + me['id'],
             me.get('email').split('@')[0],  # Facebook does not provide
