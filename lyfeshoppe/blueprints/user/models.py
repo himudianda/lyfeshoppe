@@ -87,7 +87,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     age_range_max = db.Column(db.Integer)
     gender = db.Column(db.String(32))
     timezone = db.Column(db.Integer)
-    points = db.Column(db.Integer, nullable=False, server_default=0)
+    points = db.Column(db.Integer, nullable=False, server_default='0')
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
