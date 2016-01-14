@@ -32,7 +32,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # Details
-    username = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, nullable=False, index=True)
     name = db.Column(db.String(128), index=True)
     phone = db.Column(db.String(20), index=True)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
