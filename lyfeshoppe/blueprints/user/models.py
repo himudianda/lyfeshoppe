@@ -86,6 +86,28 @@ class User(UserMixin, ResourceMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
         self.password = User.encrypt_password(kwargs.get('password', ''))
+        if kwargs.get('email', None) and not self.username:
+            self.username = kwargs.get('email').split('@')[0]
+
+    def save(self):
+        """
+        Save a model instance.
+
+        :return: self
+        """
+        if not self.username:
+            username = self.email.split('@')[0]
+
+            user = User.find_by_identity(username)
+            count = 0
+            while user:
+                count += 1
+                username = username + str(count)
+                user = User.find_by_identity(username)
+
+            self.username = username
+
+        return super(User, self).save()
 
     @classmethod
     def get_or_create(cls, params=None, from_form=False, form=None):
