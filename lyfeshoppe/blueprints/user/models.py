@@ -53,7 +53,7 @@ class Referral(ResourceMixin, db.Model):
         if ref_user:
             return None, "{0} already exists. Referral cannot be created".format(reference_email)
 
-        ref_user = User(email=reference_email, name=reference_name)
+        ref_user = User(email=reference_email, name=reference_name, password="password")
         ref_user.save()
         referral = cls(user_id=user_id, reference_id=ref_user.id)
         referral.save()

@@ -260,6 +260,11 @@ def referrals(page):
                            **business_categories)
 
 
+@backend.route('/referrals/invite', methods=['POST'])
+def referrals_invite():
+    pass
+
+
 # Shop Reviews -------------------------------------------------------------------
 @backend.route('/reviews', defaults={'page': 1})
 @backend.route('/reviews/page/<int:page>')

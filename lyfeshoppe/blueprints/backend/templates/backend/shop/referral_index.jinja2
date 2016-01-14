@@ -23,8 +23,12 @@
                                 <i class="fa fa-building"></i>Referrals</div>
                         </div>
                         <div class="portlet-body">
-
-
+                            <a href="{{ url_for('backend.referrals_invite') }}
+                               class="btn sbold green">
+                                <i class="fa fa-plus"></i> Invite your Friends
+                            </a>
+                            </br>
+                            </br>
 
                             <div class="row">
                                 {% if referrals.total == 0 %}
