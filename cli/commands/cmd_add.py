@@ -8,7 +8,7 @@ import pytz
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.issue.models import Issue
-from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.user.models import User, Referral
 from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation, Review
 
@@ -37,6 +37,7 @@ app = create_app()
 db.app = app
 
 NUM_OF_FAKE_USERS = 20
+NUM_OF_REFERRALS_PER_USER = 3
 NUM_OF_FAKE_ISSUES = 5
 NUM_OF_FAKE_BUSINESSES = 10
 MAX_EMPLOYEES_PER_BUSINESS = 5
@@ -119,6 +120,23 @@ def users():
         user.save()
 
     _log_status(User.query.count(), "users")
+
+
+@click.command()
+def referrals():
+    """
+    Create random referrals.
+    """
+    users = db.session.query(User).all()
+    for user in users:
+        num_of_referrals = random.randint(1, NUM_OF_REFERRALS_PER_USER)
+        for i in xrange(num_of_referrals):
+            reference_email = fake.email()
+            reference_name = fake.name()
+
+            Referral.create(user_id=user.id, reference_email=reference_email, reference_name=reference_name)
+
+    _log_status(Referral.query.count(), "referrals")
 
 
 @click.command()
@@ -376,6 +394,7 @@ def all(ctx):
     :return: None
     """
     ctx.invoke(users)
+    ctx.invoke(referrals)
     ctx.invoke(issues)
     ctx.invoke(businesses)
     ctx.invoke(employees)
@@ -388,6 +407,7 @@ def all(ctx):
 
 def generate_large_samples():
     global NUM_OF_FAKE_USERS
+    global NUM_OF_REFERRALS_PER_USER
     global NUM_OF_FAKE_ISSUES
     global NUM_OF_FAKE_BUSINESSES
     global MAX_EMPLOYEES_PER_BUSINESS
@@ -397,6 +417,7 @@ def generate_large_samples():
     global MAX_REVIEWS_PER_BUSINESS
 
     NUM_OF_FAKE_USERS = 200
+    NUM_OF_REFERRALS_PER_USER = 25
     NUM_OF_FAKE_ISSUES = 5
     NUM_OF_FAKE_BUSINESSES = 100
     MAX_EMPLOYEES_PER_BUSINESS = 10
@@ -418,6 +439,7 @@ def large(ctx):
     generate_large_samples()
 
     ctx.invoke(users)
+    ctx.invoke(referrals)
     ctx.invoke(issues)
     ctx.invoke(businesses)
     ctx.invoke(employees)
@@ -430,6 +452,7 @@ def large(ctx):
 
 def generate_very_large_samples():
     global NUM_OF_FAKE_USERS
+    global NUM_OF_REFERRALS_PER_USER
     global NUM_OF_FAKE_ISSUES
     global NUM_OF_FAKE_BUSINESSES
     global MAX_EMPLOYEES_PER_BUSINESS
@@ -439,6 +462,7 @@ def generate_very_large_samples():
     global MAX_REVIEWS_PER_BUSINESS
 
     NUM_OF_FAKE_USERS = 500
+    NUM_OF_REFERRALS_PER_USER = 50
     NUM_OF_FAKE_ISSUES = 50
     NUM_OF_FAKE_BUSINESSES = 1000
     MAX_EMPLOYEES_PER_BUSINESS = 10
@@ -460,6 +484,7 @@ def very_large(ctx):
     generate_very_large_samples()
 
     ctx.invoke(users)
+    ctx.invoke(referrals)
     ctx.invoke(issues)
     ctx.invoke(businesses)
     ctx.invoke(employees)
@@ -471,6 +496,7 @@ def very_large(ctx):
 
 
 cli.add_command(users)
+cli.add_command(referrals)
 cli.add_command(issues)
 cli.add_command(businesses)
 cli.add_command(employees)

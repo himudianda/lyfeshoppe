@@ -32,27 +32,32 @@ class Referral(ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.Enum(*STATUS, name='referral_status'), index=True, nullable=False, server_default='pending')
 
-    # Relationships.
-    user_id = db.Column(
-                db.Integer, db.ForeignKey('users.id', onupdate='CASCADE'),
-                index=True, nullable=False)
+    # 2 foreign keys to the same table
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
+    user = db.relationship("User", foreign_keys=[user_id])
+    reference_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
+    reference = db.relationship("User", foreign_keys=[reference_id])
 
-    reference_email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
-
-    def save(self):
+    @classmethod
+    def create(cls, user_id, reference_email, reference_name):
         """
-        Save a referral instance.
+        Create a referral instance.
 
         :return: self
         """
-        user = User.find_by_identity(self.email)
-        if user:
-            return None, "{0} already exists. Referral cannot be created".format(self.email)
+        user = User.query.get(user_id)
+        if not user:
+            return None, "System Error: user_id cannot be found"
 
-        user = User(email=self.email)
-        user.save()
+        ref_user = User.find_by_identity(reference_email)
+        if ref_user:
+            return None, "{0} already exists. Referral cannot be created".format(reference_email)
 
-        return super(Referral, self).save()
+        ref_user = User(email=reference_email, name=reference_name)
+        ref_user.save()
+        referral = cls(user_id=user_id, reference_id=ref_user.id)
+        referral.save()
+        return referral, "Referral for {0} was successfully created".format(reference_email)
 
 
 class User(UserMixin, ResourceMixin, db.Model):
@@ -96,7 +101,6 @@ class User(UserMixin, ResourceMixin, db.Model):
     # One to Many relationship: One user can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="user")
     employee_refs = db.relationship('Employee', backref='user', passive_deletes=True)
-    referrals = db.relationship(Referral, backref='user')
 
     # Locale.
     locale = db.Column(db.String(5), nullable=False, server_default='en')
