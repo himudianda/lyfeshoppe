@@ -143,7 +143,7 @@ def login():
             else:
                 flash(_('This account has been disabled.'), 'error')
         else:
-            flash(_('Identity or password is incorrect.'), 'error')
+            flash(_('Email/password is incorrect OR try social (facebook) login.'), 'error')
 
     return render_template('user/login.jinja2', form=form)
 

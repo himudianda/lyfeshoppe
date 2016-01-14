@@ -40,7 +40,7 @@ class TestLogin(ViewTestMixin):
         """ Login failure due to invalid login credentials. """
         response = self.login(identity='foo@bar.com')
         assert_status_with_message(200, response,
-                                   _('Identity or password is incorrect.'))
+                                   _('Email/password is incorrect OR try social (facebook) login.'))
 
     def test_logout(self):
         """ Logout successfully. """
