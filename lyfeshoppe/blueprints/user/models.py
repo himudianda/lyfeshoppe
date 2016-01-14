@@ -376,3 +376,25 @@ class User(UserMixin, ResourceMixin, db.Model):
                             )
         ids = [row.id for row in query.all()]
         return ids
+
+    def update_from_facebook_data(
+            self, social_id, fb_id, fb_link, fb_verified,
+            fb_added, first_name, last_name, locale,
+            age_range_min, age_range_max, gender,
+            timezone, name, email):
+        self.social_id = social_id
+        self.fb_id = fb_id
+        self.fb_link = fb_link
+        self.fb_verified = fb_verified
+        self.fb_added = False
+        self.first_name = first_name
+        self.last_name = last_name
+        self.locale = locale
+        self.age_range_min = age_range_min
+        self.age_range_max = age_range_max
+        self.gender = gender
+        self.timezone = timezone
+        self.name = name
+
+        self.save()
+        return self

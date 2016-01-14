@@ -60,14 +60,7 @@ class FacebookSignIn(OAuthSignIn):
         )
 
         me = oauth_session.get(
-                'me?fields=id,name,first_name,last_name,age_range,link,gender,'
-                'locale,timezone,updated_time,verified,email'
+                'me?fields=id,name,first_name,last_name,age_range,link,gender,locale,timezone,verified,email'
             ).json()
-
-        return (
-            'facebook$' + me['id'],
-            me.get('email').split('@')[0],  # Facebook does not provide
-                                            # username, so the email's user
-                                            # is used instead
-            me.get('email')
-        )
+        me.update({'type': 'facebook'})
+        return me

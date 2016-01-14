@@ -43,14 +43,73 @@ def oauth_callback(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('user.login'))
     oauth = OAuthSignIn.get_provider(provider)
-    social_id, username, email = oauth.callback()
-    if social_id is None:
-        flash('Authentication failed.')
+
+    user_data = oauth.callback()
+
+    provider = user_data.get('type', None)
+
+    # Some validations
+    if provider == 'facebook':
+        if not user_data.get('id', None):
+            flash(_('Facebook Authentication failed.'), 'error')
+            return redirect(url_for('user.signup'))
+
+        if not user_data.get('email', None):
+            flash(_('Facebook login failed. Your email is not registered with Facebook.'), 'error')
+            return redirect(url_for('user.signup'))
+
+        if not user_data.get('name', None):
+            flash(_('Facebook login failed. Your full name is not registered with Facebook.'), 'error')
+            return redirect(url_for('user.signup'))
+
+        if not user_data.get('verified', None):
+            flash(_('Facebook login failed. Your facebook account is not verified by facebook.'), 'error')
+            return redirect(url_for('user.signup'))
+    else:
+        flash(_('Facebook Authentication failed.'), 'error')
         return redirect(url_for('user.signup'))
-    user = User.query.filter_by(social_id=social_id).first()
-    if not user:
-        user = User(social_id=social_id, username=username, email=email)
-        user.save()
+
+    # Validations done; now save user data
+    if provider == 'facebook':
+        social_id = provider + '$' + user_data['id']
+        fb_id = provider + '$' + user_data['id']
+        fb_link = user_data.get('link', None)
+        fb_verified = user_data['verified']
+        fb_added = True
+        first_name = user_data.get('first_name', None)
+        last_name = user_data.get('last_name', None)
+        if user_data.get('age_range', None):
+            age_range_min = user_data['age_range'].get('min', None)
+            age_range_max = user_data['age_range'].get('max', None)
+        else:
+            age_range_min = None
+            age_range_max = None
+        gender = user_data.get('gender', None)
+        timezone = user_data.get('timezone', None)
+        locale = user_data.get('locale', None)
+        email = user_data['email']
+        name = user_data['name']
+
+        params = dict(
+                    social_id=social_id, fb_id=fb_id, fb_link=fb_link, fb_verified=fb_verified,
+                    fb_added=fb_added, first_name=first_name, last_name=last_name, locale=locale,
+                    age_range_min=age_range_min, age_range_max=age_range_max, gender=gender,
+                    timezone=timezone, name=name, email=email
+                )
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User(**params)
+            user.save()
+        else:
+            # Check user has facebook data populated.
+            # if not populate it now
+            if not user.fb_added and not user.fb_id:
+                user.update_from_facebook_data(**params)
+    else:
+        flash(_('Facebook Authentication failed.'), 'error')
+        return redirect(url_for('user.signup'))
+
     login_user(user, True)
     return redirect(get_dashboard_url())
 
