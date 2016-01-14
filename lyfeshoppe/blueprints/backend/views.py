@@ -260,9 +260,9 @@ def referrals(page):
                            **business_categories)
 
 
-@backend.route('/referrals/invite', methods=['POST'])
+@backend.route('/referrals/invite', methods=['GET', 'POST'])
 def referrals_invite():
-    pass
+    return render_template('backend/shop/referral_invite.jinja2', **business_categories)
 
 
 # Shop Reviews -------------------------------------------------------------------
