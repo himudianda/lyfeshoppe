@@ -77,7 +77,7 @@ def oauth_callback(provider):
         social_id = provider + '$' + user_data['id']
         fb_id = provider + '$' + user_data['id']
         fb_link = user_data.get('link', None)
-        fb_verified = user_data['verified']
+        fb_verified = user_data.get('verified', False)
         fb_added = True
         first_name = user_data.get('first_name', None)
         last_name = user_data.get('last_name', None)
