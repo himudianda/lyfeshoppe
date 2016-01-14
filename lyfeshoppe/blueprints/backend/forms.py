@@ -150,3 +150,20 @@ class ReviewForm(ModelForm):
                          choices=choices_from_dict(Review.STATUS,
                          prepend_blank=False))
     description = TextAreaField(_("description"), [DataRequired(), Length(3, 2048)])
+
+
+class ReferralForm(Form):
+    first_name_1 = StringField(_('First Name'), [DataRequired(), Length(1, 128)])
+    last_name_1 = StringField(_('Last Name'), [DataRequired(), Length(1, 128)])
+    email_1 = EmailField(_("Email Address"), [DataRequired(), Length(3, 254)])
+    gender_1 = SelectField(_('Gender'), [DataRequired()], choices=[('male', 'Male'), ('female', 'Female')])
+
+    first_name_2 = StringField(_('First Name'), [DataRequired(), Length(1, 128)])
+    last_name_2 = StringField(_('Last Name'), [DataRequired(), Length(1, 128)])
+    email_2 = EmailField(_("Email Address"), [DataRequired(), Length(3, 254)])
+    gender_2 = SelectField(_('Gender'), [DataRequired()], choices=[('male', 'Male'), ('female', 'Female')])
+
+    first_name_3 = StringField(_('First Name'), [DataRequired(), Length(1, 128)])
+    last_name_3 = StringField(_('Last Name'), [DataRequired(), Length(1, 128)])
+    email_3 = EmailField(_("Email Address"), [DataRequired(), Length(3, 254)])
+    gender_3 = SelectField(_('Gender'), [DataRequired()], choices=[('male', 'Male'), ('female', 'Female')])

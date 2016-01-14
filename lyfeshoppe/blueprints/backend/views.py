@@ -9,7 +9,8 @@ from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
-    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm, ReviewForm
+    EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm, ReviewForm, \
+    ReferralForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer, Review
 from lyfeshoppe.blueprints.user.models import User, Referral
@@ -262,7 +263,12 @@ def referrals(page):
 
 @backend.route('/referrals/invite', methods=['GET', 'POST'])
 def referrals_invite():
-    return render_template('backend/shop/referral_invite.jinja2', **business_categories)
+    form = ReferralForm()
+    if form.validate_on_submit():
+        flash(_('Referral has been created successfully.'), 'success')
+        return redirect(url_for('backend.referrals'))
+
+    return render_template('backend/shop/referral_invite.jinja2', form=form, **business_categories)
 
 
 # Shop Reviews -------------------------------------------------------------------

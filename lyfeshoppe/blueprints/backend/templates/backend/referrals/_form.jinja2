@@ -1,0 +1,182 @@
+{% import 'dashboard/macros/form.jinja2' as f with context %}
+
+{% set endpoint = 'backend.referrals_invite' %}
+{% set legend = 'Invite your Friends' %}
+{% set button = _('Submit') %}
+{% set form_kwargs = {} %}
+
+{% call f.form_tag(endpoint, **form_kwargs) %}
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-plus"></i> {{ legend }} 
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+
+            <div class="form-body">
+                <h3 class="form-section">Reference 1</h3>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.first_name_1, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.last_name_1, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.email_1, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.gender_1, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+
+                <h3 class="form-section">Reference 2</h3>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.first_name_2, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.last_name_2, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.email_2, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.gender_2, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+
+                <h3 class="form-section">Reference 3</h3>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.first_name_3, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.last_name_3, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.email_3, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                {% call f.form_group(form.gender_3, css_class='sm-margin-bottom') %}
+                                {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-6 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn green">
+                                          {{ button }}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="visible-xs visible-sm sm-margin-top"></div>
+                                        <a href="{{ url_for('backend.referrals', **form_kwargs) }}"
+                                           class="btn red btn-block">
+                                          {{ _('Cancel') }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6"> </div>
+                </div>
+            </div>
+
+
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+{% endcall %}
