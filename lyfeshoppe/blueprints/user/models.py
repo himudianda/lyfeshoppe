@@ -263,6 +263,8 @@ class User(UserMixin, ResourceMixin, db.Model):
         :return: bool
         """
         if with_password:
+            if not self.password:
+                return False
             return bcrypt.check_password_hash(self.password, password)
 
         return True
