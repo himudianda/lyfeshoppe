@@ -265,7 +265,19 @@ def referrals(page):
 def referrals_invite():
     form = ReferralForm()
     if form.validate_on_submit():
-        flash(_('Referral has been created successfully.'), 'success')
+        num_of_refs = 3
+        for i in range(num_of_refs):
+            fname = request.form.get('first_name_{0}'.format(i+1))
+            lname = request.form.get('last_name_{0}'.format(i+1))
+            email = request.form.get('email_{0}'.format(i+1))
+            # gender = request.form.get('gender_{0}'.format(i+1))
+
+            Referral.create(
+                            user_id=current_user.id,
+                            reference_email=email,
+                            reference_name=" ".join([fname, lname])
+                        )
+        flash(_('Referrals have been created successfully.'), 'success')
         return redirect(url_for('backend.referrals'))
 
     return render_template('backend/shop/referral_invite.jinja2', form=form, **business_categories)
