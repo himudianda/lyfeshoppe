@@ -55,7 +55,7 @@ def oauth_callback(provider):
             return redirect(url_for('user.signup'))
 
         if not user_data.get('email', None):
-            flash(_('Facebook login failed. Your email is not registered with Facebook.'), 'error')
+            flash(_('Facebook login failed. Your email was not received from facebook.'), 'error')
             return redirect(url_for('user.signup'))
 
         if not user_data.get('name', None):
