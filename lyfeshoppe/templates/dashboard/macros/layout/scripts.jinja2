@@ -90,6 +90,9 @@
       <script src="{{ url_for('static', filename='dashboard/global/plugins/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
   {% endif %}
+  {% if request.endpoint in ('backend.user_account') %}
+      <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.sparkline.min.js') }}" type="text/javascript"></script>
+  {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery.sparkline.min.js') }}" type="text/javascript"></script>
@@ -112,6 +115,9 @@
   {% if request.endpoint in ('backend.business_calendar') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/ui-modals.min.js') }}" type="text/javascript"></script>
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-bootstrap-select.min.js') }}" type="text/javascript"></script>
+  {% endif %}
+  {% if request.endpoint in ('backend.user_account') %}
+      <script src="{{ url_for('static', filename='dashboard/pages/scripts/profile.min.js') }}" type="text/javascript"></script>
   {% endif %}
   {% if request.endpoint in ('backend.account_settings') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/profile.min.js') }}" type="text/javascript"></script>
