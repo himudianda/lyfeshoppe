@@ -21,6 +21,40 @@ from lyfeshoppe.blueprints.billing.models.invoice import Invoice
 from lyfeshoppe.extensions import db, bcrypt
 
 
+class Referral(ResourceMixin, db.Model):
+    __tablename__ = 'referrals'
+
+    STATUS = OrderedDict([
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted')
+    ])
+
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.Enum(*STATUS, name='referral_status'), index=True, nullable=False, server_default='pending')
+
+    # Relationships.
+    user_id = db.Column(
+                db.Integer, db.ForeignKey('users.id', onupdate='CASCADE'),
+                index=True, nullable=False)
+
+    reference_email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
+
+    def save(self):
+        """
+        Save a referral instance.
+
+        :return: self
+        """
+        user = User.find_by_identity(self.email)
+        if user:
+            return None, "{0} already exists. Referral cannot be created".format(self.email)
+
+        user = User(email=self.email)
+        user.save()
+
+        return super(Referral, self).save()
+
+
 class User(UserMixin, ResourceMixin, db.Model):
     __tablename__ = 'users'
 
@@ -62,6 +96,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     # One to Many relationship: One user can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="user")
     employee_refs = db.relationship('Employee', backref='user', passive_deletes=True)
+    referrals = db.relationship(Referral, backref='user')
 
     # Locale.
     locale = db.Column(db.String(5), nullable=False, server_default='en')
