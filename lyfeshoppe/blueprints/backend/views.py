@@ -188,6 +188,13 @@ def shop_reviews_new(id, employee_id):
 
 
 # Account -------------------------------------------------------------------
+@backend.route('/account', methods=['GET'])
+def user_account():
+    return render_template(
+                'backend/account/profile.jinja2',
+                **business_categories)
+
+
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
     address_dict = {}
