@@ -62,9 +62,12 @@ def oauth_callback(provider):
             flash(_('Facebook login failed. Your full name is not registered with Facebook.'), 'error')
             return redirect(url_for('user.signup'))
 
-        if not user_data.get('verified', None):
-            flash(_('Facebook login failed. Your facebook account is not verified by facebook.'), 'error')
-            return redirect(url_for('user.signup'))
+        # Dont keep this condition for registering users.
+        # In some countries (say India) they may not register their credit cards or phone numbers
+        # and may miss email verification too.
+        # if not user_data.get('verified', None):
+        #    flash(_('Facebook login failed. Your facebook account is not verified by facebook.'), 'error')
+        #    return redirect(url_for('user.signup'))
     else:
         flash(_('Facebook Authentication failed.'), 'error')
         return redirect(url_for('user.signup'))
