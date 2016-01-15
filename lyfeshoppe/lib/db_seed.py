@@ -6,6 +6,8 @@ try:
     from instance import settings
 
     SEED_ADMIN_EMAIL = settings.SEED_ADMIN_EMAIL
+    SEED_ADMIN_FNAME = settings.SEED_ADMIN_FNAME
+    SEED_ADMIN_LNAME = settings.SEED_ADMIN_LNAME
 except ImportError:
     logging.error('Ensure __init__.py and settings.py both exist in instance/')
     exit(1)
@@ -13,6 +15,8 @@ except AttributeError:
     from config import settings
 
     SEED_ADMIN_EMAIL = settings.SEED_ADMIN_EMAIL
+    SEED_ADMIN_FNAME = settings.SEED_ADMIN_FNAME
+    SEED_ADMIN_LNAME = settings.SEED_ADMIN_LNAME
 
 
 def create_admin():
@@ -27,6 +31,8 @@ def create_admin():
     params = {
         'role': 'admin',
         'email': SEED_ADMIN_EMAIL,
+        'first_name': SEED_ADMIN_FNAME,
+        'last_name': SEED_ADMIN_LNAME,
         'password': 'password'
     }
 

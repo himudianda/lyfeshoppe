@@ -67,28 +67,31 @@ class User(UserMixin, ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # Details
+    first_name = db.Column(db.String(128))
+    last_name = db.Column(db.String(128))
+    name = db.Column(db.String(128), index=True, nullable=False)
+    email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     username = db.Column(db.String(64), unique=True, nullable=False, index=True)
-    name = db.Column(db.String(128), index=True)
     phone = db.Column(db.String(20), index=True)
-    email = db.Column(db.String(64), unique=True, index=True, nullable=False, server_default='')
 
     social_id = db.Column(db.String(64), unique=True)
     fb_id = db.Column(db.String(64), unique=True)
     fb_link = db.Column(db.String(128), unique=True)
+    # set if email, phone or credit card was verified by facebook for this user
     fb_verified = db.Column('is_fb_verified', db.Boolean(), nullable=False, server_default='0')
+    # set if user was added via facebook signup
     fb_added = db.Column('is_fb_added', db.Boolean(), nullable=False, server_default='0')
-    first_name = db.Column(db.String(128), index=True)
-    last_name = db.Column(db.String(128), index=True)
     age_range_min = db.Column(db.Integer)
     age_range_max = db.Column(db.Integer)
     gender = db.Column(db.String(32))
     timezone = db.Column(db.Integer)
-    points = db.Column(db.Integer, nullable=False, server_default='0')
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types'), index=True, nullable=False, server_default='member')
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     password = db.Column(db.String(128), nullable=False, server_default='')
+
+    points = db.Column(db.Integer, nullable=False, server_default='0')
 
     # Relationships.
     # Many to One relationship: Many users can have same address
@@ -122,8 +125,6 @@ class User(UserMixin, ResourceMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
         self.password = User.encrypt_password(kwargs.get('password', ''))
-        if kwargs.get('email', None) and not self.username:
-            self.username = kwargs.get('email').split('@')[0]
 
     def save(self):
         """
@@ -142,6 +143,12 @@ class User(UserMixin, ResourceMixin, db.Model):
                 user = User.find_by_identity(username)
 
             self.username = username
+
+        if not self.password:
+            self.password = User.encrypt_password('password')
+
+        if not self.name:
+            self.name = " ".join([self.first_name, self.last_name])
 
         return super(User, self).save()
 
