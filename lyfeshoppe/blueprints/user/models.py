@@ -35,25 +35,21 @@ class Referral(ResourceMixin, db.Model):
     reference = db.relationship("User", foreign_keys=[reference_id])
 
     @classmethod
-    def create(cls, user_id, reference_email, reference_name):
+    def create(cls, user_id, **kwargs):  # reference_email, reference_name):
         """
         Create a referral instance.
 
         :return: self
         """
-        user = User.query.get(user_id)
-        if not user:
-            return None, "System Error: user_id cannot be found"
 
-        ref_user = User.find_by_identity(reference_email)
+        ref_user = User.find_by_identity(kwargs.get('email', ""))
         if ref_user:
-            return None, "{0} already exists. Referral cannot be created".format(reference_email)
+            return None, "{0} already exists. Referral cannot be created".format(kwargs.get('email', ""))
 
-        ref_user = User(email=reference_email, name=reference_name, password="password")
-        ref_user.save()
+        ref_user = User.create(**kwargs)
         referral = cls(user_id=user_id, reference_id=ref_user.id)
         referral.save()
-        return referral, "Referral for {0} was successfully created".format(reference_email)
+        return referral, "Referral for {0} was successfully created".format(kwargs.get('email', ""))
 
 
 class User(UserMixin, ResourceMixin, db.Model):

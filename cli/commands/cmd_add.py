@@ -131,10 +131,9 @@ def referrals():
     for user in users:
         num_of_referrals = random.randint(1, NUM_OF_REFERRALS_PER_USER)
         for i in xrange(num_of_referrals):
-            reference_email = fake.email()
-            reference_name = fake.name()
-
-            Referral.create(user_id=user.id, reference_email=reference_email, reference_name=reference_name)
+            # Note: password is sent below only for sample data - in real use plz dont set the password
+            # User.save() can autogenerate a fake password
+            Referral.create(user_id=user.id, email=fake.email(), name=fake.name(), password="password")
 
     _log_status(Referral.query.count(), "referrals")
 
