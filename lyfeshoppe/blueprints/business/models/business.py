@@ -77,9 +77,13 @@ class Review(ResourceMixin, db.Model):
                     ).all()
         employee_ids = [employee.id for employee in employees]
 
+        products = Product.query.filter(Product.name.ilike(search_query))
+        product_ids = [product.id for product in products]
+
         search_chain = (
             cls.customer_id.in_(customer_ids),
             cls.employee_id.in_(employee_ids),
+            cls.product_id.in_(product_ids),
             cls.description.ilike(search_query)
         )
         return or_(*search_chain)
