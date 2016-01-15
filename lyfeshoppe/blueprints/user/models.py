@@ -34,7 +34,7 @@ class Referral(ResourceMixin, db.Model):
 
     # 2 foreign keys to the same table
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
-    user = db.relationship("User", foreign_keys=[user_id])
+    user = db.relationship("User", backref='referrals', foreign_keys=[user_id])
     reference_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
     reference = db.relationship("User", foreign_keys=[reference_id])
 
