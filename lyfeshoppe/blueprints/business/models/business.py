@@ -654,7 +654,6 @@ class Business(ResourceMixin, db.Model):
     reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
     reviews = db.relationship(Review, backref='business', passive_deletes=True)
 
-
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Business, self).__init__(**kwargs)

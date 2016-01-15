@@ -189,7 +189,7 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         return user.save()
 
-    def modify_from_form(self, form):
+    def update_from_form(self, form):
         """
         Return whether or not the user was modified successfully.
 

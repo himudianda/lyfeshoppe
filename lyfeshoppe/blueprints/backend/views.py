@@ -207,7 +207,7 @@ def account_settings():
     # form.is_submitted() ensures that this block of code is
     # only triggered if this form was submitted
     if form.is_submitted() and form.validate_on_submit():
-        if current_user.modify_from_form(form):
+        if current_user.update_from_form(form):
             flash(_('User Account has been modified successfully.'), 'success')
             return redirect(url_for('backend.user_account'))
 
