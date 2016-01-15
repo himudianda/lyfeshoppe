@@ -146,7 +146,11 @@ class Reservation(ResourceMixin, db.Model):
         business_id = params['business_id']
         customer_email = params.pop("customer_email", None)
 
-        customer = Customer.get_or_create(business_id, customer_email)
+        customer_params = {
+            'name': "Test Name",
+            'email': customer_email
+        }
+        customer, created = Customer.get_or_create(business_id=business_id, **customer_params)
         params['customer_id'] = str(customer.id)
 
         reservation = cls(**params)
