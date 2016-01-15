@@ -108,8 +108,12 @@ class Review(ResourceMixin, db.Model):
                     ).all()
         employee_ids = [employee.id for employee in employees]
 
+        businesses = Business.query.filter(or_(Business.name.ilike(search_query), Business.email.ilike(search_query)))
+        business_ids = [business.id for business in businesses]
+
         search_chain = (
             cls.employee_id.in_(employee_ids),
+            cls.business_id.in_(business_ids),
             cls.description.ilike(search_query)
         )
         return or_(*search_chain)
