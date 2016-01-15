@@ -302,6 +302,7 @@ def reviews(page):
 
     user_customer_ids = [customer.id for customer in Customer.query.filter(Customer.user == current_user)]
     paginated_reviews = Review.query \
+        .filter(Review.search_reviews_by_user(query=request.args.get('q', ''))) \
         .filter(Review.customer_id.in_(user_customer_ids)) \
         .order_by(Review.status.desc(), text(order_values)) \
         .paginate(page, 20, True)

@@ -23,9 +23,12 @@
                                 <i class="fa fa-building"></i>Reviews</div>
                         </div>
                         <div class="portlet-body">
-
-
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                  {{ f.search('backend.reviews', form_kwargs) }}
+                                </div>
+                            </div>
+                            <br/>
                             <div class="row">
                                 {% if reviews.total == 0 %}
                                     <h3>No results found</h3>
