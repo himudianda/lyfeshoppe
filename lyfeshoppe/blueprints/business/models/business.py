@@ -144,8 +144,11 @@ class Reservation(ResourceMixin, db.Model):
                     tzinfo=pytz.UTC)
 
         business_id = params['business_id']
+
         customer_email = params.pop("customer_email", "")
         customer = Customer.find_by_identity(business_id, customer_email)
+        if not customer:
+            return False
         params['customer_id'] = str(customer.id)
 
         reservation = cls(**params)
