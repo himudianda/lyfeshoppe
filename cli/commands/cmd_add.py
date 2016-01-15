@@ -111,7 +111,8 @@ def users():
         params = {
             'email': fake.email(),
             'password': 'password',
-            'name': fake.name(),
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
             'locale': random.choice(ACCEPT_LANGUAGES),
             'address': generate_address()
         }
@@ -133,7 +134,11 @@ def referrals():
         for i in xrange(num_of_referrals):
             # Note: password is sent below only for sample data - in real use plz dont set the password
             # User.save() can autogenerate a fake password
-            Referral.create(user_id=user.id, email=fake.email(), name=fake.name(), password="password")
+            Referral.create(
+                user_id=user.id, email=fake.email(),
+                first_name=fake.first_name(), last_name=fake.last_name(),
+                password="password"
+            )
 
     _log_status(Referral.query.count(), "referrals")
 

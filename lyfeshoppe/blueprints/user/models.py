@@ -63,9 +63,8 @@ class User(UserMixin, ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # Details
-    first_name = db.Column(db.String(128))
-    last_name = db.Column(db.String(128))
-    name = db.Column(db.String(128), index=True, nullable=False)
+    first_name = db.Column(db.String(64), unique=False, nullable=False, index=True)
+    last_name = db.Column(db.String(64), unique=False, nullable=False, index=True)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     username = db.Column(db.String(64), unique=True, nullable=False, index=True)
     phone = db.Column(db.String(20), index=True)
@@ -122,6 +121,10 @@ class User(UserMixin, ResourceMixin, db.Model):
         super(User, self).__init__(**kwargs)
         self.password = User.encrypt_password(kwargs.get('password', None))
 
+    @property
+    def name(self):
+        return " ".join([self.first_name, self.last_name])
+
     def save(self):
         """
         Save a user model instance.
@@ -145,9 +148,6 @@ class User(UserMixin, ResourceMixin, db.Model):
             chars = string.ascii_uppercase + string.digits
             pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
             self.password = User.encrypt_password(pwd)
-
-        if not self.name:
-            self.name = " ".join([self.first_name, self.last_name])
 
         if not self.address:
             self.address = Address()
