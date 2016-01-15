@@ -199,6 +199,20 @@ class Customer(ResourceMixin, db.Model):
         return search_chain
 
     @classmethod
+    def find_by_identity(cls, business_id, identity):
+        """
+        Find a customer by their e-mail or username.
+
+        :param identity: Email or username
+        :type identity: str
+        :return: User instance
+        """
+        user = User.query.filter((User.email == identity) | (User.username == identity)).first()
+        if not user:
+            return None
+        return cls.query.filter(cls.user == user, cls.business_id == business_id)
+
+    @classmethod
     def get_or_create_from_form(cls, business_id, form):
         """
         Return whether or not the customer was created successfully.
@@ -324,19 +338,31 @@ class Employee(ResourceMixin, db.Model):
         super(Employee, self).__init__(**kwargs)
 
     @classmethod
-    def get_or_create(cls, business_id, params=None, from_form=False, form=None):
+    def find_by_identity(cls, business_id, identity):
+        """
+        Find a employee by their e-mail or username.
+
+        :param identity: Email or username
+        :type identity: str
+        :return: User instance
+        """
+        user = User.query.filter((User.email == identity) | (User.username == identity)).first()
+        if not user:
+            return None
+        return cls.query.filter(cls.user == user, cls.business_id == business_id)
+
+    @classmethod
+    def get_or_create(cls, **kwargs):
         """
         Return whether or not the employee was created successfully.
 
         :return: bool
         """
+        business_id = kwargs.get('business_id')
 
-        if from_form:
-            new_employee = cls()
-            form.populate_obj(new_employee)
-            user = User.find_by_identity(new_employee.email)
-        else:
-            user = User.query.get(params.get('user_id', None))
+        user = User.find_by_identity(kwargs.get('email'))
+        if not user:
+            user = User.create(name=kwargs.get('name'), email=kwargs.get('email'))
 
         employee = Employee.query.filter(
                         Employee.user == user, Employee.business_id == business_id
@@ -344,16 +370,38 @@ class Employee(ResourceMixin, db.Model):
         if employee:
             return (employee, False)  # Employee exists & wasnt created
 
-        if from_form:
-            employee = cls()
-            form.populate_obj(employee)
-            employee.user = User.get_or_create(params=None, from_form=True, form=form)
-        else:
-            employee = cls(**params)
-
+        employee = cls()
         employee.business_id = business_id
+        employee.user = user
         employee = employee.save()
+        return (employee, True)  # New Employee was created
 
+    @classmethod
+    def get_or_create_from_form(cls, business_id, form):
+        """
+        Return whether or not the employee was created successfully.
+
+        :return: bool
+        """
+
+        new_employee = cls()
+        form.populate_obj(new_employee)
+
+        user = User.find_by_identity(new_employee.email)
+        if not user:
+            user = User.create_from_form(form)
+
+        employee = Employee.query.filter(
+                        Employee.user == user, Employee.business_id == business_id
+                    ).first()
+        if employee:
+            return (employee, False)  # Employee exists & wasnt created
+
+        employee = cls()
+        form.populate_obj(employee)
+        employee.business_id = business_id
+        employee.user = user
+        employee = employee.save()
         return (employee, True)  # New Employee was created
 
     def modify_from_form(self, form):
@@ -717,13 +765,14 @@ class Business(ResourceMixin, db.Model):
         business.address = Address()
         form.populate_obj(business.address)
 
-        business.save()
+        business = business.save()
 
         # Create the first Admin employee for this newly created business
         admin_employee_params = {
-            'user_id': current_user.id
+            'name': current_user.name,
+            'email': current_user.email
         }
-        Employee.get_or_create(business_id=business.id, params=admin_employee_params, from_form=False, form=None)
+        Employee.get_or_create(business_id=business.id, **admin_employee_params)
 
         return True
 
