@@ -731,7 +731,7 @@ def business_reviews(id, page):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_reviews = Review.query \
-        .filter(Review.search(request.args.get('q', ''))) \
+        .filter(Review.search_reviews_for_business(business_id=id, query=request.args.get('q', ''))) \
         .filter(Review.business == business) \
         .order_by(Review.product_id.desc(), text(order_values)) \
         .paginate(page, 20, True)

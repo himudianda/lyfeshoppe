@@ -49,7 +49,7 @@ class Review(ResourceMixin, db.Model):
         super(Review, self).__init__(**kwargs)
 
     @classmethod
-    def search(cls, query):
+    def search_reviews_for_business(cls, business_id, query):
         """
         Search a resource by 1 or more fields.
 
@@ -61,9 +61,28 @@ class Review(ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        search_chain = cls.description.ilike(search_query)
+        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
+        # user_ids = [user.id for user in users]
 
-        return search_chain
+        customers = Customer.query.filter(
+                        Customer.business_id == business_id, Customer.user
+                    ).filter(
+                        User.id.in_(u.id for u in users)
+                    ).all()
+        customer_ids = [customer.id for customer in customers]
+        employees = Employee.query.filter(
+                        Employee.business_id == business_id, Employee.user
+                    ).filter(
+                        User.id.in_(u.id for u in users)
+                    ).all()
+        employee_ids = [employee.id for employee in employees]
+
+        search_chain = (
+            cls.customer_id.in_(customer_ids),
+            cls.employee_id.in_(employee_ids),
+            cls.description.ilike(search_query)
+        )
+        return or_(*search_chain)
 
     @classmethod
     def create_from_form(cls, business_id, employee_id, customer_id, form):
