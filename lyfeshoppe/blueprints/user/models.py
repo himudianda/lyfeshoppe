@@ -124,12 +124,11 @@ class User(UserMixin, ResourceMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(User, self).__init__(**kwargs)
-
         self.password = User.encrypt_password(kwargs.get('password', None))
 
     def save(self):
         """
-        Save a model instance.
+        Save a user model instance.
 
         :return: self
         """
@@ -158,6 +157,17 @@ class User(UserMixin, ResourceMixin, db.Model):
             self.address = Address()
 
         return super(User, self).save()
+
+    @classmethod
+    def find_by_identity(cls, identity):
+        """
+        Find a user by their e-mail or username.
+
+        :param identity: Email or username
+        :type identity: str
+        :return: User instance
+        """
+        return cls.query.filter((cls.email == identity) | (cls.username == identity)).first()
 
     @classmethod
     def create(cls, **kwargs):
@@ -196,6 +206,24 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         return True
 
+    def update(self, **kwargs):
+        self.social_id = kwargs.get('social_id', None)
+        self.fb_id = kwargs.get('fb_id', None)
+        self.fb_link = kwargs.get('fb_link', None)
+        self.fb_verified = kwargs.get('fb_verified', None)
+        self.fb_added = False
+        self.first_name = kwargs.get('first_name', None)
+        self.last_name = kwargs.get('last_name', None)
+        self.locale = kwargs.get('locale', None)
+        self.age_range_min = kwargs.get('age_range_min', None)
+        self.age_range_max = kwargs.get('age_range_max', None)
+        self.gender = kwargs.get('gender', None)
+        self.timezone = kwargs.get('timezone', None)
+        self.name = kwargs.get('name', None)
+
+        self.save()
+        return self
+
     @classmethod
     def search(cls, query):
         """
@@ -213,17 +241,6 @@ class User(UserMixin, ResourceMixin, db.Model):
                         cls.name.ilike(search_query))
 
         return or_(*search_chain)
-
-    @classmethod
-    def find_by_identity(cls, identity):
-        """
-        Find a user by their e-mail or username.
-
-        :param identity: Email or username
-        :type identity: str
-        :return: User instance
-        """
-        return cls.query.filter((cls.email == identity) | (cls.username == identity)).first()
 
     @classmethod
     def encrypt_password(cls, plaintext_password):
@@ -429,25 +446,3 @@ class User(UserMixin, ResourceMixin, db.Model):
                             )
         ids = [row.id for row in query.all()]
         return ids
-
-    def update_from_facebook_data(
-            self, social_id, fb_id, fb_link, fb_verified,
-            fb_added, first_name, last_name, locale,
-            age_range_min, age_range_max, gender,
-            timezone, name, email):
-        self.social_id = social_id
-        self.fb_id = fb_id
-        self.fb_link = fb_link
-        self.fb_verified = fb_verified
-        self.fb_added = False
-        self.first_name = first_name
-        self.last_name = last_name
-        self.locale = locale
-        self.age_range_min = age_range_min
-        self.age_range_max = age_range_max
-        self.gender = gender
-        self.timezone = timezone
-        self.name = name
-
-        self.save()
-        return self
