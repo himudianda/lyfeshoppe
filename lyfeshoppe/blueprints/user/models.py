@@ -100,7 +100,8 @@ class User(UserMixin, ResourceMixin, db.Model):
     address = db.relationship(Address)
     # One to Many relationship: One user can have multiple occupancies
     occupancies = db.relationship(Occupancy, backref="user")
-    employee_refs = db.relationship('Employee', backref='user', passive_deletes=True)
+    employees = db.relationship("Employee", backref='user', passive_deletes=True)
+    customers = db.relationship("Customer", backref='user', passive_deletes=True)
 
     # Locale.
     locale = db.Column(db.String(5), nullable=False, server_default='en')
@@ -411,7 +412,7 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     @property
     def num_of_businesses(self):
-        employee_ids = [employee.id for employee in self.employee_refs]
+        employee_ids = [employee.id for employee in self.employees]
         from lyfeshoppe.blueprints.business.models.business import Business, Employee
         return Business.query.filter(
                                 Business.employees.any(Employee.id.in_(employee_ids))
@@ -419,7 +420,7 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     @property
     def id_of_businesses(self):
-        employee_ids = [employee.id for employee in self.employee_refs]
+        employee_ids = [employee.id for employee in self.employees]
         from lyfeshoppe.blueprints.business.models.business import Business, Employee
         query = db.session.query(
                                 Business.id.distinct().label("id")

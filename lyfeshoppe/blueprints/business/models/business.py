@@ -3,6 +3,7 @@ from sqlalchemy import or_, UniqueConstraint
 import pytz
 import os
 import math
+from sqlalchemy.ext.declarative import declared_attr
 
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
@@ -153,31 +154,30 @@ class Reservation(ResourceMixin, db.Model):
         return True
 
 
-class Customer(ResourceMixin, db.Model):
-    __tablename__ = 'customers'
+class CustomerAndEmployeeMixin(object):
 
-    id = db.Column(db.Integer, primary_key=True)
-
-    # Relationships.
-    business_id = db.Column(db.Integer, db.ForeignKey(
+    # Refer notes below:
+    # http://docs.sqlalchemy.org/en/latest/orm/extensions/declarative/mixins.html
+    @declared_attr
+    def business_id(cls):
+        return db.Column(db.Integer, db.ForeignKey(
                         'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
 
     # Many to One relationship: Many customers can have same user
     # Thats becoz; A customer can belong with multiple businesses.
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship(User)
-    reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
-    reviews = db.relationship(Review, backref='customer', passive_deletes=True)
+    # Also refer these notes for the syntax below:
+    # http://docs.sqlalchemy.org/en/latest/orm/extensions/declarative/mixins.html
+    @declared_attr
+    def user_id(cls):
+        return db.Column(db.Integer, db.ForeignKey(
+                        'users.id', onupdate='CASCADE', ondelete='CASCADE'
+                        ), index=True, nullable=False)
 
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-
-    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Customer, self).__init__(**kwargs)
+    # @declared_attr
+    # def user(cls):
+    #    return db.relationship(User)
 
     @classmethod
     def search(cls, query):
@@ -201,7 +201,7 @@ class Customer(ResourceMixin, db.Model):
     @classmethod
     def find_by_identity(cls, business_id, identity):
         """
-        Find a customer by their e-mail or username.
+        Find a resource by their e-mail or username.
 
         :param identity: Email or username
         :type identity: str
@@ -220,44 +220,59 @@ class Customer(ResourceMixin, db.Model):
         if not user:
             user = User.create(name=kwargs.get('name'), email=kwargs.get('email'))
 
-        customer = cls.query.filter(
+        obj = cls.query.filter(
                         cls.user == user, cls.business_id == business_id
                     ).first()
-        if customer:
-            return (customer, False)  # Customer exists & wasnt created
+        if obj:
+            return (obj, False)  # Customer OR Employee exists & wasnt created
 
-        customer = cls()
-        customer.business_id = business_id
-        customer.user = user
-        customer = customer.save()
-        return (customer, True)  # New Employee was created
+        obj = cls()
+        obj.business_id = business_id
+        obj.user = user
+        obj = obj.save()
+        return (obj, True)  # New Customer OR Employee was created
 
     @classmethod
     def get_or_create_from_form(cls, business_id, form):
         """
-        Return whether or not the customer was created successfully.
+        Return whether or not the resource was created successfully.
 
         :return: bool
         """
-        new_customer = cls()
-        form.populate_obj(new_customer)
+        new_obj = cls()
+        form.populate_obj(new_obj)
 
-        user = User.find_by_identity(new_customer.email)
+        user = User.find_by_identity(new_obj.email)
         if not user:
             user = User.create_from_form(form)
 
-        customer = Customer.query.filter(
-                    Customer.user == user, Customer.business_id == business_id
+        obj = cls.query.filter(
+                    cls.user == user, cls.business_id == business_id
                 ).first()
-        if customer:
-            return (customer, False)  # Customer already exists
+        if obj:
+            return (obj, False)  # Customer OR Employee already exists
 
-        customer = cls()
-        form.populate_obj(customer)
-        customer.business_id = business_id
-        customer.user = user
-        customer = customer.save()
-        return (customer, True)  # New customer was created
+        obj = cls()
+        form.populate_obj(obj)
+        obj.business_id = business_id
+        obj.user = user
+        obj = obj.save()
+        return (obj, True)  # New customer or employee was created
+
+
+class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
+    __tablename__ = 'customers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
+    reviews = db.relationship(Review, backref='customer', passive_deletes=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Customer, self).__init__(**kwargs)
 
     def modify_from_form(self, form):
         """
@@ -304,7 +319,7 @@ class EmployeeProductRelationships(object):
 db.mapper(EmployeeProductRelationships, employee_product_relations)
 
 
-class Employee(ResourceMixin, db.Model):
+class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     __tablename__ = 'employees'
 
     ROLE = OrderedDict([
@@ -315,17 +330,6 @@ class Employee(ResourceMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.Enum(*ROLE, name='employee_roles'), index=True, nullable=False, server_default='member')
     about = db.Column(db.Text())
-
-    # Relationships.
-    # Many to One relationship: Many employees can have same user
-    # Thats becoz; A user can be employed with multiple businesses.
-    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
-    business_id = db.Column(db.Integer, db.ForeignKey(
-                        'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
-                    ), index=True, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-                        'users.id', onupdate='CASCADE', ondelete='CASCADE'
-                        ), index=True, nullable=False)
 
     products = db.relationship('Product', secondary=employee_product_relations, backref='employees')
     reservations = db.relationship(Reservation, backref='employee', passive_deletes=True)
@@ -338,73 +342,6 @@ class Employee(ResourceMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Employee, self).__init__(**kwargs)
-
-    @classmethod
-    def find_by_identity(cls, business_id, identity):
-        """
-        Find a employee by their e-mail or username.
-
-        :param identity: Email or username
-        :type identity: str
-        :return: User instance
-        """
-        user = User.query.filter((User.email == identity) | (User.username == identity)).first()
-        if not user:
-            return None
-        return cls.query.filter(cls.user == user, cls.business_id == business_id)
-
-    @classmethod
-    def get_or_create(cls, **kwargs):
-        """
-        Return whether or not the employee was created successfully.
-
-        :return: bool
-        """
-        business_id = kwargs.get('business_id')
-
-        user = User.find_by_identity(kwargs.get('email'))
-        if not user:
-            user = User.create(name=kwargs.get('name'), email=kwargs.get('email'))
-
-        employee = Employee.query.filter(
-                        Employee.user == user, Employee.business_id == business_id
-                    ).first()
-        if employee:
-            return (employee, False)  # Employee exists & wasnt created
-
-        employee = cls()
-        employee.business_id = business_id
-        employee.user = user
-        employee = employee.save()
-        return (employee, True)  # New Employee was created
-
-    @classmethod
-    def get_or_create_from_form(cls, business_id, form):
-        """
-        Return whether or not the employee was created successfully.
-
-        :return: bool
-        """
-
-        new_employee = cls()
-        form.populate_obj(new_employee)
-
-        user = User.find_by_identity(new_employee.email)
-        if not user:
-            user = User.create_from_form(form)
-
-        employee = Employee.query.filter(
-                        Employee.user == user, Employee.business_id == business_id
-                    ).first()
-        if employee:
-            return (employee, False)  # Employee exists & wasnt created
-
-        employee = cls()
-        form.populate_obj(employee)
-        employee.business_id = business_id
-        employee.user = user
-        employee = employee.save()
-        return (employee, True)  # New Employee was created
 
     def modify_from_form(self, form):
         """
@@ -423,25 +360,6 @@ class Employee(ResourceMixin, db.Model):
         self.save()
 
         return True
-
-    @classmethod
-    def search(cls, query):
-        """
-        Search a resource by 1 or more fields.
-
-        :param query: Search query
-        :type query: str
-        :return: SQLAlchemy filter
-        """
-        if not query:
-            return ''
-
-        search_query = '%{0}%'.format(query)
-        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
-        user_ids = [user.id for user in users]
-
-        search_chain = (cls.user_id.in_(user_ids))
-        return search_chain
 
     @property
     def num_of_products(self):
