@@ -212,7 +212,6 @@ class User(UserMixin, ResourceMixin, db.Model):
         self.age_range_max = kwargs.get('age_range_max', None)
         self.gender = kwargs.get('gender', None)
         self.timezone = kwargs.get('timezone', None)
-        self.name = kwargs.get('name', None)
 
         self.save()
         return self
@@ -231,7 +230,8 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         search_query = '%{0}%'.format(query)
         search_chain = (cls.email.ilike(search_query),
-                        cls.name.ilike(search_query))
+                        cls.first_name.ilike(search_query),
+                        cls.last_name.ilike(search_query))
 
         return or_(*search_chain)
 

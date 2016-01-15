@@ -259,13 +259,12 @@ def referrals_invite():
             fname = request.form.get('first_name_{0}'.format(i+1))
             lname = request.form.get('last_name_{0}'.format(i+1))
             email = request.form.get('email_{0}'.format(i+1))
-            # gender = request.form.get('gender_{0}'.format(i+1))
+            gender = request.form.get('gender_{0}'.format(i+1))
 
             Referral.create(
-                            user_id=current_user.id,
-                            reference_email=email,
-                            reference_name=" ".join([fname, lname])
-                        )
+                user_id=current_user.id, email=email,
+                first_name=fname, last_name=lname, gender=gender
+            )
         flash(_('Referrals have been created successfully.'), 'success')
         return redirect(url_for('backend.referrals'))
 
