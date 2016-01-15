@@ -144,13 +144,8 @@ class Reservation(ResourceMixin, db.Model):
                     tzinfo=pytz.UTC)
 
         business_id = params['business_id']
-        customer_email = params.pop("customer_email", None)
-
-        customer_params = {
-            'name': "Test Name",
-            'email': customer_email
-        }
-        customer, created = Customer.get_or_create(business_id=business_id, **customer_params)
+        customer_email = params.pop("customer_email", "")
+        customer = Customer.find_by_identity(business_id, customer_email)
         params['customer_id'] = str(customer.id)
 
         reservation = cls(**params)
@@ -214,7 +209,7 @@ class CustomerAndEmployeeMixin(object):
         user = User.query.filter((User.email == identity) | (User.username == identity)).first()
         if not user:
             return None
-        return cls.query.filter(cls.user == user, cls.business_id == business_id)
+        return cls.query.filter(cls.user == user, cls.business_id == business_id).first()
 
     @classmethod
     def get_or_create(cls, **kwargs):
