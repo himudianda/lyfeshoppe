@@ -5,12 +5,8 @@ import random
 import string
 import pytz
 from flask import current_app
-
 from flask_login import UserMixin
-
-from itsdangerous import URLSafeTimedSerializer, \
-    TimedJSONWebSignatureSerializer
-
+from itsdangerous import URLSafeTimedSerializer, TimedJSONWebSignatureSerializer
 from sqlalchemy import or_
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime

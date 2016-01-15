@@ -1,31 +1,14 @@
-from flask import (
-    Blueprint,
-    redirect,
-    request,
-    flash,
-    url_for,
-    render_template)
-from flask_login import (
-    login_required,
-    login_user,
-    current_user,
-    logout_user)
+from flask import Blueprint, redirect, request, flash, url_for, render_template
+from flask_login import login_required, login_user, current_user, logout_user
 from flask_babel import gettext as _
 
 from lyfeshoppe.lib.safe_next_url import safe_next_url
 from lyfeshoppe.lib.role_redirects import get_dashboard_url
-from lyfeshoppe.blueprints.user.decorators import anonymous_required
-
-from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.user.forms import (
-    LoginForm,
-    BeginPasswordResetForm,
-    PasswordResetForm,
-    SignupForm,
-    WelcomeForm,
-    UpdateCredentials,
-    UpdateLocale)
 from lyfeshoppe.lib.oauth_providers import OAuthSignIn
+from lyfeshoppe.blueprints.user.decorators import anonymous_required
+from lyfeshoppe.blueprints.user.models import User
+from lyfeshoppe.blueprints.user.forms import LoginForm, BeginPasswordResetForm, PasswordResetForm, SignupForm, \
+    WelcomeForm, UpdateCredentials, UpdateLocale
 
 user = Blueprint('user', __name__, template_folder='templates')
 
