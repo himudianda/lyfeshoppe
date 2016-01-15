@@ -44,10 +44,6 @@ class Review(ResourceMixin, db.Model):
                     ), index=True, nullable=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Review, self).__init__(**kwargs)
-
     @classmethod
     def search_reviews_for_business(cls, business_id, query):
         """
@@ -173,10 +169,6 @@ class Reservation(ResourceMixin, db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey(
                         'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Reservation, self).__init__(**kwargs)
 
     @classmethod
     def create(cls, params):
@@ -351,10 +343,6 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
 
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Customer, self).__init__(**kwargs)
-
     @property
     def num_of_reservations(self):
         # Refer notes under Using EXISTS topic under link
@@ -401,10 +389,6 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_employee_user_business_uc'), )
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Employee, self).__init__(**kwargs)
 
     @property
     def num_of_products(self):
@@ -456,10 +440,6 @@ class Product(ResourceMixin, db.Model):
     reservations = db.relationship(Reservation, backref='product', passive_deletes=True)
     reviews = db.relationship(Review, backref='product', passive_deletes=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Product, self).__init__(**kwargs)
 
     @classmethod
     def search(cls, query):
@@ -691,10 +671,6 @@ class Business(ResourceMixin, db.Model):
     customers = db.relationship(Customer, backref='business', passive_deletes=True)
     reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
     reviews = db.relationship(Review, backref='business', passive_deletes=True)
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Business, self).__init__(**kwargs)
 
     @classmethod
     def search(cls, query):
