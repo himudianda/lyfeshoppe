@@ -213,6 +213,24 @@ class Customer(ResourceMixin, db.Model):
         return cls.query.filter(cls.user == user, cls.business_id == business_id)
 
     @classmethod
+    def get_or_create(cls, business_id, customer_email):
+        user = User.find_by_identity(customer_email)
+        if not user:
+            user = User.get_or_create(params={"email": customer_email})
+
+        customers = cls.query.filter(cls.business_id == business_id)
+        for customer in customers:
+            if customer.user.email == customer_email:
+                return customer
+
+        customer_params = {
+            "business_id": business_id,
+            "user_id": user.id
+        }
+        customer = Customer(**customer_params)
+        return customer.save()
+
+    @classmethod
     def get_or_create_from_form(cls, business_id, form):
         """
         Return whether or not the customer was created successfully.
@@ -238,24 +256,6 @@ class Customer(ResourceMixin, db.Model):
         customer.user = user
         customer = customer.save()
         return (customer, True)  # New customer was created
-
-    @classmethod
-    def get_or_create(cls, business_id, customer_email):
-        user = User.find_by_identity(customer_email)
-        if not user:
-            user = User.get_or_create(params={"email": customer_email})
-
-        customers = cls.query.filter(cls.business_id == business_id)
-        for customer in customers:
-            if customer.user.email == customer_email:
-                return customer
-
-        customer_params = {
-            "business_id": business_id,
-            "user_id": user.id
-        }
-        customer = Customer(**customer_params)
-        return customer.save()
 
     def modify_from_form(self, form):
         """
