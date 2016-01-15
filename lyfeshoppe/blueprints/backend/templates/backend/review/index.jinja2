@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- BEGIN SAMPLE TABLE PORTLET-->
-                    <div class="portlet box green">
+                    <div class="portlet box red">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-building"></i>Reviews</div>
@@ -41,19 +41,16 @@
                                             <thead>
                                                 <tr>
                                                     <th class="col-header">
-                                                        {{ items.sort('status', 'Status') }}
+                                                        {{ items.sort('employee.user.name', 'Staff Name') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('description', 'Description') }}
-                                                    </th>
-                                                    <th class="col-header">
-                                                        {{ items.sort('customer.name', 'Customer') }}
-                                                    </th>
-                                                    <th class="col-header">
-                                                        {{ items.sort('employee.name', 'Employee') }}
+                                                        {{ items.sort('customer.name', 'Customer Name') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('product.name', 'Product') }}
+                                                    </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('status', 'Review Given') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('active') }}
@@ -64,27 +61,30 @@
                                                 {% for review in reviews.items %}
                                                     <tr>
                                                         <td>
-                                                            {{ review.status }}
-                                                        </td>
-                                                        <td>
-                                                            {{ review.description }}
+                                                            {{ review.employee.user.name }}
                                                         </td>
                                                         <td>
                                                             {{ review.customer.user.name }}
                                                         </td>
                                                         <td>
-                                                            {{ review.employee.user.name }}
-                                                        </td>
-                                                        <td>
                                                             {{ review.product.name }}
                                                         </td>
                                                         <td>
-                                                            {% if review.active %}
-                                                                {% set data = "label label-md label-success label" %}
-                                                            {% else %}
+                                                            {% if review.status == 'poor' %}
                                                                 {% set data = "label label-md label-warning label" %}
+                                                            {% elif review.status == 'expected_more' %}
+                                                                {% set data = "label label-md label-success label" %}
+                                                            {% elif review.status == 'average' %}
+                                                                {% set data = "label label-md label-info label" %}
+                                                            {% elif review.status == 'good' %}
+                                                                {% set data = "label label-md label-danger label" %}
+                                                            {% elif review.status == 'very_good' %}
+                                                                {% set data = "label label-md label-danger label" %}
                                                             {% endif %}
-                                                            <span class="{{ data }}"> {{ review.active }} </span>
+                                                            <span class="{{ data }}"> {{ review.STATUS[review.status] }} </span>
+                                                        </td>
+                                                        <td>
+                                                            {{ review.active }}
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
