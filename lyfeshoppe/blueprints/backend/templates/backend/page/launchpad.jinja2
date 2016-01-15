@@ -73,8 +73,13 @@
 
                                 <ul class="dropdown-menu-v2" role="menu">
                                     <li>
-                                        <a href="{{ url_for('backend.account_settings') }}">
+                                        <a href="{{ url_for('backend.user_account') }}">
                                             <i class="icon-user"></i> My Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('backend.account_settings') }}">
+                                            <i class="icon-user"></i> Profile Settings
                                         </a>
                                     </li>
                                     <li class="divider"> </li>
@@ -134,7 +139,7 @@
 
                             <div class="row">
                                 <div class="col-sm-6 margin-bottom-30 col-md-offset-3">
-                                    <a class="webapp-btn" href="{{ url_for('backend.account_settings') }}">
+                                    <a class="webapp-btn" href="{{ url_for('backend.user_account') }}">
                                         <h3>Your Profile</h3>
                                         <p>Your profile on LyfeShoppe</p>
                                     </a>

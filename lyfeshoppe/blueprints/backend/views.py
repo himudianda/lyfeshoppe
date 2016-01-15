@@ -209,7 +209,7 @@ def account_settings():
     if form.is_submitted() and form.validate_on_submit():
         if current_user.modify_from_form(form):
             flash(_('User Account has been modified successfully.'), 'success')
-            return redirect(url_for('backend.account_settings'))
+            return redirect(url_for('backend.user_account'))
 
     if password_reset_form.is_submitted() and password_reset_form.validate_on_submit():
         password_reset_form.populate_obj(current_user)
@@ -217,7 +217,7 @@ def account_settings():
         current_user.save()
 
         flash(_('Your password has been reset.'), 'success')
-        return redirect(url_for('backend.account_settings'))
+        return redirect(url_for('backend.user_account'))
 
     return render_template(
                 'backend/account/settings.jinja2',
