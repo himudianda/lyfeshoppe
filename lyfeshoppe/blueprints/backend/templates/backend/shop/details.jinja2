@@ -124,27 +124,27 @@
                                                             <div class="col-md-9">
                                                                 <div class="row">
                                                                     <div class="col-md-8 profile-info">
-                                                                        <h1 class="font-green sbold uppercase">{{ employee['name'] }}</h1>
-                                                                        <p>{{ employee['about'] }}</p>
+                                                                        <h1 class="font-green sbold uppercase">{{ employee.name }}</h1>
+                                                                        <p>{{ employee.about }}</p>
                                                                         <p>
-                                                                            <a href="mailto:{{ employee['email'] }}">{{ employee['email'] }}</a>
+                                                                            <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>
                                                                         </p>
                                                                         <ul class="list-inline">
                                                                             <li>
-                                                                                <i class="fa fa-map-marker"></i> {{ employee['city'] }} </li>
+                                                                                <i class="fa fa-map-marker"></i> {{ employee.user.address.city if employee.user.address else "Unknown" }} </li>
                                                                             <li>
-                                                                                <i class="fa fa-mobile"></i> {{ employee['phone'] }} </li>
+                                                                                <i class="fa fa-mobile"></i> {{ employee.user.phone }} </li>
                                                                             <li>
                                                                         </ul>
                                                                         <ul class="list-inline">
                                                                             <li>
-                                                                                {% if employee['rating'] == 0 %}
+                                                                                {% if employee.rating == 0 %}
                                                                                     Not rated
                                                                                 {% else %}
-                                                                                    {% for i in range(employee['rating']) %}
+                                                                                    {% for i in range(employee.rating) %}
                                                                                         <i class="fa fa-star"></i>
                                                                                     {% endfor %}
-                                                                                    {% for i in range(5-employee['rating']) %}
+                                                                                    {% for i in range(5-employee.rating) %}
                                                                                         <i class="fa fa-star-o"></i>
                                                                                     {% endfor %}
                                                                                 {% endif %}
@@ -166,13 +166,13 @@
                                                                                         <span class="sale-info"> CURRENT RESERVATIONS
                                                                                             <i class="fa fa-img-up"></i>
                                                                                         </span>
-                                                                                        <span class="sale-num"> {{ employee.total_reservations }} </span>
+                                                                                        <span class="sale-num"> {{ employee.reservations | length }} </span>
                                                                                     </li>
                                                                                     <li>
                                                                                         <span class="sale-info"> NUM OF SERVICES OFFERED
                                                                                             <i class="fa fa-img-down"></i>
                                                                                         </span>
-                                                                                        <span class="sale-num"> {{ employee.num_of_services }} </span>
+                                                                                        <span class="sale-num"> {{ employee.products | length }} </span>
                                                                                     </li>
                                                                                     <li>
                                                                                         </br>

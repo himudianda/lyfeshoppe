@@ -68,23 +68,6 @@ def shops_list(page, type):
 @backend.route('/shops/<string:id>')
 def shop_details(id):
     business = Business.query.get(id)
-    employees = list()
-    for employee in business.active_employees:
-        user = User.query.get(employee.user_id)
-        item = {
-            'id': employee.id,
-            'name': user.name,
-            'email': user.email,
-            'about': employee.about,
-            'city': user.address.city if user.address else "Unknown",
-            'phone': user.phone,
-            'total_reservations': len(employee.reservations),
-            'num_of_services': len(employee.products),
-            'rating': employee.rating,
-            'reviews': employee.reviews
-        }
-        employees.append(item)
-
     products = dict()
     for product in business.products:
         if product.category not in products:
@@ -95,7 +78,7 @@ def shop_details(id):
 
     return render_template(
                 'backend/shop/details.jinja2',
-                business=business, employees=employees,
+                business=business, employees=business.employees,
                 products=products,
                 type_images=type_images,
                 **business_categories)
