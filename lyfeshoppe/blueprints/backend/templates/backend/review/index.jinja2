@@ -41,10 +41,10 @@
                                             <thead>
                                                 <tr>
                                                     <th class="col-header">
-                                                        {{ items.sort('employee.user.name', 'Staff Name') }}
+                                                        {{ items.sort('employee.name', 'Staff Name') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('customer.user.name', 'Customer Name') }}
+                                                        {{ items.sort('customer.name', 'Customer Name') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('product.name', 'Product') }}
@@ -64,10 +64,10 @@
                                                 {% for review in reviews.items %}
                                                     <tr>
                                                         <td>
-                                                            {{ review.employee.user.name }}
+                                                            {{ review.employee.name }}
                                                         </td>
                                                         <td>
-                                                            {{ review.customer.user.name }}
+                                                            {{ review.customer.name }}
                                                         </td>
                                                         <td>
                                                             {{ review.product.name }}

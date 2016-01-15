@@ -234,6 +234,14 @@ class CustomerAndEmployeeMixin(object):
     # def user(cls):
     #    return db.relationship(User)
 
+    @property
+    def name(self):
+        return self.user.name
+
+    @property
+    def email(self):
+        return self.user.email
+
     @classmethod
     def search(cls, query):
         """
