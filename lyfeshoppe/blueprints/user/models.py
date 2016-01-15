@@ -178,47 +178,6 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         return user.save()
 
-    @classmethod
-    def get_or_create(cls, params=None, from_form=False, form=None):
-        """
-        Return whether or not the user was created successfully.
-
-        :return: bool
-        """
-
-        if from_form:
-            new_user = cls()
-            form.populate_obj(new_user)
-            customer_email = new_user.email
-        else:
-            if 'email' in params:
-                customer_email = params.get('email', None)
-
-        user = User.find_by_identity(customer_email)
-        if not user:
-            if from_form:
-                user = cls()
-                form.populate_obj(user)
-
-                # Create Business Address
-                user.address = Address()
-                form.populate_obj(user.address)
-            else:
-                user = cls(**params)
-
-            # Generate a random password
-            pwd_size = 8
-            chars = string.ascii_uppercase + string.digits
-            pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
-            user.password = pwd
-            user = user.save()
-
-            # This prevents circular imports.
-            from lyfeshoppe.blueprints.user.tasks import deliver_new_user_email
-            deliver_new_user_email.delay(user.id, pwd)
-
-        return user
-
     def modify_from_form(self, form):
         """
         Return whether or not the user was modified successfully.
