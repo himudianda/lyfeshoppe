@@ -209,17 +209,19 @@ class Customer(ResourceMixin, db.Model):
         form.populate_obj(new_customer)
 
         user = User.find_by_identity(new_customer.email)
+        if not user:
+            user = User.create_from_form(form)
+
         customer = Customer.query.filter(
-                        Customer.user == user, Customer.business_id == business_id
-                    ).first()
+                    Customer.user == user, Customer.business_id == business_id
+                ).first()
         if customer:
-            return (customer, False)  # Customer exists & wasnt created
+            return (customer, False)  # Customer already exists
 
         customer = cls()
         form.populate_obj(customer)
         customer.business_id = business_id
-        customer.user = User.get_or_create(params=None, from_form=True, form=form)
-
+        customer.user = user
         customer = customer.save()
         return (customer, True)  # New customer was created
 
