@@ -69,7 +69,7 @@ def shops_list(page, type):
 def shop_details(id):
     business = Business.query.get(id)
     products = dict()
-    for product in business.products:
+    for product in business.active_products:
         if product.category not in products:
             products[product.category] = []
         products[product.category].append(product)
