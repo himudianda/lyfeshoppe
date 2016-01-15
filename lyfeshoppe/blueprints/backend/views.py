@@ -78,8 +78,7 @@ def shop_details(id):
 
     return render_template(
                 'backend/shop/details.jinja2',
-                business=business, employees=business.employees,
-                products=products,
+                business=business, products=products,
                 type_images=type_images,
                 **business_categories)
 
