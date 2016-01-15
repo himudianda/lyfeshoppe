@@ -26,9 +26,20 @@
                                     {% call f.form_tag('user.signup') %}
                                         <legend>Sign up today</legend>
 
-                                        {% call f.form_group(form.name, css_class='sm-margin-bottom',
-                                            autofocus='autofocus', placeholder='Full Name') %}
-                                        {% endcall %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {% call f.form_group(form.first_name, css_class='sm-margin-bottom',
+                                                    autofocus='autofocus', placeholder='First Name') %}
+                                                {% endcall %}
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                {% call f.form_group(form.last_name, css_class='sm-margin-bottom',
+                                                    autofocus='autofocus', placeholder='Last Name') %}
+                                                {% endcall %}
+                                            </div>
+                                            <!--/span-->
+                                        </div>
 
                                         {% call f.form_group(form.email, css_class='sm-margin-bottom',
                                             autofocus='autofocus', placeholder='Email address') %}
