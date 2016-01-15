@@ -343,15 +343,6 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
 
-    @property
-    def num_of_reservations(self):
-        # Refer notes under Using EXISTS topic under link
-        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
-        return Reservation.query.filter(Reservation.customer_id == self.id).count()
-        # NOTE: below is an example of using any() & it also works. But the above statment
-        # is easier to use & understand
-        # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
-
 
 employee_product_relations = db.Table(
     'employee_product_relations',
@@ -389,21 +380,6 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_employee_user_business_uc'), )
-
-    @property
-    def num_of_products(self):
-        # Refer notes under Using EXISTS topic under link
-        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
-        return Product.query.filter(Product.employees.any(Employee.id == self.id)).count()
-
-    @property
-    def num_of_reservations(self):
-        # Refer notes under Using EXISTS topic under link
-        # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html
-        return Reservation.query.filter(Reservation.employee_id == self.id).count()
-        # NOTE: below is an example of using any() & it also works. But the above statment
-        # is easier to use & understand
-        # return Reservation.query.filter(Reservation.employee.has(Employee.id == self.id)).count()
 
     @property
     def total_sales(self):

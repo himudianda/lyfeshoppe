@@ -62,10 +62,10 @@
                                                         {{ items.sort('user.email', 'Email') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        Num of Products
+                                                        {{ items.sort('products') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        Num of Reservations
+                                                        {{ items.sort('reservations') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('active') }}
@@ -97,10 +97,10 @@
                                                             {{ employee.user.email }}
                                                         </td>
                                                         <td>
-                                                            {{ employee.num_of_products }}
+                                                            {{ employee.products | length }}
                                                         </td>
                                                         <td>
-                                                            {{ employee.num_of_reservations }}
+                                                            {{ employee.reservations | length }}
                                                         </td>
                                                         <td>
                                                             {% if employee.active %}

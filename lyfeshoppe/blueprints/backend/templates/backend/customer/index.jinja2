@@ -103,7 +103,7 @@
                                                             {{ customer.phone }}
                                                         </td>
                                                         <td>
-                                                            {{ customer.num_of_reservations }}
+                                                            {{ customer.reservations | length }}
                                                         </td>
                                                         <td>
                                                             {% if customer.active %}
