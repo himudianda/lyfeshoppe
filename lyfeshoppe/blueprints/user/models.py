@@ -195,15 +195,12 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         :return: bool
         """
-
         form.populate_obj(self)
         # Create User Address if it dint exist previously
         if not self.address:
             self.address = Address()
         form.populate_obj(self.address)
-
         self.save()
-
         return True
 
     def update(self, **kwargs):
