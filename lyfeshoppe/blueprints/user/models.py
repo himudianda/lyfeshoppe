@@ -153,6 +153,10 @@ class User(UserMixin, ResourceMixin, db.Model):
         return super(User, self).save()
 
     @classmethod
+    def create(cls, **kwargs):
+        return cls(**kwargs).save()
+
+    @classmethod
     def get_or_create(cls, params=None, from_form=False, form=None):
         """
         Return whether or not the user was created successfully.

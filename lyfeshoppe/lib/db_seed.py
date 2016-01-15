@@ -36,7 +36,7 @@ def create_admin():
         'password': 'password'
     }
 
-    return User(**params).save()
+    return User.create(**params)
 
 
 def seed_database():
