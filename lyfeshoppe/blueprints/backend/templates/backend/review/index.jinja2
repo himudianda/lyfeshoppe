@@ -55,6 +55,9 @@
                                                     <th class="col-header">
                                                         {{ items.sort('active') }}
                                                     </th>
+                                                    <th class="col-header">
+                                                        {{ items.sort('description') }}
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -85,6 +88,9 @@
                                                         </td>
                                                         <td>
                                                             {{ review.active }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-outline btn-circle btn-sm red">View</a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
