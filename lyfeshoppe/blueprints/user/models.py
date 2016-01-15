@@ -124,7 +124,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         # Call Flask-SQLAlchemy's constructor.
         super(User, self).__init__(**kwargs)
 
-        self.password = User.encrypt_password(kwargs.get('password', ''))
+        self.password = User.encrypt_password(kwargs.get('password', None))
 
     def save(self):
         """
@@ -145,16 +145,38 @@ class User(UserMixin, ResourceMixin, db.Model):
             self.username = username
 
         if not self.password:
-            self.password = User.encrypt_password('password')
+            pwd_size = 8
+            chars = string.ascii_uppercase + string.digits
+            pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
+            self.password = User.encrypt_password(pwd)
 
         if not self.name:
             self.name = " ".join([self.first_name, self.last_name])
+
+        if not self.address:
+            self.address = Address()
 
         return super(User, self).save()
 
     @classmethod
     def create(cls, **kwargs):
-        return cls(**kwargs).save()
+        user = cls(**kwargs)
+
+        # Create Address
+        if 'address' in kwargs:
+            user.address = Address(kwargs.get('address'))
+        return user.save()
+
+    @classmethod
+    def create_from_form(cls, form):
+        user = cls()
+        form.populate_obj(user)
+
+        # Create Address
+        user.address = Address()
+        form.populate_obj(user.address)
+
+        return user.save()
 
     @classmethod
     def get_or_create(cls, params=None, from_form=False, form=None):
