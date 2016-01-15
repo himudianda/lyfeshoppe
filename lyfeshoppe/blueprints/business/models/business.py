@@ -259,24 +259,9 @@ class CustomerAndEmployeeMixin(object):
         obj = obj.save()
         return (obj, True)  # New customer or employee was created
 
-
-class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
-    __tablename__ = 'customers'
-
-    id = db.Column(db.Integer, primary_key=True)
-    reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
-    reviews = db.relationship(Review, backref='customer', passive_deletes=True)
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-
-    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
-
-    def __init__(self, **kwargs):
-        # Call Flask-SQLAlchemy's constructor.
-        super(Customer, self).__init__(**kwargs)
-
     def modify_from_form(self, form):
         """
-        Return whether or not the customer was modified successfully.
+        Return whether or not the resource was modified successfully.
 
         :return: bool
         """
@@ -291,6 +276,21 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
         self.save()
 
         return True
+
+
+class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
+    __tablename__ = 'customers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
+    reviews = db.relationship(Review, backref='customer', passive_deletes=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+    __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
+
+    def __init__(self, **kwargs):
+        # Call Flask-SQLAlchemy's constructor.
+        super(Customer, self).__init__(**kwargs)
 
     @property
     def num_of_reservations(self):
@@ -342,24 +342,6 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Employee, self).__init__(**kwargs)
-
-    def modify_from_form(self, form):
-        """
-        Return whether or not the employee was modified successfully.
-
-        :return: bool
-        """
-
-        form.populate_obj(self)
-        form.populate_obj(self.user)
-        # Create Business Address if it dint exist previously
-        if not self.user.address:
-            self.user.address = Address()
-        form.populate_obj(self.user.address)
-
-        self.save()
-
-        return True
 
     @property
     def num_of_products(self):
