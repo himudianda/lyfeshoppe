@@ -124,10 +124,10 @@
                                                             <div class="col-md-9">
                                                                 <div class="row">
                                                                     <div class="col-md-8 profile-info">
-                                                                        <h1 class="font-green sbold uppercase">{{ employee.name }}</h1>
+                                                                        <h1 class="font-green sbold uppercase">{{ employee.user.name }}</h1>
                                                                         <p>{{ employee.about }}</p>
                                                                         <p>
-                                                                            <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>
+                                                                            <a href="mailto:{{ employee.user.email }}">{{ employee.user.email }}</a>
                                                                         </p>
                                                                         <ul class="list-inline">
                                                                             <li>
@@ -200,7 +200,7 @@
                                                                         {% set review_accordian_number = loop.index %}
                                                                             {% if not employee.reviews | length %}
                                                                                 <div class="col-md-12">
-                                                                                    No reviews exist for {{employee.name}}.
+                                                                                    No reviews exist for {{employee.user.name}}.
                                                                                     <span><a class="btn btn-outline btn-circle btn-sm red" href="{{ url_for('backend.shop_reviews_new', id=business.id, employee_id=employee.id) }}"><i class="fa fa-edit"></i>Write review now.</a></span>
                                                                                 </div>
                                                                             {% else %}
