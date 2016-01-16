@@ -56,8 +56,7 @@ def oauth_callback(provider):
             "gender": user_data.get('gender', None),
             "timezone": user_data.get('timezone', None),
             "locale": user_data.get('locale', None),
-            "email": user_data['email'],
-            "name": user_data['name']
+            "email": user_data['email']
         }
 
         user = User.find_by_identity(user_data['email'])
