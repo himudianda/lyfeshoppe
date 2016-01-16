@@ -33,7 +33,7 @@ def before_request():
 
 
 # Welcome
-@backend.route('/welcome')
+@backend.route('/welcome', methods=['GET', 'POST'])
 def welcome():
     form = UserAccountForm(obj=current_user)
 
