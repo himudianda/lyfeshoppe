@@ -222,18 +222,6 @@ class CustomerAndEmployeeMixin(object):
                         'users.id', onupdate='CASCADE', ondelete='CASCADE'
                         ), index=True, nullable=False)
 
-    # @declared_attr
-    # def user(cls):
-    #    return db.relationship(User)
-
-    @property
-    def name(self):
-        return self.user.name
-
-    @property
-    def email(self):
-        return self.user.email
-
     @classmethod
     def search(cls, query):
         """
@@ -246,8 +234,7 @@ class CustomerAndEmployeeMixin(object):
         if not query:
             return ''
 
-        search_query = '%{0}%'.format(query)
-        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
+        users = User.query.filter(User.search(query))
         user_ids = [user.id for user in users]
 
         search_chain = (cls.user_id.in_(user_ids))
@@ -297,7 +284,10 @@ class CustomerAndEmployeeMixin(object):
         new_obj = cls()
         form.populate_obj(new_obj)
 
-        user = User.find_by_identity(new_obj.email)
+        new_obj.user = User()
+        form.populate_obj(new_obj.user)
+
+        user = User.find_by_identity(new_obj.user.email)
         if not user:
             user = User.create_from_form(form)
 
