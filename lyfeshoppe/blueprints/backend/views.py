@@ -32,8 +32,14 @@ def before_request():
     pass
 
 
-# Launchpad
+# Welcome
 @backend.route('/welcome')
+def welcome():
+    return render_template('backend/page/welcome.jinja2')
+
+
+# Launchpad
+@backend.route('/launchpad')
 def launchpad():
     return render_template('backend/page/launchpad.jinja2')
 
