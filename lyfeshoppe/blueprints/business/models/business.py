@@ -59,20 +59,20 @@ class Review(ResourceMixin, db.Model):
         search_query = '%{0}%'.format(query)
 
         users = User.query.filter(User.search(query))
+        products = Product.query.filter(Product.search(query))
         customers = Customer.query.filter(
                         Customer.business_id == business_id, Customer.user
                     ).filter(
                         User.id.in_(u.id for u in users)
                     ).all()
-        customer_ids = [customer.id for customer in customers]
         employees = Employee.query.filter(
                         Employee.business_id == business_id, Employee.user
                     ).filter(
                         User.id.in_(u.id for u in users)
                     ).all()
-        employee_ids = [employee.id for employee in employees]
 
-        products = Product.query.filter(Product.name.ilike(search_query))
+        customer_ids = [customer.id for customer in customers]
+        employee_ids = [employee.id for employee in employees]
         product_ids = [product.id for product in products]
 
         search_chain = (
@@ -96,14 +96,14 @@ class Review(ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        users = User.query.filter(User.search(query))
 
+        users = User.query.filter(User.search(query))
+        businesses = Business.query.filter(Business.search(query))
         employees = Employee.query.filter(Employee.user).filter(
                         User.id.in_(u.id for u in users)
                     ).all()
-        employee_ids = [employee.id for employee in employees]
 
-        businesses = Business.query.filter(or_(Business.name.ilike(search_query), Business.email.ilike(search_query)))
+        employee_ids = [employee.id for employee in employees]
         business_ids = [business.id for business in businesses]
 
         search_chain = (
