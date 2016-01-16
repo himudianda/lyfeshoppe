@@ -95,8 +95,7 @@
 					data-endeasing="Power4.easeIn" style="">
 						{% if current_user.is_authenticated() %}
 						{% else %}
-							<a href="{{ url_for('user.signup') }}" class="button button-border button-large button-rounded tright nomargin"><span>Register</span></a>
-							<a href="{{ url_for('user.login') }}" class="button button-border button-large button-rounded tright nomargin"><span>Login</span></a>
+							<a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored"><span>Login with Facebook</span></a>
 						{%endif%}
 					</div>
 
@@ -177,8 +176,7 @@
 					data-endeasing="Power4.easeIn" style="">
 						{% if current_user.is_authenticated() %}
 						{% else %}
-							<a href="{{ url_for('user.signup') }}" class="button button-border button-large button-rounded tright nomargin"><span>Register</span></a>
-							<a href="{{ url_for('user.login') }}" class="button button-border button-large button-rounded tright nomargin"><span>Login</span></a>
+							<a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored"><span>Login with Facebook</span></a>
 						{% endif %}
 					</div>
 				</li>
@@ -695,7 +693,7 @@
 							<h4>For Businesses</h4>
 						</div>
 						<p>Leverage our platform to attract/retain customers, boost your business &amp; gain exponential growth.</p>
-						<a href="#" class="button button-border button-large button-rounded tright nomargin"><span>Register your Business</span></a>
+						<a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-border button-large button-rounded tright nomargin"><span>Register your Business</span></a>
 					</div>
 
 					<div class="col_one_third col_last">
