@@ -211,11 +211,8 @@
                                                     </div>
                                                     <div class="tab-pane" id="tab2">
                                                         <div class="form-group">
-                                                            <label class="control-label col-md-3">Phone Number
-                                                            </label>
-                                                            <div class="col-md-4">
-                                                                <input type="text" class="form-control" name="phone" />
-                                                            </div>
+                                                            {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
+                                                            {% endcall %}
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label col-md-3">Gender
@@ -224,9 +221,9 @@
                                                             <div class="col-md-4">
                                                                 <div class="radio-list">
                                                                     <label>
-                                                                        <input type="radio" name="gender" value="M" data-title="Male" /> Male </label>
+                                                                        <input type="radio" name="gender" value="male" data-title="Male" /> Male </label>
                                                                     <label>
-                                                                        <input type="radio" name="gender" value="F" data-title="Female" /> Female </label>
+                                                                        <input type="radio" name="gender" value="female" data-title="Female" /> Female </label>
                                                                 </div>
                                                                 <div id="form_gender_error"> </div>
                                                             </div>
