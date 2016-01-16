@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declared_attr
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.common.models import Address, Availability
+from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.extensions import db
 
@@ -401,7 +401,6 @@ class Product(ResourceMixin, db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey(
                         'businesses.id', onupdate='CASCADE', ondelete='CASCADE'
                     ), index=True, nullable=False)
-    availabilities = db.relationship(Availability, backref="product")
     reservations = db.relationship(Reservation, backref='product', passive_deletes=True)
     reviews = db.relationship(Review, backref='product', passive_deletes=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
