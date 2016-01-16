@@ -97,6 +97,7 @@
                                     {% endif %}
 
                                     <form action="{{ url_for(endpoint, __method__=real_method, **form_kwargs) }}" role="form" class="form-horizontal" id="submit_form" method="{{ browser_method }}">
+                                        {{ form.hidden_tag() }}
                                         <div class="form-wizard">
                                             <div class="form-body">
                                                 <ul class="nav nav-pills nav-justified steps">
@@ -210,10 +211,18 @@
                                                         <!--/row-->
                                                     </div>
                                                     <div class="tab-pane" id="tab2">
-                                                        <div class="form-group">
-                                                            {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
-                                                            {% endcall %}
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                        {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
                                                         </div>
+                                                        <!--/row-->
                                                         <div class="form-group">
                                                             <label class="control-label col-md-3">Gender
                                                                 <span class="required"> * </span>
@@ -288,9 +297,9 @@
                                                         <a href="javascript:;" class="btn btn-outline green button-next"> Continue
                                                             <i class="fa fa-angle-right"></i>
                                                         </a>
-                                                        <a href="javascript:;" class="btn green button-submit"> Submit
-                                                            <i class="fa fa-check"></i>
-                                                        </a>
+                                                        <button type="submit" class="btn green button-submit">
+                                                            {{ _('Submit') }}<i class="fa fa-check"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
