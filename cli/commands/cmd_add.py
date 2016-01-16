@@ -9,7 +9,6 @@ from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.issue.models import Issue
 from lyfeshoppe.blueprints.user.models import User, Referral
-from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Customer, Reservation, Review
 
 SEED_ADMIN_EMAIL = None
@@ -48,15 +47,14 @@ MAX_REVIEWS_PER_BUSINESS = 5
 
 
 def generate_address():
-    return Address(**{
-                'street': fake.street_address(),
-                'city': fake.city(),
-                'state': fake.state(),
-                'zipcode': fake.zipcode(),
-                'district': fake.city(),
-                'country': fake.country()
-            }
-        )
+    return {
+        'street': fake.street_address(),
+        'city': fake.city(),
+        'state': fake.state(),
+        'zipcode': fake.zipcode(),
+        'district': fake.city(),
+        'country': fake.country()
+    }
 
 
 def _log_status(count, model_label):
@@ -113,9 +111,9 @@ def users():
             'password': 'password',
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
-            'locale': random.choice(ACCEPT_LANGUAGES),
-            'address': generate_address()
+            'locale': random.choice(ACCEPT_LANGUAGES)
         }
+        params.update(generate_address())
 
         user = User(**params)
         user.save()
@@ -156,7 +154,6 @@ def businesses():
             'phone': fake.phone_number(),
             'active': "1",
             'weekends_open': random.choice(['0', '1']),
-            'address': generate_address(),
             'metro': random.choice(Business.METRO.keys()),
             'website': 'https://lyfeshoppe.com',
             'twitter': 'https://twitter.com/TwitterSmallBiz',
@@ -164,6 +161,7 @@ def businesses():
             'youtube': 'https://www.youtube.com/channel/UCFv2NRs9s0vlgMdjCcWU9pQ',
             'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
         }
+        params.update(generate_address())
 
         business = Business(**params)
         business.save()

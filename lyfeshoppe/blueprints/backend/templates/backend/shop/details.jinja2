@@ -14,7 +14,7 @@
             <div class="row margin-bottom-40 about-header" style="height: 300px;">
                 <div class="col-md-12">
                     <h1>{{ business.name }}</h1>
-                    <h2>{{ business.address.city }}, {{ business.address.state }}</h2>
+                    <h2>{{ business.city }}, {{ business.state }}</h2>
                 </div>
             </div>
             <!-- END CONTENT HEADER -->
@@ -131,7 +131,7 @@
                                                                         </p>
                                                                         <ul class="list-inline">
                                                                             <li>
-                                                                                <i class="fa fa-map-marker"></i> {{ employee.user.address.city if employee.user.address else "Unknown" }} </li>
+                                                                                <i class="fa fa-map-marker"></i> {{ employee.user.city }} </li>
                                                                             <li>
                                                                                 <i class="fa fa-mobile"></i> {{ employee.user.phone }} </li>
                                                                             <li>
@@ -290,7 +290,7 @@
                                                             </ul>
                                                             <ul class="list-inline">
                                                                 <li>
-                                                                    <i class="fa fa-map-marker"></i> {{ business.address.city }} </li>
+                                                                    <i class="fa fa-map-marker"></i> {{ business.city }} </li>
                                                                 <li>
                                                                     <i class="fa fa-briefcase"></i> {{ business.type }} </li>
                                                             </ul>
@@ -303,9 +303,9 @@
                                                                         <div class="c-section">
                                                                             <div class="uppercase bg-blue">Address</div>
                                                                             <p>
-                                                                                {{ business.address.street }},
-                                                                                <br/>{{ business.address.city }},
-                                                                                <br/>{{ business.address.state }} - {{ business.address.zipcode }}
+                                                                                {{ business.street }},
+                                                                                <br/>{{ business.city }},
+                                                                                <br/>{{ business.state }} - {{ business.zipcode }}
                                                                             </p>
                                                                         </div>
                                                                         <div class="c-section">

@@ -3,7 +3,6 @@ import click
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 
-from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product
 
 
@@ -18,45 +17,12 @@ def cli():
 
 
 @click.command()
-def user_relations():
-    """
-    Read user relations
-    """
-    for user in db.session.query(User).all():
-        click.echo(" === User with id {0} and email {1} === ".format(user.id, user.email))
-
-        # User addresses
-        if user.address:
-            click.echo(
-                    'Address: {0},{1},{2},{3}'.format(
-                        user.address.street, user.address.city,
-                        user.address.state, user.address.zipcode,
-                        user.address.district, user.address.country
-                    )
-                )
-        else:
-            click.echo('No address listed.')
-
-
-@click.command()
 def business_relations():
     """
     Read business relations
     """
     for business in db.session.query(Business).all():
         click.echo(" === Business with id {0} and email {1} === ".format(business.id, business.email))
-
-        # Business addresses
-        if business.address:
-            click.echo(
-                    'Address: {0},{1},{2},{3}'.format(
-                        business.address.street, business.address.city,
-                        business.address.state, business.address.zipcode,
-                        business.address.district, business.address.country
-                    )
-                )
-        else:
-            click.echo('No address listed.')
 
         # Business employees
         if business.employees:
@@ -104,18 +70,6 @@ def employee_relations():
     """
     for employee in db.session.query(Employee).all():
         click.echo(" === Employee with id {0} and email {1} === ".format(employee.id, employee.user.email))
-
-        # Employee User addresses
-        if employee.user.address:
-            click.echo(
-                    'Address: {0},{1},{2},{3}'.format(
-                        employee.user.address.street, employee.user.address.city,
-                        employee.user.address.state, employee.user.address.zipcode,
-                        employee.address.district, employee.address.country
-                    )
-                )
-        else:
-            click.echo('No address listed.')
 
         # Employee reservations
         if employee.reservations:
@@ -193,7 +147,6 @@ def all(ctx):
     :param ctx:
     :return: None
     """
-    ctx.invoke(user_relations)
     ctx.invoke(business_relations)
     ctx.invoke(employee_relations)
     ctx.invoke(product_relations)
@@ -201,7 +154,6 @@ def all(ctx):
     return None
 
 
-cli.add_command(user_relations)
 cli.add_command(business_relations)
 cli.add_command(employee_relations)
 cli.add_command(product_relations)

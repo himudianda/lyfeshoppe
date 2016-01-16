@@ -179,11 +179,7 @@ def user_account():
 
 @backend.route('/account/settings', methods=['GET', 'POST'])
 def account_settings():
-    address_dict = {}
-    if current_user.address:
-        address_dict = current_user.address.__dict__
-
-    form = UserAccountForm(obj=current_user, **address_dict)
+    form = UserAccountForm(obj=current_user)
     password_reset_form = PasswordResetForm()
 
     # form.is_submitted() ensures that this block of code is
@@ -420,11 +416,7 @@ def business_dashboard(id):
 @is_staff_authorized
 def business_edit(id):
     business = Business.query.get(id)
-    address_dict = dict()
-    if business.address:
-        address_dict = business.address.__dict__
-
-    form = BusinessForm(obj=business, **address_dict)
+    form = BusinessForm(obj=business)
 
     if form.validate_on_submit():
         if business.modify_from_form(form):
@@ -512,8 +504,6 @@ def business_employee_edit(id, employee_id):
 
     form_data = dict()
     form_data.update(employee.user.__dict__)
-    if employee.user.address:
-        form_data.update(employee.user.address.__dict__)
     form = EmployeeForm(obj=employee, **form_data)
 
     if form.is_submitted() and form.validate_on_submit():
@@ -600,8 +590,6 @@ def business_customer_edit(id, customer_id):
 
     form_data = dict()
     form_data.update(customer.user.__dict__)
-    if customer.user.address:
-        form_data.update(customer.user.address.__dict__)
     form = CustomerForm(obj=customer, **form_data)
 
     if form.is_submitted() and form.validate_on_submit():

@@ -8,7 +8,6 @@ from sqlalchemy.ext.declarative import declared_attr
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.extensions import db
 
@@ -312,13 +311,7 @@ class CustomerAndEmployeeMixin(object):
 
         form.populate_obj(self)
         form.populate_obj(self.user)
-        # Create Business Address if it dint exist previously
-        if not self.user.address:
-            self.user.address = Address()
-        form.populate_obj(self.user.address)
-
         self.save()
-
         return True
 
 
@@ -621,11 +614,13 @@ class Business(ResourceMixin, db.Model):
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='0')
     points = db.Column(db.Integer, nullable=False, server_default='0')
 
-    # Relationships.
-    # Many to One relationship: Many users can have same address
-    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
-    address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
-    address = db.relationship(Address)
+    # Address
+    street = db.Column(db.String(256))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    zipcode = db.Column(db.String(20))
+    district = db.Column(db.String(100))  # or county name
+    country = db.Column(db.String(100))
     metro = db.Column(db.Enum(*METRO, name='metro'), index=True, nullable=False, server_default="other")
 
     products = db.relationship(Product, backref='business', passive_deletes=True)
@@ -662,11 +657,6 @@ class Business(ResourceMixin, db.Model):
 
         business = cls()
         form.populate_obj(business)
-
-        # Create Business Address
-        business.address = Address()
-        form.populate_obj(business.address)
-
         business = business.save()
 
         # Create the first Admin employee for this newly created business
@@ -675,7 +665,6 @@ class Business(ResourceMixin, db.Model):
             'email': current_user.email
         }
         Employee.get_or_create(business_id=business.id, **admin_employee_params)
-
         return True
 
     def modify_from_form(self, form):
@@ -684,15 +673,8 @@ class Business(ResourceMixin, db.Model):
 
         :return: bool
         """
-
         form.populate_obj(self)
-        # Create Business Address if it dint exist previously
-        if not self.address:
-            self.address = Address()
-        form.populate_obj(self.address)
-
         self.save()
-
         return True
 
     @property

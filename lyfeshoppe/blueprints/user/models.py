@@ -10,7 +10,6 @@ from itsdangerous import URLSafeTimedSerializer, TimedJSONWebSignatureSerializer
 from sqlalchemy import or_
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.billing.models.credit_card import CreditCard
 from lyfeshoppe.blueprints.billing.models.subscription import Subscription
 from lyfeshoppe.blueprints.billing.models.invoice import Invoice
@@ -60,6 +59,18 @@ class User(UserMixin, ResourceMixin, db.Model):
         ('admin', 'Admin')
     ])
 
+    METRO = OrderedDict([
+        ('sf', 'SF Bay Area'),
+        ('ny', 'New York'),
+        ('chicago', 'Chicago'),
+        ('boston', 'Boston'),
+        ('atlanta', 'Atlanta'),
+        ('la', 'Los Angeles'),
+        ('sd', 'San Diego'),
+        ('miami', 'Miami'),
+        ('other', 'Other')
+    ])
+
     id = db.Column(db.Integer, primary_key=True)
 
     # Details
@@ -88,11 +99,15 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     points = db.Column(db.Integer, nullable=False, server_default='0')
 
-    # Relationships.
-    # Many to One relationship: Many users can have same address
-    # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
-    address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
-    address = db.relationship(Address)
+    # Address
+    street = db.Column(db.String(256))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    zipcode = db.Column(db.String(20))
+    district = db.Column(db.String(100))  # or county name
+    country = db.Column(db.String(100))
+    metro = db.Column(db.Enum(*METRO, name='metro'), index=True, nullable=False, server_default="other")
+
     employees = db.relationship("Employee", backref='user', passive_deletes=True)
     customers = db.relationship("Customer", backref='user', passive_deletes=True)
 
@@ -147,9 +162,6 @@ class User(UserMixin, ResourceMixin, db.Model):
             pwd = ''.join(random.choice(chars) for _ in range(pwd_size))
             self.password = User.encrypt_password(pwd)
 
-        if not self.address:
-            self.address = Address()
-
         return super(User, self).save()
 
     @classmethod
@@ -166,21 +178,12 @@ class User(UserMixin, ResourceMixin, db.Model):
     @classmethod
     def create(cls, **kwargs):
         user = cls(**kwargs)
-
-        # Create Address
-        if 'address' in kwargs:
-            user.address = Address(kwargs.get('address'))
         return user.save()
 
     @classmethod
     def create_from_form(cls, form):
         user = cls()
         form.populate_obj(user)
-
-        # Create Address
-        user.address = Address()
-        form.populate_obj(user.address)
-
         return user.save()
 
     def update_from_form(self, form):
@@ -190,10 +193,6 @@ class User(UserMixin, ResourceMixin, db.Model):
         :return: bool
         """
         form.populate_obj(self)
-        # Create User Address if it dint exist previously
-        if not self.address:
-            self.address = Address()
-        form.populate_obj(self.address)
         self.save()
         return True
 
