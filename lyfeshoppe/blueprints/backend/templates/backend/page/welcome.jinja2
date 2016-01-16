@@ -73,7 +73,65 @@
                                                 {% call f.form_tag(endpoint, **form_kwargs) %}
                                                 <form action="#" class="form-horizontal col-md-offset-1">
                                                     <div class="form-body">
-                                                        <h3 class="form-section">Personal Details</h3>
+                                                        <h3 class="form-section">Your Address</h3>
+                                                        <br/>
+                                                        <!--/row-->
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                      {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
+                                                                      {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                        {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                      {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
+                                                                      {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                        {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-9">
+                                                                      {% call f.form_group(form.zipcode, css_class='sm-margin-bottom') %}
+                                                                      {% endcall %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                        </div>
+                                                        <!--/row-->
+                                                        <h3 class="form-section">Your Details</h3>
+                                                        <br/>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
@@ -114,71 +172,7 @@
                                                             </div>
                                                             <!--/span-->
                                                         </div>
-                                                        <h3 class="form-section">Address</h3>
-                                                        <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                      {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
-                                                                      {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                        {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
-                                                                        {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                      {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
-                                                                      {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                        {% call f.form_group(form.zipcode, css_class='sm-margin-bottom') %}
-                                                                        {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                      {% call f.form_group(form.district, css_class='sm-margin-bottom') %}
-                                                                      {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                        {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
-                                                                        {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
+                                                        
                                                     </div>
 
                                                     <div class="form-actions">
