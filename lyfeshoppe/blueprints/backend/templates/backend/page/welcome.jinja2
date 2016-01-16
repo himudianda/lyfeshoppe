@@ -1,3 +1,5 @@
+{% import 'dashboard/macros/form.jinja2' as f with context %}
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -67,8 +69,6 @@
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
 
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="portlet light " id="form_wizard_1">
@@ -81,7 +81,22 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
-                                    <form action="#" class="form-horizontal" id="submit_form" method="POST">
+                                    {% set endpoint = 'backend.account_settings' %}
+                                    {% set form_kwargs = {} %}
+
+                                    {% set method = method | lower %}
+                                    {% set browser_method = 'post' %}
+                                    {% set real_method = 'post' %}
+
+                                    {% if method == 'get' %}
+                                    {% set browser_method = 'get' %}
+                                    {% set real_method = 'get' %}
+                                    {% elif method not in ('get', 'post') %}
+                                    {% set browser_method = 'post' %}
+                                    {% set real_method = method %}
+                                    {% endif %}
+
+                                    <form action="{{ url_for(endpoint, __method__=real_method, **form_kwargs) }}" role="form" class="form-horizontal" id="submit_form" method="{{ browser_method }}">
                                         <div class="form-wizard">
                                             <div class="form-body">
                                                 <ul class="nav nav-pills nav-justified steps">
@@ -135,6 +150,10 @@
                                                                             Country<span class="required"> * </span>
                                                                         </label>
                                                                         <select class="form-control crs-country" data-region-id="one" name="country" id="country_list"></select>
+                                                                        <div style="display: none;">
+                                                                            {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
+                                                                            {% endcall %}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -146,6 +165,10 @@
                                                                             State/Region<span class="required"> * </span>
                                                                         </label>
                                                                         <select class="form-control" data-value="shortcode" data-default-value="California" name="state" id="one"></select>
+                                                                        <div style="display: none;">
+                                                                            {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                                                                            {% endcall %}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -156,10 +179,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        <label class="control-label">
-                                                                            City/Town<span class="required"> * </span>
-                                                                        </label>
-                                                                        <input type="text" class="form-control" name="city" />
+                                                                        {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -167,10 +188,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        <label class="control-label">
-                                                                            Street Address
-                                                                        </label>
-                                                                        <input type="text" class="form-control" name="street-address" />
+                                                                        {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -181,10 +200,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        <label class="control-label">
-                                                                            Zip/Post Code
-                                                                        </label>
-                                                                        <input type="text" class="form-control" name="zipcode" />
+                                                                        {% call f.form_group(form.zipcode, css_class='sm-margin-bottom') %}
+                                                                        {% endcall %}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -241,7 +258,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label col-md-3">Street Address:</label>
                                                             <div class="col-md-4">
-                                                                <p class="form-control-static" data-display="street-address"> </p>
+                                                                <p class="form-control-static" data-display="street"> </p>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">

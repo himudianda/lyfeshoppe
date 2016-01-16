@@ -35,7 +35,16 @@ def before_request():
 # Welcome
 @backend.route('/welcome')
 def welcome():
-    return render_template('backend/page/welcome.jinja2')
+    form = UserAccountForm(obj=current_user)
+
+    # form.is_submitted() ensures that this block of code is
+    # only triggered if this form was submitted
+    if form.is_submitted() and form.validate_on_submit():
+        if current_user.update_from_form(form):
+            flash(_('User Account has been modified successfully.'), 'success')
+            return redirect(url_for('backend.launchpad'))
+
+    return render_template('backend/page/welcome.jinja2', form=form)
 
 
 # Launchpad
