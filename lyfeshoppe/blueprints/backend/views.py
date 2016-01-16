@@ -44,7 +44,7 @@ def welcome():
             flash(_('User Account has been modified successfully.'), 'success')
             return redirect(url_for('backend.launchpad'))
 
-    return render_template('backend/page/welcome.jinja2', form=form)
+    return render_template('backend/page/welcome.jinja2', form=form, **business_categories)
 
 
 # Launchpad
