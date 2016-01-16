@@ -1,7 +1,9 @@
 {# Render a Bootstrap 3 form group with errors for various field types. #}
 {%- macro dashboard_url() -%}
 
-  {% if current_user.role == "admin" %}
+  {% if not current_user.country or not current_user.state or not current_user.city or not current_user.gender %}
+      <a href="{{ url_for('backend.welcome') }}">
+  {% elif current_user.role == "admin" %}
       <a href="{{ url_for('admin.dashboard') }}">
   {% elif current_user.role == "member" %}
         <a href="{{ url_for('backend.launchpad') }}">
