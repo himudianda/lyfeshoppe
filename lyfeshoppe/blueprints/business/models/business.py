@@ -57,9 +57,8 @@ class Review(ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
-        # user_ids = [user.id for user in users]
 
+        users = User.query.filter(User.search(query))
         customers = Customer.query.filter(
                         Customer.business_id == business_id, Customer.user
                     ).filter(
@@ -97,7 +96,7 @@ class Review(ResourceMixin, db.Model):
             return ''
 
         search_query = '%{0}%'.format(query)
-        users = User.query.filter(or_(User.email.ilike(search_query), User.name.ilike(search_query)))
+        users = User.query.filter(User.search(query))
 
         employees = Employee.query.filter(Employee.user).filter(
                         User.id.in_(u.id for u in users)
