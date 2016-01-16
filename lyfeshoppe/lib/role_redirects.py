@@ -3,7 +3,10 @@ from flask_login import current_user
 
 
 def get_dashboard_url():
-    if current_user.role == "admin":
+
+    if not current_user.country or not current_user.state or not current_user.city or not current_user.gender:
+        return url_for('backend.welcome')
+    elif current_user.role == "admin":
         return url_for('admin.dashboard')
     elif current_user.role == "member":
         if current_user.num_of_businesses == 0:
