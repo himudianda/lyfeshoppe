@@ -2,11 +2,11 @@
 {% import 'macros/form.jinja2' as f with context %}
 
 {% block title %}
-    Register | LyfeShoppe | Social Shop with huge discounts.
+    Signup | LyfeShoppe | Social Shop with huge discounts.
 {% endblock %}
 
 {% block meta_description %}
-    Register/Signup for LyfeShoppe
+    LyfeShoppe Login page
 {% endblock %}
 
 {% block body %}
@@ -14,71 +14,73 @@
         <!-- Content
         ============================================= -->
         <section id="content">
-            <div class="content-wrap">
-                <div class="container clearfix">
 
-                    <div class="divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
-                        <div class="tab-container">
+          <div class="content-wrap">
 
-                            <div class="panel panel-default nobottommargin">
-                                <div class="panel-body" style="padding: 40px;">
+            <div class="container clearfix">
 
-                                    {% call f.form_tag('user.signup') %}
-                                        <legend>Sign up today</legend>
+              <div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                {% call f.form_group(form.first_name, css_class='sm-margin-bottom',
-                                                    autofocus='autofocus', placeholder='First Name') %}
-                                                {% endcall %}
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                {% call f.form_group(form.last_name, css_class='sm-margin-bottom',
-                                                    autofocus='autofocus', placeholder='Last Name') %}
-                                                {% endcall %}
-                                            </div>
-                                            <!--/span-->
-                                        </div>
+                <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Signup with Facebook</div>
+                <div class="acc_content clearfix">
+                  <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
+                </div>
 
-                                        {% call f.form_group(form.email, css_class='sm-margin-bottom',
-                                            autofocus='autofocus', placeholder='Email address') %}
-                                        {% endcall %}
+                <div class="acctitle"><i class="acc-closed icon-user4"></i><i class="acc-open icon-ok-sign"></i>Signup with Email (Beta)</div>
+                <div class="acc_content clearfix">
+                  <div class="panel panel-default nobottommargin">
+                    <div class="panel-body" style="padding: 40px;">
 
-                                        {% call f.form_group(form.password, css_class='sm-margin-bottom') %}
-                                        {% endcall %}
+                        {% call f.form_tag('user.signup') %}
+                            <legend>Sign up today</legend>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <button type="submit" class="btn btn-primary btn-block">
-                                                    {{ _('Register') }}
-                                                </button>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                <a href="{{ url_for('user.login') }}" class="btn btn-default btn-block">
-                                                    {{ _('Looking to sign in?') }}
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% call f.form_group(form.first_name, css_class='sm-margin-bottom',
+                                        autofocus='autofocus', placeholder='First Name') %}
                                     {% endcall %}
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    {% call f.form_group(form.last_name, css_class='sm-margin-bottom',
+                                        autofocus='autofocus', placeholder='Last Name') %}
+                                    {% endcall %}
+                                </div>
+                                <!--/span-->
+                            </div>
 
+                            {% call f.form_group(form.email, css_class='sm-margin-bottom',
+                                autofocus='autofocus', placeholder='Email address') %}
+                            {% endcall %}
 
-                                    <div class="line line-sm"></div>
+                            {% call f.form_group(form.password, css_class='sm-margin-bottom') %}
+                            {% endcall %}
 
-                                    <div class="center">
-                                        <h4 style="margin-bottom: 15px;">or Login with:</h4>
-                                        <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
-                                    </div>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        {{ _('Register') }}
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="visible-xs visible-sm sm-margin-top"></div>
+                                    <a href="{{ url_for('user.login') }}" class="btn btn-default btn-block">
+                                        {{ _('Looking to sign in?') }}
+                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        {% endcall %}
+
+                      <div class="line line-sm"></div>
+                      <div class="center">
+                          <h4 style="margin-bottom: 15px;">or Register with:</h4>
+                          <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
+                      </div>
                     </div>
-
-
                 </div>
+                </div>
+              </div>
             </div>
+          </div>
         </section><!-- #content end -->
-
 {% endblock %}

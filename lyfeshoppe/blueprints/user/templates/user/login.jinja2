@@ -14,59 +14,62 @@
         <!-- Content
         ============================================= -->
         <section id="content">
-            <div class="content-wrap">
-                <div class="container clearfix">
 
-                    <div class="divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
-                        <div class="tab-container">
+          <div class="content-wrap">
 
-                            <div class="panel panel-default nobottommargin">
-                                <div class="panel-body" style="padding: 40px;">
+            <div class="container clearfix">
 
-                                  {% call f.form_tag('user.login') %}
-                                    <legend>Sign in to continue</legend>
+              <div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
 
-                                    {% call f.form_group(form.identity, css_class='sm-margin-bottom', autofocus='autofocus') %}
-                                    {% endcall %}
-
-                                    {% call f.form_group(form.password, css_class='sm-margin-bottom') %}
-                                    {% endcall %}
-
-                                    <div class="row">
-                                      <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary btn-block">
-                                          {{ _('Sign in') }}
-                                        </button>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <div class="visible-xs visible-sm sm-margin-top"></div>
-                                        <a href="{{ url_for('user.signup') }}" class="btn btn-default btn-block">
-                                          {{ _('Register') }}
-                                        </a>
-                                      </div>
-                                    </div>
-                                  {% endcall %}
-
-                                  <div class="text-center margin-top">
-                                    <a href="{{ url_for('user.begin_password_reset') }}" class="text-muted">
-                                      {{ _('Forgot your password?') }}
-                                    </a>
-                                  </div>
-
-                                  <div class="line line-sm"></div>
-
-                                  <div class="center">
-                                      <h4 style="margin-bottom: 15px;">or Login with:</h4>
-                                      <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
-                                  </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Login with Facebook</div>
+                <div class="acc_content clearfix">
+                  <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
                 </div>
-            </div>
-        </section><!-- #content end -->
 
+                <div class="acctitle"><i class="acc-closed icon-user4"></i><i class="acc-open icon-ok-sign"></i>Login with Email (Beta)</div>
+                <div class="acc_content clearfix">
+                  <div class="panel panel-default nobottommargin">
+                    <div class="panel-body" style="padding: 40px;">
+
+                      {% call f.form_tag('user.login') %}
+                        <legend>Sign in to continue</legend>
+
+                        {% call f.form_group(form.identity, css_class='sm-margin-bottom', autofocus='autofocus') %}
+                        {% endcall %}
+
+                        {% call f.form_group(form.password, css_class='sm-margin-bottom') %}
+                        {% endcall %}
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary btn-block">
+                              {{ _('Sign in') }}
+                            </button>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="visible-xs visible-sm sm-margin-top"></div>
+                            <a href="{{ url_for('user.signup') }}" class="btn btn-default btn-block">
+                              {{ _('Register') }}
+                            </a>
+                          </div>
+                        </div>
+                      {% endcall %}
+
+                      <div class="text-center margin-top">
+                        <a href="{{ url_for('user.begin_password_reset') }}" class="text-muted">
+                          {{ _('Forgot your password?') }}
+                        </a>
+                      </div>
+                      <div class="line line-sm"></div>
+                      <div class="center">
+                          <h4 style="margin-bottom: 15px;">or Login with:</h4>
+                          <a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
+                      </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section><!-- #content end -->
 {% endblock %}
