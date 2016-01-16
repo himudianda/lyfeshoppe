@@ -95,7 +95,7 @@
 					data-endeasing="Power4.easeIn" style="">
 						{% if current_user.is_authenticated() %}
 						{% else %}
-							<a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored"><span>Login with Facebook</span></a>
+							<a href="{{ url_for('user.oauth_authorize', provider='facebook') }}" class="button button-rounded si-facebook si-colored"><span><i class="fa fa-facebook fa-lg"></i>&nbsp;Login / Register</span></a>
 						{%endif%}
 					</div>
 
