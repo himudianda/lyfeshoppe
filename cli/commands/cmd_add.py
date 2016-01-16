@@ -37,7 +37,7 @@ app = create_app()
 db.app = app
 
 NUM_OF_FAKE_USERS = 20
-NUM_OF_REFERRALS_PER_USER = 3
+NUM_OF_REFERRALS_PER_USER = 6
 NUM_OF_FAKE_ISSUES = 5
 NUM_OF_FAKE_BUSINESSES = 10
 MAX_EMPLOYEES_PER_BUSINESS = 5
@@ -132,13 +132,9 @@ def referrals():
     for user in users:
         num_of_referrals = random.randint(1, NUM_OF_REFERRALS_PER_USER)
         for i in xrange(num_of_referrals):
-            # Note: password is sent below only for sample data - in real use plz dont set the password
-            # User.save() can autogenerate a fake password
-            Referral.create(
-                user_id=user.id, email=fake.email(),
-                first_name=fake.first_name(), last_name=fake.last_name(),
-                password="password"
-            )
+            reference = random.choice(User.query.filter(User.id != user.id).all())
+            referral = Referral(user=user, reference=reference)
+            referral.save()
 
     _log_status(Referral.query.count(), "referrals")
 

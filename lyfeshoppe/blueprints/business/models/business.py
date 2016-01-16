@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declared_attr
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.common.models import Address, Occupancy, Availability
+from lyfeshoppe.blueprints.common.models import Address, Availability
 from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.extensions import db
 
@@ -629,8 +629,6 @@ class Business(ResourceMixin, db.Model):
     address = db.relationship(Address)
     metro = db.Column(db.Enum(*METRO, name='metro'), index=True, nullable=False, server_default="other")
 
-    # One to Many relationship: One business can have multiple occupancies
-    occupancies = db.relationship(Occupancy, backref="business")
     products = db.relationship(Product, backref='business', passive_deletes=True)
     employees = db.relationship(Employee, backref='business', passive_deletes=True)
     customers = db.relationship(Customer, backref='business', passive_deletes=True)

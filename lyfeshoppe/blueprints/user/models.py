@@ -10,7 +10,7 @@ from itsdangerous import URLSafeTimedSerializer, TimedJSONWebSignatureSerializer
 from sqlalchemy import or_
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.common.models import Address, Occupancy
+from lyfeshoppe.blueprints.common.models import Address
 from lyfeshoppe.blueprints.billing.models.credit_card import CreditCard
 from lyfeshoppe.blueprints.billing.models.subscription import Subscription
 from lyfeshoppe.blueprints.billing.models.invoice import Invoice
@@ -93,8 +93,6 @@ class User(UserMixin, ResourceMixin, db.Model):
     # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
     address = db.relationship(Address)
-    # One to Many relationship: One user can have multiple occupancies
-    occupancies = db.relationship(Occupancy, backref="user")
     employees = db.relationship("Employee", backref='user', passive_deletes=True)
     customers = db.relationship("Customer", backref='user', passive_deletes=True)
 

@@ -37,25 +37,6 @@ def user_relations():
         else:
             click.echo('No address listed.')
 
-        # User occupancies
-        if user.occupancies and len(user.occupancies):
-            click.echo(
-                    'Occupancies: {0}'.format(
-                        len(user.occupancies)
-                    )
-                )
-
-            for occupancy in user.occupancies:
-                click.echo(
-                    'start_time: {0}  -  end_time: {1}  occupied for user {2}'.format(
-                        occupancy.start_time, occupancy.end_time,
-                        occupancy.user.email
-                    )
-                )
-
-        else:
-            click.echo('No occupancies listed.')
-
 
 @click.command()
 def business_relations():
@@ -76,25 +57,6 @@ def business_relations():
                 )
         else:
             click.echo('No address listed.')
-
-        # Business occupancies
-        if business.occupancies and len(business.occupancies):
-            click.echo(
-                    'Occupancies: {0}'.format(
-                        len(business.occupancies)
-                    )
-                )
-
-            for occupancy in business.occupancies:
-                click.echo(
-                    'start_time: {0}  -  end_time: {1}  occupied for business {2}'.format(
-                        occupancy.start_time, occupancy.end_time,
-                        occupancy.business.email
-                    )
-                )
-
-        else:
-            click.echo('No occupancies listed.')
 
         # Business employees
         if business.employees:
@@ -154,25 +116,6 @@ def employee_relations():
                 )
         else:
             click.echo('No address listed.')
-
-        # Employee User occupancies
-        if employee.user.occupancies and len(employee.user.occupancies):
-            click.echo(
-                    'Occupancies: {0}'.format(
-                        len(employee.user.occupancies)
-                    )
-                )
-
-            for occupancy in employee.user.occupancies:
-                click.echo(
-                    'start_time: {0}  -  end_time: {1}  occupied for user {2}'.format(
-                        occupancy.start_time, occupancy.end_time,
-                        occupancy.user.email
-                    )
-                )
-
-        else:
-            click.echo('No occupancies listed.')
 
         # Employee reservations
         if employee.reservations:
