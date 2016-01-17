@@ -75,7 +75,7 @@
                                                 {% call f.form_tag(endpoint, **form_kwargs) %}
                                                 <form action="#" class="form-horizontal col-md-offset-1">
                                                     <div class="form-body">
-                                                        <h3 class="form-section">Your Address</h3>
+                                                        <h3 class="form-section">Location</h3>
                                                         <br/>
                                                         <!--/row-->
                                                         <div class="row">
@@ -223,10 +223,12 @@
 
         if (!country_val){
             country_val = "United States"
+            $('#country').val(country_val);
         }
 
         if (!state_val){
             state_val = "California"
+            $('#state').val(state_val);
         }
 
         document.getElementById("country-select").setAttribute("data-default-value", country_val);
