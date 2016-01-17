@@ -41,6 +41,9 @@
 
 
 {%- macro PAGE_LEVEL_PLUGINS() -%}
+  {% if request.endpoint in ('backend.welcome') %}
+      <script src="{{ url_for('static', filename='dashboard/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+  {% endif %}
   {% if request.endpoint in ('backend.shops_list') %}
       <script src="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js') }}" type="text/javascript"></script>
   {% endif %}
@@ -100,6 +103,9 @@
 {%- endmacro -%}
 
 {%- macro PAGE_LEVEL_SCRIPTS() -%}
+  {% if request.endpoint in ('backend.welcome') %}
+      <script src="{{ url_for('static', filename='dashboard/pages/scripts/components-select2.min.js') }}" type="text/javascript"></script>
+  {% endif %}
   {% if request.endpoint in ('backend.shops_list') %}
       <script src="{{ url_for('static', filename='dashboard/pages/scripts/portfolio-1.min.js') }}" type="text/javascript"></script>
   {% endif %}
