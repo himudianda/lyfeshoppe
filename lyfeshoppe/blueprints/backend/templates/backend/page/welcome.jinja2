@@ -55,7 +55,7 @@
                                     <div class="portlet-title tabbable-line">
                                         <div class="caption caption-md">
                                             <i class="icon-globe theme-font hide"></i>
-                                            <span class="caption-subject font-blue-madison bold uppercase">Activating New Account</span>
+                                            <span class="caption-subject font-blue-madison bold uppercase">Activating New Account for {{current_user.name}}</span>
                                         </div>
                                         <ul class="nav nav-tabs">
                                             <li class="active">
@@ -67,6 +67,8 @@
                                         <div class="tab-content">
                                             <!-- PERSONAL INFO TAB -->
                                             <div class="tab-pane active" id="tab_1_1">
+                                                <h2 style="text-align:center;">Hello {{current_user.name}} ! Welcome to LyfeShoppe.</h2>
+                                                <br/>
 
                                                 {% set endpoint = 'backend.welcome' %}
                                                 {% set form_kwargs = {} %}
