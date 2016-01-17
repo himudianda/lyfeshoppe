@@ -84,7 +84,7 @@
                                                                     <div class="col-md-9">
 
                                                                         <label class="control-label"><span class="required"> * </span><strong>Country: </strong></label>
-                                                                        <select class="crs-country form-control" data-region-id="one" data-default-value="United States" id="country-select" onchange="countrySelect()"></select>
+                                                                        <select class="crs-country form-control" data-region-id="one" id="country-select" onchange="countrySelect()"></select>
                                                                         <div style="display: none;">
                                                                             {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
                                                                             {% endcall %}
@@ -97,7 +97,7 @@
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
                                                                         <label class="control-label"><span class="required"> * </span><strong>State/Province: </strong></label>
-                                                                        <select id="one" data-value="shortcode" data-default-value="California" onchange="stateSelect()" class="form-control"></select>
+                                                                        <select id="one" data-value="shortcode" onchange="stateSelect()" class="form-control"></select>
                                                                         <div style="display: none;">
                                                                             {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
                                                                             {% endcall %}
