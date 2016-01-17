@@ -38,6 +38,17 @@ class BulkDeleteForm(Form):
                         choices=choices_from_dict(SCOPE, prepend_blank=False))
 
 
+class WelcomeForm(ModelForm):
+    country = StringField(_('Country'), [DataRequired()])
+    state = StringField(_('State/Province'), [DataRequired()])
+    city = StringField(_('City/Town'), [DataRequired()])
+    street = StringField(_('Street Address'), [Optional(), Length(1, 255)])
+    zipcode = StringField(_('Zip/Post Code'), [Optional(), Length(1, 30)])
+
+    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+    gender = SelectField(_('Gender'), [DataRequired()], choices=(('male', "Male"), ('female', "Female")))
+
+
 class UserAccountForm(ModelForm):
 
     first_name = StringField(_('First Name'), [DataRequired(), Length(1, 255)])

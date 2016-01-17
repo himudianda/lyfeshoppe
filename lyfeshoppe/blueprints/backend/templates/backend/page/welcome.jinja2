@@ -80,8 +80,14 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                      {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
-                                                                      {% endcall %}
+                                                                        <div>
+                                                                            Country:
+                                                                            <select class="crs-country" data-region-id="one" data-default-value="United States"></select>
+                                                                        </div>
+                                                                        <div style="display: none;">
+                                                                            {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
+                                                                            {% endcall %}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -89,13 +95,19 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
-                                                                        {% endcall %}
+                                                                        <div>
+                                                                            State/Province: <select id="one" data-value="shortcode" data-default-value="California"></select>
+                                                                        </div>
+                                                                        <div style="display: none;">
+                                                                            {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                                                                            {% endcall %}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <!--/span-->
                                                         </div>
+                                                        <br/>
                                                         <!--/row-->
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -136,7 +148,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        {% call f.form_group(form.first_name, css_class='sm-margin-bottom') %}
+                                                                        {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
                                                                         {% endcall %}
                                                                     </div>
                                                                 </div>
@@ -144,7 +156,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        {% call f.form_group(form.last_name, css_class='sm-margin-bottom') %}
+                                                                        {% call f.form_group(form.gender, css_class='sm-margin-bottom') %}
                                                                         {% endcall %}
                                                                     </div>
                                                                 </div>
@@ -152,27 +164,6 @@
                                                             <!--/span-->
                                                         </div>
                                                         <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                      {% call f.form_group(form.email, css_class='sm-margin-bottom') %}
-                                                                      {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="col-md-9">
-                                                                        {% call f.form_group(form.phone, css_class='sm-margin-bottom') %}
-                                                                        {% endcall %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        
                                                     </div>
 
                                                     <div class="form-actions">
@@ -220,4 +211,8 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
+{% endblock %}
+
+{% block footer_scripts %}
+    <script src="{{ url_for('static', filename='common/js/jquery.crs.min.js') }}" type="text/javascript"></script>
 {% endblock %}

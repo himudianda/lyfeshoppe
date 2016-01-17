@@ -10,7 +10,7 @@ from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
     EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm, ReviewForm, \
-    ReferralForm
+    ReferralForm, WelcomeForm
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer, Review
 from lyfeshoppe.blueprints.user.models import User, Referral
@@ -35,7 +35,7 @@ def before_request():
 # Welcome
 @backend.route('/welcome', methods=['GET', 'POST'])
 def welcome():
-    form = UserAccountForm(obj=current_user)
+    form = WelcomeForm(obj=current_user)
 
     # form.is_submitted() ensures that this block of code is
     # only triggered if this form was submitted
