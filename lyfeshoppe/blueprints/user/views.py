@@ -150,7 +150,7 @@ def password_reset():
 
         if login_user(u):
             flash(_('Your password has been reset.'), 'success')
-            return redirect(url_for('backend.launchpad'))
+            return redirect(get_dashboard_url())
 
     return render_template('user/password_reset.jinja2', form=form)
 
@@ -169,7 +169,7 @@ def signup():
 
         if login_user(u):
             flash(_('Awesome, thanks for signing up!'), 'success')
-            return redirect(url_for('backend.launchpad'))
+            return redirect(get_dashboard_url())
 
     return render_template('user/signup.jinja2', form=form)
 
