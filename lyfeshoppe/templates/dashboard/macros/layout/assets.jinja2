@@ -42,10 +42,6 @@
 
 
 {%- macro PAGE_LEVEL_PLUGINS() -%}
-  {% if request.endpoint in ('backend.welcome') %}
-    <link href="{{ url_for('static', filename='dashboard/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='dashboard/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-  {% endif %}
   {% if request.endpoint in ('backend.shops_list') %}
       <link href="{{ url_for('static', filename='dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
