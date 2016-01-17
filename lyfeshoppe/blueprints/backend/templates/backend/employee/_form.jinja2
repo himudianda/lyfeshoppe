@@ -94,8 +94,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-9">
-                              {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
-                              {% endcall %}
+
+                                <label class="control-label"><span class="required"> * </span><strong>Country: </strong></label>
+                                <select class="crs-country form-control" data-region-id="one" id="country-select" onchange="countrySelect()"></select>
+                                <div style="display: none;">
+                                    {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
+                                    {% endcall %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,19 +108,24 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-9">
-                                {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
-                                {% endcall %}
+                                <label class="control-label"><span class="required"> * </span><strong>State/Province: </strong></label>
+                                <select id="one" data-value="shortcode" onchange="stateSelect()" class="form-control"></select>
+                                <div style="display: none;">
+                                    {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                                    {% endcall %}
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!--/span-->
                 </div>
+                <br/>
                 <!--/row-->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-9">
-                              {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
+                              {% call f.form_group(form.city, css_class='sm-margin-bottom') %}
                               {% endcall %}
                             </div>
                         </div>
@@ -136,23 +146,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-9">
-                              {% call f.form_group(form.district, css_class='sm-margin-bottom') %}
+                              {% call f.form_group(form.metro, css_class='sm-margin-bottom') %}
                               {% endcall %}
                             </div>
                         </div>
                     </div>
                     <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-9">
-                                {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
-                                {% endcall %}
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
                 </div>
-                <!--/row-->
             </div>
 
             <div class="form-actions">

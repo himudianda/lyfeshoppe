@@ -56,9 +56,6 @@ class UserAccountForm(WelcomeForm):
     email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
 
-    street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
-    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
-
 
 class BusinessForm(ModelForm):
 
