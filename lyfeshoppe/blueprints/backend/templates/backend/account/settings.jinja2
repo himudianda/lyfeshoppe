@@ -243,6 +243,13 @@
     <script src="{{ url_for('static', filename='common/js/jquery.crs.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
+        // The country & states select dropdown must show the values thats currently set
+        var country_val = $('#country').val();
+        var state_val = $('#state').val();
+        document.getElementById("country-select").setAttribute("data-default-value", country_val);
+        document.getElementById("one").setAttribute("data-default-value", state_val);
+
+        // These functions are triggered when the country or state dropdown changes
         function countrySelect() {
             $('#country').val($('#country-select').val());
         }
