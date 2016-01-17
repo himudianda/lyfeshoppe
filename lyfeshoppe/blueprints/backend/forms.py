@@ -95,7 +95,7 @@ class EmployeeForm(UserAccountForm):
     active = BooleanField(_('Yes, Employee is active'))
 
 
-class CustomerForm(ModelForm):
+class CustomerForm(UserAccountForm):
     active = BooleanField(_('Yes, Customer is active'))
 
 
