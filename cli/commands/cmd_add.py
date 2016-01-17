@@ -46,14 +46,24 @@ MAX_RESERVATIONS_PER_BUSINESS = 20
 MAX_REVIEWS_PER_BUSINESS = 5
 
 
-def generate_address():
+def generate_business_address():
     return {
-        'street': fake.street_address(),
-        'city': fake.city(),
+        'country': fake.country(),
         'state': fake.state(),
+        'city': fake.city(),
         'zipcode': fake.zipcode(),
-        'district': fake.city(),
-        'country': fake.country()
+        'street': fake.street_address(),
+        'metro': random.choice(Business.METRO.keys())
+    }
+
+
+def generate_user_address():
+    return {
+        'country': fake.country(),
+        'state': fake.state(),
+        'city': fake.city(),
+        'zipcode': fake.zipcode(),
+        'metro': random.choice(User.METRO.keys())
     }
 
 
@@ -113,7 +123,7 @@ def users():
             'last_name': fake.last_name(),
             'locale': random.choice(ACCEPT_LANGUAGES)
         }
-        params.update(generate_address())
+        params.update(generate_user_address())
 
         user = User(**params)
         user.save()
@@ -161,7 +171,7 @@ def businesses():
             'youtube': 'https://www.youtube.com/channel/UCFv2NRs9s0vlgMdjCcWU9pQ',
             'linkedin': 'https://www.linkedin.com/in/mark-cuban-06a0755b'
         }
-        params.update(generate_address())
+        params.update(generate_business_address())
 
         business = Business(**params)
         business.save()

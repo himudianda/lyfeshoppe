@@ -42,9 +42,9 @@ class WelcomeForm(ModelForm):
     country = StringField(_('Country'), [DataRequired()])
     state = StringField(_('State/Province'), [DataRequired()])
     city = StringField(_('City/Town'), [DataRequired()])
-    street = StringField(_('Street Address'), [Optional(), Length(1, 255)])
     zipcode = StringField(_('Zip/Post Code'), [Optional(), Length(1, 30)])
-
+    metro = SelectField(_('Metro Area'), [DataRequired()],
+                        choices=choices_from_dict(Business.METRO, prepend_blank=False))
     phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
     gender = SelectField(_('Gender'), [DataRequired()], choices=(('male', "Male"), ('female', "Female")))
 

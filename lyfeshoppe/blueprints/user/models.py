@@ -100,12 +100,10 @@ class User(UserMixin, ResourceMixin, db.Model):
     points = db.Column(db.Integer, nullable=False, server_default='0')
 
     # Address
-    street = db.Column(db.String(256))
-    city = db.Column(db.String(100))
-    state = db.Column(db.String(100))
-    zipcode = db.Column(db.String(20))
-    district = db.Column(db.String(100))  # or county name
     country = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    city = db.Column(db.String(100))
+    zipcode = db.Column(db.String(20))
     metro = db.Column(db.Enum(*METRO, name='metro'), index=True, nullable=False, server_default="other")
 
     employees = db.relationship("Employee", backref='user', passive_deletes=True)
