@@ -14,6 +14,7 @@ from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, User
 from lyfeshoppe.blueprints.user.forms import PasswordResetForm
 from lyfeshoppe.blueprints.business.models.business import Business, Employee, Product, Reservation, Customer, Review
 from lyfeshoppe.blueprints.user.models import User, Referral
+from lyfeshoppe.lib.role_redirects import get_dashboard_url
 
 backend = Blueprint('backend', __name__, template_folder='templates')
 
@@ -35,6 +36,9 @@ def before_request():
 # Welcome
 @backend.route('/welcome', methods=['GET', 'POST'])
 def welcome():
+    if current_user.country and current_user.state and current_user.city and current_user.gender:
+        return redirect(get_dashboard_url())
+
     form = WelcomeForm(obj=current_user)
 
     # form.is_submitted() ensures that this block of code is
