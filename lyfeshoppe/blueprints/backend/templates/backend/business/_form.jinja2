@@ -211,6 +211,18 @@
                 <br/>
                 <!--/row-->
                 <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                              {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
+                              {% endcall %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-9">
@@ -242,18 +254,6 @@
                     </div>
                     <!--/span-->
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-9">
-                              {% call f.form_group(form.street, css_class='sm-margin-bottom') %}
-                              {% endcall %}
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                </div>
-                <!--/row-->
             </div>
 
 
