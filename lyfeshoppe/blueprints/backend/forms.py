@@ -49,19 +49,15 @@ class WelcomeForm(ModelForm):
     gender = SelectField(_('Gender'), [DataRequired()], choices=(('male', "Male"), ('female', "Female")))
 
 
-class UserAccountForm(ModelForm):
+class UserAccountForm(WelcomeForm):
 
     first_name = StringField(_('First Name'), [DataRequired(), Length(1, 255)])
     last_name = StringField(_('Last Name'), [DataRequired(), Length(1, 255)])
     email = EmailField(_("Email Address"),
                        [DataRequired(), Length(3, 254)])
-    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+
     street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
-    city = StringField(_('City'), [Optional(), Length(1, 30)])
-    state = StringField(_('State'), [Optional(), Length(1, 30)])
-    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
     district = StringField(_('District/County'), [Optional(), Length(1, 30)])
-    country = StringField(_('Country'), [Optional(), Length(1, 30)])
 
 
 class BusinessForm(ModelForm):
