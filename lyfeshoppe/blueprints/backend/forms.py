@@ -90,39 +90,16 @@ class BusinessForm(ModelForm):
     country = StringField(_('Country'), [DataRequired(), Length(1, 30)])
 
 
-class EmployeeForm(ModelForm):
-    first_name = StringField(_('First Name'), [DataRequired(), Length(1, 255)])
-    last_name = StringField(_('Last Name'), [DataRequired(), Length(1, 255)])
-    email = EmailField(_("Email Address"),
-                       [DataRequired(), Length(3, 254)])
-    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
+class EmployeeForm(UserAccountForm):
     about = TextAreaField(_("About the Employee"), [Optional(), Length(3, 2048)])
-    street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
-    city = StringField(_('City'), [Optional(), Length(1, 30)])
-    state = StringField(_('State'), [Optional(), Length(1, 30)])
-    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
-    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
-    country = StringField(_('Country'), [Optional(), Length(1, 30)])
     active = BooleanField(_('Yes, Employee is active'))
 
 
 class CustomerForm(ModelForm):
-    first_name = StringField(_('First Name'), [DataRequired(), Length(1, 255)])
-    last_name = StringField(_('Last Name'), [DataRequired(), Length(1, 255)])
-    email = EmailField(_("Email Address"),
-                       [DataRequired(), Length(3, 254)])
-    phone = StringField(_('Phone number'), [Optional(), Length(1, 12)])
-    street = StringField(_('Full Street Address'), [Optional(), Length(1, 255)])
-    city = StringField(_('City'), [Optional(), Length(1, 30)])
-    state = StringField(_('State'), [Optional(), Length(1, 30)])
-    zipcode = StringField(_('Zipcode'), [Optional(), Length(1, 30)])
-    district = StringField(_('District/County'), [Optional(), Length(1, 30)])
-    country = StringField(_('Country'), [Optional(), Length(1, 30)])
-    active = BooleanField(_('Yes, Employee is active'))
+    active = BooleanField(_('Yes, Customer is active'))
 
 
 class ProductForm(ModelForm):
-
     name = StringField(_('Product name'), [DataRequired(), Length(1, 128)])
     category = StringField(_('Product Category'), [DataRequired(), Length(1, 32)])
     description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
