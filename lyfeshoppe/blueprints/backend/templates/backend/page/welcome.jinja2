@@ -80,10 +80,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        <div>
-                                                                            Country:
-                                                                            <select class="crs-country" data-region-id="one" data-default-value="United States"></select>
-                                                                        </div>
+                                                                        <span class="required"> * </span><strong>Country: </strong>
+                                                                        <select class="crs-country" data-region-id="one" data-default-value="United States"></select>
                                                                         <div style="display: none;">
                                                                             {% call f.form_group(form.country, css_class='sm-margin-bottom') %}
                                                                             {% endcall %}
@@ -95,9 +93,9 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="col-md-9">
-                                                                        <div>
-                                                                            State/Province: <select id="one" data-value="shortcode" data-default-value="California"></select>
-                                                                        </div>
+
+                                                                        <span class="required"> * </span><strong>State/Province: </strong>
+                                                                        <select id="one" data-value="shortcode" data-default-value="California"></select>
                                                                         <div style="display: none;">
                                                                             {% call f.form_group(form.state, css_class='sm-margin-bottom') %}
                                                                             {% endcall %}
