@@ -68,7 +68,7 @@
                                                         {{ items.sort('reservations') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('active') }}
+                                                        {{ items.sort('active_employee', 'Is Active') }}
                                                     </th>
                                                     <th id="bulk_actions" colspan="5">
                                                         <div class="form-inline">
@@ -103,12 +103,12 @@
                                                             {{ employee.reservations | length }}
                                                         </td>
                                                         <td>
-                                                            {% if employee.active %}
+                                                            {% if employee.active_employee %}
                                                                 {% set data = "label label-md label-success label" %}
                                                             {% else %}
                                                                 {% set data = "label label-md label-warning label" %}
                                                             {% endif %}
-                                                            <span class="{{ data }}"> {{ employee.active }} </span>
+                                                            <span class="{{ data }}"> {{ employee.active_employee }} </span>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
