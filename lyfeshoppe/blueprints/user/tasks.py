@@ -30,28 +30,3 @@ def deliver_password_reset_email(user_id, reset_token):
                           template='user/mail/password_reset', ctx=ctx)
 
     return None
-
-
-@celery.task()
-def deliver_new_user_email(user_id, password):
-    """
-    Send a new user e-mail to a user.
-
-    :param user_id: The user id
-    :type user_id: int
-    :param password: The password
-    :type password: str
-    :return: None if a user was not found
-    """
-    user = User.query.get(user_id)
-
-    if user is None:
-        return
-
-    ctx = {'user': user, 'password': password}
-
-    send_template_message(subject=_('New User email from LyfeShoppe'),
-                          recipients=[user.email],
-                          template='user/mail/new_user', ctx=ctx)
-
-    return None
