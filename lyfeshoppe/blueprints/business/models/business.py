@@ -253,22 +253,17 @@ class CustomerAndEmployeeMixin(object):
         return cls.query.filter(cls.user == user, cls.business_id == business_id).first()
 
     @classmethod
-    def get_or_create(cls, **kwargs):
+    def create(cls, **kwargs):
         business_id = kwargs.get('business_id')
-
-        user = User.find_by_identity(kwargs.get('email'))
-        if not user:
-            user = User.create(name=kwargs.get('name'), email=kwargs.get('email'))
+        user_id = kwargs.get('business_id')
 
         obj = cls.query.filter(
-                        cls.user == user, cls.business_id == business_id
+                        cls.user_id == user_id, cls.business_id == business_id
                     ).first()
         if obj:
             return (obj, False)  # Customer OR Employee exists & wasnt created
 
-        obj = cls()
-        obj.business_id = business_id
-        obj.user = user
+        obj = cls(business_id=business_id, user_id=user_id)
         obj = obj.save()
         return (obj, True)  # New Customer OR Employee was created
 
@@ -659,11 +654,7 @@ class Business(ResourceMixin, db.Model):
         business = business.save()
 
         # Create the first Admin employee for this newly created business
-        admin_employee_params = {
-            'name': current_user.name,
-            'email': current_user.email
-        }
-        Employee.get_or_create(business_id=business.id, **admin_employee_params)
+        Employee.create(business_id=business.id, user_id=current_user.id)
         return True
 
     def modify_from_form(self, form):
