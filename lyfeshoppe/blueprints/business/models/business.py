@@ -255,7 +255,7 @@ class CustomerAndEmployeeMixin(object):
     @classmethod
     def create(cls, **kwargs):
         business_id = kwargs.get('business_id')
-        user_id = kwargs.get('business_id')
+        user_id = kwargs.get('user_id')
 
         obj = cls.query.filter(
                         cls.user_id == user_id, cls.business_id == business_id
