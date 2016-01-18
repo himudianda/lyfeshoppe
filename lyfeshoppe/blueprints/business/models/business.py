@@ -714,5 +714,5 @@ class Business(ResourceMixin, db.Model):
         """
         Request a review
         """
-        from lyfeshoppe.blueprints.business.tasks import request_customer_review
+        from lyfeshoppe.blueprints.user.tasks import request_customer_review
         request_customer_review.delay(business_id, customer_id)
