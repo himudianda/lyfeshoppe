@@ -316,7 +316,7 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reservations = db.relationship(Reservation, backref='customer', passive_deletes=True)
     reviews = db.relationship(Review, backref='customer', passive_deletes=True)
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+    active_customer = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
 
@@ -354,7 +354,7 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     reservations = db.relationship(Reservation, backref='employee', passive_deletes=True)
     reviews = db.relationship(Review, backref='employee', passive_deletes=True)
 
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+    active_employee = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_employee_user_business_uc'), )
 
@@ -681,7 +681,7 @@ class Business(ResourceMixin, db.Model):
         return list(
                     Employee.query.filter(
                         Employee.id.in_([employee.id for employee in self.employees]),
-                        Employee.active
+                        Employee.active_employee
                     )
             )
 

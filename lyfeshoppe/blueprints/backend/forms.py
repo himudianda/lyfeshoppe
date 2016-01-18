@@ -89,11 +89,11 @@ class BusinessForm(ModelForm):
 
 class EmployeeForm(UserAccountForm):
     about = TextAreaField(_("About the Employee"), [Optional(), Length(3, 2048)])
-    active = BooleanField(_('Yes, Employee is active'))
+    active_employee = BooleanField(_('Yes, Employee is active'))
 
 
 class CustomerForm(UserAccountForm):
-    active = BooleanField(_('Yes, Customer is active'))
+    active_customer = BooleanField(_('Yes, Customer is active'))
 
 
 class ProductForm(ModelForm):
