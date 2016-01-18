@@ -54,7 +54,7 @@ def notify_business_create(business_id, user_id):
 
     ctx = {'user': user, 'business': business}
 
-    send_template_message(subject=_('Your new business ' + business.name + ' has been created'),
+    send_template_message(subject=_('Your business ' + business.name + ' has been created'),
                           recipients=[user.email, business.email],
                           template='mail/business/business_created', ctx=ctx)
 
@@ -81,7 +81,7 @@ def notify_customer_create(business_id, customer_id, owner_id):
 
     ctx = {'customer': customer, 'business': business, 'owner': owner}
 
-    send_template_message(subject=_('You are a priced customer at ' + business.name),
+    send_template_message(subject=_('Customer at ' + business.name),
                           recipients=[owner.email, business.email, customer.email],
                           template='mail/customer/customer_created', ctx=ctx)
 
