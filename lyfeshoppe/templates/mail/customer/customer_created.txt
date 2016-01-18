@@ -1,0 +1,17 @@
+Hello {{ customer.name }},
+    You have been added as a new customer of {{ business.name }} by its admin {{owner.name}}.
+
+You can now view your bookings and rate/review the service provided by {{business.name}}.
+You can also shop for unlimited free services & blow-out discounts on lifestyle products in your area.
+If you own OR want to start an online shop - its free and easy on LyfeShoppe {{ url_for('backend.businesses_new', _external=True) }}
+
+
+Your account is already created. You can login to LyfeShoppe using:
+1. Facebook: {{ url_for('user.oauth_authorize', provider='facebook', _external=True) }}
+2. Your email & password: {{ url_for('user.login', _external=True) }}
+    NOTE: Your password will be sent in a separate email for security reasons.
+
+Please invite your friends & get reward points to earn unlimited lifestyle services for life !
+
+Thanks,
+LyfeShoppe staff

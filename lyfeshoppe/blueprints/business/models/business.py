@@ -295,6 +295,7 @@ class CustomerAndEmployeeMixin(object):
         obj.business_id = business_id
         obj.user = user
         obj = obj.save()
+
         return (obj, True)  # New customer or employee was created
 
     def modify_from_form(self, form):
@@ -319,6 +320,14 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     active_customer = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_customer_user_business_uc'), )
+
+    @classmethod
+    def get_or_create_from_form(cls, business_id, form):
+        customer, created = super(Customer, cls).get_or_create_from_form(business_id, form)
+        if created:
+            from lyfeshoppe.blueprints.business.tasks import notify_customer_create
+            notify_customer_create.delay(business_id, customer.user.id, current_user.id)
+        return (customer, created)
 
 
 employee_product_relations = db.Table(

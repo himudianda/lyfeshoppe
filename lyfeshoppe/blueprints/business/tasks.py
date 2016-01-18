@@ -59,3 +59,30 @@ def notify_business_create(business_id, user_id):
                           template='mail/business/business_created', ctx=ctx)
 
     return None
+
+
+@celery.task()
+def notify_customer_create(business_id, customer_id, owner_id):
+    """
+    Notify when the business is created
+
+    :param user_id: The user id
+    :type user_id: int
+    :param reset_token: The reset token
+    :type reset_token: str
+    :return: None if a user was not found
+    """
+    business = Business.query.get(business_id)
+    customer = User.query.get(customer_id)
+    owner = User.query.get(owner_id)
+
+    if not business or not customer or not owner:
+        return
+
+    ctx = {'customer': customer, 'business': business, 'owner': owner}
+
+    send_template_message(subject=_('You are a priced customer at ' + business.name),
+                          recipients=[owner.email, business.email, customer.email],
+                          template='mail/customer/customer_created', ctx=ctx)
+
+    return None
