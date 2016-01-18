@@ -56,7 +56,8 @@ class UserForm(ModelForm):
         Length(1, 16),
         Regexp('^\w+$', message=username_message)
     ])
-    name = StringField(_('Full name'), [Optional(), Length(1, 128)])
+    first_name = StringField(_('First name'), [Optional(), Length(1, 128)])
+    last_name = StringField(_('Last name'), [Optional(), Length(1, 128)])
     role = SelectField(_('Privileges'), [DataRequired()],
                        choices=choices_from_dict(User.ROLE,
                                                  prepend_blank=False))
