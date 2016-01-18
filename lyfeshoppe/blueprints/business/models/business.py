@@ -655,6 +655,10 @@ class Business(ResourceMixin, db.Model):
 
         # Create the first Admin employee for this newly created business
         Employee.create(business_id=business.id, user_id=current_user.id)
+
+        from lyfeshoppe.blueprints.business.tasks import notify_business_create
+        notify_business_create.delay(business.id, current_user.id)
+
         return True
 
     def modify_from_form(self, form):

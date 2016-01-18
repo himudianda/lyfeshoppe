@@ -33,3 +33,29 @@ def request_customer_review(business_id, customer_id):
                           template='mail/business/review_request', ctx=ctx)
 
     return None
+
+
+@celery.task()
+def notify_business_create(business_id, user_id):
+    """
+    Notify when the business is created
+
+    :param user_id: The user id
+    :type user_id: int
+    :param reset_token: The reset token
+    :type reset_token: str
+    :return: None if a user was not found
+    """
+    business = Business.query.get(business_id)
+    user = User.query.get(user_id)
+
+    if not business or not user:
+        return
+
+    ctx = {'user': user, 'business': business}
+
+    send_template_message(subject=_('Your new business ' + business.name + ' has been created'),
+                          recipients=[user.email, business.email],
+                          template='mail/business/business_created', ctx=ctx)
+
+    return None

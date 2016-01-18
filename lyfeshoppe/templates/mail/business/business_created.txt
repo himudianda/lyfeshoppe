@@ -1,0 +1,31 @@
+Hello {{ user.name }},
+
+Your new shop {{business.name}} has been successfully created at LyfeShoppe.
+
+The dashboard for this business can be accessed at: 
+{{ url_for('backend.business_dashboard', id=business.id, _external=True) }}
+
+The store profile visible to customers is here:
+{{ url_for('backend.shop_details', id=business.id, _external=True) }}
+
+Please feel free to add the following to your online shop
+
+1. Services/Products you provide:
+    {{ url_for('backend.business_products', id=business.id, _external=True) }}
+
+2. Your Employees
+    {{ url_for('backend.business_employees', id=business.id, _external=True) }}
+
+3. Your Customers
+    {{ url_for('backend.business_customers', id=business.id, _external=True) }}
+
+4. Existing & Past Bookings
+    {{ url_for('backend.business_calendar', id=business.id, call="view", _external=True) }}
+
+
+Once you have added your Customers; you may also request them to rate/recommend your business.
+You can do that by clicking a single button !
+    {{ url_for('backend.business_customers', id=business.id, _external=True) }}
+
+Thanks,
+LyfeShoppe staff
