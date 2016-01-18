@@ -16,6 +16,7 @@ from lyfeshoppe.initialize import authentication, locale
 
 CELERY_TASK_LIST = [
     'lyfeshoppe.blueprints.user.tasks',
+    'lyfeshoppe.blueprints.business.tasks',
     'lyfeshoppe.blueprints.issue.tasks',
     'lyfeshoppe.blueprints.billing.tasks',
     'lyfeshoppe.blueprints.stream.tasks',
