@@ -326,7 +326,8 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
         customer, created = super(Customer, cls).get_or_create_from_form(business_id, form)
         if created:
             from lyfeshoppe.blueprints.business.tasks import notify_customer_create
-            notify_customer_create.delay(business_id, customer.user.id, current_user.id)
+            reset_token = customer.user.serialize_token()
+            notify_customer_create.delay(business_id, customer.user.id, current_user.id, reset_token)
         return (customer, created)
 
 

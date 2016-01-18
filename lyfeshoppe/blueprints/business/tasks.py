@@ -62,7 +62,7 @@ def notify_business_create(business_id, user_id):
 
 
 @celery.task()
-def notify_customer_create(business_id, customer_id, owner_id):
+def notify_customer_create(business_id, customer_id, owner_id, reset_token):
     """
     Notify when the business is created
 
@@ -79,7 +79,7 @@ def notify_customer_create(business_id, customer_id, owner_id):
     if not business or not customer or not owner:
         return
 
-    ctx = {'customer': customer, 'business': business, 'owner': owner}
+    ctx = {'customer': customer, 'business': business, 'owner': owner, 'reset_token': reset_token}
 
     send_template_message(subject=_('Customer at ' + business.name),
                           recipients=[owner.email, business.email, customer.email],
