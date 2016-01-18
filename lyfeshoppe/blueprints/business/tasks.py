@@ -3,7 +3,7 @@ from flask_babel import lazy_gettext as _
 from lyfeshoppe.lib.flask_mailplus import send_template_message
 from lyfeshoppe.app import create_celery_app
 from lyfeshoppe.blueprints.user.models import User
-from lyfeshoppe.blueprints.business.models.business import Business, Customer
+from lyfeshoppe.blueprints.business.models.business import Business, Customer, Employee
 
 celery = create_celery_app()
 
@@ -84,5 +84,32 @@ def notify_customer_create(business_id, customer_id, owner_id, reset_token):
     send_template_message(subject=_('Customer at ' + business.name),
                           recipients=[owner.email, business.email, customer.email],
                           template='mail/customer/customer_created', ctx=ctx)
+
+    return None
+
+
+@celery.task()
+def notify_employee_create(business_id, employee_id, owner_id, reset_token):
+    """
+    Notify when the business is created
+
+    :param user_id: The user id
+    :type user_id: int
+    :param reset_token: The reset token
+    :type reset_token: str
+    :return: None if a user was not found
+    """
+    business = Business.query.get(business_id)
+    employee = User.query.get(employee_id)
+    owner = User.query.get(owner_id)
+
+    if not business or not employee or not owner:
+        return
+
+    ctx = {'employee': employee, 'business': business, 'owner': owner, 'reset_token': reset_token}
+
+    send_template_message(subject=_('Employee at ' + business.name),
+                          recipients=[owner.email, business.email, employee.email],
+                          template='mail/employee/employee_created', ctx=ctx)
 
     return None

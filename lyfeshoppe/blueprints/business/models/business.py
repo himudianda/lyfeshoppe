@@ -368,6 +368,15 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
 
     __table_args__ = (UniqueConstraint('user_id', 'business_id', name='_employee_user_business_uc'), )
 
+    @classmethod
+    def get_or_create_from_form(cls, business_id, form):
+        employee, created = super(Employee, cls).get_or_create_from_form(business_id, form)
+        if created:
+            from lyfeshoppe.blueprints.business.tasks import notify_employee_create
+            reset_token = employee.user.serialize_token()
+            notify_employee_create.delay(business_id, employee.user.id, current_user.id, reset_token)
+        return (employee, created)
+
     @property
     def total_sales(self):
         total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
