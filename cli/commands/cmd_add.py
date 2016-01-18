@@ -218,7 +218,7 @@ def employees():
                 'business_id': business.id,
                 'user_id': user.id,
                 'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
-                'active': '1'
+                'active_employee': '1'
             }
 
             employee = Employee(**params)
@@ -277,7 +277,7 @@ def customers():
             params = {
                 'business_id': business.id,
                 'user_id': user.id,
-                'active': '1'
+                'active_customer': '1'
             }
 
             customer = Customer(**params)
