@@ -8,10 +8,10 @@ If you own OR want to start an online shop - its free and easy on LyfeShoppe:
     {{ url_for('backend.businesses_new', _external=True) }}
 
 
-Your account is already created. You can login to LyfeShoppe using:
+Your account is already created. You can login to LyfeShoppe using either:
 
 1. Facebook: {{ url_for('user.oauth_authorize', provider='facebook', _external=True) }}
-
+    OR
 2. Email & Password. Click the link below to create your password
     Your registered Email: {{employee.email}}
     Password reset link: {{ url_for('user.password_reset', reset_token=reset_token, _external=True) }}
