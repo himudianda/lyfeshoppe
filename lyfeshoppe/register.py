@@ -14,7 +14,6 @@ from lyfeshoppe.blueprints.backend import backend
 from lyfeshoppe.blueprints.page import page
 from lyfeshoppe.blueprints.user import user
 from lyfeshoppe.blueprints.issue import issue
-from lyfeshoppe.blueprints.stream import stream
 from lyfeshoppe.blueprints.billing.views.billing import billing
 from lyfeshoppe.blueprints.billing.views.stripe_webhook import stripe_webhook
 from lyfeshoppe.extensions import (
@@ -40,7 +39,6 @@ FLASK_BLUEPRINTS = [
     user,
     issue,
     billing,
-    stream,
     stripe_webhook
 ]
 

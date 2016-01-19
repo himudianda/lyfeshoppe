@@ -15,15 +15,6 @@ redis:
   volumes:
     - ~/.docker-volumes/lyfeshoppe/redis/data:/var/lib/redis/data
 
-faye:
-  image: nickjj/faye:latest
-  links:
-    - redis
-  ports:
-    - 4242:4242
-  environment:
-    FAYE_PUSH_TOKEN: 123notsecure
-
 cadvisor:
   image: google/cadvisor:latest
   volumes:
@@ -44,7 +35,6 @@ cadvisor:
 #  links:
 #    - redis
 #    - postgres
-#    - faye
 #  ports:
 #    - 8000:8000
 #

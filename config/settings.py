@@ -176,11 +176,3 @@ OAUTH_CREDENTIALS = {
         'secret': None
     }
 }
-
-# Broadcast (websocket server) settings.
-#
-# NOTE: you should NOT supply the PUSH_TOKEN/BROADCAST_INTERNAL_URL here,
-# put them in an instance config file, such as: instance/settings.py
-BROADCAST_PUBLIC_URL = 'http://localhost:4242/stream'
-BROADCAST_INTERNAL_URL = None
-BROADCAST_PUSH_TOKEN = None
