@@ -8,6 +8,7 @@ from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import URLSafeTimedSerializer, TimedJSONWebSignatureSerializer
 from sqlalchemy import or_
+from flask_login import current_user
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from lyfeshoppe.blueprints.billing.models.credit_card import CreditCard
@@ -47,7 +48,13 @@ class Referral(ResourceMixin, db.Model):
 
         ref_user = User.create(**kwargs)
         referral = cls(user_id=user_id, reference_id=ref_user.id)
-        referral.save()
+        referral = referral.save()
+
+        # Notify
+        from lyfeshoppe.blueprints.user.tasks import deliver_referral_email
+        reset_token = ref_user.serialize_token()
+        deliver_referral_email.delay(ref_user.id, current_user.id, reset_token)
+
         return referral, "Referral for {0} was successfully created".format(kwargs.get('email', ""))
 
 

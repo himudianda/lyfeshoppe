@@ -276,11 +276,12 @@ def referrals_invite():
             email = request.form.get('email_{0}'.format(i+1))
             gender = request.form.get('gender_{0}'.format(i+1))
 
-            Referral.create(
+            referral, status = Referral.create(
                 user_id=current_user.id, email=email,
                 first_name=fname, last_name=lname, gender=gender
             )
-        flash(_('Referrals have been created successfully.'), 'success')
+
+            flash(_(status), 'success')
         return redirect(url_for('backend.referrals'))
 
     return render_template('backend/shop/referral_invite.jinja2', form=form, **business_categories)

@@ -325,6 +325,7 @@ class Customer(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     def get_or_create_from_form(cls, business_id, form):
         customer, created = super(Customer, cls).get_or_create_from_form(business_id, form)
         if created:
+            # Notify
             from lyfeshoppe.blueprints.business.tasks import notify_customer_create
             reset_token = customer.user.serialize_token()
             notify_customer_create.delay(business_id, customer.user.id, current_user.id, reset_token)
@@ -372,6 +373,7 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
     def get_or_create_from_form(cls, business_id, form):
         employee, created = super(Employee, cls).get_or_create_from_form(business_id, form)
         if created:
+            # Notify
             from lyfeshoppe.blueprints.business.tasks import notify_employee_create
             reset_token = employee.user.serialize_token()
             notify_employee_create.delay(business_id, employee.user.id, current_user.id, reset_token)
