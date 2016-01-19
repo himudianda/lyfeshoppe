@@ -45,7 +45,7 @@ class WelcomeForm(ModelForm):
     zipcode = StringField(_('Zip/Post Code'), [Optional(), Length(1, 30)])
     metro = SelectField(_('Metro Area'), [DataRequired()],
                         choices=choices_from_dict(Business.METRO, prepend_blank=False))
-    phone = StringField(_('Phone number'), [Optional(), Length(1, 20)])
+    phone = StringField(_('Phone *with Country code'), [Optional(), Length(1, 20)])
     gender = SelectField(_('Gender'), [DataRequired()], choices=(('male', "Male"), ('female', "Female")))
 
 
