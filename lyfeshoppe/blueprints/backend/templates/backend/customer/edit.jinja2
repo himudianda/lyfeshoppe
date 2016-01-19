@@ -18,6 +18,7 @@
 
 {% block footer_scripts %}
     <script src="{{ url_for('static', filename='common/js/jquery.crs.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         // The country & states select dropdown must show the values thats currently set
@@ -33,5 +34,9 @@
         function stateSelect() {
             $('#state').val($('#one').val());
         }
+        // Input mask for phone number implemented
+        $("#phone").inputmask("mask", {
+            "mask": "+999(9999999999)"
+        });
     </script>
 {% endblock %}

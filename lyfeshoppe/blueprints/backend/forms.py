@@ -68,7 +68,7 @@ class BusinessForm(ModelForm):
     closing_time = StringField(_('Closing time'), [DataRequired()], widget=DateTimePickerWidget())
     weekends_open = BooleanField(_('Yes, Open on weekends'))
 
-    phone = StringField(_('Business Phone number'), [DataRequired(), Length(1, 12)])
+    phone = StringField(_('Business Phone *with Country code'), [DataRequired(), Length(1, 20)])
     website = StringField(_('Website'), [Optional(), Length(0, 32)])
     twitter = StringField(_('Twitter Profile'), [Optional(), Length(0, 64)])
     facebook = StringField(_('Facebook Profile'), [Optional(), Length(0, 64)])
