@@ -7,7 +7,7 @@ import pytz
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import URLSafeTimedSerializer, TimedJSONWebSignatureSerializer
-from sqlalchemy import or_
+from sqlalchemy import or_, UniqueConstraint
 from flask_login import current_user
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
@@ -34,8 +34,10 @@ class Referral(ResourceMixin, db.Model):
     reference_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
     reference = db.relationship("User", foreign_keys=[reference_id])
 
+    __table_args__ = (UniqueConstraint('user_id', 'reference_id', name='_referrer_reference_uc'), )
+
     @classmethod
-    def create(cls, user_id, **kwargs):  # reference_email, reference_name):
+    def create(cls, user_id, **kwargs):
         """
         Create a referral instance.
 
@@ -44,9 +46,21 @@ class Referral(ResourceMixin, db.Model):
 
         ref_user = User.find_by_identity(kwargs.get('email', ""))
         if ref_user:
-            return None, "{0} already exists. Referral cannot be created".format(kwargs.get('email', ""))
+            if ref_user.sign_in_count >= 5:
+                # If the referred user is already active on LyfeShoppe (i.e >= 5 sign ins)
+                # then dont send another invite
+                return None, "{0} is an active LyfeShoppe user. Referral cannot be created".format(
+                                                                                kwargs.get('email', "")
+                                                                            )
+            my_refs = cls.query.filter(cls.reference_id == ref_user.id, cls.user_id == user_id)
+            if my_refs:
+                # if this user has already referred a reference before - dont let him refer again
+                return None, "You have already referred {0}. Referral cannot be created".format(
+                                                                                kwargs.get('email', "")
+                                                                            )
+        else:
+            ref_user = User.create(**kwargs)
 
-        ref_user = User.create(**kwargs)
         referral = cls(user_id=user_id, reference_id=ref_user.id)
         referral = referral.save()
 
@@ -345,6 +359,18 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         serializer = TimedJSONWebSignatureSerializer(private_key, expiration)
         return serializer.dumps({'user_email': self.email}).decode('utf-8')
+
+    def give_referral_points(self):
+        refs = Referral.query.filter(Referral.reference_id == self.id)
+        if not refs:
+            return  # No one referred this user
+        for ref in refs:
+            # If this user can signed in even once - award points to all
+            # those who referred him
+            if ref.status == 'pending' and self.sign_in_count >= 1:
+                ref.status = 'accepted'
+                ref.user.points += 100
+                ref.save()
 
     def update_activity_tracking(self, ip_address):
         """

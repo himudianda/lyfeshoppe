@@ -93,6 +93,7 @@ def login():
             # 3) Add a checkbox to the login form with the id/name 'remember'
             if login_user(u, remember=True):
                 u.update_activity_tracking(request.remote_addr)
+                u.give_referral_points()
 
                 # Handle optionally redirecting to the next URL safely.
                 next_url = request.form.get('next')

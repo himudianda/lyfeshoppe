@@ -121,6 +121,7 @@ def users():
             'password': 'password',
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
+            'phone': fake.phone_number(),
             'locale': random.choice(ACCEPT_LANGUAGES)
         }
         params.update(generate_user_address())
@@ -142,7 +143,11 @@ def referrals():
         for i in xrange(num_of_referrals):
             reference = random.choice(User.query.filter(User.id != user.id).all())
             referral = Referral(user=user, reference=reference)
-            referral.save()
+            try:
+                referral.save()
+            except:
+                db.session.rollback()
+                continue
 
     _log_status(Referral.query.count(), "referrals")
 
