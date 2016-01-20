@@ -157,17 +157,6 @@ STRIPE_PLANS = {
     }
 }
 
-# Twitter settings.
-#
-# API keys, NOTE: you should NOT supply them in this config, put them
-# in an instance config file, such as: instance/settings.py
-#
-# They are only listed below to act as documentation.
-TWITTER_CONSUMER_KEY = None
-TWITTER_CONSUMER_SECRET = None
-TWITTER_ACCESS_TOKEN = None
-TWITTER_ACCESS_SECRET = None
-
 # Facebook settings.
 #
 OAUTH_CREDENTIALS = {
