@@ -161,11 +161,11 @@ def shop_booking(username, product_id):
                            **business_categories)
 
 
-@backend.route('/shops/<string:id>/employee/<string:employee_id>/review', methods=['GET', 'POST'])
-def shop_reviews_new(id, employee_id):
-    business = Business.query.get(id)
-    employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == id).first()
-    customer = Customer.query.filter(Customer.user_id == current_user.id, Customer.business_id == id).first()
+@backend.route('/shops/<string:username>/employee/<string:employee_id>/review', methods=['GET', 'POST'])
+def shop_reviews_new(username, employee_id):
+    business = Business.find_by_identity(username)
+    employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == business.id).first()
+    customer = Customer.query.filter(Customer.user_id == current_user.id, Customer.business_id == business.id).first()
 
     if not business or not employee:
         flash(_('Business or Employee does not exist.'), 'error')
@@ -178,7 +178,7 @@ def shop_reviews_new(id, employee_id):
     form = ReviewForm()
     if form.is_submitted() and form.validate_on_submit():
 
-        if Review.create_from_form(id, employee_id, customer.id, form):
+        if Review.create_from_form(business.id, employee_id, customer.id, form):
             flash(_('Review has been created successfully.'), 'success')
             return redirect(url_for('backend.shop_details', username=business.username))
 

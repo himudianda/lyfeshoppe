@@ -2,7 +2,7 @@
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'backend.shop_reviews_new' %}
-  {% set form_kwargs = {'id': business.id, 'employee_id': employee.id} %}
+  {% set form_kwargs = {'username': business.username, 'employee_id': employee.id} %}
   {% set legend = 'Write a new Review' %}
   {% set button = _('Add') %}
 {% else %}

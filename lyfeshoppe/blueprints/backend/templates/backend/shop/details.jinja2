@@ -177,7 +177,7 @@
                                                                                     <li>
                                                                                         </br>
                                                                                         <div class="col-md-1">
-                                                                                            <a class="btn btn-default yellow" href="{{ url_for('backend.shop_reviews_new', id=business.id, employee_id=employee.id) }}">Write a Review</a>
+                                                                                            <a class="btn btn-default yellow" href="{{ url_for('backend.shop_reviews_new', username=business.username, employee_id=employee.id) }}">Write a Review</a>
                                                                                         </div>
                                                                                     </li>
                                                                                 </ul>
@@ -201,7 +201,7 @@
                                                                             {% if not employee.reviews | length %}
                                                                                 <div class="col-md-12">
                                                                                     No reviews exist for {{employee.user.name}}.
-                                                                                    <span><a class="btn btn-outline btn-circle btn-sm red" href="{{ url_for('backend.shop_reviews_new', id=business.id, employee_id=employee.id) }}"><i class="fa fa-edit"></i>Write review now.</a></span>
+                                                                                    <span><a class="btn btn-outline btn-circle btn-sm red" href="{{ url_for('backend.shop_reviews_new', username=business.username, employee_id=employee.id) }}"><i class="fa fa-edit"></i>Write review now.</a></span>
                                                                                 </div>
                                                                             {% else %}
                                                                                 {% for review in employee.reviews %}
