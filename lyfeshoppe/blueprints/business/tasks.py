@@ -9,7 +9,7 @@ celery = create_celery_app()
 
 
 @celery.task()
-def request_customer_review(business_id, customer_id):
+def request_customer_review(username, customer_id):
     """
     Send a customer review request for business
 
@@ -19,7 +19,7 @@ def request_customer_review(business_id, customer_id):
     :type reset_token: str
     :return: None if a user was not found
     """
-    business = Business.query.get(business_id)
+    business = Business.find_by_identity(username)
     customer = Customer.query.get(customer_id)
     user = User.query.get(customer.user.id)
 

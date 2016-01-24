@@ -11,8 +11,6 @@ def get_dashboard_url():
     elif current_user.role == "member":
         if current_user.num_of_businesses == 0:
             return url_for('backend.shops_list')
-        elif current_user.num_of_businesses == 1:
-            return url_for('backend.business_dashboard', id=current_user.id_of_businesses[0])
         else:
             # If user has multiple businesses on lyfeshoppe
             return url_for('backend.businesses')

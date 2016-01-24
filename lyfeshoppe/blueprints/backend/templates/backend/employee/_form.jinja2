@@ -2,12 +2,12 @@
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'backend.business_employees_new' %}
-  {% set form_kwargs = {'id': business.id} %}
+  {% set form_kwargs = {'username': business.username} %}
   {% set legend = 'Add a new Employee' %}
   {% set button = _('Add') %}
 {% else %}
   {% set endpoint = 'backend.business_employee_edit' %}
-  {% set form_kwargs = {'id': business.id, 'employee_id': employee.id} %}
+  {% set form_kwargs = {'username': business.username, 'employee_id': employee.id} %}
   {% set legend = 'Update this employee' %}
   {% set button = _('Save') %}
 {% endif %}

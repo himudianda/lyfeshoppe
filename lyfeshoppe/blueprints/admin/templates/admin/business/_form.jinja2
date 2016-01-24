@@ -7,7 +7,7 @@
   {% set button = _('Add') %}
 {% else %}
   {% set endpoint = 'admin.businesses_edit' %}
-  {% set form_kwargs = {'id': business.id} %}
+  {% set form_kwargs = {'username': business.username} %}
   {% set legend = 'Update this business' %}
   {% set button = _('Save') %}
 {% endif %}

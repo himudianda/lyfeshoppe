@@ -74,12 +74,12 @@
                                                 {% for business in businesses.items %}
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_edit', id=business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <a href="{{ url_for('backend.business_edit', username=business.username) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                                 <i class="fa fa-edit"></i> Edit
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_dashboard', id=business.id) }}">
+                                                            <a href="{{ url_for('backend.business_dashboard', username=business.username) }}">
                                                                 {{ business.name }}
                                                             </a>
                                                         </td>
@@ -100,7 +100,7 @@
                                                             {{ business.email }}
                                                         </td>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_dashboard', id=business.id) }}" class="btn btn-outline btn-circle red btn-sm blue">
+                                                            <a href="{{ url_for('backend.business_dashboard', username=business.username) }}" class="btn btn-outline btn-circle red btn-sm blue">
                                                                 <i class="fa fa-share"></i> Dashboard
                                                             </a>
 

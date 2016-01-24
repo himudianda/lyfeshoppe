@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set form_kwargs = {'id': business.id} %}
+    {% set form_kwargs = {'username': business.username} %}
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="desc"> Total Reservations </div>
                         </div>
-                        <a class="more" href="{{ url_for('backend.business_calendar', id=business.id, call='view') }}"> View more
+                        <a class="more" href="{{ url_for('backend.business_calendar', username=business.username, call='view') }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -44,7 +44,7 @@
                                 $<span data-counter="counterup" data-value="{{ business.total_sales }}">0</span> </div>
                             <div class="desc"> Total Sales </div>
                         </div>
-                        <a class="more" href="{{ url_for('backend.business_calendar', id=business.id, call='view') }}"> View more
+                        <a class="more" href="{{ url_for('backend.business_calendar', username=business.username, call='view') }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="desc"> Number of Customers </div>
                         </div>
-                        <a class="more" href="{{ url_for('backend.business_customers', id=business.id) }}"> View more
+                        <a class="more" href="{{ url_for('backend.business_customers', username=business.username) }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -81,7 +81,7 @@
                                 }
                             <div class="desc"> Avg. Transaction Size </div>
                         </div>
-                        <a class="more" href="{{ url_for('backend.business_products', id=business.id) }}"> View more
+                        <a class="more" href="{{ url_for('backend.business_products', username=business.username) }}"> View more
                             <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                     </div>
@@ -196,7 +196,7 @@
                                             <td class="fit">
                                                 <img class="user-pic rounded" src="{{ url_for('static', filename='common/images/anonymous_user_small.png') }}"> </td>
                                             <td>
-                                                <a href="{{ url_for('backend.business_employee_edit', id=business.id, employee_id=employee.id) }}" class="primary-link">{{employee.user.name}}</a>
+                                                <a href="{{ url_for('backend.business_employee_edit', username=business.username, employee_id=employee.id) }}" class="primary-link">{{employee.user.name}}</a>
                                             </td>
                                             <td> ${{employee.total_sales}} </td>
                                             <td> {{employee.reservations|length}} </td>
@@ -277,7 +277,7 @@
                             </div>
                             <div class="panel panel-default">
                               <div class="panel-heading">
-                                {% set form_kwargs = {'id': business.id, 'call':"view"} %}
+                                {% set form_kwargs = {'username': business.username, 'call':"view"} %}
                                 <a href="{{ url_for('backend.business_calendar', **form_kwargs) }}">
                                     Reservations
                                 </a>

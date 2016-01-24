@@ -23,7 +23,7 @@
                         <div class="modal-body">
 
                             {% set endpoint = 'backend.business_calendar' %}
-                            {% set form_kwargs = {'id': business.id, 'call': 'add'} %}
+                            {% set form_kwargs = {'username': business.username, 'call': 'add'} %}
                             {% set button = _('Create') %}
 
                             <!-- Bootstrap Modal that opens for creating a Reservation -->
@@ -60,7 +60,7 @@
                                                             </select>
                                                             </br>
                                                             {{_('New Customer?')}}
-                                                            <a href="{{ url_for('backend.business_customers_new', id=business.id) }}"
+                                                            <a href="{{ url_for('backend.business_customers_new', username=business.username) }}"
                                                                 class="green">
                                                                     {{ _(' First Register here.') }}
                                                             </a>
@@ -145,7 +145,7 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id, call=view) }}"
+                                                                    <a href="{{ url_for('backend.business_calendar', username=business.username, call=view) }}"
                                                                        class="btn red btn-block">
                                                                       {{ _('Cancel') }}
                                                                     </a>
@@ -182,7 +182,7 @@
                         <div class="modal-body">
 
                             {% set endpoint = 'backend.business_calendar' %}
-                            {% set form_kwargs = {'id': business.id, 'call': 'edit'} %}
+                            {% set form_kwargs = {'username': business.username, 'call': 'edit'} %}
                             {% set button = _('Save') %}
 
                             <!-- Bootstrap Modal that opens for modifying a Reservation -->
@@ -280,7 +280,7 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="visible-xs visible-sm sm-margin-top"></div>
-                                                                    <a href="{{ url_for('backend.business_calendar', id=business.id, call='view') }}"
+                                                                    <a href="{{ url_for('backend.business_calendar', username=business.username, call='view') }}"
                                                                        class="btn red btn-block">
                                                                       {{ _('Cancel') }}
                                                                     </a>

@@ -122,7 +122,7 @@
                                     </div>
                                 {% elif current_user.num_of_businesses == 1 %}
                                     <div class="col-sm-6 margin-bottom-30">
-                                        <a class="webapp-btn" href="{{ url_for('backend.business_dashboard', id=current_user.id_of_businesses[0]) }}">
+                                        <a class="webapp-btn" href="{{ url_for('backend.businesses') }}">
                                             <h3>Your Shop</h3>
                                             <p>You have {{ current_user.num_of_businesses }} shop on LyfeShoppe</p>
                                         </a>

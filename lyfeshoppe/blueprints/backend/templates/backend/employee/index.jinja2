@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set form_kwargs = {'id': business.id} %}
+    {% set form_kwargs = {'username': business.username} %}
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -86,7 +86,7 @@
                                                             <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ employee.id }}">
                                                         </td>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_employee_edit', id=business.id, employee_id=employee.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <a href="{{ url_for('backend.business_employee_edit', username=business.username, employee_id=employee.id) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                                 <i class="fa fa-edit"></i> Edit
                                                             </a>
                                                         </td>

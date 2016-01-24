@@ -373,14 +373,14 @@ def is_staff_authorized(func):
     from functools import wraps
 
     @wraps(func)
-    def func_wrapper(id, **kwargs):
-        business = Business.query.get(id)
+    def func_wrapper(username, **kwargs):
+        business = Business.find_by_identity(username)
         if not business:
             flash(_('Invalid Business ID provided.'), 'error')
             return redirect(url_for('backend.businesses'))
 
         if current_user.role == "admin":
-            return func(id, **kwargs)
+            return func(username, **kwargs)
 
         employee = Employee.query.filter(
                         (Employee.user_id == current_user.id) & (Employee.business_id == business.id)
@@ -401,7 +401,7 @@ def is_staff_authorized(func):
                     ).first()
             if not emp:
                 flash(_('You do not have permission to do that.'), 'error')
-                return redirect(url_for('backend.business_employees', id=id))
+                return redirect(url_for('backend.business_employees', username=username))
 
         # For API editing product data
         if kwargs.get('product_id', None):
@@ -410,16 +410,16 @@ def is_staff_authorized(func):
                     ).first()
             if not product:
                 flash(_('You do not have permission to do that.'), 'error')
-                return redirect(url_for('backend.business_products', id=id))
+                return redirect(url_for('backend.business_products', username=username))
 
-        return func(id, **kwargs)
+        return func(username, **kwargs)
     return func_wrapper
 
 
-@backend.route('/businesses/<int:id>')
+@backend.route('/businesses/<string:username>')
 @is_staff_authorized
-def business_dashboard(id):
-    business = Business.query.get(id)
+def business_dashboard(username):
+    business = Business.find_by_identity(username)
 
     group_and_count_employees = BusinessDashboard.group_and_count_employees(business)
     group_and_count_products = BusinessDashboard.group_and_count_products(business)
@@ -432,10 +432,10 @@ def business_dashboard(id):
                            business=business)
 
 
-@backend.route('/businesses/edit/<int:id>', methods=['GET', 'POST'])
+@backend.route('/businesses/edit/<string:username>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_edit(id):
-    business = Business.query.get(id)
+def business_edit(username):
+    business = Business.find_by_identity(username)
     form = BusinessForm(obj=business)
 
     if form.validate_on_submit():
@@ -449,11 +449,11 @@ def business_edit(id):
 
 
 # Business Employees -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/employees', defaults={'page': 1})
-@backend.route('/businesses/<int:id>/employees/page/<int:page>')
+@backend.route('/businesses/<string:username>/employees', defaults={'page': 1})
+@backend.route('/businesses/<string:username>/employees/page/<int:page>')
 @is_staff_authorized
-def business_employees(id, page):
-    business = Business.query.get(id)
+def business_employees(username, page):
+    business = Business.find_by_identity(username)
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
@@ -473,9 +473,9 @@ def business_employees(id, page):
                            business=business)
 
 
-@backend.route('/businesses/<int:id>/employees/bulk_deactivate', methods=['POST'])
+@backend.route('/businesses/<string:username>/employees/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
-def business_employees_bulk_deactivate(id):
+def business_employees_bulk_deactivate(username):
     form = BulkDeleteForm()
 
     if form.validate_on_submit():
@@ -494,32 +494,32 @@ def business_employees_bulk_deactivate(id):
     else:
         flash(_('No employees were deactivated, something went wrong.'), 'error')
 
-    return redirect(url_for('backend.business_employees', id=id))
+    return redirect(url_for('backend.business_employees', username=username))
 
 
-@backend.route('/businesses/<int:id>/employees/new', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/employees/new', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_employees_new(id):
-    business = Business.query.get(id)
+def business_employees_new(username):
+    business = Business.find_by_identity(username)
     employee = Employee()
     form = EmployeeForm(obj=employee)
 
     if form.validate_on_submit():
-        employee, created = Employee.get_or_create_from_form(business_id=id, form=form)
+        employee, created = Employee.get_or_create_from_form(business_id=business.id, form=form)
         if created:
             flash(_('Employee has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_employees', id=id))
+            return redirect(url_for('backend.business_employees', username=username))
         else:
             flash(_('Employee already exists.'), 'success')
-            return redirect(url_for('backend.business_employees', id=id))
+            return redirect(url_for('backend.business_employees', username=username))
 
     return render_template('backend/employee/new.jinja2', form=form, employee=employee, business=business)
 
 
-@backend.route('/businesses/<int:id>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_employee_edit(id, employee_id):
-    business = Business.query.get(id)
+def business_employee_edit(username, employee_id):
+    business = Business.find_by_identity(username)
     employee = Employee.query.get(employee_id)
 
     form_data = dict()
@@ -529,17 +529,17 @@ def business_employee_edit(id, employee_id):
     if form.is_submitted() and form.validate_on_submit():
         if employee.modify_from_form(form):
             flash(_('Employee has been modified successfully.'), 'success')
-            return redirect(url_for('backend.business_employees', id=id))
+            return redirect(url_for('backend.business_employees', username=username))
 
     return render_template('backend/employee/edit.jinja2', form=form, business=business, employee=employee)
 
 
 # Business Customers -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/customers', defaults={'page': 1})
-@backend.route('/businesses/<int:id>/customers/page/<int:page>')
+@backend.route('/businesses/<string:username>/customers', defaults={'page': 1})
+@backend.route('/businesses/<string:username>/customers/page/<int:page>')
 @is_staff_authorized
-def business_customers(id, page):
-    business = Business.query.get(id)
+def business_customers(username, page):
+    business = Business.find_by_identity(username)
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
@@ -559,9 +559,9 @@ def business_customers(id, page):
                            business=business)
 
 
-@backend.route('/businesses/<int:id>/customers/bulk_deactivate', methods=['POST'])
+@backend.route('/businesses/<string:username>/customers/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
-def business_customers_bulk_deactivate(id):
+def business_customers_bulk_deactivate(username):
     form = BulkDeleteForm()
 
     if form.validate_on_submit():
@@ -580,32 +580,32 @@ def business_customers_bulk_deactivate(id):
     else:
         flash(_('No customers were deactivated, something went wrong.'), 'error')
 
-    return redirect(url_for('backend.business_customers', id=id))
+    return redirect(url_for('backend.business_customers', username=username))
 
 
-@backend.route('/businesses/<int:id>/customers/new', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/customers/new', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_customers_new(id):
-    business = Business.query.get(id)
+def business_customers_new(username):
+    business = Business.find_by_identity(username)
     customer = Customer()
     form = CustomerForm(obj=customer)
 
     if form.validate_on_submit():
-        customer, created = Customer.get_or_create_from_form(business_id=id, form=form)
+        customer, created = Customer.get_or_create_from_form(business_id=business.id, form=form)
         if created:
             flash(_('Customer has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_customers', id=id))
+            return redirect(url_for('backend.business_customers', username=username))
         else:
             flash(_('Customer already exists.'), 'success')
-            return redirect(url_for('backend.business_customers', id=id))
+            return redirect(url_for('backend.business_customers', username=username))
 
     return render_template('backend/customer/new.jinja2', form=form, customer=customer, business=business)
 
 
-@backend.route('/businesses/<int:id>/customers/edit/<int:customer_id>', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/customers/edit/<int:customer_id>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_customer_edit(id, customer_id):
-    business = Business.query.get(id)
+def business_customer_edit(username, customer_id):
+    business = Business.find_by_identity(username)
     customer = Customer.query.get(customer_id)
 
     form_data = dict()
@@ -615,26 +615,26 @@ def business_customer_edit(id, customer_id):
     if form.is_submitted() and form.validate_on_submit():
         if customer.modify_from_form(form):
             flash(_('Customer has been modified successfully.'), 'success')
-            return redirect(url_for('backend.business_customers', id=id))
+            return redirect(url_for('backend.business_customers', username=username))
 
     return render_template('backend/customer/edit.jinja2', form=form, business=business, customer=customer)
 
 
-@backend.route('/businesses/<int:id>/customer/<int:customer_id>/request-review', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/customer/<int:customer_id>/request-review', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_customer_request_review(id, customer_id):
-    Business.request_a_review(id, customer_id)
+def business_customer_request_review(username, customer_id):
+    Business.request_a_review(username, customer_id)
 
     flash(_('Your request has been sent.'), 'success')
-    return redirect(url_for('backend.business_customers', id=id))
+    return redirect(url_for('backend.business_customers', username=username))
 
 
 # Business Products -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/products', defaults={'page': 1})
-@backend.route('/businesses/<int:id>/products/page/<int:page>')
+@backend.route('/businesses/<string:username>/products', defaults={'page': 1})
+@backend.route('/businesses/<string:username>/products/page/<int:page>')
 @is_staff_authorized
-def business_products(id, page):
-    business = Business.query.get(id)
+def business_products(username, page):
+    business = Business.find_by_identity(username)
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
@@ -654,9 +654,9 @@ def business_products(id, page):
                            business=business)
 
 
-@backend.route('/businesses/<int:id>/products/bulk_deactivate', methods=['POST'])
+@backend.route('/businesses/<string:username>/products/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
-def business_products_bulk_deactivate(id):
+def business_products_bulk_deactivate(username):
     form = BulkDeleteForm()
 
     if form.validate_on_submit():
@@ -675,45 +675,45 @@ def business_products_bulk_deactivate(id):
     else:
         flash(_('No products were deactivated, something went wrong.'), 'error')
 
-    return redirect(url_for('backend.business_products', id=id))
+    return redirect(url_for('backend.business_products', username=username))
 
 
-@backend.route('/businesses/<int:id>/products/new', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/products/new', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_products_new(id):
-    business = Business.query.get(id)
+def business_products_new(username):
+    business = Business.find_by_identity(username)
     product = Product()
     form = ProductForm(obj=product)
 
     if form.validate_on_submit():
-        if Product.create_from_form(business_id=id, form=form):
+        if Product.create_from_form(business_id=business.id, form=form):
             flash(_('Product has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_products', id=id))
+            return redirect(url_for('backend.business_products', username=username))
 
     return render_template('backend/product/new.jinja2', form=form, product=product, business=business)
 
 
-@backend.route('/businesses/<int:id>/products/edit/<int:product_id>', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/products/edit/<int:product_id>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_product_edit(id, product_id):
-    business = Business.query.get(id)
+def business_product_edit(username, product_id):
+    business = Business.find_by_identity(username)
     product = Product.query.get(product_id)
     form = ProductForm(obj=product)
 
     if form.is_submitted() and form.validate_on_submit():
         if product.modify_from_form(form):
             flash(_('Product has been modified successfully.'), 'success')
-            return redirect(url_for('backend.business_products', id=id))
+            return redirect(url_for('backend.business_products', username=username))
 
     return render_template('backend/product/edit.jinja2', form=form, business=business, product=product)
 
 
 # Business Products -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/reviews', defaults={'page': 1})
-@backend.route('/businesses/<int:id>/reviews/page/<int:page>')
+@backend.route('/businesses/<string:username>/reviews', defaults={'page': 1})
+@backend.route('/businesses/<string:username>/reviews/page/<int:page>')
 @is_staff_authorized
-def business_reviews(id, page):
-    business = Business.query.get(id)
+def business_reviews(username, page):
+    business = Business.find_by_identity(username)
     search_form = SearchForm()
 
     sort_by = Review.sort_by(request.args.get('sort', 'status'),
@@ -721,7 +721,7 @@ def business_reviews(id, page):
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_reviews = Review.query \
-        .filter(Review.search_reviews_for_business(business_id=id, query=request.args.get('q', ''))) \
+        .filter(Review.search_reviews_for_business(business_id=business.id, query=request.args.get('q', ''))) \
         .filter(Review.business == business) \
         .order_by(Review.product_id.desc(), text(order_values)) \
         .paginate(page, 20, True)
@@ -733,10 +733,10 @@ def business_reviews(id, page):
 
 
 # Business Calendar -------------------------------------------------------------------
-@backend.route('/businesses/<int:id>/calendar/<string:call>', methods=['GET', 'POST'])
+@backend.route('/businesses/<string:username>/calendar/<string:call>', methods=['GET', 'POST'])
 @is_staff_authorized
-def business_calendar(id, call):
-    business = Business.query.get(id)
+def business_calendar(username, call):
+    business = Business.find_by_identity(username)
     form = ReservationForm()
     edit_form = ReservationEditForm()
 
@@ -749,17 +749,17 @@ def business_calendar(id, call):
             'customer_email': request.form.get('customer_email'),
             'employee_id': request.form.get('employee_id'),
             'product_id': request.form.get('product_id'),
-            'business_id': id,
+            'business_id': business.id,
             'start_time': reservation.start_time,
             'end_time': reservation.end_time
         }
 
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
-            return redirect(url_for('backend.business_calendar', id=id, call="view"))
+            return redirect(url_for('backend.business_calendar', username=username, call="view"))
         else:
             flash(_('Reservation create failed.'), 'error')
-            return redirect(url_for('backend.business_calendar', id=id, call="view"))
+            return redirect(url_for('backend.business_calendar', username=username, call="view"))
 
     if call == "edit" and edit_form.is_submitted() and edit_form.validate_on_submit():
         reservation_id = request.form.get('reservation_id'),
@@ -769,7 +769,7 @@ def business_calendar(id, call):
 
         reservation.save()
         flash(_('Reservation has been saved modified.'), 'success')
-        return redirect(url_for('backend.business_calendar', id=id, call="view"))
+        return redirect(url_for('backend.business_calendar', username=username, call="view"))
 
     events = dict()
 

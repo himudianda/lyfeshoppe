@@ -455,15 +455,3 @@ class User(UserMixin, ResourceMixin, db.Model):
         return Business.query.filter(
                                 Business.employees.any(Employee.id.in_(employee_ids))
                               ).count()
-
-    @property
-    def id_of_businesses(self):
-        employee_ids = [employee.id for employee in self.employees]
-        from lyfeshoppe.blueprints.business.models.business import Business, Employee
-        query = db.session.query(
-                                Business.id.distinct().label("id")
-                            ).filter(
-                                Business.employees.any(Employee.id.in_(employee_ids))
-                            )
-        ids = [row.id for row in query.all()]
-        return ids

@@ -2,12 +2,12 @@
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'backend.business_products_new' %}
-  {% set form_kwargs = {'id': business.id} %}
+  {% set form_kwargs = {'username': business.username} %}
   {% set legend = 'Add a new Product' %}
   {% set button = _('Add') %}
 {% else %}
   {% set endpoint = 'backend.business_product_edit' %}
-  {% set form_kwargs = {'id': business.id, 'product_id': product.id} %}
+  {% set form_kwargs = {'username': business.username, 'product_id': product.id} %}
   {% set legend = 'Update this product' %}
   {% set button = _('Save') %}
 {% endif %}

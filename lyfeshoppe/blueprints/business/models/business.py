@@ -767,9 +767,9 @@ class Business(ResourceMixin, db.Model):
         return statuses
 
     @classmethod
-    def request_a_review(cls, business_id, customer_id):
+    def request_a_review(cls, username, customer_id):
         """
         Request a review
         """
         from lyfeshoppe.blueprints.business.tasks import request_customer_review
-        request_customer_review.delay(business_id, customer_id)
+        request_customer_review.delay(username, customer_id)

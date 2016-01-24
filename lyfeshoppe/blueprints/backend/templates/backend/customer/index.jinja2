@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set form_kwargs = {'id': business.id} %}
+    {% set form_kwargs = {'username': business.username} %}
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -89,7 +89,7 @@
                                                             <input class="checkbox-item" id="bulk_ids" name="bulk_ids" type="checkbox" value="{{ customer.id }}">
                                                         </td>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_customer_edit', id=business.id, customer_id=customer.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <a href="{{ url_for('backend.business_customer_edit', username=business.username, customer_id=customer.id) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                                 <i class="fa fa-edit"></i> Edit
                                                             </a>
                                                         </td>
@@ -114,7 +114,7 @@
                                                             <span class="{{ data }}"> {{ customer.active_customer }} </span>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ url_for('backend.business_customer_request_review', id=business.id, customer_id=customer.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <a href="{{ url_for('backend.business_customer_request_review', username=business.username, customer_id=customer.id) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                                 <i class="fa fa-smile-o"></i> Request
                                                             </a>
                                                         </td>
