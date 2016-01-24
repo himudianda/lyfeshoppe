@@ -140,8 +140,10 @@ def referrals():
     users = db.session.query(User).all()
     for user in users:
         num_of_referrals = random.randint(1, NUM_OF_REFERRALS_PER_USER)
+        reference_id_list = []
         for i in xrange(num_of_referrals):
-            reference = random.choice(User.query.filter(User.id != user.id).all())
+            reference = random.choice(User.query.filter(User.id != user.id, ~User.id.in_(reference_id_list)).all())
+            reference_id_list.append(reference.id)
             referral = Referral(user=user, reference=reference)
             try:
                 referral.save()
