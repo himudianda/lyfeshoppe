@@ -102,10 +102,10 @@ def shop_details(username):
                 **business_categories)
 
 
-@backend.route('/shops/<string:id>/product/<string:product_id>/booking', methods=['GET', 'POST'])
-def shop_booking(id, product_id):
-    business = Business.query.get(id)
-    product = Product.query.filter(Product.id == product_id, Product.business_id == id).first()
+@backend.route('/shops/<string:username>/product/<string:product_id>/booking', methods=['GET', 'POST'])
+def shop_booking(username, product_id):
+    business = Business.find_by_identity(username)
+    product = Product.query.filter(Product.id == product_id, Product.business_id == business.id).first()
 
     form = BookingForm()
     if form.is_submitted() and form.validate_on_submit():
@@ -118,7 +118,7 @@ def shop_booking(id, product_id):
             'customer_email': current_user.email,
             'employee_id': request.form.get('employee_id'),
             'product_id': product_id,
-            'business_id': id,
+            'business_id': business.id,
             'start_time': reservation.start_time,
             'end_time': reservation.end_time
         }

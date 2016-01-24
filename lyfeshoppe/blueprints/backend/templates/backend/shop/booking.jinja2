@@ -23,7 +23,7 @@
                         <div class="modal-body">
 
                             {% set endpoint = 'backend.shop_booking' %}
-                            {% set form_kwargs = {'id': business.id, 'product_id': product.id} %}
+                            {% set form_kwargs = {'username': business.username, 'product_id': product.id} %}
                             {% set button = _('Create') %}
 
                             <!-- Bootstrap Modal that opens for creating a Reservation -->

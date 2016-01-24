@@ -79,7 +79,7 @@
                                                                                                     </h5>
                                                                                                 </div>
                                                                                                 <div class="col-md-1">
-                                                                                                    <a class="btn btn-default" href="{{ url_for('backend.shop_booking', id=business.id, product_id=product.id) }}">Book</a>
+                                                                                                    <a class="btn btn-default" href="{{ url_for('backend.shop_booking', username=business.username, product_id=product.id) }}">Book</a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         <p> {{ product.description }} </p>
