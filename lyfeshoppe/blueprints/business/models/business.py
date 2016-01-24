@@ -4,6 +4,7 @@ import pytz
 import os
 import math
 from sqlalchemy.ext.declarative import declared_attr
+import re
 
 from config.settings import STATIC_FILES_PATH
 from flask_login import current_user
@@ -612,7 +613,8 @@ class Business(ResourceMixin, db.Model):
 
     # Details
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
+    name = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(64), unique=True, nullable=False, index=True)
     email = db.Column(db.String(255), index=True)
     type = db.Column(db.Enum(*TYPE, name='business_types'), index=True, nullable=False, server_default=TYPE.keys()[0])
     about = db.Column(db.Text())
@@ -643,6 +645,25 @@ class Business(ResourceMixin, db.Model):
     customers = db.relationship(Customer, backref='business', passive_deletes=True)
     reservations = db.relationship(Reservation, backref='business', passive_deletes=True)
     reviews = db.relationship(Review, backref='business', passive_deletes=True)
+
+    def save(self):
+        """
+        Save a business model instance.
+
+        :return: self
+        """
+        if not self.username:
+            username = re.sub('[^0-9a-zA-Z]+', '-', self.name)
+            business = Business.find_by_identity(username)
+            count = 0
+            while business:
+                count += 1
+                username = username + str(count)
+                business = Business.find_by_identity(username)
+
+            self.username = username
+
+        return super(Business, self).save()
 
     @classmethod
     def search(cls, query):
@@ -691,6 +712,17 @@ class Business(ResourceMixin, db.Model):
         form.populate_obj(self)
         self.save()
         return True
+
+    @classmethod
+    def find_by_identity(cls, identity):
+        """
+        Find a user by their e-mail or username.
+
+        :param identity: Email or username
+        :type identity: str
+        :return: User instance
+        """
+        return cls.query.filter((cls.email == identity) | (cls.username == identity)).first()
 
     @property
     def active_products(self):
