@@ -65,7 +65,7 @@
                                             {% for review in reviews.items %}
                                                 <tr>
                                                     <td>
-                                                        <a href="{{ url_for('backend.shop_details', id=review.business.id) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                        <a href="{{ url_for('backend.shop_details', username=review.business.username) }}" class="btn btn-outline btn-circle btn-sm purple">
                                                             <i class="fa fa-share"></i> {{ review.business.name }}
                                                         </a>
                                                     </td>

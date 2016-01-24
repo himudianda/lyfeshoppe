@@ -84,9 +84,9 @@ def shops_list(page, type):
                            **business_categories)
 
 
-@backend.route('/shops/<string:id>')
-def shop_details(id):
-    business = Business.query.get(id)
+@backend.route('/shops/<string:username>')
+def shop_details(username):
+    business = Business.find_by_identity(username)
     products = dict()
     for product in business.active_products:
         if product.category not in products:
@@ -125,10 +125,10 @@ def shop_booking(id, product_id):
 
         if Reservation.create(params):
             flash(_('Reservation has been created successfully.'), 'success')
-            return redirect(url_for('backend.shop_details', id=id))
+            return redirect(url_for('backend.shop_details', username=business.username))
         else:
             flash(_('Reservation create failed.'), 'error')
-            return redirect(url_for('backend.shop_details', id=id))
+            return redirect(url_for('backend.shop_details', username=business.username))
 
     events = dict()
 
@@ -169,18 +169,18 @@ def shop_reviews_new(id, employee_id):
 
     if not business or not employee:
         flash(_('Business or Employee does not exist.'), 'error')
-        return redirect(url_for('backend.shop_details', id=id))
+        return redirect(url_for('backend.shop_details', username=business.username))
 
     if not customer:
         flash(_('You must be a customer to write a review.'), 'error')
-        return redirect(url_for('backend.shop_details', id=id))
+        return redirect(url_for('backend.shop_details', username=business.username))
 
     form = ReviewForm()
     if form.is_submitted() and form.validate_on_submit():
 
         if Review.create_from_form(id, employee_id, customer.id, form):
             flash(_('Review has been created successfully.'), 'success')
-            return redirect(url_for('backend.shop_details', id=id))
+            return redirect(url_for('backend.shop_details', username=business.username))
 
     return render_template('backend/shop/review_add.jinja2',
                            form=form,

@@ -6,7 +6,7 @@ The dashboard for this business can be accessed at:
 {{ url_for('backend.business_dashboard', id=business.id, _external=True) }}
 
 The store profile visible to customers is here:
-{{ url_for('backend.shop_details', id=business.id, _external=True) }}
+{{ url_for('backend.shop_details', username=business.username, _external=True) }}
 
 Please feel free to add the following to your online shop
 

@@ -3,7 +3,7 @@ Hello {{ user.name }},
 {{business.name}} has requested a review from you.
 You may write a review for this business by visiting their page on LyfeShoppe.
 
-{{ url_for('backend.shop_details', id=business.id, _external=True) }}
+{{ url_for('backend.shop_details', username=business.username, _external=True) }}
 
 Thanks,
 LyfeShoppe staff
