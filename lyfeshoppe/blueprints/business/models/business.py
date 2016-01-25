@@ -172,7 +172,7 @@ class Reservation(ResourceMixin, db.Model):
     @classmethod
     def create(cls, params):
         """
-        Return whether or not the employee was created successfully.
+        Return whether or not the reservation was created successfully.
 
         :return: bool
         """
@@ -192,9 +192,11 @@ class Reservation(ResourceMixin, db.Model):
         customer_email = params.pop("customer_email", "")
         customer = Customer.find_by_identity(business_id, customer_email)
         if not customer:
-            return False
-        params['customer_id'] = str(customer.id)
+            # User with customer_email is not a customer of this business yet. Add him
+            user = User.find_by_identity(customer_email)  # user should always exist coz he's the current user
+            customer, created = Customer.create(business_id=business_id, user_id=user.id)
 
+        params['customer_id'] = str(customer.id)
         reservation = cls(**params)
         reservation.save()
         return True
