@@ -188,6 +188,17 @@ def shop_reviews_new(username, employee_id):
                            **business_categories)
 
 
+# User Profile -------------------------------------------------------------------
+@backend.route('/user/<string:username>', methods=['GET'])
+def user_profile(username):
+    user = User.find_by_identity(username)
+    if not user:
+        return render_template('404.html'), 404
+    return render_template(
+                'backend/user/profile.jinja2', user=user,
+                **business_categories)
+
+
 # Account -------------------------------------------------------------------
 @backend.route('/account', methods=['GET'])
 def user_account():

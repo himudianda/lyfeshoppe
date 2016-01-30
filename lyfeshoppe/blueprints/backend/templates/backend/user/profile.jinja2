@@ -1,0 +1,83 @@
+{% extends 'dashboard/layouts/app.jinja2' %}
+
+{% block title %}
+    {{user.name}} on LyfeShoppe | Social Shop with huge discounts.
+{% endblock %}
+
+{% block content %}
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!-- BEGIN PROFILE SIDEBAR -->
+                    <div class="profile-sidebar">
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light profile-sidebar-portlet ">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic">
+                                <img src="{{ url_for('static', filename='dashboard/pages/media/profile/profile_user.jpg') }}" class="img-responsive" alt=""> </div>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name"> {{ user.name }} </div>
+                                <div class="profile-usertitle-job"> {{ user.role }} </div>
+                            </div>
+                            <!-- END SIDEBAR USER TITLE -->
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light ">
+                            <!-- STAT -->
+                            <div class="row list-separated profile-stat">
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="uppercase profile-stat-title"> {{ current_user.points }} </div>
+                                    <div class="uppercase profile-stat-text"> Points </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="uppercase profile-stat-title"> {{ current_user.referrals | length }} </div>
+                                    <div class="uppercase profile-stat-text"> Referrals </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="uppercase profile-stat-title"> 8 </div>
+                                    <div class="uppercase profile-stat-text"> Reviews </div>
+                                </div>
+                            </div>
+                            <!-- END STAT -->
+                            <div>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <i class="fa fa-user"></i><strong>Username: </strong>
+                                    {{current_user.username}}
+                                </div>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <i class="fa fa-envelope"></i><strong>Email: </strong>
+                                    {{current_user.email}}
+                                </div>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <i class="fa fa-phone"></i><strong>Phone: </strong>
+                                    {{current_user.phone}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                    </div>
+                    <!-- END BEGIN PROFILE SIDEBAR -->
+                    <!-- BEGIN PROFILE CONTENT -->
+                    <div class="profile-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PROFILE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+{% endblock %}
