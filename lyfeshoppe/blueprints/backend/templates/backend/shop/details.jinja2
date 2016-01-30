@@ -176,8 +176,11 @@
                                                                                     </li>
                                                                                     <li>
                                                                                         </br>
-                                                                                        <div class="col-md-1">
-                                                                                            <a class="btn btn-default yellow" href="{{ url_for('backend.shop_reviews_new', username=business.username, employee_id=employee.id) }}">Write a Review</a>
+                                                                                        <div class="col-md-6">
+                                                                                            <a class="btn btn-default yellow btn-sm" href="{{ url_for('backend.shop_reviews_new', username=business.username, employee_id=employee.id) }}">Write a Review</a>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <a href="{{ url_for('backend.user_profile', username=employee.user.username) }}" class="cbp-l-caption-buttonLeft btn red uppercase btn red uppercase btn-sm" rel="nofollow">Visit Profile</a>
                                                                                         </div>
                                                                                     </li>
                                                                                 </ul>
@@ -313,7 +316,7 @@
                                                                             <p>
                                                                                 <strong>Phone: </strong> {{ business.phone }}
                                                                                 <br/>
-                                                                                <strong>Email: </strong> {{ business.email }}
+                                                                                <strong>Email: </strong> <a href="mailto:{{ business.email }}">{{ business.email }}</a>
                                                                             </p>
                                                                         </div>
                                                                         <div class="c-section">
