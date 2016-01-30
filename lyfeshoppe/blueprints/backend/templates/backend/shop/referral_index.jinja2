@@ -65,13 +65,13 @@
                                             {% for referral in referrals.items %}
                                                 <tr>
                                                     <td>
-                                                        <div>
-                                                            {{ referral.reference.name }}
-                                                        </div>
+                                                        <a href="{{ url_for('backend.user_profile', username=referral.reference.username) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <i class="fa fa-share"></i> {{ referral.reference.name }}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <div>
-                                                            {{ referral.reference.email }}
+                                                            <a href="mailto:{{ referral.reference.email }}">{{ referral.reference.email }}</a>
                                                         </div>
                                                     </td>
                                                     <td>
