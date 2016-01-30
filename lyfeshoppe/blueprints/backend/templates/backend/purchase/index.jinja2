@@ -75,9 +75,9 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <div>
-                                                            {{ purchase.employee.user.name }}
-                                                        </div>
+                                                        <a href="{{ url_for('backend.user_profile', username=purchase.employee.user.username) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                            <i class="fa fa-user"></i> {{ purchase.employee.user.name }}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         {% if purchase.status == 'new' %}

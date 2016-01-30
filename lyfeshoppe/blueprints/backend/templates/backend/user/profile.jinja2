@@ -35,11 +35,11 @@
                             <!-- STAT -->
                             <div class="row list-separated profile-stat">
                                 <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <div class="uppercase profile-stat-title"> {{ current_user.points }} </div>
+                                    <div class="uppercase profile-stat-title"> {{ user.points }} </div>
                                     <div class="uppercase profile-stat-text"> Points </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <div class="uppercase profile-stat-title"> {{ current_user.referrals | length }} </div>
+                                    <div class="uppercase profile-stat-title"> {{ user.referrals | length }} </div>
                                     <div class="uppercase profile-stat-text"> Referrals </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-6">
@@ -51,15 +51,15 @@
                             <div>
                                 <div class="margin-top-20 profile-desc-link">
                                     <i class="fa fa-user"></i><strong>Username: </strong>
-                                    {{current_user.username}}
+                                    {{user.username}}
                                 </div>
                                 <div class="margin-top-20 profile-desc-link">
                                     <i class="fa fa-envelope"></i><strong>Email: </strong>
-                                    {{current_user.email}}
+                                    {{user.email}}
                                 </div>
                                 <div class="margin-top-20 profile-desc-link">
                                     <i class="fa fa-phone"></i><strong>Phone: </strong>
-                                    {{current_user.phone}}
+                                    {{user.phone}}
                                 </div>
                             </div>
                         </div>
