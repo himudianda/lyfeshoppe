@@ -71,7 +71,9 @@
                                                     </td>
                                                     <td>
                                                         <div>
-                                                            {{ review.employee.user.name }}
+                                                            <a href="{{ url_for('backend.user_profile', username=review.employee.user.username) }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                <i class="fa fa-user"></i> {{ review.employee.user.name }}
+                                                            </a>
                                                         </div>
                                                     </td>
                                                     <td>
