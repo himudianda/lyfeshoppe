@@ -7,12 +7,15 @@
 {% endblock %}
 
 {% block content %}
-	<div class="page-content-wrapper">
+    <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-			<div class="alert alert-danger" style="text-align:center">
-				<strong>Access Restricted:</strong> Only Premium Members can access this page
-			</div>
+            <div class="alert alert-danger" style="text-align:center">
+                <strong>Access Restricted:</strong> Only Premium Members can access this page
+            </div>
+            <div class="alert alert-info" style="text-align:center">
+                <button class="btn btn-sm blue" href="{{ url_for('backend.referrals') }}">Invite your friends</button> to earn Points & become a Premium Member !!
+            </div>
         </div>
     </div>
 {% endblock %}
