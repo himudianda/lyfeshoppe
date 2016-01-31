@@ -809,3 +809,43 @@ def business_calendar(username, call):
                            form=form, edit_form=edit_form,
                            business=business, events=json.dumps(events)
                            )
+
+# Premium Pages =================================================
+@backend.route('/pitch-deck')
+def planning_pitch_deck():
+    return render_template('backend/premium/pitch_deck.jinja2', **business_categories)
+
+
+@backend.route('/business-plan')
+def planning_business_plan():
+    return render_template('backend/premium/business_plan.jinja2', **business_categories)
+
+
+@backend.route('/revenue-forecasts')
+def planning_revenue_forecasts():
+    return render_template('backend/premium/revenue_forecast.jinja2', **business_categories)
+
+
+@backend.route('/sales-funnel')
+def planning_sales_funnel():
+    return render_template('backend/premium/sales_funnel.jinja2', **business_categories)
+
+
+@backend.route('/business-benchmarks')
+def planning_business_benchmarks():
+    return render_template('backend/premium/benchmarks.jinja2', **business_categories)
+
+
+@backend.route('/business-scheduling')
+def planning_business_scheduling():
+    return render_template('backend/premium/scheduling.jinja2', **business_categories)
+
+
+@backend.route('/customer-acquisition')
+def planning_customer_acquisition():
+    return render_template('backend/premium/customer_acquisition.jinja2', **business_categories)
+
+
+@backend.route('/performance-metrics')
+def planning_performance_metrics():
+    return render_template('backend/premium/performance_metrics.jinja2', **business_categories)
