@@ -59,36 +59,6 @@ class SignupForm(ModelForm):
     password = PasswordField(_('Password'), [DataRequired(), Length(8, 128)])
 
 
-class WelcomeForm(ModelForm):
-    username_message = _('Letters, numbers and underscores only please.')
-
-    username = StringField(validators=[
-        Unique(
-            User.username,
-            get_session=lambda: db.session
-        ),
-        DataRequired(),
-        Length(1, 16),
-        Regexp('^\w+$', message=username_message)
-    ])
-
-
-class UpdateCredentials(ModelForm):
-    email = EmailField(validators=[
-        Email(),
-        Unique(
-            User.email,
-            get_session=lambda: db.session
-        )
-    ])
-    current_password = PasswordField(_('Current password'),
-                                     [DataRequired(),
-                                      Length(8, 128),
-                                      ensure_existing_password_matches]
-                                     )
-    password = PasswordField(_('Password'), [Optional(), Length(8, 128)])
-
-
 class UpdateLocale(ModelForm):
     locale = SelectField(_('Language preference'), [DataRequired()],
                          choices=choices_from_dict(LANGUAGES))

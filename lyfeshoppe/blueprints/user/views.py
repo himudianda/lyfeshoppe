@@ -8,7 +8,7 @@ from lyfeshoppe.lib.oauth_providers import OAuthSignIn
 from lyfeshoppe.blueprints.user.decorators import anonymous_required
 from lyfeshoppe.blueprints.user.models import User
 from lyfeshoppe.blueprints.user.forms import LoginForm, BeginPasswordResetForm, PasswordResetForm, SignupForm, \
-    WelcomeForm, UpdateCredentials, UpdateLocale
+    UpdateLocale
 
 user = Blueprint('user', __name__, template_folder='templates')
 
@@ -173,27 +173,6 @@ def signup():
             return redirect(get_dashboard_url())
 
     return render_template('user/signup.jinja2', form=form)
-
-
-@user.route('/settings/update_credentials', methods=['GET', 'POST'])
-@login_required
-def update_credentials():
-    form = UpdateCredentials(current_user, uid=current_user.id)
-
-    if form.validate_on_submit():
-        # We cannot form.populate_obj() because the password is optional.
-        new_password = request.form.get('password', '')
-        current_user.email = request.form.get('email')
-
-        if new_password:
-            current_user.password = User.encrypt_password(new_password)
-
-        current_user.save()
-
-        flash(_('Your sign in settings have been updated.'), 'success')
-        return redirect(url_for('user.settings'))
-
-    return render_template('user/update_credentials.jinja2', form=form)
 
 
 @user.route('/settings/update_locale', methods=['GET', 'POST'])
