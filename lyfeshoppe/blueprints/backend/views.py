@@ -339,6 +339,7 @@ def review_edit(id):
 
     return render_template('backend/shop/review_edit.jinja2', form=form,
                            review=review,
+                           business=review.business, employee=review.employee,
                            **business_categories)
 
 

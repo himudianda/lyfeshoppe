@@ -132,6 +132,23 @@ class Review(ResourceMixin, db.Model):
         review.save()
         return True
 
+    def modify_from_form(self, form):
+        """
+        Return whether or not the review was modified successfully.
+
+        :return: bool
+        """
+
+        old_product_id = self.product_id
+        form.populate_obj(self)
+
+        # NOTE: We do this because product_id is set to "" in the form when edit/modify
+        # API is called. We dont want to lose info about the product for which review was written
+        self.product_id = old_product_id
+        self.save()
+
+        return True
+
 
 class Reservation(ResourceMixin, db.Model):
     __tablename__ = 'reservations'
