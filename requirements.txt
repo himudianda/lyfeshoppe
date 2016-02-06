@@ -26,9 +26,6 @@ Flask-Webpack==0.0.6
 # I18n
 Flask-Babel==0.9
 
-# Billing
-stripe==1.22.3
-
 # Twitter
 tweepy==3.3.0
 

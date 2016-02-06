@@ -27,13 +27,11 @@ def before_request():
 # Dashboard -------------------------------------------------------------------
 @admin.route('')
 def dashboard():
-    group_and_count_plans = Dashboard.group_and_count_plans()
     group_and_count_users = Dashboard.group_and_count_users()
     group_and_count_issues = Dashboard.group_and_count_issues()
     group_and_count_businesses = Dashboard.group_and_count_businesses()
 
     return render_template('admin/page/dashboard.jinja2',
-                           group_and_count_plans=group_and_count_plans,
                            group_and_count_users=group_and_count_users,
                            group_and_count_issues=group_and_count_issues,
                            group_and_count_businesses=group_and_count_businesses)
@@ -103,7 +101,7 @@ def users(page):
 
     paginated_users = User.query \
         .filter(User.search(request.args.get('q', ''))) \
-        .order_by(User.role.desc(), User.payment_id,
+        .order_by(User.role.desc(),
                   text(order_values)) \
         .paginate(page, 20, True)
 

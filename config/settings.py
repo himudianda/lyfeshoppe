@@ -72,16 +72,7 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 # Celery recurring scheduled tasks.
-CELERYBEAT_SCHEDULE = {
-    'mark-soon-to-expire-credit-cards': {
-        'task': 'lyfeshoppe.blueprints.billing.tasks.mark_old_credit_cards',
-        'schedule': crontab(hour=12, minute=1)
-    },
-    'mark-invalid-coupons': {
-        'task': 'lyfeshoppe.blueprints.billing.tasks.expire_old_coupons',
-        'schedule': crontab(hour=12, minute=2)
-    },
-}
+CELERYBEAT_SCHEDULE = {}
 
 # Login settings.
 REMEMBER_COOKIE_DURATION = timedelta(days=90)
