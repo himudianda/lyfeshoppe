@@ -20,7 +20,7 @@
                         <div class="portlet light profile-sidebar-portlet ">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
-                                <img src="{{ url_for('static', filename='dashboard/pages/media/profile/profile_user.jpg') }}" class="img-responsive" alt=""> </div>
+                                <img src="{{ url_for('static', filename='common/images/anonymous.jpg') }}" class="img-responsive" alt=""> </div>
                             <!-- END SIDEBAR USERPIC -->
                             <!-- SIDEBAR USER TITLE -->
                             <div class="profile-usertitle">
@@ -55,11 +55,11 @@
                                 </div>
                                 <div class="margin-top-20 profile-desc-link">
                                     <i class="fa fa-envelope"></i><strong>Email: </strong>
-                                    <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                                    <small>hidden</small>
                                 </div>
                                 <div class="margin-top-20 profile-desc-link">
                                     <i class="fa fa-phone"></i><strong>Phone: </strong>
-                                    {{user.phone}}
+                                    <small>hidden</small>
                                 </div>
                             </div>
                         </div>
