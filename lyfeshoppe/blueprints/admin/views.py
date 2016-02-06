@@ -134,25 +134,6 @@ def users_edit(id):
     return render_template('admin/user/edit.jinja2', form=form, user=user)
 
 
-@admin.route('/users/bulk_delete', methods=['POST'])
-def users_bulk_delete():
-    form = BulkDeleteForm()
-
-    if form.validate_on_submit():
-        ids = User.get_bulk_action_ids(request.form.get('scope'),
-                                       request.form.getlist('bulk_ids'),
-                                       omit_ids=[current_user.id],
-                                       query=request.args.get('q', ''))
-
-        flash(_n('%(num)d user was scheduled to be deleted.',
-                 '%(num)d users were scheduled to be deleted.',
-                 num=len(ids)), 'success')
-    else:
-        flash(_('No users were deleted, something went wrong.'), 'error')
-
-    return redirect(url_for('admin.users'))
-
-
 @admin.route('/users/bulk_deactivate', methods=['POST'])
 def users_bulk_deactivate():
     form = BulkDeleteForm()

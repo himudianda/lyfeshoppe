@@ -405,29 +405,6 @@ class User(UserMixin, ResourceMixin, db.Model):
 
         return False
 
-    @classmethod
-    def bulk_delete(cls, ids):
-        """
-        Override the general bulk_delete method because we need to delete them
-        one at a time while also deleting them on Stripe.
-
-        :param ids: List of ids to be deleted
-        :type ids: list
-        :return: int
-        """
-        delete_count = 0
-
-        for id in ids:
-            user = User.query.get(id)
-
-            if user is None:
-                continue
-
-            user.delete()
-            delete_count += 1
-
-        return delete_count
-
     @property
     def num_of_businesses(self):
         employee_ids = [employee.id for employee in self.employees]

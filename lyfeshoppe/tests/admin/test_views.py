@@ -49,27 +49,6 @@ class TestUsers(ViewTestMixin):
         assert_status_with_message(200, response,
                                    _('User has been saved successfully.'))
 
-    def test_bulk_delete_nothing(self):
-        """ Last admin account should not get deleted. """
-        old_count = User.query.count()
-        params = {
-            'bulk_ids': [1],
-            'scope': 'all_selected_products'
-        }
-
-        self.login()
-        response = self.client.post(url_for('admin.users_bulk_delete'),
-                                    data=params, follow_redirects=True)
-
-        assert_status_with_message(200, response,
-                                   _n('%(num)d user was scheduled to be '
-                                      'deleted.',
-                                      '%(num)d users were scheduled to be '
-                                      'deleted.', num=0))
-
-        new_count = User.query.count()
-        assert old_count == new_count
-
     def test_cancel_subscription(self, subscriptions, mock_stripe):
         """ User subscription gets cancelled.. """
         user = User.find_by_identity('subscriber@localhost.com')
@@ -128,75 +107,3 @@ class TestIssues(ViewTestMixin):
         assert_status_with_message(200, response,
                                    _('Issue has been saved successfully.'))
 
-    def test_bulk_delete(self, issues):
-        """ Resource gets bulk deleted. """
-        old_count = Issue.query.count()
-        params = {
-            'bulk_ids': [1, 2],
-            'scope': 'all_search_results'
-        }
-
-        self.login()
-        response = self.client.post(url_for('admin.issues_bulk_delete'),
-                                    data=params, follow_redirects=True)
-
-        assert_status_with_message(200, response,
-                                   _n('%(num)d issue was deleted.',
-                                      '%(num)d issues were deleted.',
-                                      num=2))
-
-        new_count = Issue.query.count()
-        assert (old_count - 2) == new_count
-
-
-class TestCoupon(ViewTestMixin):
-    def test_index_page(self):
-        """ Index renders successfully. """
-        self.login()
-        response = self.client.get(url_for('admin.coupons'))
-
-        assert response.status_code == 200
-
-    def test_new_page(self, coupons):
-        """ New page renders successfully. """
-        self.login()
-        response = self.client.get(url_for('admin.coupons_new'))
-
-        assert response.status_code == 200
-
-    def test_new_resource(self, mock_stripe):
-        """ Edit this resource successfully. """
-        params = {
-            'code': '1337',
-            'duration': 'repeating',
-            'percent_off': 5,
-            'amount_off': None,
-            'currency': 'usd',
-            'redeem_by': None,
-            'max_redemptions': 10,
-            'duration_in_months': 5,
-        }
-
-        self.login()
-        response = self.client.post(url_for('admin.coupons_new'),
-                                    data=params, follow_redirects=True)
-
-        assert_status_with_message(200, response,
-                                   _('Coupon has been created successfully.'))
-
-    def test_bulk_delete(self, coupons, mock_stripe):
-        """ Resource gets bulk deleted. """
-        params = {
-            'bulk_ids': [1, 2, 3],
-            'scope': 'all_search_results'
-        }
-
-        self.login()
-        response = self.client.post(url_for('admin.coupons_bulk_delete'),
-                                    data=params, follow_redirects=True)
-
-        assert_status_with_message(200, response,
-                                   _n('%(num)d coupon was scheduled to be '
-                                      'deleted.',
-                                      '%(num)d coupons were scheduled to be '
-                                      'deleted.', num=3))
