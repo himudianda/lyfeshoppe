@@ -14,8 +14,6 @@ from lyfeshoppe.blueprints.backend import backend
 from lyfeshoppe.blueprints.page import page
 from lyfeshoppe.blueprints.user import user
 from lyfeshoppe.blueprints.issue import issue
-from lyfeshoppe.blueprints.billing.views.billing import billing
-from lyfeshoppe.blueprints.billing.views.stripe_webhook import stripe_webhook
 from lyfeshoppe.extensions import (
     db,
     bcrypt,
@@ -28,7 +26,6 @@ from lyfeshoppe.extensions import (
     webpack,
     debug_toolbar
 )
-from lyfeshoppe.blueprints.billing.template_processors import format_currency
 from lyfeshoppe.blueprints.backend.template_processors import format_datetime
 from lyfeshoppe.lib.momentjs import momentjs
 
@@ -37,9 +34,7 @@ FLASK_BLUEPRINTS = [
     backend,
     page,
     user,
-    issue,
-    billing,
-    stripe_webhook
+    issue
 ]
 
 CUSTOM_ERROR_PAGES = [404, 500, 502]
@@ -124,7 +119,6 @@ def template_processors(app):
         app.jinja_loader = multiple_template_loader
 
     app.jinja_env.add_extension('jinja2.ext.do')
-    app.jinja_env.filters['format_currency'] = format_currency
     app.jinja_env.filters['datetime'] = format_datetime
 
     app.jinja_env.globals['momentjs'] = momentjs

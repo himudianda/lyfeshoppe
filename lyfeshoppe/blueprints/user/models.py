@@ -11,9 +11,6 @@ from sqlalchemy import or_, UniqueConstraint
 from flask_login import current_user
 
 from lyfeshoppe.lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from lyfeshoppe.blueprints.billing.models.credit_card import CreditCard
-from lyfeshoppe.blueprints.billing.models.subscription import Subscription
-from lyfeshoppe.blueprints.billing.models.invoice import Invoice
 from lyfeshoppe.extensions import db, bcrypt
 
 
@@ -132,14 +129,6 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     # Locale.
     locale = db.Column(db.String(5), nullable=False, server_default='en')
-
-    credit_card = db.relationship(CreditCard, uselist=False, backref='users', passive_deletes=True)
-    subscription = db.relationship(Subscription, uselist=False, backref='users', passive_deletes=True)
-    invoices = db.relationship(Invoice, backref='users', passive_deletes=True)
-
-    # Billing.
-    payment_id = db.Column(db.String(128), index=True)
-    cancelled_subscription_on = db.Column(AwareDateTime())
 
     # Activity tracking.
     sign_in_count = db.Column(db.Integer, nullable=False, default=0)
@@ -434,16 +423,7 @@ class User(UserMixin, ResourceMixin, db.Model):
             if user is None:
                 continue
 
-            if user.payment_id is None:
-                user.delete()
-            else:
-                subscription = Subscription()
-                cancelled = subscription.cancel(user=user)
-
-                # If successful, delete it locally.
-                if cancelled:
-                    user.delete()
-
+            user.delete()
             delete_count += 1
 
         return delete_count

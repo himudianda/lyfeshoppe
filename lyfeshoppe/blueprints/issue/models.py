@@ -17,7 +17,6 @@ class Issue(ResourceMixin, db.Model):
     LABEL = OrderedDict([
         ('login', 'I cannot access my account'),
         ('signup', 'I have a question before I sign up'),
-        ('billing', 'I have a billing question'),
         ('email', 'I am not receiving e-mails'),
         ('request', 'I want to request a feature'),
         ('other', 'Other')

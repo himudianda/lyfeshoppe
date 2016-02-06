@@ -2,38 +2,10 @@ from sqlalchemy import func
 
 from lyfeshoppe.blueprints.user.models import db, User
 from lyfeshoppe.blueprints.issue.models import Issue
-from lyfeshoppe.blueprints.billing.models.subscription import Subscription
 from lyfeshoppe.blueprints.business.models.business import Business
 
 
 class Dashboard(object):
-    @classmethod
-    def group_and_count_coupons(cls):
-        """
-        Obtain coupon usage statistics across all subscribers.
-
-        :return: tuple
-        """
-        not_null = db.session.query(Subscription).filter(
-            Subscription.coupon.isnot(None)).count()
-        total = db.session.query(func.count(Subscription.id)).scalar()
-
-        if total == 0:
-            percent = 0
-        else:
-            percent = round((not_null / float(total)) * 100, 1)
-
-        return not_null, total, percent
-
-    @classmethod
-    def group_and_count_plans(cls):
-        """
-        Perform a group by/count on all subscriber types.
-
-        :return: dict
-        """
-        return Dashboard._group_and_count(Subscription, Subscription.plan)
-
     @classmethod
     def group_and_count_users(cls):
         """

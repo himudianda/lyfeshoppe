@@ -27,7 +27,6 @@ from lyfeshoppe.lib.util_wtforms import ModelForm, choices_from_dict
 from lyfeshoppe.blueprints.user.models import db, User
 from lyfeshoppe.blueprints.business.models.business import Business
 from lyfeshoppe.blueprints.issue.models import Issue
-from lyfeshoppe.blueprints.billing.models.coupon import Coupon
 
 
 class SearchForm(Form):
@@ -109,48 +108,3 @@ class IssueContactForm(Form):
     subject = StringField(_('Subject'), [DataRequired(), Length(1, 254)])
     message = TextAreaField(_('Message to be sent'),
                             [DataRequired(), Length(1, 8192)])
-
-
-class CouponForm(Form):
-    percent_off = IntegerField(_('Percent off'), [Optional(),
-                                                  NumberRange(min=1, max=100)])
-    amount_off = FloatField(_('Amount off'), [Optional(),
-                                              NumberRange(min=0.01,
-                                                          max=21474836.47)])
-    code = StringField(_('Code'), [DataRequired(), Length(1, 32)])
-    currency = SelectField(_('Currency'), [DataRequired()],
-                           choices=choices_from_dict(Currency.TYPES,
-                                                     prepend_blank=False))
-    duration = SelectField(_('Duration'), [DataRequired()],
-                           choices=choices_from_dict(Coupon.DURATION,
-                                                     prepend_blank=False))
-    duration_in_months = IntegerField(_('Duration in months'), [Optional(),
-                                                                NumberRange(
-                                                                    min=1,
-                                                                    max=12)])
-    max_redemptions = IntegerField(_('Max Redemptions'),
-                                   [Optional(),
-                                    NumberRange(min=1)])
-    redeem_by = DateTimeField(_('Redeem by'), [Optional()],
-                              format='%Y-%m-%d %H:%M:%S')
-
-    def validate(self):
-        if not Form.validate(self):
-            return False
-
-        result = True
-        percent_off = self.percent_off.data
-        amount_off = self.amount_off.data
-
-        if percent_off is None and amount_off is None:
-            self.percent_off.errors.append(_('Pick at least one.'))
-            self.amount_off.errors.append(_('Pick at least one.'))
-            result = False
-        elif percent_off and amount_off:
-            self.percent_off.errors.append(_('Cannot pick both.'))
-            self.amount_off.errors.append(_('Cannot pick both.'))
-            result = False
-        else:
-            result = True
-
-        return result

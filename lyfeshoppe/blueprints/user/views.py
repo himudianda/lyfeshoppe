@@ -175,31 +175,6 @@ def signup():
     return render_template('user/signup.jinja2', form=form)
 
 
-@user.route('/welcome', methods=['GET', 'POST'])
-@login_required
-def welcome():
-    if current_user.username:
-        flash(_('You already picked a username.'), 'warning')
-        return redirect(url_for('user.settings'))
-
-    form = WelcomeForm()
-
-    if form.validate_on_submit():
-        current_user.username = request.form.get('username')
-        current_user.save()
-
-        flash(_('Sign up is complete, enjoy our services.'), 'success')
-        return redirect(url_for('billing.pricing'))
-
-    return render_template('user/welcome.jinja2', form=form)
-
-
-@user.route('/settings')
-@login_required
-def settings():
-    return render_template('user/settings.jinja2')
-
-
 @user.route('/settings/update_credentials', methods=['GET', 'POST'])
 @login_required
 def update_credentials():
