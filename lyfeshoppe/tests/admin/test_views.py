@@ -49,22 +49,6 @@ class TestUsers(ViewTestMixin):
         assert_status_with_message(200, response,
                                    _('User has been saved successfully.'))
 
-    def test_cancel_subscription(self, subscriptions, mock_stripe):
-        """ User subscription gets cancelled.. """
-        user = User.find_by_identity('subscriber@localhost.com')
-        params = {
-            'id': user.id
-        }
-
-        self.login()
-        response = self.client.post(url_for('admin.users_cancel_subscription'),
-                                    data=params, follow_redirects=True)
-
-        assert_status_with_message(200, response,
-                                   _('Subscription has been cancelled for '
-                                     '%(user)s', user='Subby'))
-        assert user.cancelled_subscription_on is not None
-
 
 class TestIssues(ViewTestMixin):
     def test_index_page(self):

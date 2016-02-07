@@ -2,7 +2,6 @@ import logging
 import time
 from logging.handlers import SMTPHandler
 
-import stripe
 from flask import g, request, render_template
 from werkzeug.contrib.fixers import ProxyFix
 from jinja2 import ChoiceLoader, FileSystemLoader
@@ -47,8 +46,6 @@ def api_keys(app):
     :param app: Flask application instance
     :return: None
     """
-    stripe.api_key = app.config.get('STRIPE_SECRET_KEY')
-    stripe.api_version = app.config.get('STRIPE_API_VERSION')
     return None
 
 
