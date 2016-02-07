@@ -2,7 +2,7 @@ import logging
 from collections import OrderedDict
 from lyfeshoppe.lib.util_wtforms import ModelForm
 from flask_wtf import Form
-from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField
+from wtforms import HiddenField, SelectField, StringField, DateTimeField, BooleanField, TextAreaField, FloatField
 from wtforms_components import EmailField, IntegerField
 from wtforms.validators import DataRequired, Length, Optional, NumberRange
 from flask_babel import lazy_gettext as _
@@ -100,7 +100,7 @@ class ProductForm(ModelForm):
     name = StringField(_('Product name'), [DataRequired(), Length(1, 128)])
     category = StringField(_('Product Category'), [DataRequired(), Length(1, 32)])
     description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
-    price = IntegerField(_('Price'), [Optional(), NumberRange(min=1, max=1000000)])
+    price = FloatField(_('Price'), [Optional(), NumberRange(min=1, max=1000000)])
     duration_mins = IntegerField(_('Duration in mins'), [Optional(), NumberRange(min=1, max=1000)])
 
     active = BooleanField(_('Yes, Product is active'))
