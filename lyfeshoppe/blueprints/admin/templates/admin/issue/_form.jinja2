@@ -1,4 +1,4 @@
-{% import 'macros/form.jinja2' as f with context %}
+{% import 'dashboard/macros/form.jinja2' as f with context %}
 
 {% if request.endpoint.endswith('new') %}
   {% set endpoint = 'admin.issues_new' %}
