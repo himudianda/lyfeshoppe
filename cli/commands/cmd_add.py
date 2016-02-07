@@ -44,6 +44,7 @@ MAX_CUSTOMERS_PER_BUSINESS = 10
 MAX_PRODUCTS_PER_BUSINESS = 6
 MAX_RESERVATIONS_PER_BUSINESS = 20
 MAX_REVIEWS_PER_BUSINESS = 5
+FAKE_EMAIL_PREFIX = "f_"
 
 
 def generate_business_address():
@@ -117,7 +118,7 @@ def users():
     """
     for i in xrange(0, NUM_OF_FAKE_USERS):
         params = {
-            'email': fake.email(),
+            'email': FAKE_EMAIL_PREFIX + fake.email(),
             'password': 'password',
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
@@ -163,7 +164,7 @@ def businesses():
     for i in range(0, NUM_OF_FAKE_BUSINESSES):
         params = {
             'name': fake.company(),
-            'email': fake.company_email(),
+            'email': FAKE_EMAIL_PREFIX + fake.company_email(),
             'type': random.choice(Business.TYPE.keys()),
             'about': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
             'opening_time': datetime.strptime('08:00:00', '%H:%M:%S').time(),
@@ -197,7 +198,7 @@ def issues():
         params = {
             'status': random.choice(Issue.STATUS.keys()),
             'label': random.choice(Issue.LABEL.keys()),
-            'email': fake.email(),
+            'email': FAKE_EMAIL_PREFIX + fake.email(),
             'question': fake.paragraph()
         }
 
