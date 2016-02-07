@@ -650,7 +650,7 @@ def business_products(username, page):
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
-    sort_by = Product.sort_by(request.args.get('sort', 'capacity'),
+    sort_by = Product.sort_by(request.args.get('sort', 'price_cents'),
                               request.args.get('direction', 'asc'))
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 

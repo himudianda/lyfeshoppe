@@ -422,7 +422,6 @@ class Product(ResourceMixin, db.Model):
     name = db.Column(db.String(128))
     category = db.Column(db.String(32))
     description = db.Column(db.Text())
-    capacity = db.Column(db.Integer, nullable=False, default=1)  # 1 person
     price_cents = db.Column(db.Integer, nullable=False, default=1000)  # $10
     duration_mins = db.Column(db.Integer, nullable=False, default=60)  # 1 hour
 
