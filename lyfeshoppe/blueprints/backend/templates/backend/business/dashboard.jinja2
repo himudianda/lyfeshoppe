@@ -41,7 +41,7 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                $<span data-counter="counterup" data-value="{{ business.total_sales }}">0</span> </div>
+                                {{business.currency}} <span data-counter="counterup" data-value="{{ business.total_sales }}">0</span> </div>
                             <div class="desc"> Total Sales </div>
                         </div>
                         <a class="more" href="{{ url_for('backend.business_calendar', username=business.username, call='view') }}"> View more
@@ -73,9 +73,9 @@
                         <div class="details">
                             <div class="number">
                                 {% if business.reservations|length %}
-                                    $<span data-counter="counterup" data-value="{{ '%0.2f'| format( (business.total_sales/business.reservations|length)|float) }}"></span>
+                                    {{business.currency}} <span data-counter="counterup" data-value="{{ '%0.2f'| format( (business.total_sales/business.reservations|length)|float) }}"></span>
                                 {% else %}
-                                    $<span data-counter="counterup" data-value="0"></span>
+                                    {{business.currency}} <span data-counter="counterup" data-value="0"></span>
                                 {% endif %}
                             </div>
                                 }
@@ -107,7 +107,7 @@
                                             {% if business.reservations|length %}
                                                 <span> {{ '%0.1f'| format( business.reservation_statuses_count['new'] / business.reservations|length * 100 ) }}</span>%
                                             {% else %}
-                                                $<span data-counter="counterup" data-value="0"></span>
+                                                <span data-counter="counterup" data-value="0"></span>
                                             {% endif %}
                                         </div>
                                         <a class="title" href="javascript:;"> New Bookings
@@ -121,7 +121,7 @@
                                             {% if business.reservations|length %}
                                                 <span> {{ '%0.1f'| format( business.reservation_statuses_count['executed'] / business.reservations|length * 100 ) }}</span>%
                                             {% else %}
-                                                $<span data-counter="counterup" data-value="0"></span>
+                                                <span data-counter="counterup" data-value="0"></span>
                                             {% endif %}
                                         </div>
                                         <a class="title" href="javascript:;"> Executed Bookings
@@ -135,7 +135,7 @@
                                             {% if business.reservations|length %}
                                                 <span> {{ '%0.1f'| format( business.reservation_statuses_count['cancelled'] / business.reservations|length * 100 ) }}</span>%
                                             {% else %}
-                                                $<span data-counter="counterup" data-value="0"></span>
+                                                <span data-counter="counterup" data-value="0"></span>
                                             {% endif %}
                                         </div>
                                         <a class="title" href="javascript:;"> Cancelled Bookings
@@ -172,14 +172,14 @@
                                             <td>
                                                 <a href="{{ url_for('backend.business_employee_edit', username=business.username, employee_id=employee.id) }}" class="primary-link">{{employee.user.name}}</a>
                                             </td>
-                                            <td> ${{employee.total_sales}} </td>
+                                            <td> {{business.currency}} {{employee.total_sales}} </td>
                                             <td> {{employee.reservations|length}} </td>
                                             <td> {{employee.products|length}} </td>
                                             <td>
                                                 {% if business.reservations|length %}
                                                     <span class="bold theme-font">{{'%0.1f'| format( (employee.reservations|length / business.reservations|length)*100 )}}%</span>
                                                 {% else %}
-                                                    $<span data-counter="counterup" data-value="0"></span>
+                                                    <span data-counter="counterup" data-value="0"></span>
                                                 {% endif %}
                                             </td>
                                         </tr>
