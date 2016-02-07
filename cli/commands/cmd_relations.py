@@ -53,9 +53,8 @@ def business_relations():
 
             for product in business.products:
                 click.echo(
-                    'product {0} with capacity {1} has price {2} cents & duration {3} mins'.format(
-                        product.name, product.capacity,
-                        product.price_cents, product.duration_mins
+                    'product {0} with price {1} cents & duration {2} mins'.format(
+                        product.name, product.price_cents, product.duration_mins
                     )
                 )
 
@@ -97,9 +96,8 @@ def employee_relations():
 
             for product in employee.products:
                 click.echo(
-                    'product {0} with capacity {1} has price {2} cents & duration {3} mins'.format(
-                        product.name, product.capacity,
-                        product.price_cents, product.duration_mins
+                    'product {0} with price {1} cents & duration {2} mins'.format(
+                        product.name, product.price_cents, product.duration_mins
                     )
                 )
 
