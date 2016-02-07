@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/img/bootstrap-formhelpers-currencies.flags.png"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/img/bootstrap-formhelpers-googlefonts.png"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -22,6 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='common/js/jquery.crs.min.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='dashboard/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
@@ -70,6 +74,17 @@
         $("#phone").inputmask("mask", {
             "mask": "+999(9999999999)"
         });
+
+
+        // The currency select dropdown must show the values thats currently set
+        var currency_val = $('#currency').val();
+        console.log(currency_val);
+        document.getElementById("currency-select").setAttribute("data-currency", currency_val);
+        
+        // These functions are triggered when the country or state dropdown changes
+        function currencySelect() {
+            $('#currency').val($('#currency-select').val());
+        }
 
     </script>
 {% endblock %}

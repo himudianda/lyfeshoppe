@@ -86,6 +86,8 @@ class BusinessForm(ModelForm):
     district = StringField(_('District/County'), [Optional(), Length(1, 30)])
     country = StringField(_('Country'), [DataRequired(), Length(1, 30)])
 
+    currency = StringField(_('Currency'), [DataRequired(), Length(1, 32)])
+
 
 class EmployeeForm(UserAccountForm):
     about = TextAreaField(_("About the Employee"), [Optional(), Length(3, 2048)])
@@ -100,7 +102,7 @@ class ProductForm(ModelForm):
     name = StringField(_('Product name'), [DataRequired(), Length(1, 128)])
     category = StringField(_('Product Category'), [DataRequired(), Length(1, 32)])
     description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
-    price = FloatField(_('Price'), [Optional(), NumberRange(min=1, max=1000000)])
+    price = FloatField(_('Price'), [DataRequired(), NumberRange(min=1, max=1000000)])
     duration_mins = IntegerField(_('Duration in mins'), [Optional(), NumberRange(min=1, max=1000)])
 
     active = BooleanField(_('Yes, Product is active'))

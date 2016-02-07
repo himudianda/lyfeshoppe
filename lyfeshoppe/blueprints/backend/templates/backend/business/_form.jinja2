@@ -89,6 +89,24 @@
                 </div>
                 <!--/row-->
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-9">
+
+                                <label class="control-label"><span class="required"> * </span><strong>Currency: </strong></label>
+                                <select class="form-control bfh-currencies" id="currency-select" data-currency="EUR" onchange="currencySelect()"></select>
+                                <div style="display: none;">
+                                    {% call f.form_group(form.currency, css_class='sm-margin-bottom') %}
+                                    {% endcall %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="col-md-12">

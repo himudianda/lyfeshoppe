@@ -648,6 +648,7 @@ class Business(ResourceMixin, db.Model):
     linkedin = db.Column(db.String(64))
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='0')
     points = db.Column(db.Integer, nullable=False, server_default='0')
+    currency = db.Column(db.String(32), nullable=False, default="USD")
 
     # Address
     country = db.Column(db.String(100))
