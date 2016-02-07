@@ -254,7 +254,7 @@ def products():
                 'name': fake.text(max_nb_chars=48),
                 'category': random.choice(['Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing']),
                 'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
-                'price_cents': random.randint(100, 100000),
+                'price': random.randint(10, 1000),
                 'duration_mins': random.choice(['30', '60', '90', '120', '150', '180']),
                 'business_id': business.id,
                 'employees': random.sample(employees_list, random.randint(1, len(employees_list)))

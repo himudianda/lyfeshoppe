@@ -100,7 +100,7 @@ class ProductForm(ModelForm):
     name = StringField(_('Product name'), [DataRequired(), Length(1, 128)])
     category = StringField(_('Product Category'), [DataRequired(), Length(1, 32)])
     description = TextAreaField(_("Product description"), [DataRequired(), Length(3, 2048)])
-    price_cents = IntegerField(_('Price in cents'), [Optional(), NumberRange(min=1, max=1000000)])
+    price = IntegerField(_('Price'), [Optional(), NumberRange(min=1, max=1000000)])
     duration_mins = IntegerField(_('Duration in mins'), [Optional(), NumberRange(min=1, max=1000)])
 
     active = BooleanField(_('Yes, Product is active'))

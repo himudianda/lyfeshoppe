@@ -401,9 +401,8 @@ class Employee(ResourceMixin, CustomerAndEmployeeMixin, db.Model):
 
     @property
     def total_sales(self):
-        total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
-        total_sales = total_sales_in_cents/100
-        return total_sales
+        total_sales_value = sum([item.product.price for item in self.reservations])
+        return total_sales_value
 
     @property
     def rating(self):
@@ -422,7 +421,7 @@ class Product(ResourceMixin, db.Model):
     name = db.Column(db.String(128))
     category = db.Column(db.String(32))
     description = db.Column(db.Text())
-    price_cents = db.Column(db.Integer, nullable=False, default=1000)  # $10
+    price = db.Column(db.Float, nullable=False)
     duration_mins = db.Column(db.Integer, nullable=False, default=60)  # 1 hour
 
     # Relationships.
@@ -769,9 +768,8 @@ class Business(ResourceMixin, db.Model):
 
     @property
     def total_sales(self):
-        total_sales_in_cents = sum([item.product.price_cents for item in self.reservations])
-        total_sales = total_sales_in_cents/100
-        return total_sales
+        total_sales_value = sum([item.product.price for item in self.reservations])
+        return total_sales_value
 
     @property
     def reservation_statuses_count(self):

@@ -62,7 +62,7 @@
                                                         {{ items.sort('description', 'Description') }}
                                                     </th>
                                                     <th class="col-header">
-                                                        {{ items.sort('price_cents', 'Price (cents)') }}
+                                                        {{ items.sort('price', 'Price') }}
                                                     </th>
                                                     <th class="col-header">
                                                         {{ items.sort('duration_mins', 'Duration (mins)') }}
@@ -97,7 +97,7 @@
                                                             {{ product.description }}
                                                         </td>
                                                         <td>
-                                                            {{ product.price_cents }}
+                                                            {{ product.price }}
                                                         </td>
                                                         <td>
                                                             {{ product.duration_mins }}

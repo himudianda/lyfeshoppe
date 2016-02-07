@@ -650,14 +650,14 @@ def business_products(username, page):
     search_form = SearchForm()
     bulk_form = BulkDeleteForm()
 
-    sort_by = Product.sort_by(request.args.get('sort', 'price_cents'),
+    sort_by = Product.sort_by(request.args.get('sort', 'price'),
                               request.args.get('direction', 'asc'))
     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
 
     paginated_products = Product.query \
         .filter(Product.search(request.args.get('q', ''))) \
         .filter(Product.business == business) \
-        .order_by(Product.price_cents.desc(), text(order_values)) \
+        .order_by(Product.price.desc(), text(order_values)) \
         .paginate(page, 20, True)
 
     return render_template('backend/product/index.jinja2',
