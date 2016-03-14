@@ -790,3 +790,41 @@ class Business(ResourceMixin, db.Model):
         """
         from lyfeshoppe.blueprints.business.tasks import request_customer_review
         request_customer_review.delay(username, customer_id)
+
+    @classmethod
+    def active_business_categories(cls):
+        types = list()
+        services = list()
+
+        for business in cls.query.all():
+            types.append(business.type)
+        types = list(set(types))
+
+        for type in types:
+            for service_name, type_names in cls.SERVICE_TYPES.iteritems():
+                if type in type_names:
+                    services.append(service_name)
+        services = list(set(services))
+
+        types_dict = OrderedDict()
+        services_dict = OrderedDict()
+        service_types_dict = OrderedDict()
+
+        for service in services:
+            if service in cls.SERVICES:
+                services_dict[service] = cls.SERVICES[service]
+            if service in cls.SERVICE_TYPES:
+                service_types_dict[service] = list()
+                for type in cls.SERVICE_TYPES[service]:
+                    if type in types:
+                        service_types_dict[service].append(type)
+
+        for type in types:
+            if type in cls.TYPE:
+                types_dict[type] = cls.TYPE[type]
+
+        return {
+            "business_services": services_dict,
+            "business_types": types_dict,
+            "business_service_types": service_types_dict
+        }

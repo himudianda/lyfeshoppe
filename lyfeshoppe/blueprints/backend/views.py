@@ -18,12 +18,6 @@ from lyfeshoppe.lib.role_redirects import get_dashboard_url
 
 backend = Blueprint('backend', __name__, template_folder='templates')
 
-business_categories = dict(
-    business_services=Business.SERVICES,
-    business_types=Business.TYPE,
-    business_service_types=Business.SERVICE_TYPES
-)
-
 
 @backend.before_request
 @login_required
@@ -48,7 +42,7 @@ def welcome():
             flash(_('User Account has been modified successfully.'), 'success')
             return redirect(url_for('backend.launchpad'))
 
-    return render_template('backend/page/welcome.jinja2', form=form, **business_categories)
+    return render_template('backend/page/welcome.jinja2', form=form, **Business.active_business_categories())
 
 
 # Launchpad
@@ -81,7 +75,7 @@ def shops_list(page, type):
                            metros=Business.METRO,
                            type=type,
                            type_images=type_images,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 @backend.route('/shops/<string:username>')
@@ -99,7 +93,7 @@ def shop_details(username):
                 'backend/shop/details.jinja2',
                 business=business, products=products,
                 type_images=type_images,
-                **business_categories)
+                **Business.active_business_categories())
 
 
 @backend.route('/shops/<string:username>/product/<string:product_id>/booking', methods=['GET', 'POST'])
@@ -158,7 +152,7 @@ def shop_booking(username, product_id):
                            form=form,
                            business=business, product=product,
                            events=json.dumps(events),
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 @backend.route('/shops/<string:username>/employee/<string:employee_id>/review', methods=['GET', 'POST'])
@@ -185,7 +179,7 @@ def shop_reviews_new(username, employee_id):
     return render_template('backend/shop/review_add.jinja2',
                            form=form,
                            business=business, employee=employee,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 # User Profile -------------------------------------------------------------------
@@ -196,7 +190,7 @@ def user_profile(username):
         return render_template('404.html'), 404
     return render_template(
                 'backend/user/profile.jinja2', user=user,
-                **business_categories)
+                **Business.active_business_categories())
 
 
 # Account -------------------------------------------------------------------
@@ -204,7 +198,7 @@ def user_profile(username):
 def user_account():
     return render_template(
                 'backend/account/profile.jinja2',
-                **business_categories)
+                **Business.active_business_categories())
 
 
 @backend.route('/account/settings', methods=['GET', 'POST'])
@@ -230,7 +224,7 @@ def account_settings():
     return render_template(
                 'backend/account/settings.jinja2',
                 form=form, password_reset_form=password_reset_form,
-                **business_categories)
+                **Business.active_business_categories())
 
 
 # Purchases -------------------------------------------------------------------
@@ -252,7 +246,7 @@ def purchases(page):
     return render_template('backend/purchase/index.jinja2',
                            form=search_form,
                            purchases=paginated_reservations,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 # Shop Referrals -------------------------------------------------------------------
@@ -273,7 +267,7 @@ def referrals(page):
     return render_template('backend/shop/referral_index.jinja2',
                            form=search_form,
                            referrals=paginated_referrals,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 @backend.route('/referrals/invite', methods=['GET', 'POST'])
@@ -295,7 +289,7 @@ def referrals_invite():
             flash(_(status), 'success')
         return redirect(url_for('backend.referrals'))
 
-    return render_template('backend/shop/referral_invite.jinja2', form=form, **business_categories)
+    return render_template('backend/shop/referral_invite.jinja2', form=form, **Business.active_business_categories())
 
 
 # Shop Reviews -------------------------------------------------------------------
@@ -318,7 +312,7 @@ def reviews(page):
     return render_template('backend/shop/review_index.jinja2',
                            form=search_form,
                            reviews=paginated_reviews,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 @backend.route('/reviews/edit/<int:id>', methods=['GET', 'POST'])
@@ -340,7 +334,7 @@ def review_edit(id):
     return render_template('backend/shop/review_edit.jinja2', form=form,
                            review=review,
                            business=review.business, employee=review.employee,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 # Businesses -----------------------------------------------------------------------
@@ -364,7 +358,7 @@ def businesses(page):
     return render_template('backend/business/index.jinja2',
                            form=search_form, bulk_form=bulk_form,
                            businesses=paginated_businesses,
-                           **business_categories)
+                           **Business.active_business_categories())
 
 
 @backend.route('/businesses/new', methods=['GET', 'POST'])
@@ -377,7 +371,7 @@ def businesses_new():
             flash(_('Business has been created successfully.'), 'success')
             return redirect(url_for('backend.businesses'))
 
-    return render_template('backend/business/new.jinja2', form=form, business=business, **business_categories)
+    return render_template('backend/business/new.jinja2', form=form, business=business, **Business.active_business_categories())
 
 
 # Business Dashboard -------------------------------------------------------------------
@@ -814,39 +808,39 @@ def business_calendar(username, call):
 # Premium Pages =================================================
 @backend.route('/pitch-deck')
 def planning_pitch_deck():
-    return render_template('backend/premium/pitch_deck.jinja2', **business_categories)
+    return render_template('backend/premium/pitch_deck.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/business-plan')
 def planning_business_plan():
-    return render_template('backend/premium/business_plan.jinja2', **business_categories)
+    return render_template('backend/premium/business_plan.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/revenue-forecasts')
 def planning_revenue_forecasts():
-    return render_template('backend/premium/revenue_forecast.jinja2', **business_categories)
+    return render_template('backend/premium/revenue_forecast.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/sales-funnel')
 def planning_sales_funnel():
-    return render_template('backend/premium/sales_funnel.jinja2', **business_categories)
+    return render_template('backend/premium/sales_funnel.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/business-benchmarks')
 def planning_business_benchmarks():
-    return render_template('backend/premium/benchmarks.jinja2', **business_categories)
+    return render_template('backend/premium/benchmarks.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/business-scheduling')
 def planning_business_scheduling():
-    return render_template('backend/premium/scheduling.jinja2', **business_categories)
+    return render_template('backend/premium/scheduling.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/customer-acquisition')
 def planning_customer_acquisition():
-    return render_template('backend/premium/customer_acquisition.jinja2', **business_categories)
+    return render_template('backend/premium/customer_acquisition.jinja2', **Business.active_business_categories())
 
 
 @backend.route('/performance-metrics')
 def planning_performance_metrics():
-    return render_template('backend/premium/performance_metrics.jinja2', **business_categories)
+    return render_template('backend/premium/performance_metrics.jinja2', **Business.active_business_categories())
