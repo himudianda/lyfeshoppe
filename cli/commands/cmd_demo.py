@@ -5,6 +5,7 @@ from faker import Faker
 import pytz
 import copy
 
+from config import settings
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.user.models import User
@@ -60,7 +61,7 @@ def demo_user():
     Create random user.
     """
     params = {
-        'email': "demo@lyfeshoppe.com",
+        'email': settings.DEMO_EMAIL,
         'password': 'password',
         'first_name': "John",
         'last_name': "Smith",
@@ -114,7 +115,7 @@ def demo_employees():
     Create random employees.
     """
     business = db.session.query(Business).first()
-    demo_user = db.session.query(User).filter(User.email == "demo@lyfeshoppe.com").first()
+    demo_user = db.session.query(User).filter(User.email == settings.DEMO_EMAIL).first()
     main_employee_params = {
         'business_id': business.id,
         'user_id': demo_user.id,

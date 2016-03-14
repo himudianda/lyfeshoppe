@@ -52,6 +52,9 @@ SEED_ADMIN_EMAIL = 'nerdo.harry@gmail.com'
 SEED_ADMIN_FNAME = 'Harshit'
 SEED_ADMIN_LNAME = 'Imudianda'
 
+# demo user
+DEMO_EMAIL = 'demo@lyfeshoppe.com'
+
 # Database settings,
 # The username and password must match what's in docker-compose.yml for dev.
 db_uri = 'postgresql://lyfeshoppe:bestpassword@localhost:5432/{0}'
