@@ -22,6 +22,171 @@ NUM_OF_CUSTOMERS = 100
 NUM_OF_RESERVATIONS = 2000
 NUM_OF_REVIEWS = 50
 
+PRODUCTS = [
+    {
+        'num': 1,
+        'name': 'Root Touchup',
+        'category': 'Hair Color',
+        'description': 'Color is applied only to the most recent section of re-growth. Usually the first inch of hair from the scalp. Generally those getting root touch-ups get this service repeated every 4-6 weeks as the natural color grows in and becomes apparent.',
+        'price': 60,
+        'duration_mins': 45
+    },
+    {
+        'num': 2,
+        'name': 'All over color',
+        'category': 'Hair Color',
+        'description': 'This is for individual who desires for all of their hair to be a different solid color.',
+        'price': 180,
+        'duration_mins': 90
+    },
+    {
+        'num': 3,
+        'name': 'Partial Weave',
+        'category': 'Hair Color',
+        'description': 'Partial weaves involve the common weaving method where majority of the hair is braided leaving a thin section at the top for parting, on the sides and possibly the back as well to allow for wearing of high ponytails.',
+        'price': 160,
+        'duration_mins': 90
+    },
+    {
+        'num': 4,
+        'name': 'Full Weave',
+        'category': 'Hair Color',
+        'description': 'A full weave is when all your hair has been braided up and extension hair is applied over your own.',
+        'price': 240,
+        'duration_mins': 120
+    },
+    {
+        'num': 5,
+        'name': 'Roots & Partial Weave',
+        'category': 'Hair Color',
+        'description': 'Root touch up with Partial hair weave.',
+        'price': 320,
+        'duration_mins': 120
+    },
+    {
+        'num': 6,
+        'name': 'Roots & Full Weave',
+        'category': 'Hair Color',
+        'description': 'Root touch up with Full hair weave.',
+        'price': 400,
+        'duration_mins': 150
+    },
+    {
+        'num': 7,
+        'name': "Men's Haircut",
+        'category': 'Hair Cut',
+        'description': "Men's haircut performed as requested by the client.",
+        'price': 20,
+        'duration_mins': 30
+    },
+    {
+        'num': 8,
+        'name': "Women's Dry Haircut",
+        'category': 'Hair Cut',
+        'description': "Women's dry haircut performed as requested by the client.",
+        'price': 25,
+        'duration_mins': 30
+    },
+    {
+        'num': 9,
+        'name': "Senior's OR Kids Haircut",
+        'category': 'Hair Cut',
+        'description': "Hair cut for Seniors over 60 or kids below 12 .",
+        'price': 15,
+        'duration_mins': 20
+    },
+    {
+        'num': 10,
+        'name': "Toddler's Haircut",
+        'category': 'Hair Cut',
+        'description': "Toddler's haircut performed as requested by the client.",
+        'price': 10,
+        'duration_mins': 15
+    },
+    {
+        'num': 11,
+        'name': "Women's Straightening & Haircut",
+        'category': 'Hair Cut',
+        'description': "Great for women with curly or wavy hair. This service provides hair straightening and cutting in a combo pack.",
+        'price': 45,
+        'duration_mins': 30
+    },
+    {
+        'num': 12,
+        'name': "Women's Shampoo Cut & Style",
+        'category': 'Hair Cut',
+        'description': "Hair cut, shampooing and styling done to provide a complete hair style makeover for every occasion.",
+        'price': 60,
+        'duration_mins': 45
+    },
+    {
+        'num': 13,
+        'name': "Bridal Hairdo",
+        'category': 'Specials',
+        'description': "Exquisite bridal services provided for you to look great on your wedding day.",
+        'price': 360,
+        'duration_mins': 150
+    },
+    {
+        'num': 14,
+        'name': "Chic Party Styling",
+        'category': 'Specials',
+        'description': "Fun and Fresh styles from our brochure to help you look great at every party.",
+        'price': 240,
+        'duration_mins': 120
+    },
+    {
+        'num': 15,
+        'name': "Formal Hairdo",
+        'category': 'Specials',
+        'description': "Modern day formal look lets you help look great in the corporate world.",
+        'price': 120,
+        'duration_mins': 45
+    },
+    {
+        'num': 16,
+        'name': "Brazilian Waxing",
+        'category': 'Waxing',
+        'description': "Complete brazilian waxing service in a private room.",
+        'price': 180,
+        'duration_mins': 30
+    },
+    {
+        'num': 17,
+        'name': "Arm OR Leg Waxing",
+        'category': 'Waxing',
+        'description': "Complete arms or leg waxing service.",
+        'price': 60,
+        'duration_mins': 30
+    },
+    {
+        'num': 18,
+        'name': "Manicure",
+        'category': 'Nails Service',
+        'description': "Complete manicure service.",
+        'price': 40,
+        'duration_mins': 30
+    },
+    {
+        'num': 19,
+        'name': "Pedicure",
+        'category': 'Nails Service',
+        'description': "Complete pedicure service.",
+        'price': 60,
+        'duration_mins': 45
+    },
+    {
+        'num': 20,
+        'name': "Shellac Nail Paint",
+        'category': 'Nails Service',
+        'description': "Nail Paint & styling done to perfection.",
+        'price': 100,
+        'duration_mins': 45
+    },
+
+]
+
+#'Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing'
 
 def generate_address():
     return {
@@ -164,11 +329,11 @@ def demo_products():
 
     for i in xrange(NUM_OF_PRODUCTS):
         params = {
-            'name': fake.text(max_nb_chars=48),
-            'category': random.choice(['Massage', 'Makeup', 'Nail', 'Haircut', 'Waxing']),
-            'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
-            'price': random.randint(10, 1000),
-            'duration_mins': random.choice(['30', '60', '90', '120', '150', '180']),
+            'name': PRODUCTS[i].get('name', "Fake product"),
+            'category': PRODUCTS[i].get('category', "Fake Category"),
+            'description': PRODUCTS[i].get('description', "Fake product description"),
+            'price': PRODUCTS[i].get('price', 100),
+            'duration_mins': PRODUCTS[i].get('duration_mins', 60),
             'business_id': business.id,
             'employees': random.sample(employees, random.randint(1, len(employees)))
         }
