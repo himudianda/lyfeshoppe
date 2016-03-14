@@ -5,6 +5,7 @@ from flask_babel import ngettext as _n
 from flask_babel import gettext as _
 import json
 
+from config import settings
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
 from lyfeshoppe.blueprints.user.decorators import role_required
@@ -52,7 +53,7 @@ def launchpad():
 
 
 # Shop -------------------------------------------------------------------
-@backend.route('/shops', defaults={'type': "makeup", 'page': 1})
+@backend.route('/shops', defaults={'type': settings.DEFAULT_SHOP_TYPE, 'page': 1})
 @backend.route('/shops/type/<string:type>', defaults={'page': 1})
 @backend.route('/shops/type/<string:type>/page/<int:page>')
 def shops_list(page, type):

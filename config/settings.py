@@ -98,3 +98,5 @@ OAUTH_CREDENTIALS = {
         'secret': None
     }
 }
+
+DEFAULT_SHOP_TYPE = "hair"
