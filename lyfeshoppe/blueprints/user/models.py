@@ -406,9 +406,13 @@ class User(UserMixin, ResourceMixin, db.Model):
         return False
 
     @property
-    def num_of_businesses(self):
+    def businesses(self):
         employee_ids = [employee.id for employee in self.employees]
         from lyfeshoppe.blueprints.business.models.business import Business, Employee
         return Business.query.filter(
                                 Business.employees.any(Employee.id.in_(employee_ids))
-                              ).count()
+                              )
+
+    @property
+    def num_of_businesses(self):
+        return self.businesses.count()

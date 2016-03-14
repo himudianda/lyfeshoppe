@@ -121,8 +121,9 @@
                                         </a>
                                     </div>
                                 {% elif current_user.num_of_businesses == 1 %}
+                                    {% set business_username = current_user.businesses.first().username %}
                                     <div class="col-sm-6 margin-bottom-30">
-                                        <a class="webapp-btn" href="{{ url_for('backend.businesses') }}">
+                                        <a class="webapp-btn" href="{{ url_for('backend.business_dashboard', username=business_username) }}">
                                             <h3>Your Shop</h3>
                                             <p>You have {{ current_user.num_of_businesses }} shop on LyfeShoppe</p>
                                         </a>

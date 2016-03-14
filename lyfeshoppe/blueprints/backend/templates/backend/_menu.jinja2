@@ -56,7 +56,8 @@
             <span class="arrow"></span>
         </a>
     {% elif current_user.num_of_businesses == 1 %}
-        <a href="{{ url_for('backend.businesses') }}" class="nav-link nav-toggle">
+        {% set business_username = current_user.businesses.first().username %}
+        <a href="{{ url_for('backend.business_dashboard', username=business_username) }}" class="nav-link nav-toggle">
             <i class="icon-basket"></i>
             <span class="title">Your Shop</span>
             <span class="arrow"></span>
