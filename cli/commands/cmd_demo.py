@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import click
 from faker import Faker
 import pytz
+import copy
 
 from lyfeshoppe.app import create_app
 from lyfeshoppe.extensions import db
@@ -16,9 +17,9 @@ db.app = app
 NUM_OF_EMPLOYEES = 10
 NUM_OF_PRODUCTS = 20
 FAKE_EMAIL_PREFIX = "f_"
-MAX_CUSTOMERS_PER_BUSINESS = 100
-MAX_RESERVATIONS_PER_BUSINESS = 2000
-MAX_REVIEWS_PER_BUSINESS = 50
+NUM_OF_CUSTOMERS = 100
+NUM_OF_RESERVATIONS = 2000
+NUM_OF_REVIEWS = 50
 
 
 def generate_address():
@@ -56,7 +57,7 @@ def cli():
 @click.command()
 def demo_user():
     """
-    Create random users.
+    Create random user.
     """
     params = {
         'email': "demo@lyfeshoppe.com",
@@ -182,7 +183,7 @@ def demo_customers():
     Create random customers.
     """
     business = db.session.query(Business).first()
-    for i in xrange(NUM_OF_EMPLOYEES):
+    for i in xrange(NUM_OF_CUSTOMERS):
         params = {
             'email': FAKE_EMAIL_PREFIX + fake.email(),
             'password': 'password',
@@ -210,6 +211,99 @@ def demo_customers():
 
 
 @click.command()
+def demo_reviews():
+    """
+    Create random reviews.
+    """
+    business = db.session.query(Business).first()
+
+    customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
+    employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
+
+    for i in xrange(NUM_OF_REVIEWS):
+        employee = random.choice(employees)
+
+        # Solution from:
+        # http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
+        # Error hit: NotImplementedError: in_() not yet supported for relationships.
+        # For a simple many-to-one, use in_() against the set of foreign key values.
+        # Joins in SQLAlchemy is used
+        products = Product.query.join(Product.employees).filter(Employee.id.in_(e.id for e in [employee])).all()
+        if not products:
+            continue
+        product = random.choice(products)
+        customer = random.choice(customers)
+
+        params = {
+            'status': random.choice(Review.STATUS.keys()),
+            'description': fake.paragraph(nb_sentences=6, variable_nb_sentences=True),
+            'business_id': business.id,
+            'customer_id': customer.id,
+            'employee_id': employee.id,
+            'product_id': product.id
+        }
+
+        review = Review(**params)
+        review.save()
+
+    _log_status(Review.query.count(), "reviews")
+
+
+
+@click.command()
+def demo_reservations():
+    """
+    Create random reservations.
+    """
+    business = db.session.query(Business).first()
+    customers = db.session.query(Customer).filter(Customer.business_id == business.id).all()
+    employees = db.session.query(Employee).filter(Employee.business_id == business.id).all()
+
+    statuses = copy.deepcopy(Reservation.STATUS)
+    del statuses['executed']
+
+    for i in xrange(NUM_OF_RESERVATIONS):
+        employee = random.choice(employees)
+
+        # Solution from:
+        # http://stackoverflow.com/questions/23436095/querying-from-list-of-related-in-sqlalchemy-and-flask
+        # Error hit: NotImplementedError: in_() not yet supported for relationships.
+        # For a simple many-to-one, use in_() against the set of foreign key values.
+        # Joins in SQLAlchemy is used
+        products = Product.query.join(Product.employees).filter(Employee.id.in_(e.id for e in [employee])).all()
+        if not products:
+            continue
+        product = random.choice(products)
+        customer = random.choice(customers)
+
+        # Create a fake unix timestamp in the future.
+        duration = product.duration_mins
+        start_time = random.choice([
+                                fake.date_time_this_month(before_now=True, after_now=False),
+                                fake.date_time_this_month(before_now=False, after_now=True)
+                            ])
+        end_time = start_time + timedelta(minutes=duration)
+
+        status = "executed" if end_time < datetime.now() else random.choice(statuses.keys())
+        start_time = start_time.replace(tzinfo=pytz.utc)
+        end_time = end_time.replace(tzinfo=pytz.utc)
+
+        params = {
+            'status': status,
+            'start_time': start_time,
+            'end_time': end_time,
+            'business_id': business.id,
+            'customer_id': customer.id,
+            'employee_id': employee.id,
+            'product_id': product.id
+        }
+
+        reservation = Reservation(**params)
+        reservation.save()
+
+    _log_status(Reservation.query.count(), "reservations")
+
+@click.command()
 @click.pass_context
 def all(ctx):
     """
@@ -223,6 +317,8 @@ def all(ctx):
     ctx.invoke(demo_employees)
     ctx.invoke(demo_products)
     ctx.invoke(demo_customers)
+    ctx.invoke(demo_reviews)
+    ctx.invoke(demo_reservations)
     return None
 
 
@@ -231,4 +327,6 @@ cli.add_command(demo_business)
 cli.add_command(demo_employees)
 cli.add_command(demo_products)
 cli.add_command(demo_customers)
+cli.add_command(demo_reviews)
+cli.add_command(demo_reservations)
 cli.add_command(all)
