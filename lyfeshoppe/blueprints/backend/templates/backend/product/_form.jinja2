@@ -99,18 +99,10 @@
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        {% if current_user.email == "demo@lyfeshoppe.com" %}
-                                            <a href="{{ url_for('backend.business_products', **form_kwargs) }}"
-                                               class="btn green btn-block">
-                                              {{ _('Save (not for demo user)') }}
-                                            </a>
-                                        {% else %}
-                                            <button type="submit" class="btn green">
-                                                {{ button }}
-                                            </button>
-                                        {% endif %}
+                                        <button type="submit" class="btn green">
+                                          {{ button }}
+                                        </button>
                                     </div>
-
                                     <div class="col-md-3">
                                         <div class="visible-xs visible-sm sm-margin-top"></div>
                                         <a href="{{ url_for('backend.business_products', **form_kwargs) }}"
