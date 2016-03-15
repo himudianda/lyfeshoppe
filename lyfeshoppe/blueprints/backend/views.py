@@ -8,7 +8,7 @@ import json
 from config import settings
 from lyfeshoppe.extensions import db
 from lyfeshoppe.blueprints.backend.models import BusinessDashboard
-from lyfeshoppe.blueprints.user.decorators import role_required
+from lyfeshoppe.blueprints.user.decorators import role_required, restrict_user
 from lyfeshoppe.blueprints.backend.forms import SearchForm, BulkDeleteForm, UserAccountForm, BusinessForm, \
     EmployeeForm, ProductForm, ReservationForm, ReservationEditForm, BookingForm, CustomerForm, ReviewForm, \
     ReferralForm, WelcomeForm
@@ -157,6 +157,7 @@ def shop_booking(username, product_id):
 
 
 @backend.route('/shops/<string:username>/employee/<string:employee_id>/review', methods=['GET', 'POST'])
+@restrict_user(settings.DEMO_EMAIL)
 def shop_reviews_new(username, employee_id):
     business = Business.find_by_identity(username)
     employee = Employee.query.filter(Employee.id == employee_id, Employee.business_id == business.id).first()
@@ -203,6 +204,7 @@ def user_account():
 
 
 @backend.route('/account/settings', methods=['GET', 'POST'])
+@restrict_user(settings.DEMO_EMAIL)
 def account_settings():
     form = UserAccountForm(obj=current_user)
     password_reset_form = PasswordResetForm()
@@ -272,6 +274,7 @@ def referrals(page):
 
 
 @backend.route('/referrals/invite', methods=['GET', 'POST'])
+@restrict_user(settings.DEMO_EMAIL)
 def referrals_invite():
     form = ReferralForm()
     if form.validate_on_submit():
@@ -363,6 +366,7 @@ def businesses(page):
 
 
 @backend.route('/businesses/new', methods=['GET', 'POST'])
+@restrict_user(settings.DEMO_EMAIL)
 def businesses_new():
     business = Business()
     form = BusinessForm(obj=business)
@@ -441,6 +445,7 @@ def business_dashboard(username):
 
 @backend.route('/businesses/edit/<string:username>', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_edit(username):
     business = Business.find_by_identity(username)
     form = BusinessForm(obj=business)
@@ -482,6 +487,7 @@ def business_employees(username, page):
 
 @backend.route('/businesses/<string:username>/employees/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_employees_bulk_deactivate(username):
     form = BulkDeleteForm()
 
@@ -506,6 +512,7 @@ def business_employees_bulk_deactivate(username):
 
 @backend.route('/businesses/<string:username>/employees/new', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_employees_new(username):
     business = Business.find_by_identity(username)
     employee = Employee()
@@ -525,6 +532,7 @@ def business_employees_new(username):
 
 @backend.route('/businesses/<string:username>/employees/edit/<int:employee_id>', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_employee_edit(username, employee_id):
     business = Business.find_by_identity(username)
     employee = Employee.query.get(employee_id)
@@ -568,6 +576,7 @@ def business_customers(username, page):
 
 @backend.route('/businesses/<string:username>/customers/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_customers_bulk_deactivate(username):
     form = BulkDeleteForm()
 
@@ -592,6 +601,7 @@ def business_customers_bulk_deactivate(username):
 
 @backend.route('/businesses/<string:username>/customers/new', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_customers_new(username):
     business = Business.find_by_identity(username)
     customer = Customer()
@@ -611,6 +621,7 @@ def business_customers_new(username):
 
 @backend.route('/businesses/<string:username>/customers/edit/<int:customer_id>', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_customer_edit(username, customer_id):
     business = Business.find_by_identity(username)
     customer = Customer.query.get(customer_id)
@@ -629,6 +640,7 @@ def business_customer_edit(username, customer_id):
 
 @backend.route('/businesses/<string:username>/customer/<int:customer_id>/request-review', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_customer_request_review(username, customer_id):
     Business.request_a_review(username, customer_id)
 
@@ -663,6 +675,7 @@ def business_products(username, page):
 
 @backend.route('/businesses/<string:username>/products/bulk_deactivate', methods=['POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_products_bulk_deactivate(username):
     form = BulkDeleteForm()
 
@@ -687,6 +700,7 @@ def business_products_bulk_deactivate(username):
 
 @backend.route('/businesses/<string:username>/products/new', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_products_new(username):
     business = Business.find_by_identity(username)
     product = Product()
@@ -702,6 +716,7 @@ def business_products_new(username):
 
 @backend.route('/businesses/<string:username>/products/edit/<int:product_id>', methods=['GET', 'POST'])
 @is_staff_authorized
+@restrict_user(settings.DEMO_EMAIL)
 def business_product_edit(username, product_id):
     business = Business.find_by_identity(username)
     product = Product.query.get(product_id)

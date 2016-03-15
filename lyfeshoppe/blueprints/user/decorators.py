@@ -4,7 +4,7 @@ from flask_babel import gettext as _
 from flask_login import current_user
 
 from lyfeshoppe.lib.role_redirects import get_dashboard_url
-
+from config import settings
 
 def anonymous_required():
     """
@@ -39,6 +39,28 @@ def role_required(*roles):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if current_user.role not in roles:
+                flash(_('You do not have permission to do that.'), 'error')
+                return redirect(get_dashboard_url())
+
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    return decorator
+
+def restrict_user(*emails):
+    emails = emails + (settings.DEMO_EMAIL,)
+    """
+    Restrict user from using this API
+
+    :param *emails: 1 or more restricted emails
+    :return: Function
+    """
+
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if current_user.email in emails:
                 flash(_('You do not have permission to do that.'), 'error')
                 return redirect(get_dashboard_url())
 
