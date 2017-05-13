@@ -25,3 +25,8 @@ def privacy():
 @page.route('/investors')
 def investors():
     return render_template('page/investors.jinja2')
+
+
+@page.route('/team')
+def team():
+    return render_template('page/team.jinja2')

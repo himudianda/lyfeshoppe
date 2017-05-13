@@ -1,0 +1,156 @@
+{% extends 'frontend/layouts/app.jinja2' %}
+
+{% block title %}
+    FAQs | LyfeShoppe | Social Shop with huge discounts.
+{% endblock %}
+
+{% block meta_description %}
+    We bring huge discounts from the best businesses around you.
+{% endblock %}
+
+{% block hero %}
+{% endblock %}
+
+
+{% block body %}
+
+        <!-- Content
+        ============================================= -->
+        <section id="content">
+
+            <div class="content-wrap">
+
+                <div class="container clearfix">
+
+                    <div class="heading-block center">
+                        <h2>Meet the Team</h2>
+                        <span>We are committed to help your business achieve astronomical growth.</span>
+                    </div>
+
+                    <div class="row clearfix">
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                    <img src="{{ url_for('static', filename='frontend/images/team/HarshitImudianda.jpg') }}" alt="Harshit Imudianda">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Harshit Imudianda</h4><span>Founder, CEO/CTO</span></div>
+                                    <div class="team-content">
+                                        <p>Before founding LyfeShoppe, Harshit worked in the Computer Vision Group at Apple building 3D Maps. He also held various engineering roles at Cisco & Netapp. He has a Master's in Computer Science from USC.</p>
+                                    </div>
+                                    <a href="https://www.linkedin.com/in/harshitimudianda/" class="social-icon si-rounded si-small si-light si-linkedin">
+                                        <i class="icon-linkedin"></i>
+                                        <i class="icon-linkedin"></i>
+                                    </a>
+                                    <a href="https://github.com/himudianda" class="social-icon si-rounded si-small si-light si-github">
+                                        <i class="icon-github"></i>
+                                        <i class="icon-github"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/harshit.imudianda" class="social-icon si-rounded si-small si-light si-facebook">
+                                        <i class="icon-facebook"></i>
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                    <img src="{{ url_for('static', filename='frontend/images/team/SharinMadaiah.jpg') }}" alt="Sharin Madaiah">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Sharin Madaiah</h4><span>Founder, Product Manager</span></div>
+                                    <div class="team-content">
+                                        <p>Sharin leads Product Mgmt, Customer Relations & Marketing at LyfeShoppe. She worked at Cerner Inc in Bangalore, India before moving to San Francisco. She holds <br/>a Master's in Computer Science.</p>
+                                    </div>
+                                    <a href="https://www.linkedin.com/in/sharin-madaiah-b49a18bb/" class="social-icon si-rounded si-small si-light si-linkedin">
+                                        <i class="icon-linkedin"></i>
+                                        <i class="icon-linkedin"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharin.madaiah" class="social-icon si-rounded si-small si-light si-facebook">
+                                        <i class="icon-facebook"></i>
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                    <img src="{{ url_for('static', filename='frontend/images/team/Sachin.jpg') }}" alt="Sachin Thotappa">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Sachin Thotappa</h4><span>Lead QA Engineer</span></div>
+                                    <div class="team-content">
+                                        <p>Sachin is the QA lead at LyfeShoppe writing test-suites to continuously improve product quality. He holds a Master's degree in Computer Science.</p>
+                                    </div>
+                                    <a href="https://www.linkedin.com/in/sachin-thotappa-8a0b0048/" class="social-icon si-rounded si-small si-light si-linkedin">
+                                        <i class="icon-linkedin"></i>
+                                        <i class="icon-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                    <img src="{{ url_for('static', filename='frontend/images/team/Rachitha.jpg') }}" alt="Rachitha Machaiah">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Rachita Machaiah</h4><span>Sales & Customer Relations</span></div>
+                                    <div class="team-content">
+                                        <p>Rachitha reports to our Product Manager and is responsible for business development & sales at LyfeShoppe. She manages our relationship with over 100 small business customers across San Francisco Bay Area. </p>
+                                    </div>
+                                    <a href="https://www.linkedin.com/in/rachitha-machaiah-912482129/" class="social-icon si-rounded si-small si-light si-linkedin">
+                                        <i class="icon-linkedin"></i>
+                                        <i class="icon-linkedin"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/rachitha.machaiah" class="social-icon si-rounded si-small si-light si-facebook">
+                                        <i class="icon-facebook"></i>
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                    <img src="{{ url_for('static', filename='frontend/images/team/Shravan.jpg') }}" alt="Shravan S.">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Shravan S.</h4><span>FullStack Software Engineer</span></div>
+                                    <div class="team-content">
+                                        <p>Shravan comes to LyfeShoppe after spending over 8 years at Amazon building their payments & inventory management systems. He reports to Harshit and the 2 are solving complex ecommerce problems at scale.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 bottommargin">
+                            <div class="team team-list clearfix">
+                                <div class="team-image">
+                                <img src="{{ url_for('static', filename='frontend/images/team/Vishal.jpg') }}" alt="Vishal Mehra">
+                                </div>
+                                <div class="team-desc">
+                                    <div class="team-title"><h4>Vishal Mehra</h4><span>Designer</span></div>
+                                    <div class="team-content">
+                                        <p>Vishal reports to Sharin and is the creative lead at LyfeShoppe. The 2 carve out beautiful UX workflows that make Lyfeshoppe a visual treat to our members.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section><!-- #content end -->
+
+{% endblock %}

@@ -48,6 +48,7 @@ docs/_build/
 tmtags
 
 # App ignores.
+.venv/
 build/manifest.json
 build/public/*
 !build/public/robots.txt

@@ -23,6 +23,7 @@
           <nav id="primary-menu">
             <ul>
               <li {% if request.endpoint in ('page.home') %} class="current"{% endif %}><a href="{{ url_for('page.home') }}"><div>Home</div></a></li>
+              <li {% if request.endpoint in ('page.team') %} class="current"{% endif %}><a href="{{ url_for('page.team') }}"><div>Team</div></a></li>
               <li {% if request.endpoint in ('page.faq') %} class="current"{% endif %}><a href="{{ url_for('page.faq') }}">FAQ</a></li>
               <li {% if request.endpoint in ('issue.support') %} class="current"{% endif %}><a href="{{ url_for('issue.support') }}">Support</a></li>
               <li {% if request.endpoint in ('page.investors') %} class="current"{% endif %}><a href="{{ url_for('page.investors') }}">Investors</a></li>
